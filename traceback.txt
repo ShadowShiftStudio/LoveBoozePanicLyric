@@ -1,28 +1,51 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "renpy/common/00start.rpy", line 278, in script
-    python:
-ScriptError: could not find label 'start'.
+  File "game/script.rpy", line 28, in script
+    "\"Звук смывания унитаза\""
+  File "renpy/common/000window.rpy", line 114, in _window_auto_callback
+    _window_show(auto=True)
+  File "renpy/common/000window.rpy", line 69, in _window_show
+    renpy.with_statement(trans)
+OSError: Couldn't find file 'audio/toilet sound.mp3'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "C:\renpy-8.0.3-sdk\renpy\bootstrap.py", line 277, in bootstrap
-    renpy.main.main()
-  File "C:\renpy-8.0.3-sdk\renpy\main.py", line 660, in main
-    run(restart)
-  File "C:\renpy-8.0.3-sdk\renpy\main.py", line 146, in run
-    renpy.execution.run_context(True)
-  File "C:\renpy-8.0.3-sdk\renpy\execution.py", line 938, in run_context
-    context.run()
-  File "renpy/common/00start.rpy", line 278, in script
-    python:
-  File "C:\renpy-8.0.3-sdk\renpy\script.py", line 927, in lookup
-    raise ScriptError("could not find label '%s'." % str(original))
-ScriptError: could not find label 'start'.
+  File "game/script.rpy", line 28, in script
+    "\"Звук смывания унитаза\""
+  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 891, in execute
+    statement_name("say")
+  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 47, in statement_name
+    i(name)
+  File "renpy/common/000window.rpy", line 114, in _window_auto_callback
+    _window_show(auto=True)
+  File "renpy/common/000window.rpy", line 69, in _window_show
+    renpy.with_statement(trans)
+  File "C:\renpy-8.0.3-sdk\renpy\exports.py", line 1657, in with_statement
+    return renpy.game.interface.do_with(trans, paired, clear=clear)
+  File "C:\renpy-8.0.3-sdk\renpy\display\core.py", line 2798, in do_with
+    return self.interact(trans_pause=True,
+  File "C:\renpy-8.0.3-sdk\renpy\display\core.py", line 3377, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
+  File "C:\renpy-8.0.3-sdk\renpy\display\core.py", line 4103, in interact_core
+    renpy.audio.audio.periodic()
+  File "C:\renpy-8.0.3-sdk\renpy\audio\audio.py", line 1166, in periodic
+    raise_(exc[0], exc[1], exc[2])
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python3.9/site-packages/future/utils/__init__.py", line 441, in raise_
+  File "C:\renpy-8.0.3-sdk\renpy\audio\audio.py", line 1144, in periodic_thread_main
+    periodic_pass()
+  File "C:\renpy-8.0.3-sdk\renpy\audio\audio.py", line 1086, in periodic_pass
+    c.periodic()
+  File "C:\renpy-8.0.3-sdk\renpy\audio\audio.py", line 517, in periodic
+    topf = load(filename)
+  File "C:\renpy-8.0.3-sdk\renpy\audio\audio.py", line 70, in load
+    rv = renpy.loader.load(fn)
+  File "C:\renpy-8.0.3-sdk\renpy\loader.py", line 820, in load
+    raise IOError("Couldn't find file '%s'." % name)
+OSError: Couldn't find file 'audio/toilet sound.mp3'.
 
 Windows-10-10.0.22621 AMD64
 Ren'Py 8.0.3.22090809
 TechTales 1.0
-Fri Mar 10 22:45:34 2023
+Fri Mar 10 22:57:58 2023
