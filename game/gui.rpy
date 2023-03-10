@@ -80,7 +80,7 @@ define gui.label_text_size = 36
 define gui.notify_text_size = 24
 
 ## Размер заголовка игры.
-define gui.title_text_size = 75
+define gui.title_text_size = 100
 
 
 ## Главное и игровое меню. #####################################################
