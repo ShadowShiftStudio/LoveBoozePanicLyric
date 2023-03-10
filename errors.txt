@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 52: expected statement.
-    renpy.pause 2.0
-                 ^
+File "game/script.rpy", line 61: expected 'image_name_component' not found.
+    scene with fade
+          ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sat Mar 11 00:25:26 2023
+Sat Mar 11 00:47:17 2023
