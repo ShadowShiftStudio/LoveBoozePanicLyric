@@ -1,36 +1,34 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 62, in script
-    pause music
-  File "renpy/common/000statements.rpy", line 449, in execute_pause
-    delay = eval(p["delay"])
-  File "game/script.rpy", line 62, in <module>
-    pause music
-NameError: name 'music' is not defined
+  File "game/script.rpy", line 104, in script
+    hide pasha_smiles with fade(0.5, 0.0, 0.5)
+  File "game/script.rpy", line 104, in <module>
+    hide pasha_smiles with fade(0.5, 0.0, 0.5)
+Exception: Not a color: 0.5
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 62, in script
-    pause music
-  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 2232, in execute
-    self.call("execute")
-  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 2220, in call
-    return renpy.statements.call(method, parsed, *args, **kwargs)
-  File "C:\renpy-8.0.3-sdk\renpy\statements.py", line 281, in call
-    return method(parsed, *args, **kwargs)
-  File "renpy/common/000statements.rpy", line 449, in execute_pause
-    delay = eval(p["delay"])
+  File "game/script.rpy", line 104, in script
+    hide pasha_smiles with fade(0.5, 0.0, 0.5)
+  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 1654, in execute
+    paired = renpy.python.py_eval(self.paired)
   File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1092, in py_eval
     return py_eval_bytecode(code, globals, locals)
   File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1085, in py_eval_bytecode
     return eval(bytecode, globals, locals)
-  File "game/script.rpy", line 62, in <module>
-    pause music
-NameError: name 'music' is not defined
+  File "game/script.rpy", line 104, in <module>
+    hide pasha_smiles with fade(0.5, 0.0, 0.5)
+  File "C:\renpy-8.0.3-sdk\renpy\display\transition.py", line 235, in Fade
+    widget = renpy.display.image.Solid(color)
+  File "C:\renpy-8.0.3-sdk\renpy\display\imagelike.py", line 51, in __init__
+    self.color = renpy.easy.color(color)
+  File "C:\renpy-8.0.3-sdk\renpy\color.py", line 196, in __new__
+    raise Exception("Not a color: %r" % (color,))
+Exception: Not a color: 0.5
 
 Windows-10-10.0.22621 AMD64
 Ren'Py 8.0.3.22090809
 TechTales 1.0
-Sat Mar 11 00:18:16 2023
+Sat Mar 11 01:32:31 2023
