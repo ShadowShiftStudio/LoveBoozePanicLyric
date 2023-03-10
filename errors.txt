@@ -1,0 +1,10 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/script.rpy", line 8: expected end of line
+    play sound "audio/alarm-sound.mp3" text "ads"
+                                       ^
+
+Ren'Py Version: Ren'Py 8.0.3.22090809
+Fri Mar 10 22:12:54 2023
