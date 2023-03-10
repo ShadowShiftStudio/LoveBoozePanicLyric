@@ -1,28 +1,28 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 8, in script
-    while (play sound "audio/alarm-sound.mp3"):
-SyntaxError: invalid syntax (game/script.rpy, line 8)
+  File "renpy/common/00start.rpy", line 278, in script
+    python:
+ScriptError: could not find label 'start'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 8, in script
-    while (play sound "audio/alarm-sound.mp3"):
-  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 2058, in execute
-    if renpy.python.py_eval(self.condition):
-  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1090, in py_eval
-    code = py_compile(code, 'eval')
-  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1027, in py_compile
-    raise e
-  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 979, in py_compile
-    raise orig_e
-  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 972, in py_compile
-    tree = compile(source, filename, py_mode, ast.PyCF_ONLY_AST | flags, 1)
-SyntaxError: invalid syntax (game/script.rpy, line 8)
+  File "C:\renpy-8.0.3-sdk\renpy\bootstrap.py", line 277, in bootstrap
+    renpy.main.main()
+  File "C:\renpy-8.0.3-sdk\renpy\main.py", line 660, in main
+    run(restart)
+  File "C:\renpy-8.0.3-sdk\renpy\main.py", line 146, in run
+    renpy.execution.run_context(True)
+  File "C:\renpy-8.0.3-sdk\renpy\execution.py", line 938, in run_context
+    context.run()
+  File "renpy/common/00start.rpy", line 278, in script
+    python:
+  File "C:\renpy-8.0.3-sdk\renpy\script.py", line 927, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'start'.
 
 Windows-10-10.0.22621 AMD64
 Ren'Py 8.0.3.22090809
 TechTales 1.0
-Fri Mar 10 22:13:42 2023
+Fri Mar 10 22:45:34 2023
