@@ -2,9 +2,15 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 127: expected statement.
-    renpy.pause(1.0)
-                    ^
+File "game/script.rpy", line 10: invalid syntax
+    bool kfc_with_pasha = false
+          ^
+    
+
+File "game/script.rpy", line 11: invalid syntax
+    bool go_or_no = false
+          ^
+    
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sat Mar 11 01:52:52 2023
+Sat Mar 11 02:27:36 2023

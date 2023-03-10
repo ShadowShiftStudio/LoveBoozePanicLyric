@@ -1,13 +1,16 @@
 ﻿define sanya = Character('Саня', color="#f5fcc4")
 define sanya_with_surname = Character("[player_name]", color="#f5fcc4")
 define pasha = Character('Пашка Запивон', color="#ffcccc")
+define rod = Character('Родители', color="#8ffd94")
 
 label start:
     jump first_day
 
 label first_day:
+    $ kfc_with_pasha = False
+    $ go_or_no = False
     scene black scen
-
+    
     play sound "audio/alarm-sound.mp3"
     "*Звук будильника*"
     stop sound
@@ -81,7 +84,7 @@ label first_day:
     sanya "А чё с ним не так? Имя Саня – Заебись!"
     
     $ player_name = "Саня "
-    $ player_name_buf = renpy.input("Во дела. Ладно, меченый, как звать-то тебя теперь?", length=16)
+    $ player_name_buf = renpy.input("Во дела. Ладно, меченый, как звать-то тебя теперь? \nСаня ...", length=16)
     $ player_name_buf = player_name_buf.strip()
 
     if player_name_buf == "" :
@@ -107,7 +110,7 @@ label first_day:
     pasha "Как там тебя зовут, ещё раз?"
     
     $ player_name = "Саня "
-    $ player_name_buf = renpy.input("Ну я же говорю", length=16)
+    $ player_name_buf = renpy.input("Ну я же говорю  \nСаня ...", length=16)
     $ player_name_buf = player_name_buf.strip()
 
     if player_name_buf == "" :
@@ -126,4 +129,50 @@ label first_day:
 
     $ renpy.pause(1.0)
 
+
+    # сцена в лекторной 
+    # 
+    # 
+
+
+
+    play sound "audio/sound-in-bus.mp3" volume 0.5
+    scene bus with fade
+    "Как обычно, по пути домой я глубоко погрузился в себя. Мои мысли перескакивали со скучных лекций и лаб на Пашку, на новую подругу Юлю и обратно."
+    stop sound
+    play sound "audio/bus.mp3"
+    $ renpy.pause(7.0)
+    stop sound
+    scene sanya room with fade
+    # звук открытия двери и ходьбы
+    "Открыв дверь домой, я первым делом пошёл к окну."
+    sanya_with_surname "За столько лет я так и не смог бросить"
+    "Достав последнюю сигаретку из пачки ванильного чапмана, я пару раз затянулся."
+    sanya_with_surname "Фух, сразу полегчало. На днях надо будет купить ещё пару пачек в кб"
+    "Странный день вышел сегодня. Кажется, какое решение я бы не принял, всё пошло бы всё равно через жопу..."
     
+    if kfc_with_pasha :
+        "Красивая девушка сама позвала прогуляться, а я и тут умудрился всё просрать... Это просто пиздец..."
+    else :
+        "Почему я не могу не вести себя как идиот хотя бы на первом свидании?"
+
+    scene sanya cry with fade
+
+    "Посмотрел, встал из-за стола, подошёл к окну, закурил... много думал... Плакал..."
+    "Затушив сигарету, я направился на кухню, но меня прервало уведомление на телефоне."
+
+    
+
+    sanya_with_surname "Здравствуйте, Александр Артёмович! Приглашаем вас в санаторий–профилакторий. Оздоровительное лечение, двухразовое питание и проживание. Путёвка на неделю за счёт Университета."
+
+    menu :
+        "Еду" :
+            sanya_with_surname "Звучит как отличная идея, может хотя бы там смогу вернуть краски в жизнь."
+            $ go_or_no = True
+        "Не еду" : 
+            sanya_with_surname "Да блядь, опять спам от университета, как же он бесит."
+            $ go_or_no = False
+
+    rod "Саша, мы можем оплатить поездку, тебе будет полезно развеяться"
+    "Ладно, это и правда неплохая возможность отдохнуть. Говорить о том что он бесплатный я конечно не буду."
+
