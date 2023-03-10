@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 8: expected end of line
-    play sound "audio/alarm-sound.mp3" text "ads"
-                                       ^
+File "game/script.rpy", line 52: expected statement.
+    renpy.pause 2.0
+                 ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Fri Mar 10 22:12:54 2023
+Sat Mar 11 00:25:26 2023
