@@ -2,9 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/options.rpy", line 161: style property frame is not known.
-    frame (10, "#000000", 0.5)
+File "game/script.rpy", line 523: if statement expects a non-empty block.
+    if go_to_yuli :
+                   ^
+
+File "game/script.rpy", line 525: expected statement.
+    else :
          ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sat Mar 11 23:49:05 2023
+Sun Mar 12 02:22:59 2023

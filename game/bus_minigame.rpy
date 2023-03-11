@@ -18,16 +18,27 @@ init python:
                         Image("car5.png"), Image("car6.png")]
 
             self.car_counter = 0
-            self.car_factor = 3
+            self.car_factor = 3.5
 
             self.bus_y = 0;
             self.bus_y_additional = 15
 
+            self.bus_change_line_max = 35
+            self.bus_change_line_counter = self.bus_change_line_max
+
+            self.bus_prev_line = 0
+            self.bus_line = 1
+
             self.cars_sets = [[0], [1, 2], [2], [0, 1], [0, 2], [1]]
 
             self.distance_bitween_sets_factor = 2
+            self.distance_bitween_sets_step = 0.00005
+            self.counters_step = 0.001
+
+            self.count_of_lines = 3
 
             self.finished = False
+            self.first_render = True
 
         def visit(self):
             return [ self.bus, self.background, self.ground ]
@@ -58,16 +69,13 @@ init python:
             t = Transform(child=self.bus, xsize=400, ysize=int(400 * 380 / 1013.0))
             bus = renpy.render(t, width, height, st, at)
 
-            bus_y = (height - bus.height) / 2 + self.bus_y
+            prev_bus_y = (height - ground.height) / 2 + (ground.height / 3 - bus.height) / 2 + self.bus_prev_line * ground.height / 3
+            next_bus_y = (height - ground.height) / 2 + (ground.height / 3 - bus.height) / 2 + self.bus_line * ground.height / 3
 
-            if bus_y < (height - ground.height) / 2:
-                self.bus_y += self.bus_y_additional
-                bus_y = (height - bus.height) / 2 + self.bus_y
+            bus_y = prev_bus_y + self.bus_change_line_counter / self.bus_change_line_max * (next_bus_y - prev_bus_y)
 
-            if bus_y > (height + ground.height) / 2 - bus.height:
-                self.bus_y -= self.bus_y_additional
-                bus_y = (height - bus.height) / 2 + self.bus_y
-
+            if self.bus_change_line_counter + 1 <= self.bus_change_line_max:
+                self.bus_change_line_counter += 1
 
             is_game_finished = False
             distance_bitween_sets = bus.width * self.distance_bitween_sets_factor
@@ -77,10 +85,10 @@ init python:
                     t = Transform(child=self.cars[car_line_i % 6], xsize=200, ysize=int(200 * 427 / 844))
                     car = renpy.render(t, width, height, st, at)
 
-                    car_x = car.width + width / 2 + self.car_counter * self.car_factor - cars_set_i * distance_bitween_sets
+                    car_x = (0 if self.first_render else car.width + width / 2) + self.car_counter * self.car_factor - cars_set_i * distance_bitween_sets
                     car_duplicate_x = car_x - distance_bitween_sets * (len(self.cars_sets))
 
-                    car_y = (height - ground.height) / 2 + car_line_i * (ground.height / 3) + (ground.height / 12)
+                    car_y = (height - ground.height) / 2 + ((ground.height / 3) - car.height) / 2 + car_line_i * (ground.height / 3)
 
                     r.blit(car, (car_x, car_y))
                     r.blit(car, (car_duplicate_x, car_y))
@@ -94,15 +102,20 @@ init python:
 
                 if cars_set_i == 0 and car_duplicate_x >= car.width + width / 2:
                     self.car_counter = -1
+                    self.first_render = False
 
             r.blit(bus, (width - bus.width, bus_y))
 
+            self.distance_bitween_sets_factor += self.distance_bitween_sets_step
+            self.ground_factor += self.counters_step
+            self.background_factor += self.counters_step
+            self.car_factor += self.counters_step
+
             if self.finished:
-                return r
-
-            self.car_counter += 1
-
-            renpy.redraw(self, 0)
+                renpy.timeout(0)
+            else:
+                self.car_counter += 1
+                renpy.redraw(self, 0.00001)
 
             return r
 
@@ -110,12 +123,18 @@ init python:
             import pygame
 
             if ev.type == pygame.KEYDOWN:
-                if ev.key == pygame.K_DOWN:
-                    self.bus_y += self.bus_y_additional
-                    renpy.restart_interaction()
-                if ev.key == pygame.K_UP:
-                    self.bus_y -= self.bus_y_additional
-                    renpy.restart_interaction()
+                if ev.key == pygame.K_DOWN or ev.key == pygame.K_s:
+                    if self.bus_change_line_counter == self.bus_change_line_max:
+                        self.bus_prev_line = self.bus_line
+                        self.bus_change_line_counter = 0
+                        self.bus_line = self.bus_line + 1 if self.bus_line + 1 < self.count_of_lines else self.count_of_lines - 1
+                        renpy.restart_interaction()
+                if ev.key == pygame.K_UP or ev.key == pygame.K_w:
+                    if self.bus_change_line_counter == self.bus_change_line_max:
+                        self.bus_prev_line = self.bus_line
+                        self.bus_change_line_counter = 0
+                        self.bus_line = self.bus_line - 1 if self.bus_line - 1 >= 0 else 0
+                        renpy.restart_interaction()
 
             if self.finished:
                 return ""
@@ -127,7 +146,6 @@ screen bus():
     add bus_minigame
 
 label play_bus:
-    
     window hide  # Hide the window and quick menu while in pong
     $ quick_menu = False
 
@@ -145,3 +163,4 @@ label play_bus:
 
     $ quick_menu = True
     window show
+    
