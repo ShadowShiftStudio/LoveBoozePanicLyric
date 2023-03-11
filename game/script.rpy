@@ -3,6 +3,21 @@ define sanya_with_surname = Character("[player_name]", color="#f5fcc4")
 define pasha = Character('Пашка Запивон', color="#ffcccc")
 define yuli = Character('Юля', color="#ffaaff")
 
+init python :
+    def mplay(fn, chan = "music", fin = 1.0, fout = 1.0):
+        renpy.play(fn, channel = chan, fadein = fin, fadeout = fout)
+        # канал на паузу
+    def mpause(channel = "music"):
+        c = renpy.audio.audio.get_channel(channel)
+        c.pause()
+        # снять с паузы
+    def munpause(channel = "music"):
+        c = renpy.audio.audio.get_channel(channel)
+        c.unpause()
+        # остановить мелодию
+    def mstop(chan = "music", fout=1.0):
+        renpy.music.stop(channel = chan, fadeout = fout)
+
 define kfc_with_pasha = False
 define go_or_no = False
 
@@ -44,8 +59,8 @@ label first_day:
     scene black scen 
     with fade
 
-    play music "audio/street-music.mp3" 
-    $ renpy.pause (5.0)
+    $ mplay("audio/street-music.mp3")
+    pause (2.0)
     scene bus station 
     with fade
 
@@ -55,7 +70,8 @@ label first_day:
     "А вот и мой автобус подъезжает."    
     sanya "Ладно, пора и честь знать."
 
-    stop music 
+    $ mstop() 
+    pause(2.0)
 
     play sound "audio/bus.mp3" volume 0.5
     "*Звук подъезжающего автобуса*"
@@ -147,8 +163,14 @@ label first_day:
 
     scene lecture scen 
     with fade
-
+    play sound "audio/table_punch.mp3"
+    $ renpy.pause(2)
     "Преподаватель" "Встаём, студенты. Здравствуйте, поздравляю вас с началом нового учебного года, меня зовут..."
+    stop sound
+
+    $ mplay("audio/lecture-sound.mp3")
+    pause (1.0)
+
     "Какая же скукота, вроде новый предмет, а начинается всё по-старому:"
     "\"Фсем привет, я Такой-то Такойтович. М-м-мой претмет будет непрасты-ы-ым, но я вас фсе-ему научу, в-вот только на ле-екции обязательно ходите!!!\""
     "Заебало..."
@@ -186,12 +208,18 @@ label first_day:
 
     yuli "(шёпотом) Я вот никогда не понимала, зачем нам постоянно ставят предметы, которые практически бесполезны для нашего направления?"
     sanya_with_surname "Согласен!"
+    $ mpause()
+    pause (1.0)
     "Преподаватель в этот момент прекратил говорить, и я крикнул \"Согласен!\" на всю аудиторию."
 
     show yuli sad at right 
     with move
 
     "Преподователь" "Мужчина! На моём предмете разговоры могу вести только я!"
+
+    $ munpause()
+    pause (0.5)
+
     "Ну что же поделать, раз такая красивая мадам будоражит мои нейроны прямо сейчас! Повезло ещё, что я в этот самый момент не решил сказать слово \"ХУЙ!\""
     
     show yuli sad at truecenter 
@@ -205,7 +233,13 @@ label first_day:
     show yuli sad at right 
     with move
 
+    $ mpause()
+    pause (0.5)
+
     "Преподаватель" "Молодой человек, я вам в последний раз делаю замечание! Прекратите разговаривать на лекции!"
+
+    $ munpause()
+    pause (0.5)
 
     show yuli sad at truecenter 
     with move
@@ -254,6 +288,9 @@ label first_day:
     show yuli horny at right 
     with move 
 
+    $ mstop()
+    pause (0.5)
+
     "Преподаватель" "Так, молодой человек на камчатке! ..."
     sanya_with_surname "В тебе есть искринка, Юль, я это вижу!"
     "Преподаватель" "Вы меня слышите вообще?"
@@ -277,7 +314,7 @@ label first_day:
             $ kfc_with_pasha = False
         "Отказаться" :
             sanya_with_surname "Юля, давай погуляем завтра, я сегодня никак не могу – с другом уже договорился встретиться! Мы с ним тысячу лет не виделись!"
-            sanya_with_surname "Ты знаешь что сделай, напиши мне свой ник в телеграмме, я тебе сегодня вечером ещё напишу обязательно!"
+            sanya_with_surname "Ты знаешь, что сделай, напиши мне свой ник в телеграмме, я тебе сегодня вечером ещё напишу обязательно!"
             $ kfc_with_pasha = True
 
     if kfc_with_pasha :
@@ -303,12 +340,12 @@ label first_day:
         $ renpy.pause(1.0)
 
         "Вспомнив про намеченные планы, я согласился, и в скором времени мы уже были на месте."
-
+        play music "audio/kfc-sound.mp3" volume 0.5
         scene kfc inside 
         with fade
 
         "Зайдя внутрь, мне в нос сразу же ударил сладкий запах курочки, мы с Пашей переглянулись и быстро пошли заказывать."
-        "Людей было не так много, оно и не удивительно, вечер всё таки."
+        "Людей было не так много, хотя, казалось бы, вечер – час-пик!"
 
         show pasha neutral 
         with dissolve
@@ -330,7 +367,9 @@ label first_day:
         sanya_with_surname "Ах-ха-ха, бля-я-ядь, сука, ну, Пашка, а ты умеешь поднять настроение!"
         pasha "А я умею!"
         pasha "Ну что, выпьем?"
-        
+
+        stop music
+
         hide pasha smiles
         with dissolve
 
@@ -338,6 +377,8 @@ label first_day:
         # мини игра
         #
         
+        play music "audio/street-sound.mp3" volume 0.5
+
         scene black scen 
         with fade
 
@@ -361,6 +402,8 @@ label first_day:
         pasha "Конечно, братка, держи."
         "После пары затягов у меня сдавило горло и сразу захотелось блевать."
         sanya_with_surname "Ебаный винстон синий, блядь!!"
+        stop music
+        # дальше Юля
     
     play sound "audio/sound-in-bus.mp3" volume 0.5
 
