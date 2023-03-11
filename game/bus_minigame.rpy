@@ -127,6 +127,7 @@ screen bus():
     add bus_minigame
 
 label play_bus:
+    
     window hide  # Hide the window and quick menu while in pong
     $ quick_menu = False
 
@@ -134,12 +135,13 @@ label play_bus:
 
     scene white
     with dissolve
-
-    "Передвижение осуществляется стрелками."
-
+    screen my_screen():
+        text "Управление стрелочками вверх и вниз" xalign 0.5 yalign 0.5 color "#000"
+    show screen my_screen with dissolve
+    pause(2.0)
+    hide screen my_screen with dissolve
     call screen bus 
     with fade
 
     $ quick_menu = True
     window show
-    
