@@ -1,4 +1,4 @@
-Sat Mar 11 17:44:33 2023
+Sat Mar 11 18:21:23 2023
 Windows-10-10.0.22621
 Ren'Py 8.0.3.22090809
  
@@ -39,12 +39,10 @@ Interface start took 0.05s
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1920, 1080)
 swap interval: 1 frames
-Windowed mode.
+Fullscreen mode.
 Vendor: "b'NVIDIA Corporation'"
 Renderer: b'NVIDIA GeForce RTX 3060/PCIe/SSE2'
 Version: b'4.6.0 NVIDIA 531.18'
 Display Info: None
-Screen sizes: virtual=(1920, 1080) physical=(1739, 978) drawable=(1739, 978)
-Maximum texture size: 4096x4096
-Screen sizes: virtual=(1920, 1080) physical=(1920, 1009) drawable=(1920, 1009)
+Screen sizes: virtual=(1920, 1080) physical=(1920, 1080) drawable=(1920, 1080)
 Maximum texture size: 4096x4096

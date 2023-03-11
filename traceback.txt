@@ -1,28 +1,26 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 256, in script
-    scene kfc inside with faid
-  File "game/script.rpy", line 256, in <module>
-    scene kfc inside with faid
-NameError: name 'faid' is not defined
+  File "game/script.rpy", line 107, in script
+    $ player_name_buf[0] = player_name_buf[0].upper()
+  File "game/script.rpy", line 107, in <module>
+    $ player_name_buf[0] = player_name_buf[0].upper()
+TypeError: 'str' object does not support item assignment
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 256, in script
-    scene kfc inside with faid
-  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 1654, in execute
-    paired = renpy.python.py_eval(self.paired)
-  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1092, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1085, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/script.rpy", line 256, in <module>
-    scene kfc inside with faid
-NameError: name 'faid' is not defined
+  File "game/script.rpy", line 107, in script
+    $ player_name_buf[0] = player_name_buf[0].upper()
+  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 1131, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1061, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/script.rpy", line 107, in <module>
+    $ player_name_buf[0] = player_name_buf[0].upper()
+TypeError: 'str' object does not support item assignment
 
 Windows-10-10.0.22621 AMD64
 Ren'Py 8.0.3.22090809
 TechTales 1.0
-Sat Mar 11 17:26:23 2023
+Sat Mar 11 18:01:07 2023
