@@ -5,7 +5,7 @@ define yuli = Character('Юля', color="#ffaaff")
 
 init python :
     def mplay(fn, chan = "music", fin = 1.0, fout = 1.0):
-        renpy.play(fn, channel = chan, fadein = fin, fadeout = fout)
+        renpy.music.play(fn, channel = chan, loop = True, fadein = fin, fadeout = fout)
         # канал на паузу
     def mpause(channel = "music"):
         c = renpy.audio.audio.get_channel(channel)
@@ -28,8 +28,11 @@ label first_day:
 
     scene black scen
     
-    play sound "audio/alarm-sound.mp3"
+    play music "audio/alarm-sound.mp3"
     "*Звук будильника*"
+    stop music
+    play sound "audio/alarm-sound-end.mp3"
+    pause(2.0)
     stop sound
 
     scene sanya room 
@@ -38,6 +41,8 @@ label first_day:
     play sound "audio/deep-moan.mp3"
     "*Вздох*"
     stop sound
+
+    play music "audio/einaudi_nefeli.mp3" volume 0.1
 
     "Ну что, день первый пошёл..."
     "Как же меня это всё достало: эти бесконечные лабораторные работы, сдачи курсачей..."
@@ -49,10 +54,13 @@ label first_day:
     "А теперь я уже совсем старый стал, – 20 лет ёпте! Сменил вот недавно паспорт, теперь даже над фоткой в нём не поржать."
     "Господи, как ссать-то охота..."
 
+    stop music fadeout 2.0
+    pause (0.5)
+
     scene sanya toilet 
     with fade
-        
-    play sound "audio/toilet-sound.mp3" volume 0.5
+    
+    play sound "audio/toilet-sound.mp3" volume 0.1
     "*Звук смыва унитаза*"
     stop sound
 
@@ -113,15 +121,15 @@ label first_day:
     $ player_name = "Саня "
     $ player_name_buf = renpy.input("Во дела. Ладно, меченый, как звать-то тебя теперь? \nСаня ...", length=16, allow="ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮйцукенгшщзхъфывапролджэячсмитьбю")
     $ player_name_buf = player_name_buf.strip()
-    $ player_name_buf = player_name_buf.lower()
-
+    $ player_name_buf = player_name_buf.lower().title()
+    
     if player_name_buf == "" :
         $ player_name = "Саня Юрченко"
         $ player_name_buf = "Юрченко"
         $ player_name_tmp = player_name_buf
     else :
-        $ player_name += player_name_buf.title()
-        $ player_name_tmp = player_name_buf.title()
+        $ player_name += player_name_buf
+        $ player_name_tmp = player_name_buf
 
     sanya "[player_name]"
     pasha "О-о-о, панковская фамилия, я вижу! Ну такое дело надо отметить!!"
@@ -143,15 +151,15 @@ label first_day:
     $ player_name = "Саня "
     $ player_name_buf = renpy.input("Ну я же говорю  \nСаня ...", length=16, allow="ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮйцукенгшщзхъфывапролджэячсмитьбю")
     $ player_name_buf = player_name_buf.strip()
-    $ player_name_buf = player_name_buf.lower()
+    $ player_name_buf = player_name_buf.lower().title()
 
     if player_name_buf == "" :
         $ player_name = "Саня Юрченко"
         $ player_name_buf = "Юрченко"
     else :
-        $ player_name += player_name_buf.title()
+        $ player_name += player_name_buf
     
-    if player_name_buf.title() != player_name_tmp :
+    if player_name_buf != player_name_tmp :
         pasha "А-а-а, а я почему-то запомнил [player_name_tmp], ну ладно, [player_name_buf], теперь никогда не забуду!"
     else :
         pasha "А-а-а, ну я так и запомнил! Давай, [player_name_buf], бывай!"
@@ -340,6 +348,7 @@ label first_day:
         $ renpy.pause(1.0)
 
         "Вспомнив про намеченные планы, я согласился, и в скором времени мы уже были на месте."
+
         play music "audio/kfc-sound.mp3" volume 0.5
         scene kfc inside 
         with fade
@@ -390,6 +399,7 @@ label first_day:
         with dissolve
 
         "Знатно накидавшись, мы вышли из кефаса и решили перекурить."
+
         show pasha giggles
         with dissolve
 
@@ -402,12 +412,15 @@ label first_day:
         pasha "Конечно, братка, держи."
         "После пары затягов у меня сдавило горло и сразу захотелось блевать."
         sanya_with_surname "Ебаный винстон синий, блядь!!"
+
         stop music
         # дальше Юля
 
     else :
 
         "Мы молча встали и вышли из лекторной."
+
+        play music "audio/strauss-festival.mp3" fadein 4.5 volume 0.1
 
         hide yuli happy
         scene nstu enter 
@@ -420,17 +433,17 @@ label first_day:
 
         "Мы говорили обо всём на свете: об учёбе, о семье, о людях, что нас окружают."
         "С ней я словно позабыл обо всём на свете..."
-
-        show yuli rain 
+        
+        scene rain yuli
         with fade
-        show yuli happy at truecenter
-        with dissolve
-
+        show yuli neutral
+        with fade
+        
         "Она подошла к забору и молча смотрела на правый берег."
         yuli "Саша, здесь так красиво..."
         sanya_with_surname "Мне тоже очень нравится."
 
-        show yuli horny at truecenter
+        show yuli horny
         with dissolve
 
         yuli "Обнимемся?"
@@ -439,7 +452,7 @@ label first_day:
         "Он наклонился и крепко обнял ее."
         sanya_with_surname "Конечно, давай обнимемся."
         
-        hide yuli horny at truecenter
+        hide yuli horny
         scene black scen 
         with fade
 
@@ -470,13 +483,16 @@ label first_day:
 
         "Когда они шли обратно к университету, Саня не мог отделаться от чувства вины за то, что только что произошло."
         "Он понимал, что подвел друга и совершил ошибку, решив пойти на свидание с Юлей вместо того, чтобы встретиться с Пашей."
+
         scene nstu enter 
         with fade
         show pasha angry at truecenter
         with fade
+
         pasha "Знаешь, Саня, я думал, что мы друзья. Но, похоже, ты не ценишь нашу дружбу так, как я."
         sanya_with_surname "Да нет же, Паша, всё не так. Извини, я просто увлёкся делами..."
         pasha "Да какая разница. Я не хочу больше об этом говорить. Просто не делай так больше."
+
         hide pasha angry
         with dissolve
         pause (2.0)
@@ -484,6 +500,7 @@ label first_day:
         "С этими словами Паша ушел, оставив Саню стоять одного на улице. Саня понимал, что совершил ошибку, но он также знал, что не может вернуть то, что уже произошло."
         "Он поклялся как-нибудь загладить свою вину перед Пашей и больше никогда не предавать доверие друга."
         "После всех мыслей, я не нашел ничего лучше, чем поехать домой."
+        stop music fadeout 3.0
         scene black scen 
         with fade
         pause 2.0
@@ -501,7 +518,7 @@ label first_day:
     $ renpy.pause(7.0)
 
     stop sound
-
+    play music "audio/home-sad.mp3" volume 0.2
     scene sanya room 
     with fade
 
@@ -554,5 +571,7 @@ label first_day:
     "Преподы как обычно валят на сессии, заставляя снова и снова приходить на пересдачи, ради которых приходится  учить тонны бесполезного материала."
     "Единственное положительное за последние дни было знакомство с Юлей. Для меня было удивительно что она вообще со мной заговорила (Дописать)"
     "С этими мыслями я погрузился в сон."
+
+    stop music fadeout 2.0
 
     return
