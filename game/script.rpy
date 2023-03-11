@@ -81,11 +81,11 @@ label first_day:
     $ mstop() 
     pause(2.0)
 
-    play sound "audio/bus.mp3" volume 0.5
+    play sound "audio/bus.mp3" volume 0.2
     "*Звук подъезжающего автобуса*"
     stop sound
 
-    play sound "audio/sound-in-bus.mp3" volume 0.5
+    play sound "audio/sound-in-bus.mp3" volume 0.2
 
     scene bus 
     with fade
@@ -96,9 +96,9 @@ label first_day:
 
     scene black scen 
     with fade
-    play sound "audio/bus.mp3" volume 0.5
+    play sound "audio/bus.mp3" volume 0.2
     $ renpy.pause (7.5)
-    
+    stop sound fadeout 1.5
     scene bus station near nstu 
     with fade
     show pasha neutral 
@@ -217,6 +217,8 @@ label first_day:
     yuli "(шёпотом) Я вот никогда не понимала, зачем нам постоянно ставят предметы, которые практически бесполезны для нашего направления?"
     sanya_with_surname "Согласен!"
     $ mpause()
+    play sound "audio/table_punch.mp3"
+    $ renpy.pause(2)
     pause (1.0)
     "Преподаватель в этот момент прекратил говорить, и я крикнул \"Согласен!\" на всю аудиторию."
 
@@ -242,6 +244,8 @@ label first_day:
     with move
 
     $ mpause()
+    play sound "audio/table_punch.mp3"
+    $ renpy.pause(2)
     pause (0.5)
 
     "Преподаватель" "Молодой человек, я вам в последний раз делаю замечание! Прекратите разговаривать на лекции!"
@@ -297,6 +301,8 @@ label first_day:
     with move 
 
     $ mstop()
+    play sound "audio/table_punch.mp3"
+    $ renpy.pause(2)
     pause (0.5)
 
     "Преподаватель" "Так, молодой человек на камчатке! ..."
@@ -505,7 +511,7 @@ label first_day:
         with fade
         pause 2.0
 
-    play sound "audio/sound-in-bus.mp3" volume 0.5
+    play sound "audio/sound-in-bus.mp3" volume 0.2
 
     scene bus 
     with fade
@@ -570,8 +576,9 @@ label first_day:
     
     "Преподы как обычно валят на сессии, заставляя снова и снова приходить на пересдачи, ради которых приходится  учить тонны бесполезного материала."
     "Единственное положительное за последние дни было знакомство с Юлей. Для меня было удивительно что она вообще со мной заговорила (Дописать)"
+    "Начинает казаться, будто мое будущее не зависит от меня, будто последствия не зависят от моих действий"
     "С этими мыслями я погрузился в сон."
 
-    stop music fadeout 2.0
+    stop music fadeout 3.0
 
     return
