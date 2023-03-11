@@ -1,32 +1,28 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 62, in script
-    $ mplay("audio/street-music.mp3")
-  File "game/script.rpy", line 62, in <module>
-    $ mplay("audio/street-music.mp3")
-  File "game/script.rpy", line 8, in mplay
-    renpy.play(fn, channel = chan, loop = True, fadein = fin, fadeout = fout)
-TypeError: renpy.audio.music.play() got multiple values for keyword argument 'loop'
+  File "game/script.rpy", line 481, in script
+    with Dissolve(3.5, False, None)
+TypeError: __init__() got multiple values for argument 'old_widget'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 62, in script
-    $ mplay("audio/street-music.mp3")
-  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 1131, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1061, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "game/script.rpy", line 62, in <module>
-    $ mplay("audio/street-music.mp3")
-  File "game/script.rpy", line 8, in mplay
-    renpy.play(fn, channel = chan, loop = True, fadein = fin, fadeout = fout)
-  File "C:\renpy-8.0.3-sdk\renpy\exports.py", line 3939, in play
-    renpy.audio.music.play(filename, channel=channel, loop=False, **kwargs)
-TypeError: renpy.audio.music.play() got multiple values for keyword argument 'loop'
+  File "game/script.rpy", line 481, in script
+    with Dissolve(3.5, False, None)
+  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 1658, in execute
+    renpy.exports.with_statement(trans, paired=paired)
+  File "C:\renpy-8.0.3-sdk\renpy\exports.py", line 1657, in with_statement
+    return renpy.game.interface.do_with(trans, paired, clear=clear)
+  File "C:\renpy-8.0.3-sdk\renpy\display\core.py", line 2798, in do_with
+    return self.interact(trans_pause=True,
+  File "C:\renpy-8.0.3-sdk\renpy\display\core.py", line 3377, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
+  File "C:\renpy-8.0.3-sdk\renpy\display\core.py", line 3752, in interact_core
+    trans = self.ongoing_transition[None](
+TypeError: __init__() got multiple values for argument 'old_widget'
 
 Windows-10-10.0.22621 AMD64
 Ren'Py 8.0.3.22090809
 TechTales 1.0
-Sat Mar 11 20:15:03 2023
+Sat Mar 11 21:14:14 2023
