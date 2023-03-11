@@ -2,9 +2,65 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 280: expected statement.
-    renpy.pause(2.0)
-                    ^
+File "game/script.rpy", line 156: expected statement.
+    at right 
+    ^
+
+File "game/script.rpy", line 165: expected statement.
+    at right 
+    ^
+
+File "game/script.rpy", line 173: expected statement.
+    at right 
+    ^
+
+File "game/script.rpy", line 179: expected statement.
+    at truecenter 
+    ^
+
+File "game/script.rpy", line 186: expected statement.
+    at truecenter
+    ^
+
+File "game/script.rpy", line 194: expected statement.
+    at right 
+    ^
+
+File "game/script.rpy", line 201: expected statement.
+    at truecenter 
+    ^
+
+File "game/script.rpy", line 210: expected statement.
+    at right 
+    ^
+
+File "game/script.rpy", line 216: expected statement.
+    at truecenter 
+    ^
+
+File "game/script.rpy", line 220: expected statement.
+    at truecenter 
+    ^
+
+File "game/script.rpy", line 228: expected statement.
+    at truecenter  
+    ^
+
+File "game/script.rpy", line 240: expected statement.
+    at truecenter 
+    ^
+
+File "game/script.rpy", line 250: expected statement.
+    at truecenter 
+    ^
+
+File "game/script.rpy", line 260: expected statement.
+    at right 
+    ^
+
+File "game/script.rpy", line 270: expected statement.
+    at truecenter 
+    ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sat Mar 11 17:28:57 2023
+Sat Mar 11 17:43:06 2023
