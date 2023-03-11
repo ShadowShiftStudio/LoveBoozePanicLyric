@@ -2,41 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 152: end of line expected.
-    show yuli horny with dissolve at right
-                                  ^
-
-File "game/script.rpy", line 159: end of line expected.
-    show yuli happy with dissolve at right
-                                  ^
-
-File "game/script.rpy", line 164: end of line expected.
-    show yuli happy with dissolve at truecenter
-                                  ^
-
-File "game/script.rpy", line 170: end of line expected.
-    show yuli sad with dissolve at truecenter
-                                ^
-
-File "game/script.rpy", line 184: end of line expected.
-    show yuli empathy with dissolve at truecenter
-                                    ^
-
-File "game/script.rpy", line 191: end of line expected.
-    show yuli sad with dissolve at truecenter
-                                ^
-
-File "game/script.rpy", line 202: end of line expected.
-    show yuli shy with dissolve at truecenter
-                                ^
-
-File "game/script.rpy", line 211: end of line expected.
-    show yuli horny with dissolve at truecenter
-                                  ^
-
-File "game/script.rpy", line 226: end of line expected.
-    show yuli happy with dissolve at truecenter
-                                  ^
+File "game/script.rpy", line 280: expected statement.
+    renpy.pause(2.0)
+                    ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sat Mar 11 15:35:01 2023
+Sat Mar 11 17:28:57 2023

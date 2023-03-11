@@ -19,7 +19,8 @@ label first_day:
     "*Звук будильника*"
     stop sound
 
-    scene sanya room with fade
+    scene sanya room 
+    with fade
 
     play sound "audio/deep-moan.mp3"
     "*Вздох*"
@@ -35,17 +36,20 @@ label first_day:
     "А теперь я уже совсем старый стал, – 20 лет ёпте! Сменил вот недавно паспорт, теперь даже над фоткой в нём не поржать."
     "Господи, как ссать-то охота..."
 
-    scene sanya toilet with fade
+    scene sanya toilet 
+    with fade
         
     play sound "audio/toilet-sound.mp3" volume 0.5
     "*Звук смыва унитаза*"
     stop sound
 
-    scene black scen with fade
+    scene black scen 
+    with fade
 
     play music "audio/street-music.mp3" 
     $ renpy.pause (5.0)
-    scene bus station with fade
+    scene bus station 
+    with fade
 
     "А я вот иду и думаю: \"а не слишком ли я много пить стал в последнее время?\""
     "Уже будто и не помню себя трезвым..."
@@ -61,18 +65,22 @@ label first_day:
 
     play sound "audio/sound-in-bus.mp3" volume 0.5
 
-    scene bus with fade
+    scene bus 
+    with fade
     "Даже матушку свою довёл."
     "Вчера с мужиками пришли пиво попить, последний день лета проводить, скажем так, а она меня поджидает у туалета и говорит:"
     "\"Хоть бы раз домой вернулся с девчонкой какой-нибудь красивенькой, а не как обычно с парнями в зассаных майках\", — \"Мама, ну мы же панки\"..."
     stop sound
 
-    scene black scen with fade
+    scene black scen 
+    with fade
     play sound "audio/bus.mp3" volume 0.5
     $ renpy.pause (7.5)
     
-    scene bus station near nstu with fade
-    show pasha neutral with fade
+    scene bus station near nstu 
+    with fade
+    show pasha neutral 
+    with fade
 
     "Только вышел из автобуса, как тут мне на встречу идёт крупный парень, он явно меня узнал, а вот я его не очень..."
     "Ба-а, так это же Пашка Запивон так за лето подкачался!"
@@ -135,7 +143,8 @@ label first_day:
 
     $ renpy.pause(1.0)
 
-    scene lecture scen with fade
+    scene lecture scen 
+    with fade
 
     "Преподаватель" "Встаём, студенты. Здравствуйте, поздравляю вас с началом нового учебного года, меня зовут..."
     "Какая же скукота, вроде новый предмет, а начинается всё по-старому:"
@@ -143,52 +152,81 @@ label first_day:
     "Заебало..."
     "Справа от меня сидит миловидная особа в весьма открытой одежде. Похоже, не одному мне душно с этой лекции."
 
-    show yuli greeting at right with dissolve 
+    show yuli greeting 
+    at right 
+    with dissolve 
 
     "Ой, похоже, она заметила, что я пялюсь на неё..."
     "Девушка справа" "Приветики, куда смотришь?"
     sanya_with_surname "До этого играл с лектором в гляделки, но боюсь, что он играет не по правилам, так что начал искать себе соперника на равных. Вот, наткнулся на тебя..."
     "Бог ты мой, насколько же это была плохая и несуразная шут..."
 
-    show yuli horny at right with dissolve
+    show yuli horny 
+    at right 
+    with dissolve
 
     "Я на высоте!! Надо давить дальше!"
     sanya_with_surname "А меня Саша зовут!"
     yuli "А меня Юля, очень приятно познакомиться! Ах-хах"
 
-    show yuli happy at right with dissolve
+    show yuli happy 
+    at right 
+    with dissolve
 
     sanya_with_surname "Юля, ты перевелась откуда-то? Я почему-то тебя раньше никогда не видел!"
 
-    show yuli happy at truecenter with move
+    show yuli happy 
+    at truecenter 
+    with move
 
     yuli "(шёпотом) А потому что на лекции надо чаще ходить, я тебя тоже за целый год ни разу не видела!"
     "Тут она права, я вообще на эту лекцию по схемотехнике попал лишь потому что где-то надо было дождаться Пашу, у него-то, видите ли, пра-а-актика, надо прийти-и-и!"
 
-    show yuli sad at truecenter with dissolve
+    show yuli sad 
+    at truecenter
+    with dissolve
 
     yuli "(шёпотом) Я вот никогда не понимала, зачем нам постоянно ставят предметы, которые практически бесполезны для нашего направления?"
     sanya_with_surname "Согласен!"
     "Преподаватель в этот момент прекратил говорить, и я крикнул \"Согласен!\" на всю аудиторию."
-    show yuli sad at right with move
+
+    show yuli sad 
+    at right 
+    with move
+
     "Преподователь" "Мужчина! На моём предмете разговоры могу вести только я!"
     "Ну что же поделать, раз такая красивая мадам будоражит мои нейроны прямо сейчас! Повезло ещё, что я в этот самый момент не решил сказать слово \"БЛЯТЬ!\""
-    show yuli sad at truecenter with move
+    
+    show yuli sad 
+    at truecenter 
+    with move
+
     sanya_with_surname "(уже шёпотом) Согласен... Особенно сильно раздражает, когда по этим бесполезным предметам, как, например, этот, нужно потом ещё и полноценный экзамен сдавать, билеты к нему учить и чего похуже."
     yuli "(шёпотом) У этого предмета ещё и такое дурацкое название, – ..."
     extend " Блин, забыла, ну это, как его..."
     sanya_with_surname "Схемотехника!!"
-    show yuli sad at right with move
-    "Преподаватель" "Молодой человек, я вам в последний раз делаю замечание! Прекратите разговаривать на лекции!"
-    show yuli sad at truecenter with move
 
-    show yuli empathy at truecenter with dissolve
+    show yuli sad 
+    at right 
+    with move
+
+    "Преподаватель" "Молодой человек, я вам в последний раз делаю замечание! Прекратите разговаривать на лекции!"
+
+    show yuli sad 
+    at truecenter 
+    with move
+
+    show yuli empathy 
+    at truecenter 
+    with dissolve
 
     yuli "(шёпотом) История лингвистических учений же!"
     sanya_with_surname "Стоп, что?"
     "В эту минуту я осмотрел всю аудиторию. Вокруг меня были одни девушки... О нет, кажется, я перепутал кабинеты... И теперь вместо бесполезной схемотехники я сижу... Я сижу в компании приятных дам! Что за день!"
 
-    show yuli sad at truecenter  with dissolve
+    show yuli sad 
+    at truecenter  
+    with dissolve
 
     yuli "Ты что, перепутал лекторные? Бедняжка..."
     "Какие ещё лекторные, правильно же лектории! Тебе бы точно не помешало послушать про лингвистические уче..."
@@ -198,7 +236,9 @@ label first_day:
     extend " Такая естественная и простая."
     "Одевается вызывающе, но при этом такая стеснительная..."
 
-    show yuli shy at truecenter with dissolve
+    show yuli shy 
+    at truecenter 
+    with dissolve
 
     yuli "(шёпотом) Что ты такое говоришь, дурачок?"
     sanya_with_surname "(шёпотом) До этого мне казалось, что я сижу на самом бесполезном для меня предмете, но теперь я понимаю, насколько же я ошибался."
@@ -206,21 +246,30 @@ label first_day:
     "Разговор, кажется, заходит в тупик. Нельзя же вечно обсуждать скукоту лекции, иначе это свойство перейдёт и на сам диалог!"
     sanya_with_surname "Юля, а ты чем любишь заниматься обычно?"
 
-    show yuli horny at truecenter with dissolve
+    show yuli horny 
+    at truecenter 
+    with dissolve
 
     yuli "Не знаю, чем я люблю заниматься обычно, но после этой пары я свободна на все четыре стороны!"
 
     sanya_with_surname "Ого, какой темперамент!"
     "Я за эти 10 минут на лекции по лингвистике уже такие слова, как темперамент начал использовать? А что, весьма продуктивно!"
     sanya_with_surname "Вот этот настрой мне нравится!"
-    show yuli horny at right with move 
+
+    show yuli horny 
+    at right 
+    with move 
+
     "Преподаватель" "Так, молодой человек на камчатке! ..."
     sanya_with_surname "В тебе есть искринка, Юль, я это вижу!"
     "Преподаватель" "Вы меня слышите вообще?"
     sanya_with_surname "И вообще ..."
     "Преподаватель" "Стукните его там кто-нибудь рядом!"
 
-    show yuli horny at truecenter with move
+    show yuli horny 
+    at truecenter 
+    with move
+
     "*Юля легко проводит рукой по моему подбородку, поворачивая голову в сторону преподавателя*"
 
     "Преподаватель" "Молодой человек, ну наконец-то! Попрошу Вас немедленно покинуть лекционный зал! "
@@ -239,49 +288,98 @@ label first_day:
             $ kfc_with_pasha = True
 
     if kfc_with_pasha :
+
         hide yuli happy
-        show nstu enter with fade
+        show nstu enter 
+        with fade
+
         "Наконец-то лекция закончилась..."
         extend " Как обычно она была душной, зато на ней я познакомился с прекрасной Юлей"
-        # scene greating nstu with fade
-        show pasha neutral with fade
+
+        show pasha neutral 
+        with fade
+
         "У входа я сразу встретил Пашку, который уже ждал меня."
-        # нужен фон
         pasha "Ну чё, [sanya], погнали в кефас?"
-        show pasha smiles with dissolve
-        # нужен кфс
+
+        hide pasha neutral 
+        with dissolve
+        scene black scen 
+        with fade
+
+        $ renpy.pause(1.0)
+
         "Вспомнив про намеченные планы, я согласился, и в скором времени мы уже были на месте."
+
+        scene kfc inside 
+        with fade
+
         "Зайдя внутрь, мне в нос сразу же ударил сладкий запах курочки, мы с Пашей переглянулись и быстро пошли заказывать."
         "Людей было не так много, оно и не удивительно, вечер всё таки."
-        pasha "Слушай, ты уже записался на дополнительную физру? У нас зале ещё есть свободные места."
-        sanya_with_surname "Я ещё не думал об этом, всё что я выбирал до этого было полной херней, занятия скучные, а преподы - мудаки"
-        pasha "Заебись, записывайся тогда к нам. Завтра подойди к нашему ♂Dungeon Master♂, он тебя быстро ♂Fisting♂ и будешь как новый ♂Boy next door♂"
-        pasha "Да и кстати, вход платный всего ♂Three hundread bucks♂"
-        "Нам достаточно быстро принесли наш заказ. Честно говоря, Пашка выглядел уж слишком веселым."
+
+        show pasha neutral 
+        with dissolve
+
+        pasha "Слушай, ты уже записался на дополнительную физру? У нас в зале ещё есть свободные места."
+        sanya_with_surname "Я даже не думал об этом, всё, что я выбирал до этого, было полной хернёй, - занятия скучные, а преподы - мудаки"
+        pasha "Заебись, записывайся тогда к нашему тренеру в подвальчике. Ты его сразу узнаешь, он больше меня в два раза."
+        "Куда больше-то, блядь?"
+        pasha "Да, и кстати, занятия выходят намного дешевле, чем ♂Three hundread bucks♂."
+        "Мне быстро принесли мой заказ: баскет дуэт и три бутылки бада."
+        "Некоторое время спустя принесли и заказ Паши: чикен моблан, три чизбургера, цезарь ролл, большая фри, большая деревенская, ещё и соус ёпте!"
+
         pasha "Ну что, Санёк, сейчас нам будет весело."
+
+        show pasha smiles 
+        with dissolve
+
         "Сказав это Пашка непонятно откуда достал бутылку водяры."
-        sanya_with_surname "Пхаах, бляять сука, ну Пашка а ты умеешь поднять настроение."
+        sanya_with_surname "Пхаах, бляять сука, ну Пашка, а ты умеешь поднять настроение."
         pasha "А я умею."
+
+        hide pasha smiles
 
         #
         # мини игра
         #
+        
+        scene black scen 
+        with fade
+
+        $ renpy.pause(2.0)
+
+        scene kfc outside 
+        with fade
+        show pasha neutral 
+        with dissolve
 
         "Знатно накидавшись, мы вышли с кифаса и решили перекурить."
         pasha "После вкусного обеда по законам Архимеда, чтобы жиром не заплыть нужно срочно покурить!"
         sanya_with_surname "А ты не подкинешь сигаретки?"
+
+        show pasha smiles 
+        with dissolve
+
         pasha "Конечно, братка, держи."
         "После пары затягов у меня сдавило горло и сразу захотелось блевать."
         sanya_with_surname "Ебаный винстон синий блять!!"
     
     play sound "audio/sound-in-bus.mp3" volume 0.5
-    scene bus with fade
+    scene bus 
+    with fade
+
     "Как обычно, по пути домой я глубоко погрузился в себя. Мои мысли перескакивали со скучных лекций и лаб на Пашку, на новую подругу Юлю и обратно."
+    
     stop sound
     play sound "audio/bus.mp3"
+
     $ renpy.pause(7.0)
+
     stop sound
-    scene sanya room with fade
+
+    scene sanya room 
+    with fade
+
     # звук открытия двери и ходьбы
     "Открыв дверь домой, я первым делом пошёл к окну."
     sanya_with_surname "За столько лет я так и не смог бросить"
@@ -294,11 +392,13 @@ label first_day:
     else :
         "Почему я не могу не вести себя как идиот хотя бы на первом свидании?"
 
-    scene sanya cry with fade
+    scene sanya cry 
+    with fade
     #можно добавить звук плача
     "Посмотрел, встал из-за стола, подошёл к окну, закурил... много думал... Плакал..."
 
-    scene sanya notification with fade
+    scene sanya notification 
+    with fade
     # можно добавить звук уведомления
     "Затушив сигарету, я направился на кухню, но меня прервало уведомление на телефоне."
 
