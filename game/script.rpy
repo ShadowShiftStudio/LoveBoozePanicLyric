@@ -4,6 +4,7 @@ define pasha = Character('Пашка Запивон', color="#ffcccc")
 define yuli = Character('Юля', color="#ffaaff")
 
 init python :
+
     def mplay(fn, chan = "music", fin = 1.0, fout = 1.0):
         renpy.music.play(fn, channel = chan, loop = True, fadein = fin, fadeout = fout)
         # канал на паузу
@@ -20,6 +21,7 @@ init python :
 
 define kfc_with_pasha = False
 define go_or_no = False
+define mood_counter = -5
 
 label start:
     jump first_day
@@ -107,7 +109,7 @@ label first_day:
     scene bus station near nstu 
     with fade
     show pasha neutral 
-    with fade
+    with dissolve
 
     "Только вышел из автобуса, как тут мне на встречу идёт крупный парень, он явно меня узнал, а вот я его не очень..."
     "Ба-а, так это же Пашка Запивон так за лето подкачался!"
@@ -341,14 +343,14 @@ label first_day:
     if kfc_with_pasha :
 
         hide yuli happy
-        show nstu enter 
+        scene nstu enter 
         with fade
 
         "Наконец-то лекция закончилась..."
         extend " Как обычно она была душной, зато на ней я познакомился с прекрасной Юлей"
 
         show pasha neutral 
-        with fade
+        with dissolve
 
         "У входа я сразу встретил Пашку, который уже ждал меня."
         pasha "Ну чё, [sanya], погнали в кефас?"
@@ -455,7 +457,7 @@ label first_day:
         with fade
 
         show yuli neutral
-        with fade
+        with dissolve
         
         "Она подошла к забору и молча смотрела на правый берег."
         yuli "Саша, здесь так красиво..."
@@ -526,7 +528,7 @@ label first_day:
         with fade
 
         show pasha sad at truecenter
-        with fade
+        with dissolve
 
         pasha "Знаешь, Саня, я думал, что мы друзья. Но, похоже, ты не ценишь нашу дружбу так, как я."
         sanya_with_surname "Да нет же, Паша, всё не так. Извини, я просто увлёкся делами..."
@@ -578,9 +580,8 @@ label first_day:
 
     scene sanya notification 
     with fade
-    # можно добавить звук уведомления
-    "Затушив сигарету, я было направился на кухню, но меня прервало уведомление на телефоне."
 
+    "Затушив сигарету, я было направился на кухню, но меня прервало уведомление на телефоне."
     "Система информированния студентов" "Здравствуйте, Александр Артёмович!\nПриглашаем вас в санаторий–профилакторий. Оздоровительное лечение, двухразовое питание и проживание. Путёвка на неделю за счёт Университета."
 
     menu :
