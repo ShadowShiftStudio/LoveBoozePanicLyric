@@ -586,10 +586,14 @@ label first_day:
         
         "Она подошла к забору и молча смотрела на правый берег."
         yuli "Саша, здесь так красиво..."
+        
+        stop music
 
         play music "audio/stop_breaths.mp3" fadein 1.5 volume 0.5
         "Я перестаю дышать..."
         stop music fadeout 2.0
+
+        play music "audio/strauss-festival.mp3" fadein 4.5 volume 0.1 fadeout 1.5
 
         sanya_with_surname "Мне тоже очень нравится."
 
