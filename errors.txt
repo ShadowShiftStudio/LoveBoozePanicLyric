@@ -2,21 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 6: expected statement.
-    def mplay(fn, chan = "music", fin = 1.0, fout = 1.0):
-             ^
-
-File "game/script.rpy", line 9: expected statement.
-    def mpause(channel = "music"):
-              ^
-
-File "game/script.rpy", line 13: expected statement.
-    def munpause(channel = "music"):
-                ^
-
-File "game/script.rpy", line 17: expected statement.
-    def mstop(chan = "music", fout=1.0):
-             ^
+File "game/options.rpy", line 161: style property frame is not known.
+    frame (10, "#000000", 0.5)
+         ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sat Mar 11 18:56:58 2023
+Sat Mar 11 23:49:05 2023

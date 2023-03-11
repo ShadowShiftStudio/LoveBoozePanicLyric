@@ -130,7 +130,16 @@ label play_bus:
     window hide  # Hide the window and quick menu while in pong
     $ quick_menu = False
 
-    call screen bus
+    image white = "#fff"
+
+    scene white
+    with dissolve
+
+    "Передвижение осуществляется стрелками."
+
+    call screen bus 
+    with fade
 
     $ quick_menu = True
     window show
+    
