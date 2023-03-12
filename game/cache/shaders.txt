@@ -1,16 +1,16 @@
-renpy.texture
 renpy.alpha renpy.texture
-renpy.imagedissolve renpy.imagedissolve
-renpy.alpha renpy.geometry renpy.texture
 renpy.dissolve renpy.dissolve
-renpy.geometry renpy.imagedissolve
-renpy.matrixcolor renpy.texture
->>>>>>> origin/sms
-renpy.solid
 <<<<<<< HEAD
-renpy.geometry renpy.matrixcolor renpy.texture
-renpy.ftl
-renpy.geometry renpy.texture
+renpy.alpha renpy.geometry renpy.texture
 renpy.dissolve renpy.geometry
-=======
+renpy.geometry renpy.texture
+renpy.geometry renpy.matrixcolor renpy.texture
+renpy.solid
+>>>>>>> origin/sms
+renpy.ftl
+renpy.geometry renpy.imagedissolve
+renpy.imagedissolve renpy.imagedissolve
 renpy.geometry renpy.solid
+=======
+renpy.texture
+renpy.matrixcolor renpy.texture

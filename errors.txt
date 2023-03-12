@@ -2,18 +2,7 @@
 errors listed below, and try again.
 
 
-<<<<<<< HEAD
-File "game/script.rpy", line 1642: expected statement.
-    Зайдя в квартиру, я сразу достал сигарету и пошёл к окну.
-                    ^
+File "game/script.rpy", line 1845: Tab characters are not allowed in Ren'Py scripts.
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sun Mar 12 20:49:17 2023
-=======
-File "game/script.rpy", line 515: expected statement.
-    sms_trans = [align(2.15, .5), rotate(2.5, False)]
-              ^
-
-Ren'Py Version: Ren'Py 8.0.3.22090809
-Sun Mar 12 20:36:32 2023
->>>>>>> origin/sms
+Sun Mar 12 22:57:05 2023
