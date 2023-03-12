@@ -2118,10 +2118,8 @@ label third_day :
 
             hide nadya happy
             with dissolve
-            scene black scen
-            with dissolve
-            play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1
-            pause 7.0
+            
+            jump nadya_ch
 
         elif kfc_with_pasha == False or ussr_or_no == True :
 
@@ -2133,10 +2131,8 @@ label third_day :
 
             hide yuli greeting
             with dissolve
-            scene black scen
-            with dissolve
-            play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1
-            pause 7.0
+            
+            jump yuli_sh
 
         else :
 
@@ -2154,7 +2150,87 @@ label third_day :
             "К сожалению, автобус попал в аварию. Погибло два человека. Единственный Пассажир и водитель."
 
     elif last_choice_nadya :
+
         "В автобусе я увидел несколько знакомых людей, не задумываясь я подсел к Наде."
+        sanya "Надь, привет..."
+
+        show nadya light sad
+        with dissolve
+
+        nadya "Сааш, я так долго тебя ждала, я беспокоилась после твоего звонка. С  тобой точно все хорошо?."
+        sanya_with_surname "Да, Надь, все хорошо, не беспокойся так. Ты мне очень помогла, спасибо тебе."
+        nadya "Ну раз ты так говоришь."
+
+        show nadya smiles
+        with dissolve
+
+        nadya "Ладно, Сашенька, садись я как раз заняла тебе место."
+
+        hide nadya smiles
+        with dissolve
+
+        jump nadya_ch
 
     elif last_choice_yulia :
         "В автобусе я увидел несколько знакомых людей, не задумываясь я подсел к Юле."
+        sanya "Юль, привет..."
+
+        show yuli sad
+        with dissolve
+
+        yuli "Сааш, я так долго тебя ждала, я беспокоилась после твоего звонка. С  тобой точно все хорошо?."
+        sanya_with_surname "Да, Юль, все хорошо, не беспокойся так. Ты мне очень помогла, спасибо тебе."
+        yuli "Ну раз ты так говоришь."
+
+        show yuli happy
+        with dissolve
+
+        yuli "Ладно, Сашенька, садись я как раз заняла тебе место."
+
+        hide yuli happy
+        with dissolve
+
+        jump yuli_sh
+
+    return
+
+label nadya_ch :
+
+        play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1
+        pause 7.0
+        scene black scen
+        with dissolve
+
+        "Спустя пару минут Икарус тронулся."
+
+        "Все в автобусе оживленно разговаривали друг с другом."
+
+        "Некоторые пристально смотрят в окно, разглядывая встречающиеся пейзажи."
+
+        "Спустя полчаса Надя стало клонить в сон, она опустила голову мне на плече и спокойно посапывала. "
+
+        "Я время от времени разглядывал пейзажи за окном, весело болтающих ребят, учтивую сопровождающую и конечно же Надя."
+
+        "Немного погодя меня и самого стало клонить в сон. "
+        "Я не сопротивлялся."
+
+label yuli_sh :
+
+        play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1
+        pause 7.0  
+        scene black scen
+        with dissolve
+
+        "Спустя пару минут Икарус тронулся."
+
+        "Все в автобусе оживленно разговаривали друг с другом."
+
+        "Некоторые пристально смотрят в окно, разглядывая встречающиеся пейзажи."
+
+        "Спустя полчаса Юля стало клонить в сон, она опустила голову мне на плече и спокойно посапывала. "
+
+        "Я время от времени разглядывал пейзажи за окном, весело болтающих ребят, учтивую сопровождающую и конечно же Юля."
+
+        "Немного погодя меня и самого стало клонить в сон. "
+        "Я не сопротивлялся."
+
