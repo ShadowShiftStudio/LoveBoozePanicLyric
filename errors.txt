@@ -2,9 +2,8 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 2558: Line is indented, but the preceding play sound statement statement does not expect a block. Please check this line's indentation.
-    show night:
-    ^
+File "game/kfc_minigame.rpy", line 195: is not terminated with a newline. (Check strings and parenthesis.)
+                play(renpy.sound.Sound("audio/bitenmap.mp3")
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Mon Mar 13 04:09:39 2023
+Mon Mar 13 03:10:31 2023
