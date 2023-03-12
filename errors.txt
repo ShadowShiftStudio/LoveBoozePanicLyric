@@ -2,25 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 1137: else clause expects a non-empty block.
-    else :
-          ^
-
-File "game/script.rpy", line 1380: expected statement.
-    nadya: "Прости, мне уже пора, добавишь меня в телеграмме?"
-         ^
-
-File "game/script.rpy", line 1381: expected statement.
-    sanya: "Да, конечно."
-         ^
-
-File "game/script.rpy", line 1382: expected statement.
-    nadya: "Класс, мой номер: ..."
-         ^
-
-File "game/script.rpy", line 1383: expected statement.
-    nadya: "Ладно, мне пора идти. Ещё увидимся."
-         ^
+File "game/script.rpy", line 1642: expected statement.
+    Зайдя в квартиру, я сразу достал сигарету и пошёл к окну.
+                    ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sun Mar 12 18:10:49 2023
+Sun Mar 12 20:49:17 2023
