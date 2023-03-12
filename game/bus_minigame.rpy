@@ -18,7 +18,7 @@ init python:
                         Image("car5.png"), Image("car6.png")]
 
             self.car_counter = 0
-            self.car_factor = 2.1
+            self.car_factor = 4.1
 
             self.bus_y = 0;
             self.bus_y_additional = 15
@@ -29,7 +29,7 @@ init python:
             self.bus_prev_line = 0
             self.bus_line = 1
 
-            self.cars_sets = [[0], [1, 2], [2], [0, 1], [0, 2], [1]]
+            self.cars_sets = [[0], [1, 2], [2], [0, 1], [0, 2], [1], [1, 0], [2, 0], [2, 1]]
 
             self.distance_bitween_sets_factor = 2
             self.distance_bitween_sets_step = 0.00005

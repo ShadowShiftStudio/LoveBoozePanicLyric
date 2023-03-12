@@ -2,9 +2,8 @@
 errors listed below, and try again.
 
 
-File "game/options.rpy", line 65: invalid syntax
-    "audio/seven-summer.mp3" volume 0.3
-                              ^
+File "game/kfc_minigame.rpy", line 195: is not terminated with a newline. (Check strings and parenthesis.)
+                play(renpy.sound.Sound("audio/bitenmap.mp3")
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Mon Mar 13 02:19:52 2023
+Mon Mar 13 03:10:31 2023

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 =======
 >>>>>>> origin/sms
 renpy.dissolve renpy.geometry
@@ -17,3 +18,24 @@ renpy.geometry renpy.imagedissolve
 renpy.matrixcolor renpy.texture
 renpy.geometry renpy.matrixcolor renpy.texture
 >>>>>>> origin/heart
+=======
+renpy.dissolve renpy.geometry
+renpy.geometry renpy.texture
+renpy.matrixcolor renpy.texture
+renpy.alpha renpy.geometry renpy.texture
+renpy.alpha renpy.texture
+>>>>>>> origin/heart
+renpy.texture
+>>>>>>> origin/sms
+renpy.geometry renpy.imagedissolve
+renpy.dissolve renpy.dissolve
+renpy.geometry renpy.solid
+renpy.alpha renpy.geometry renpy.solid
+renpy.imagedissolve renpy.imagedissolve
+renpy.alpha renpy.solid
+renpy.solid
+<<<<<<< HEAD
+renpy.ftl
+renpy.geometry renpy.matrixcolor renpy.texture
+=======
+>>>>>>> Stashed changes

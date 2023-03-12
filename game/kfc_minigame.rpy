@@ -1,4 +1,6 @@
 init python:
+    from renpy.audio.sound import play
+    
     class Counter:
         def __init__(self, duration):
             self.duration = duration
@@ -178,6 +180,7 @@ init python:
             self.animation_started = False
             self.is_finished = False
             self.buttons = buttons
+            #self.my_sound = renpy.audio.sound("bitenmap.mp3")
         
         def start(self):
             self.animation_started = True
@@ -191,6 +194,8 @@ init python:
             self.counter.reset_reverse()
 
         def drink(self):
+            #renpy.audio.sound("bitenmap.mp3")
+            play("audio/bitenmap.mp3")
             self.start()
 
         def is_finished_drinking(self):
@@ -247,7 +252,7 @@ init python:
     class TextDisplayable(renpy.Displayable):
         def __init__(self, glasses):
             renpy.Displayable.__init__(self)
-            self.counter = Counter(100)
+            self.counter = Counter(50)
             self.started = False
             self.finished = False
             self.reverse = False
@@ -334,9 +339,11 @@ init python:
             self.winner = ""
 
         def on_gg_bite(self):
+            play("audio/bite.mp3")
             self.update_stats(self.bite_decrease)
 
         def on_gg_not_bite(self):
+            play("audio/nea.mp3")
             self.update_stats(self.not_bite_decrease)
 
         def update_stats(self, hp_decrease):
@@ -347,7 +354,7 @@ init python:
 
             import random
 
-            is_pasha_bite = True if self.gg_bar.percent <= 21 else bool(random.getrandbits(1))
+            is_pasha_bite = bool(random.getrandbits(1))
 
             if is_pasha_bite:
                 self.pasha_bar.decrease(self.bite_decrease)
@@ -449,6 +456,6 @@ label play_kfc_minigame:
 
 
 if _return == "pasha":
-    "Паша выиграл"
+    "Саня конкретно перебрал с выпивкой в этот раз... Ноги еле идут..."
 else:
-    "Вы выиграли"
+    "Вы выиграли! Паша конкретно перебрал с выпивкой в этот раз..."
