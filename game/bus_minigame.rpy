@@ -8,17 +8,17 @@ init python:
             self.background = Image("mg1 road background.png")
             self.ground = Image("mg1 road ground.png")
 
-            self.ground_factor = 2.5
+            self.ground_factor = 1
             self.ground_counter = 0
             self.background_counter = 0
-            self.background_factor = 2
+            self.background_factor = 5
 
             self.cars= [Image("car1.png"), Image("car2.png"),
                         Image("car3.png"), Image("car4.png"),
                         Image("car5.png"), Image("car6.png")]
 
             self.car_counter = 0
-            self.car_factor = 3.5
+            self.car_factor = 2.1
 
             self.bus_y = 0;
             self.bus_y_additional = 15

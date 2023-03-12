@@ -5,7 +5,6 @@ define yuli = Character('Юля', color="#ffaaff")
 define nadya = Character('Надя', color="#f180a6")
 
 init python :
-
     def mplay(fn, chan = "music", fin = 1.0, fout = 1.0):
         renpy.music.play(fn, channel = chan, loop = True, fadein = fin, fadeout = fout)
         # канал на паузу
@@ -110,14 +109,20 @@ label first_day:
 
     scene black scen 
     with fade
+    "Какой странный сон мне приснился..."
+    "Бесконечно едешь прямо... Была бы хотя б малиновая лада, а не автобус..."
     play sound "audio/bus.mp3" volume 0.2
     $ renpy.pause (7.5)
     stop sound fadeout 1.5
     play music "audio/street-sound.mp3" volume 0.1
     scene bus station near nstu 
     with fade
-    show pasha neutral 
-    with dissolve
+
+    show pasha neutral:
+        alpha 0.0 xalign 0.5 yalign 1.0
+
+        # Take 1.0 seconds to move things back to the left.
+        linear 1.0 xalign 0.6 alpha 1.0
 
     "Только вышел из автобуса, как тут мне на встречу идёт крупный парень, он явно меня узнал, а вот я его не очень..."
     "Ба-а, так это же Пашка Запивон так за лето подкачался!"
@@ -125,8 +130,9 @@ label first_day:
     sanya "Паша, а я тебя и не узнал сперва, Накачался за лето я вижу!"
     pasha "Да так, самую малость."
 
-    show pasha smiles
-    with dissolve
+    show pasha smiles with dissolve
+
+    pause 2.0
 
     pasha "Слышь, Саня, говорили ты фамилию себе изменил, женился что ли?"
     sanya "Да там свои приколы с этим, ну захотелось мне просто фамилию новую, начать жизнь, знаешь, с чистого листа."
@@ -456,16 +462,15 @@ label first_day:
         pasha "Ну ты же на схемотехнике сидел, придумал бы там что-то на задних рядах такое..."
 
         show pasha giggles
-        with dissolve
 
         extend " схемотичное!"
 
         sanya_with_surname "Паша, ты дурак, тебе часто это говорят?"
         pasha "Ну, а ты мне почаще об этом напоминай."
-        extend " И вообще, я вижу ты уже начинаешь с девочкам взлетать!"
+        extend " И вообще, я вижу ты уже начинаешь с девочками взлетать!"
         pasha "Когда они за тобой хвостами ходить будут, ты только не забывай, с кем ползал!!!"
         "Паша явно намекал на себя."
-        sanya_with_surname "Короче я скучал на лекции, а потом смотрю направо, а там она сидит вся такая довольная..."
+        sanya_with_surname "Короче, я скучал на лекции, а потом смотрю направо... и оп! там она сидит вся такая довольная..."
         pasha "Наверное, потому что тебя заметила, такого красавца, да?"
         "А Паша то умеет засмущать"
         sanya_with_surname "Она ещё ходит в такой очень облегающей маечке, знаешь, с вырезом в виде сердечка ниже груди. Очень мило выглядит, немного даже вызывающе..."
@@ -483,7 +488,7 @@ label first_day:
 
         pasha "Да ты совсем дурак? Тебе золото с неба упало, а ты что-то про договорились мне тут талдычишь!"
         sanya_with_surname "Ну я взял её номер, сказал завтра ещё погуляем..."
-        pasha "А ну! Пиши ей прямо щас, говори что передумал, что ты мужик и хочешь видеть её прям щас!"
+        pasha "А ну! Пиши ей прямо щас, говори что передумал, что ты мужик и хочешь видеть её!"
         sanya_with_surname "Паша, ну я ж ..."
         extend " ну я ж того ... в зюзю!"
 
@@ -492,29 +497,61 @@ label first_day:
 
         pasha "Пи-ши я те-бе ска-зал!"
         "Последняя трезвая частичка меня просто кричит, что это всё не к добру..."
-        "Я достал телефон, нашёл её контакт и написал её следующее, считай, любовное послание:"
-        
-        image message_yuli_background = "message yuli background.png"
-        image message_yuli_messages = "message yuli messages.png"
+        "Я достал телефон, нашёл её контакт и написал ей следующее, считай, любовное послание:"
+        hide pasha angry
 
-        show message_yuli_background at truecenter
+        $ quick_menu = False
+
+        window hide
+
+        $ sms_show(_("Юлолия"), True)
         with dissolve
 
-        pause 3.0
+        sms_c "Сегодня"
 
-        show message_yuli_messages at truecenter 
+        sms_r "поивет юлтчка!!!"
+
+        sms_r "{image=emoji rofl}"
+
+        sms_r "п мы можкм с тобой скйчас прямо встетитсья?б"
+
+        sms_r "{image=emoji sweat}"
+
+        sms_r "посто я очень ну хряу тебя видеть!"
+
+        sms_r "мяу)"
+        $ sms_hide()
+
         with dissolve
 
-        pause 7.0
-
-        hide message_yuli_background
-        hide message_yuli_messages
-
+        show pasha neutral with dissolve
         "Ну, вроде получилось неплохо, даже смайлики добавил к месту!"
         sanya_with_surname "Ой, ответила!"
         pasha "Что пишет? Не томи!"
-        sanya_with_surname "\"Привет, Саша, я сразу и не поняла, кто мне пишет такие романсы\", – скобочка, скобочка, скобочка, – \"Я сейчас на набережной стою, скучаю как раз. Хочешь, приходи.\", – подмигивающий смайлик."
+        hide pasha sad
+        window hide
+        $ sms_show(_("Юлолия"), False)
+        with dissolve
 
+        sms_yuli "Привет, Саша, я сразу и не поняла, кто мне пишет такие романсы)))"
+        $ sms_hide()
+
+        show pasha neutral
+        sanya_with_surname "– скобочка, скобочка, скобочка, –"
+        window hide
+        hide pasha neutral
+
+        $ sms_show(_("Юлолия"), False)
+        sms_yuli "Я сейчас на набережной стою, скучаю как раз"
+        sms_yuli "Хочешь, приходи"
+        $ sms_hide()
+        $ quick_menu = True
+        
+        show pasha neutral
+        sanya_with_surname " – подмигивающий смайлик."
+        $ sms_hide()
+
+        with dissolve
         show pasha angry
         with dissolve
 

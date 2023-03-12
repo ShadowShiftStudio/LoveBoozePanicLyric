@@ -1,53 +1,92 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 799, in script
-    $ hf_start()
-  File "game/script.rpy", line 799, in <module>
-    $ hf_start()
-  File "game/HiddenFolks.rpy", line 178, in hf_start
-    renpy.call_screen("HiddenFolks")
-OSError: Couldn't find file 'audio/click.ogg'.
+  File "game/script.rpy", line 514, in script
+    sms_r "{image=in_love}"
+  File "game/sms.rpy", line 257, in execute
+    screen sms():
+  File "game/sms.rpy", line 257, in execute
+    screen sms():
+  File "game/sms.rpy", line 260, in execute
+    frame:
+  File "game/sms.rpy", line 264, in execute
+    frame:
+  File "game/sms.rpy", line 267, in execute
+    vbox:
+  File "game/sms.rpy", line 276, in execute
+    viewport:
+  File "game/sms.rpy", line 289, in execute
+    vbox:
+  File "game/sms.rpy", line 291, in execute
+    for i_style, i_text in sms_all:
+  File "game/sms.rpy", line 293, in execute
+    $ img = sms_image(i_style, i_text)
+  File "game/sms.rpy", line 293, in <module>
+    $ img = sms_image(i_style, i_text)
+  File "game/sms.rpy", line 248, in sms_image
+    z = sms_h / h
+NameError: name 'sms_h' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 799, in script
-    $ hf_start()
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\ast.py", line 1131, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\python.py", line 1061, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "game/script.rpy", line 799, in <module>
-    $ hf_start()
-  File "game/HiddenFolks.rpy", line 178, in hf_start
-    renpy.call_screen("HiddenFolks")
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\exports.py", line 3181, in call_screen
-    rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
+  File "game/script.rpy", line 514, in script
+    sms_r "{image=in_love}"
+  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\ast.py", line 921, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\exports.py", line 1373, in say
+    who(what, *args, **kwargs)
+  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\character.py", line 1266, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\character.py", line 927, in do_display
+    display_say(who,
+  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\character.py", line 666, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
   File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\ui.py", line 299, in interact
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\core.py", line 3377, in interact
     repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\core.py", line 3846, in interact_core
-    renpy.audio.audio.interact()
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\audio\audio.py", line 1213, in interact
-    periodic()
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\audio\audio.py", line 1166, in periodic
-    raise_(exc[0], exc[1], exc[2])
-  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python3.9/site-packages/future/utils/__init__.py", line 441, in raise_
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\audio\audio.py", line 1144, in periodic_thread_main
-    periodic_pass()
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\audio\audio.py", line 1086, in periodic_pass
-    c.periodic()
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\audio\audio.py", line 517, in periodic
-    topf = load(filename)
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\audio\audio.py", line 70, in load
-    rv = renpy.loader.load(fn)
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\loader.py", line 820, in load
-    raise IOError("Couldn't find file '%s'." % name)
-OSError: Couldn't find file 'audio/click.ogg'.
+  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\core.py", line 3810, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\core.py", line 582, in visit_all
+    d.visit_all(callback, seen)
+  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\core.py", line 582, in visit_all
+    d.visit_all(callback, seen)
+  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\core.py", line 582, in visit_all
+    d.visit_all(callback, seen)
+  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\screen.py", line 451, in visit_all
+    callback(self)
+  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\core.py", line 3810, in <lambda>
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\screen.py", line 462, in per_interact
+    self.update()
+  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\screen.py", line 653, in update
+    self.screen.function(**self.scope)
+  File "game/sms.rpy", line 257, in execute
+    screen sms():
+  File "game/sms.rpy", line 257, in execute
+    screen sms():
+  File "game/sms.rpy", line 260, in execute
+    frame:
+  File "game/sms.rpy", line 264, in execute
+    frame:
+  File "game/sms.rpy", line 267, in execute
+    vbox:
+  File "game/sms.rpy", line 276, in execute
+    viewport:
+  File "game/sms.rpy", line 289, in execute
+    vbox:
+  File "game/sms.rpy", line 291, in execute
+    for i_style, i_text in sms_all:
+  File "game/sms.rpy", line 293, in execute
+    $ img = sms_image(i_style, i_text)
+  File "game/sms.rpy", line 293, in <module>
+    $ img = sms_image(i_style, i_text)
+  File "game/sms.rpy", line 248, in sms_image
+    z = sms_h / h
+NameError: name 'sms_h' is not defined
 
 Windows-10-10.0.22621 AMD64
 Ren'Py 8.0.3.22090809
 TechTales 1.0
-Sun Mar 12 18:53:46 2023
+Sun Mar 12 21:00:55 2023
