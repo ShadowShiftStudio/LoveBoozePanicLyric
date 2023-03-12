@@ -1410,7 +1410,7 @@ label second_day :
             hide yuli horny2
             show black scen
             with fade
-        
+            $ ussr_or_no = True
         else :
             
             sanya_with_surname "Согласен, сейчас жизнь куда лучше, ни то что в совке, посмотреть только на то, куда он нас привел, в кошмарную перестройку."
