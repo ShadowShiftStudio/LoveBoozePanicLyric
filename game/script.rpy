@@ -29,6 +29,9 @@ define buy_sigarets = False
 define give_sigaret_nadya = False
 define choice_nadya_without_yuli = False
 define dilog_with_nadya = False
+define last_choice_yulia = False
+define last_choice_nadya = False
+define last_choise_lonly = False
 define mood_counter = -5
 
 label start:
@@ -1952,4 +1955,89 @@ label second_day :
     jump third_day
 
 label third_day :
-    "Я проснулся"
+    
+    scene sanya bed with fade :
+        linear 35 yoffset -560
+        linear 35 yoffset 0
+        repeat
+
+    "Проснувшись я понял что ничуть не отдохнул за прошедшую ночь."
+    "Гул в голове всё не утихал, подняться с кровати я не мог."
+    "Через пятнадцать минут боль немного утихла и я смог подняться. Я достал телефон и проверил время."
+    sanya "Блядь, я опаздываю!"
+
+    "Я быстро собрался, захватил заранее заготовленные вещи и пачку новокупленных сигарет. "
+    "Выйдя на улицу, я достал одну сигаретку и глубоко затянулся, головная боль ушла, а мысли переключились на вчерашний день."
+
+    scene sanya home
+    with dissolve
+
+    "С кем же мне поехать в итоге?"
+
+    menu :
+        "Юля" if kfc_with_pasha == True or ussr_or_no == True :
+            $ last_choice_yulia = True
+            "Первым в голове возник образ Юли. Вчерашняя прогулка оставила приятное послевкусие."
+            "Я и не ожидал что мы всего за пару дней так сблизимся, мы удачно совпали характерами, временами мне кажется что мы с ней очень похожи."
+            "Интересно смогу-ли я ещё встретиться с ней?"
+
+        "Надя" if dilog_with_nadya == True :
+            $ last_choice_nadya = True
+            "Первым в голове возник образ Нади. Наше знакомство оказалось для меня неожиданностью. Мы встречались только один раз, но она всем видом показывала что я ей симпатичен."
+
+        "Один" :
+            $ last_choise_lonly = True
+            "А ведь и ехать не с кем... Поеду тогда один."
+
+    
+    scene bus station
+    with fade
+
+    "Заебала уже эта остановка. Когда её уже снесут хотя бы?"
+    "А вот и моя развалюшка..."
+
+    play sound "audio/bus.mp3" fadein 1.5 fadeout 1.5 volume 0.1
+    scene black scen 
+    with fade
+
+    pause 6.0
+    stop sound
+
+    play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1
+
+    scene bus
+    with fade
+
+    "Посплю пока. Главное не проспать остановку..."
+
+    call play_bus
+
+    "Снова тот же сон..."
+
+    
+    scene black scen 
+    with fade
+    play sound "audio/bus.mp3" fadein 1.5 fadeout 1.5 volume 0.1
+    pause 6.0
+    stop sound
+
+    scene bus station near nstu
+    with fade
+
+    "Кажется по времени всё нормально. Можно уже не торопиться."
+
+    scene black scen
+    with fade
+
+    "На часах было без пяти восемь, а в конце улицы уже виднелся ждавший меня автобус."
+    "Подойдя ближе я был приятно удивлен, передо мной открылся вид не на старенький и потрепанный ЛИАЗ, а на красивый Икарус, он выглядел так будто только сошёл с конвеера."
+
+    scene neew bus
+    with fade
+
+    if last_choise_lonly :
+    
+    elif last_choice_nadya :
+
+    elif last_choice_yulia :
+        

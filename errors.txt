@@ -2,7 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 1845: Tab characters are not allowed in Ren'Py scripts.
+File "game/script.rpy", line 1975: choice menuitem expects a non-empty block.
+    "Юля" if (kfc_with_pasha == True or ussr_or_no == True) :
+                                                             ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sun Mar 12 22:57:05 2023
+Sun Mar 12 23:30:35 2023
