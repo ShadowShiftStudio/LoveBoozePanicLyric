@@ -18,11 +18,11 @@ init python:
                 return True
 
         def decrease(self):
-            if  self.counter - 1 >= 0:
-                self.counter -= 1
-                return self.counter == 0
-            else:
-                return True
+            self.counter -= 1;
+            if  self.counter < 0:
+                self.counter = 0
+
+            return self.counter == 0
 
         def reset(self):
             self.counter = 0
@@ -158,12 +158,12 @@ init python:
             return r
 
         def increase(self, value):
-            if self.percent + value <= 100:
-                self.percent += value
+            self.percent += value
+            if self.percent > value: self.percent = value
 
         def decrease(self, value):
-            if self.percent - value >= 0:
-                self.percent -= value
+            self.percent -= value
+            if self.percent < 0: self.percent = 0
 
         def add_score(self, value):
             self.score += value
@@ -364,12 +364,6 @@ init python:
             self.pasha_bar.add_score((100 - self.pasha_bar.percent) * 10)
             self.gg_bar.add_score((100 - self.gg_bar.percent) * 10)
 
-            renpy.redraw(self.gg_bar, 0.001)
-            renpy.redraw(self.pasha_bar, 0.001)
-
-            self.round_changed = True
-            renpy.redraw(self, 0.001)
-
             if self.pasha_bar.percent <= 0:
                 self.winner = "sanya"
                 renpy.timeout(0.001)
@@ -379,6 +373,12 @@ init python:
                 self.winner = "pasha"
                 renpy.timeout(0.001)
                 return
+
+            renpy.redraw(self.gg_bar, 0.001)
+            renpy.redraw(self.pasha_bar, 0.001)
+
+            self.round_changed = True
+            renpy.redraw(self, 0.001)
 
         def visit(self):
             return [ self.bowl_image, self.pasha_image, self.gg_glass, self.gg_bar, self.pasha_bar, self.bowl_image, self.background_image, self.bite_button, self.not_bite_button ]
