@@ -2047,7 +2047,7 @@ label third_day :
     "С кем же мне поехать в итоге?"
 
     menu :
-        "Юля" if kfc_with_pasha == True or ussr_or_no == True :
+        "Юля" if kfc_with_pasha == False or ussr_or_no == True :
             $ last_choice_yulia = True
             "Первым в голове возник образ Юли. Вчерашняя прогулка оставила приятное послевкусие."
             "Я и не ожидал что мы всего за пару дней так сблизимся, мы удачно совпали характерами, временами мне кажется что мы с ней очень похожи."
@@ -2108,10 +2108,53 @@ label third_day :
     with fade
 
     if last_choise_lonly :
-        ""
-    
+        if dilog_with_nadya == True :
+
+            show nadya happy
+            with dissolve
+
+            nadya "Привет! Я с тобой поеду."
+            sanya_with_surname "Конечно, садись."
+
+            hide nadya happy
+            with dissolve
+            scene black scen
+            with dissolve
+            play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1
+            pause 7.0
+
+        elif kfc_with_pasha == False or ussr_or_no == True :
+
+            show yuli greeting
+            with dissolve
+
+            yuli "Сань, привет. Я сяду с тобой?"
+            sanya_with_surname "Да, Юль, конечно."
+
+            hide yuli greeting
+            with dissolve
+            scene black scen
+            with dissolve
+            play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1
+            pause 7.0
+
+        else :
+
+            "Смотря на пустой автобус, я понял лишь одно - я никому не нужен."
+            "Впрочем, оно и не удивительно, последние дни я всё делал не так, как нужно было бы."
+            "Пустота автобуса, предначертанная жизнью, будто говорила мне, что я неудачник, что я никому не был нужен и не буду."
+
+            play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1
+
+            "Всё, что мне оставалось, - это молча смотреть в окно и наблюдать на проезжающие леса, дома, автомобили."
+
+            show black scen
+            with fade
+
+            "К сожалению, автобус попал в аварию. Погибло два человека. Единственный Пассажир и водитель."
+
     elif last_choice_nadya :
-        ""
+        "В автобусе я увидел несколько знакомых людей, не задумываясь я подсел к Наде."
 
     elif last_choice_yulia :
-        ""
+        "В автобусе я увидел несколько знакомых людей, не задумываясь я подсел к Юле."

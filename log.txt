@@ -1,4 +1,4 @@
-Sun Mar 12 23:55:16 2023
+Mon Mar 13 00:08:56 2023
 Windows-10-10.0.22621
 Ren'Py 8.0.3.22090809
  
@@ -22,14 +22,14 @@ Initial gc. took 0.02s
 DPI scale factor: 1.000000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.22s
+Creating interface object took 0.20s
 Cleaning stores took 0.00s
-Init translation took 0.03s
-Build styles took 0.00s
+Init translation took 0.04s
+Build styles took 0.01s
 Load screen analysis took 0.02s
 Analyze screens took 0.00s
 Save screen analysis took 0.00s
-Prepare screens took 0.04s
+Prepare screens took 0.03s
 Save pyanalysis. took 0.00s
 Save bytecode. took 0.00s
 Running _start took 0.00s
@@ -46,5 +46,10 @@ Version: b'4.6.0 NVIDIA 531.18'
 Display Info: None
 Screen sizes: virtual=(1920, 1080) physical=(1739, 978) drawable=(1739, 978)
 Maximum texture size: 4096x4096
-Screen sizes: virtual=(1920, 1080) physical=(1920, 1009) drawable=(1920, 1009)
-Maximum texture size: 4096x4096
+Cleaning stores took 0.00s
+Init translation took 0.00s
+Build styles took 0.00s
+Load screen analysis took 0.01s
+Analyze screens took 0.00s
+Prepare screens took 0.00s
+Running _start took 0.00s
