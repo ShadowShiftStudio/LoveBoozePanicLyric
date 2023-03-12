@@ -1819,5 +1819,13 @@ label second_day :
             linear 35 yoffset 0
             repeat
 
+    scene black scen 
+    with dissolve
+
+    pause 6.0
+
+    jump third_day
+
 
 label third_day :
+    "Я проснулся"
