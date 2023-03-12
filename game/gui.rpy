@@ -23,17 +23,17 @@ init python:
 ## Цвета текста в интерфейсе.
 
 ## Акцентный цвет используется в заголовках и подчёркнутых текстах.
-define gui.accent_color = '#00cc99'
+define gui.accent_color = '#00cc4e'
 
 ## Цвет, используемый в текстовой кнопке, когда она не выбрана и не наведена.
-define gui.idle_color = '#888888'
+define gui.idle_color = '#f0f0f0'
 
 ## Small_color используется в маленьком тексте, который должен быть ярче/темнее,
 ## для того, чтобы выделяться.
-define gui.idle_small_color = '#aaaaaa'
+define gui.idle_small_color = '#eee3e3'
 
 ## Цвет, используемых в кнопках и панелях, когда они наведены.
-define gui.hover_color = '#66e0c1'
+define gui.hover_color = '#cfa121'
 
 ## Цвет, используемый текстовой кнопкой, когда она выбрана, но не наведена.
 ## Кнопка может быть выбрана, если это текущий экран или текущее значение
@@ -53,16 +53,16 @@ define gui.text_color = '#ffffff'
 define gui.interface_text_color = '#ffffff'
 
 
-## Шрифты и их размеры #########################################################
+## Шрифты и их размеры ######################################################### "DejaVuSans.ttf"
 
 ## Шрифт, используемый внутриигровым текстом.
-define gui.text_font = "DejaVuSans.ttf"
+define gui.text_font = "fonts/sfpro.ttf"
 
 ## Шрифт, используемый именами персонажей.
-define gui.name_text_font = "DejaVuSans.ttf"
+define gui.name_text_font = "fonts/sfpro_semibold.ttf"
 
 ## Шрифт, используемый текстом вне игры.
-define gui.interface_text_font = "DejaVuSans.ttf"
+define gui.interface_text_font = "fonts/sfpro.ttf"
 
 ## Размер нормального текста диалога.
 define gui.text_size = 33
@@ -86,8 +86,8 @@ define gui.title_text_size = 100
 ## Главное и игровое меню. #####################################################
 
 ## Изображения, используемые в главном и игровом меню.
-define gui.main_menu_background = "gui/main_menu.png"
-define gui.game_menu_background = "gui/game_menu.png"
+define gui.main_menu_background = "gui/sanya.png"
+define gui.game_menu_background = "gui/sanya.png"
 
 
 ## Диалог ######################################################################
@@ -250,13 +250,13 @@ define gui.file_slot_rows = 2
 
 ## Местоположение левого края навигационных кнопок по отношению к левому краю
 ## экрана.
-define gui.navigation_xpos = 60
+define gui.navigation_xpos = 50
 
 ## Вертикальная позиция индикатора пропуска.
 define gui.skip_ypos = 15
 
 ## Вертикальная позиция экрана уведомлений.
-define gui.notify_ypos = 68
+define gui.notify_ypos = 18
 
 ## Интервал между выборами в меню.
 define gui.choice_spacing = 33
@@ -277,7 +277,7 @@ define gui.page_spacing = 0
 define gui.slot_spacing = 15
 
 ## Позиция текста главного меню.
-define gui.main_menu_text_xalign = 1.0
+define gui.main_menu_text_xalign = 0.0
 
 
 ## Рамки #######################################################################

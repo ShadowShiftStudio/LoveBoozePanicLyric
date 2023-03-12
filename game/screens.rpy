@@ -293,7 +293,7 @@ screen navigation():
         style_prefix "navigation"
 
         xpos gui.navigation_xpos
-        yalign 0.5
+        yalign 0.8
 
         spacing gui.navigation_spacing
 
@@ -359,8 +359,8 @@ screen main_menu():
     add gui.main_menu_background
 
     ## Эта пустая рамка затеняет главное меню.
-    frame:
-        style "main_menu_frame"
+    # frame:
+    #     style "main_menu_frame"
 
     ## Оператор use включает отображение другого экрана в данном. Актуальное
     ## содержание главного меню находится на экране навигации.
@@ -385,14 +385,14 @@ style main_menu_title is main_menu_text
 style main_menu_version is main_menu_text
 
 style main_menu_frame:
-    xsize 420
+    xsize 220
     yfill True
 
     background "gui/overlay/main_menu.png"
 
 style main_menu_vbox:
     xalign 1.0
-    xoffset -30
+    xoffset 3330
     xmaximum 1200
     yalign 1.0
     yoffset -30
@@ -554,8 +554,9 @@ screen about():
 
         vbox:
 
-            label "[config.name!t]"
-            text _("Версия [config.version!t]\n")
+            #label "[config.name!t]"
+            text _("Любовь, выпивка, паника, лирика\n")
+            text _("Авторы:\nAsind\nDarlin In The Steam\nDanilka108\nTheNorth\nи Серёжа")
 
             ## gui.about обычно установлено в options.rpy.
             if gui.about:
