@@ -1,19 +1,19 @@
-=======
->>>>>>> origin/sms
-renpy.dissolve renpy.geometry
-renpy.geometry renpy.solid
-renpy.imagedissolve renpy.imagedissolve
-renpy.alpha renpy.geometry renpy.solid
-renpy.solid
-renpy.ftl
-renpy.alpha renpy.solid
-renpy.geometry renpy.texture
 renpy.alpha renpy.geometry renpy.texture
 renpy.texture
+renpy.geometry renpy.matrixcolor renpy.texture
+>>>>>>> origin/sms
+renpy.dissolve renpy.geometry
+renpy.alpha renpy.solid
+>>>>>>> origin/heart
+renpy.alpha renpy.geometry renpy.solid
+renpy.ftl
+renpy.solid
+=======
+renpy.matrixcolor renpy.texture
+renpy.geometry renpy.imagedissolve
+renpy.geometry renpy.texture
+renpy.imagedissolve renpy.imagedissolve
+renpy.dissolve renpy.dissolve
 renpy.alpha renpy.texture
 <<<<<<< HEAD
-renpy.dissolve renpy.dissolve
-renpy.geometry renpy.imagedissolve
-renpy.matrixcolor renpy.texture
-renpy.geometry renpy.matrixcolor renpy.texture
->>>>>>> origin/heart
+renpy.geometry renpy.solid
