@@ -2,18 +2,9 @@
 errors listed below, and try again.
 
 
-<<<<<<< HEAD
-File "game/script.rpy", line 1642: expected statement.
-    Зайдя в квартиру, я сразу достал сигарету и пошёл к окну.
-                    ^
-
-Ren'Py Version: Ren'Py 8.0.3.22090809
-Sun Mar 12 20:49:17 2023
-=======
-File "game/script.rpy", line 515: expected statement.
-    sms_trans = [align(2.15, .5), rotate(2.5, False)]
+File "game/script.rpy", line 1114: end of line expected.
+    hide night:
               ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sun Mar 12 20:36:32 2023
->>>>>>> origin/sms
+Sun Mar 12 23:27:06 2023
