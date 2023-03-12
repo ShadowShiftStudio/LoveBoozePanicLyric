@@ -6,86 +6,43 @@ init -2000 python:
     def d2(x, d=2):
         return int(x / d)
 
-    # задаём пределы
-    clip = lambda i, mini, maxi: max(min(maxi, i), mini)
-
-    # строка в целочисленное или в дробное
-    def fint(x, default=0): # можно None
-        try:
-            x = int(x)
-            return x
-        except:
-            try:
-                x = float(x)
-                return x
-            except:
-                return default
-
     # префиксы спрайтов, теги в которых нужно делить не пробелами, а "_"
     layered_prefixes = []
 
-init -2:
+init:
     # масштабирование
     transform zoom(zoom=1):
-        subpixel True
         zoom zoom
+
     transform xzoom(zoom=1):
-        subpixel True
         xzoom zoom
+
     transform yzoom(zoom=1):
-        subpixel True
         yzoom zoom
-    transform zooming(xzoom1=1., yzoom1=1., xzoom2=1., yzoom2=1., t=1):
-        subpixel True
-        xzoom xzoom1 yzoom yzoom1
-        ease t xzoom xzoom2 yzoom yzoom2
 
     # прозрачность
     transform alpha(alpha=1.):
         alpha alpha
-    transform alphing(alpha1=0, alpha2=1, t=1):
-        alpha alpha1
-        ease t alpha alpha2
 
     # размытость
     transform blur(blur=4):
         blur blur
-    transform bluring(blur1=0, blur2=16, t=1):
-        blur blur1
-        ease t blur blur2
 
     # яркость
     transform brightness(brightness=.25):
         matrixcolor BrightnessMatrix(brightness)
 
-    transform brightnessing(brightness1=0, brightness2=.25, t=2):
-        matrixcolor BrightnessMatrix(brightness1)
-        ease t matrixcolor BrightnessMatrix(brightness2)
-
     # контраст
     transform contrast(contrast=1.25):
         matrixcolor ContrastMatrix(contrast)
-
-    transform contrasting(contrast1=1, contrast2=1.25, t=2):
-        matrixcolor ContrastMatrix(contrast1)
-        ease t matrixcolor ContrastMatrix(contrast2)
 
     # насыщенность
     transform saturation(saturation=1.):
         matrixcolor SaturationMatrix(saturation)
 
-    transform saturationing(saturation1=1., saturation2=.5, t=2):
-        matrixcolor SaturationMatrix(saturation1)
-        ease t matrixcolor SaturationMatrix(saturation2)
-
     # подкрашивание картинок
     transform color(color="#000"):
         matrixcolor TintMatrix(color)
-
-    # силуэт цвета color color1 переходит в color2
-    transform coloring(color1="#fff", color2="#fff", t=2):
-        matrixcolor TintMatrix(color1)
-        ease t matrixcolor TintMatrix(color2)
 
     # спрайт цвета color1 переливается в color2
     transform color2(color1="#fff", color2="#def", t=2):
@@ -98,12 +55,7 @@ init -2:
     transform paint(color="#fff"):
         matrixcolor TintMatrix(color) * InvertMatrix(1.) * TintMatrix("#000")
 
-    # силуэт цвета color color1 переходит в color2
-    transform painting(color1="#fff", color2="#fff", t=2):
-        matrixcolor TintMatrix(color1) * InvertMatrix(1.) * TintMatrix("#000")
-        ease t matrixcolor TintMatrix(color2) * InvertMatrix(1.) * TintMatrix("#000")
-
-    # силуэт цвета color1 переливается в color2 циклично
+    # силуэт цвета color1 переливается в color2
     transform paint2(color1="#fff", color2="#def", t=2):
         matrixcolor TintMatrix(color1) * InvertMatrix(1.) * TintMatrix("#000")
         ease_quad t*.5 matrixcolor TintMatrix(color2) * InvertMatrix(1.) * TintMatrix("#000")
@@ -117,10 +69,6 @@ init -2:
         yalign yalign
     transform align(xalign=.5, yalign=1.):
         align (xalign, yalign)
-    transform aligning(xalign1=.5, yalign1=1., xalign2=.5, yalign2=1., t=1):
-        subpixel True
-        align (xalign1, yalign1)
-        ease t align (xalign2, yalign2)
 
     # положение
     transform xpos(xpos=.5):
@@ -129,19 +77,6 @@ init -2:
         ypos ypos
     transform pos(xpos=.5, ypos=.0):
         pos (xpos, ypos)
-    transform posing(xpos1=.5, ypos1=1., xpos2=.5, ypos2=1., t=1):
-        subpixel True
-        pos (xpos1, ypos1)
-        ease t pos (xpos2, ypos2)
-
-    transform zpos(zpos=0, depth=True, zzoom=True):
-        gl_depth depth
-        zzoom zzoom
-        zpos zpos
-    transform zposing(zpos=0, t=1, depth=True, zzoom=True):
-        gl_depth depth
-        zzoom zzoom
-        ease t zpos zpos
 
     # якорь
     transform xanchor(xanchor=.5):
@@ -150,64 +85,37 @@ init -2:
         yanchor yanchor
     transform anchor(xanchor=.5, yanchor=1.):
         anchor (xanchor, yanchor)
-    transform anchoring(anchor1=.5, anchor2=.5, t=1):
-        anchor anchor1
-        ease t anchor anchor2
 
     # отзеркаливание
     transform hflip(xz=-1.):
-        subpixel True
         xzoom xz
     transform vflip(yz=-1.):
-        subpixel True
         yzoom yz
 
     # поворот против часовой
-    transform rotate(a=45, rotate_pad=False):
-        subpixel True
+    transform rotate(a=45, rotate_pad=True):
         rotate_pad rotate_pad
         rotate a
-    transform rotating(a1=0, a2=360, t=1, rotate_pad=False):
-        subpixel True
-        rotate_pad rotate_pad
-        rotate a1
-        ease t rotate a2
 
     # повороты с перспективой
     ## вверх-вниз
-    transform turnx(x=45, depth=True):
-        subpixel True
+    transform turnx(x=45):
         perspective True
-        gl_depth depth
-        matrixtransform RotateMatrix(x, 0, 0)
-
-    # повороты с перспективой
-    ## вверх-вниз
-    transform turnx(x=45, depth=True):
-        subpixel True
-        perspective True
-        gl_depth depth
         matrixtransform RotateMatrix(x, 0, 0)
 
     ## влево-вправо
-    transform turny(y=45, depth=True):
-        subpixel True
+    transform turny(y=45):
         perspective True
-        gl_depth depth
         matrixtransform RotateMatrix(0, y, 0)
 
     ## против часовой-по часовой
-    transform turnz(z=45, depth=True):
-        subpixel True
+    transform turnz(z=45):
         perspective True
-        gl_depth depth
         matrixtransform RotateMatrix(0, 0, z)
 
     ## по всем направлениям
-    transform turn(x=0, y=45, z=0, depth=True):
-        subpixel True
+    transform turn(x=0, y=45, z=0):
         perspective True
-        gl_depth depth
         matrixtransform RotateMatrix(x, y, z)
 
     # вырезание
@@ -216,7 +124,6 @@ init -2:
 
     # подпрыгивание персонажа
     transform leap(dt=.4, dyz=0.01, dxz=0.005):
-        subpixel True
         yzoom 1.
         easein dt*0.35 yzoom 1.+dyz xzoom 1.-dxz
         easeout dt*0.35 yzoom 1. xzoom 1.
@@ -245,7 +152,6 @@ init -2:
 
     # сиськотряс
     transform boobs(t=2):
-        subpixel True
         yanchor 0 yzoom 1
         easeout (t*.075) yzoom 1.05
         easein  (t*.1)   yzoom .95
@@ -256,25 +162,8 @@ init -2:
         easeout (t*.15)  yzoom 1.005
         easein  (t*.15)  yzoom 1.
 
-init python:
-    # переменная для хранения скорости вывода текста
-    CPS = _preferences.text_cps
-
-    # сохранить значение скорости
-    def cps_save():
-        global CPS
-        CPS = _preferences.text_cps
-
-    # изменить скорость
-    def cps_set(cps):
-        _preferences.text_cps = cps
-
-    # восстановить сохраненное значение скорости
-    def cps_restore():
-        _preferences.text_cps = CPS
-
 init -2 python:
-        # единоразовый dismiss
+    # единоразовый dismiss
     def skip_once():
         renpy.end_interaction(True)
     SkipOnce = renpy.curry(skip_once)
@@ -481,19 +370,24 @@ init -2 python:
         for i in effects:
             define.move_transitions(i, delay)
 
-    def cur_time(tformat="%H:%M:%S"):
-        return datetime.datetime.now().strftime(tformat)
-
     import datetime
-
     # для цифровых часиков (не менять, не вызывать)
-    def clock_f(st, at, tformat="%H:%M:%S", **kwarg):
-        return Text(cur_time(tformat), **kwarg), .25
+    clock_properties = None
+    def show_digital_clock(st, at):
+        cur_time = datetime.datetime.now().strftime("%H:%M:%S")
+        img = Text(cur_time, **clock_properties)
+        return img, .25
 
-    # создать цифровые часики:
-    # image clock = Clock(size=48, color="#fff8", outlines=[(2, "#0008", 0, 0)], align=(.05, .05))
-    def Clock(**kwarg):
-        return DynamicDisplayable(clock_f, **kwarg)
+    # создать цифровые часики с любым именем картинки (только в init!):
+    # $ create_clock("digital_clock", size=48, color="#fff8", outlines=[(2, "#0008", 0, 0)], align=(.05, .05))
+    # применение - на любом экране screen:
+    # add "digital_clock"
+    # или в виде спрайта:
+    # show digital_clock
+    def create_clock(name, **properties):
+        global clock_properties
+        clock_properties = properties
+        renpy.image(name, DynamicDisplayable(show_digital_clock))
 
     # показать экран на слое "мастер",
     # чтобы он не исчезал, когда прячем интерфейс
@@ -637,7 +531,7 @@ init -2 python:
     renpy.music.register_channel("effect", "sfx", loop=True)
 
     # зацикленный звуковой эффект, не музыка
-    def sfxplay(name, channel="effect", loop=True, fadein=1, fadeout=1, ext="ogg", audio_dir=audio_dir):
+    def sfxplay(name, channel="effect", loop=True, fadein=1, fadeout=1, ext="ogg"):
         if name:
             renpy.music.play(audio_dir + "/" + name + "." + ext, channel=channel, loop=loop, fadein=fadein, fadeout=fadeout)
 
@@ -666,14 +560,10 @@ init -2 python:
         new_fn = music_dir + "/" + mname + "." + ext
         renpy.music.play(new_fn, channel=channel, loop=loop, fadein=fadein, fadeout=fadeout)
 
-    # убрать из строки теги типа <from 0.2>
-    def mdeletetags(str):
-        return re.sub(re.compile('<.*?>'), '', str)
-
     # запустить музыку для имени файла и пути
-    def fnplay(new_fn, fadein=1, fadeout=1, channel="music", restart=True):
+    def fnplay(new_fn, fadein=1, fadeout=1, channel="music"):
         old_fn = renpy.music.get_playing()
-        if restart or (mdeletetags(old_fn) != mdeletetags(new_fn)):
+        if old_fn != new_fn and new_fn:
             renpy.music.play(new_fn, channel=channel, loop=True, fadein=fadein, fadeout=fadeout)
 
     # последняя сохраненная мелодия
@@ -681,15 +571,16 @@ init -2 python:
 
     # сохранить в памяти играющую мелодию
     def msave():
-        store.last_music_fn = renpy.music.get_playing()
+        global last_music_fn
+        last_music_fn = renpy.music.get_playing()
 
     # восстановить игравшую при сохранении мелодию
     def mrestore(fadein=1, fadeout=1, channel="music"):
         if last_music_fn:
-            fnplay(last_music_fn, fadein=fadein, fadeout=fadeout, channel=channel, restart=False)
+            fnplay(last_music_fn, fadein=fadein, fadeout=fadeout, channel=channel)
 
     # воспроизвести звук для канала audio, который поддерживает многопоточность
-    def splay(mname, fadein=0, fadeout=0, channel=config.play_channel, ext="ogg", audio_dir=audio_dir):
+    def splay(mname, fadein=0, fadeout=0, channel=config.play_channel, ext="ogg"):
         if mname:
             mname = make_list(mname)
             lst = []
@@ -698,7 +589,7 @@ init -2 python:
             renpy.play(lst, channel=channel, fadein=fadein, fadeout=fadeout)
 
     # воспроизвести звук
-    def sndplay(mname, fadein=0, fadeout=0, channel="sound", ext="ogg", audio_dir=audio_dir):
+    def sndplay(mname, fadein=0, fadeout=0, channel="sound", ext="ogg"):
         if mname:
             mname = make_list(mname)
             lst = []
@@ -811,10 +702,6 @@ init -2 python:
             images.append(tag)
         return images
 
-    # показан ли спрайт на экране
-    def sprite_showed(image, layer='master'):
-        return image in get_showing_sprites(layer)
-
     # найти на экране спрайт, содержащий тег
     def get_sprite_by_tag(tag, layer='master'):
         if tag:
@@ -842,20 +729,6 @@ init -2 python:
     import copy as dcopy
     def copy(*args):
         return dcopy.deepcopy(*args)
-
-    # входит ли в строку where подстрока what
-    # или одна из подстрок, если what - список или кортеж
-    def has_text(where, what):
-        if isinstance(what, (str, unicode)):
-            what = [what]
-        for i in what:
-            if i in where:
-                return True
-        return False
-
-    # существует ли переменная с заданным именем
-    def has_val(key):
-        return key in globals().keys()
 
 # БЛОК ДЛЯ РАБОТЫ С ВРЕМЕНАМИ СУТОК
 # как пользоваться:
@@ -1048,10 +921,6 @@ init 1900 python hide:
             # игнорируем, если такой спрайт уже есть
             if name in renpy.display.image.images:
                 continue
-
-            # если тег один, но требуется для многослойных картинок, то добавляем в конце "_"
-            if layered and not "_" in name:
-                name = name + "_"
 
             # объявляем спрайт
             renpy.image(name, fn)
