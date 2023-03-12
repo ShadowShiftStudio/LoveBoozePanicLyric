@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 2246: play requires a channel
-    play "audio/bus.mp3" fadein 1.5 fadeout 1.5 volume 0.1
-         ^
+File "game/options.rpy", line 65: invalid syntax
+    "audio/seven-summer.mp3" volume 0.3
+                              ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Mon Mar 13 01:31:53 2023
+Mon Mar 13 02:19:52 2023
