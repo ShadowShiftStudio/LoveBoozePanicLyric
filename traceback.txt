@@ -1,28 +1,26 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 1139, in script
-    with dissolves
-  File "game/script.rpy", line 1139, in <module>
-    with dissolves
-NameError: name 'dissolves' is not defined
+  File "game/script.rpy", line 420, in script call
+    call kfc_minigame
+  File "game/script.rpy", line 420, in script call
+    call kfc_minigame
+ScriptError: could not find label 'kfc_minigame'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 1139, in script
-    with dissolves
-  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 1651, in execute
-    trans = renpy.python.py_eval(self.expr)
-  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1092, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1085, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/script.rpy", line 1139, in <module>
-    with dissolves
-NameError: name 'dissolves' is not defined
+  File "game/script.rpy", line 420, in script call
+    call kfc_minigame
+  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 1705, in execute
+    rv = renpy.game.context().call(label, return_site=self.next.name)
+  File "game/script.rpy", line 420, in script call
+    call kfc_minigame
+  File "C:\renpy-8.0.3-sdk\renpy\script.py", line 927, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'kfc_minigame'.
 
 Windows-10-10.0.22621 AMD64
 Ren'Py 8.0.3.22090809
 TechTales 1.0
-Sun Mar 12 22:59:14 2023
+Mon Mar 13 01:51:11 2023

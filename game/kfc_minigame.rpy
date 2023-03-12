@@ -447,7 +447,8 @@ label play_kfc_minigame:
     $ quick_menu = True
     window show
 
-    if _return == "pasha":
-        "Паша выиграл"
-    else:
-        "Вы выиграли"
+
+if _return == "pasha":
+    "Паша выиграл"
+else:
+    "Вы выиграли"

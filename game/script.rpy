@@ -417,9 +417,12 @@ label first_day:
         hide pasha smiles
         with dissolve
 
-        #
-        # мини игра
-        #
+        call play_kfc_minigame
+
+        if _return == "pasha":
+            $ is_winned = True
+        else:
+            $ is_winned = False
         
         play music "audio/street-sound.mp3" volume 0.5
 
@@ -451,7 +454,7 @@ label first_day:
 
         "Мы с Пашком так много выпили, а я ещё даже и не думал рассказать ему о моём знакомстве с Юлькой."
         "Да просто все мысли были о том, как же я"
-        if win_or_lose_pasha :
+        if is_winned :
             extend " жестко его перепил сегодня, что-что, а вот пил Пашка всегда слабенько"
         else :
             extend " жестко напился сегодня, что даже Пашка меня перепил. Явно сдаю позиции. Говорю же – старость!"
