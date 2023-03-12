@@ -2,8 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/kfc_minigame.rpy", line 195: is not terminated with a newline. (Check strings and parenthesis.)
-                play(renpy.sound.Sound("audio/bitenmap.mp3")
+File "game/script.rpy", line 1489: expected statement.
+    else :
+         ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Mon Mar 13 03:10:31 2023
+Mon Mar 13 04:52:36 2023
