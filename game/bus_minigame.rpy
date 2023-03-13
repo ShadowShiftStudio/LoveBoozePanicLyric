@@ -1,4 +1,5 @@
 init python:
+    from renpy.audio.sound import play
     class BusMinigameDisplayable(renpy.Displayable):
         def __init__(self):
             renpy.Displayable.__init__(self)
@@ -112,6 +113,7 @@ init python:
             self.car_factor += self.counters_step
 
             if self.finished:
+                play("audio/avaria.mp3")
                 renpy.timeout(0)
             else:
                 self.car_counter += 1
