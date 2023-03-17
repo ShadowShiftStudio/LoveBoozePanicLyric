@@ -40,6 +40,10 @@ screen my_screen():
     add "notification.png" xalign 1.0 yalign 0.055 xzoom 0.6
     text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
+screen my_screen_big():
+    add "notification.png" xalign 1.0 yalign 0.055 
+    text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
+
 label start:
     jump first_day
 
@@ -589,11 +593,20 @@ label first_day:
 
         menu :
             "Отказаться" :
+                show screen my_screen 
+                with dissolve
+
                 sanya_with_surname "Паша, да... Мне уже в любом случае пора бы домой идти. Если случайно встретимся, то встретимся, если нет, то не суждено значит."
                 $ go_to_yuli = False
             "Согласиться" :
+                show screen my_screen 
+                with dissolve
+
                 pasha "Саня, Саня, теряешь такие возможности! Ну, как знаешь. Я тоже уже до хаты собираюсь. Давай, особо не теряйся!"
                 $ go_to_yuli = True
+
+        hide screen my_screen
+        with dissolve
 
         if go_to_yuli :
 
@@ -881,11 +894,24 @@ label first_day:
 
     menu :
         "Отличная идея!" :
+            $ str_for_notification = "У этого действия будут последствия"
+            
+            show screen my_screen_big 
+            with dissolve
+
             sanya_with_surname "Звучит как отличная идея, может хотя бы там смогу вернуть краски в жизнь."
             $ go_or_no = True
         "Какой-то отстой." : 
+            $ str_for_notification = "У этого действия будут последствия"
+            
+            show screen my_screen_big 
+            with dissolve
+
             sanya_with_surname "Да блядь, опять спам от университета, как же он бесит."
             $ go_or_no = False
+        
+    hide screen my_screen_big
+    with dissolve
 
     "Родители" "Саша, мы можем оплатить санаторий, тебе будет полезно развеяться."
     "Ладно, это и правда неплохая возможность отдохнуть. Говорить о том, что он бесплатный я, конечно, не буду."
@@ -1288,9 +1314,22 @@ label second_day :
     menu :
 
         "Пойти в курилку" :
+            $ str_for_notification = "У этого действия будут последствия"
+
+            show screen my_screen_big
+            with dissolve
+
             $ go_to_smooking = True
         "Забить и покурить дома" :
+            $ str_for_notification = "У этого действия будут последствия"
+
+            show screen my_screen_big
+            with dissolve
+
             $ go_to_smooking = False
+
+    hide screen my_screen_big
+    with dissolve
 
     if go_to_smooking :
         scene black scen 
@@ -1319,9 +1358,22 @@ label second_day :
 
         menu :
             "СОЮЗ НЕРУШИМЫХ..." :
+                $ str_for_notification = "У этого действия будут последствия"
+
+                show screen my_screen_big
+                with dissolve
+
                 $ ussr_or_no = True
             "На хуй СССР!" :
+                $ str_for_notification = "У этого действия будут последствия"
+
+                show screen my_screen_big
+                with dissolve
+
                 $ ussr_or_no = False
+
+        hide screen my_screen_big
+        with dissolve
 
         if ussr_or_no:
             sanya_with_surname "Честно говоря, мне кажется что в СССР было лучше, чем сейчас. Жизнь была проще, люди добродушнее..."
@@ -1566,10 +1618,23 @@ label second_day :
         menu :
 
             "Купить сиги." :
+                $ str_for_notification = "Надя запомнила это"
+
+                show screen my_screen
+                with dissolve
+
                 $ buy_sigarets = True
 
             "Ты же малолетка. Домой иди." :
+                $ str_for_notification = "Надя запомнила это"
+
+                show screen my_screen
+                with dissolve
+
                 $ buy_sigarets = False
+
+        hide screen my_screen
+        with dissolve
 
         if buy_sigarets :
             hide nadya flirting 
@@ -1642,10 +1707,21 @@ label second_day :
             menu :
 
                 "Стрельнуть сижку, оторвать её от своей души." :
+                    $ str_for_notification = "Надя запомнила это"
+
+                    show screen my_screen_big
+                    with dissolve
                     $ give_sigaret_nadya = True
 
                 "Обойдешься без сиги." :
+                    $ str_for_notification = "Надя запомнила это"
+
+                    show screen my_screen_big
+                    with dissolve
                     $ give_sigaret_nadya = False
+
+            hide screen my_screen
+            with dissolve
 
             if give_sigaret_nadya :
 
@@ -1715,6 +1791,11 @@ label second_day :
 
                 "Согласиться..." :
                     $ choice_nadya_without_yuli = True
+                    
+                    $ str_for_notification = "Надя запомнила это"
+
+                    show screen my_screen_big
+                    with dissolve
 
                     sanya_with_surname "Конечно, я буду только рад составить тебе компанию."
 
@@ -1743,6 +1824,11 @@ label second_day :
                 "Нейтральный ответ" :
                     $ choice_nadya_without_yuli = False
 
+                    $ str_for_notification = "Надя запомнила это"
+
+                    show screen my_screen_big
+                    with dissolve
+
                     sanya_with_surname "Прости, последнее время я очень занят, может когда-нибудь в другой раз."
 
                     show nadya light sad
@@ -1760,6 +1846,9 @@ label second_day :
                     with dissolve
 
                     "Уже было достаточно поздно, поэтому недолго думая я решил отправиться прямиком к своему дому."
+            
+            hide screen my_screen
+            with dissolve
     
     scene black scen
     with fade
@@ -2076,6 +2165,11 @@ label third_day :
 
     menu :
         "Юля" if kfc_with_pasha == False or ussr_or_no == True :
+            
+            $ str_for_notification = "У этого действия будут последствия"
+
+            show screen my_screen_big
+            with dissolve
 
             $ last_choice_yulia = True
 
@@ -2085,17 +2179,29 @@ label third_day :
 
         "Надя" if dilog_with_nadya == True :
 
+            $ str_for_notification = "У этого действия будут последствия"
+
+            show screen my_screen_big
+            with dissolve
+
             $ last_choice_nadya = True
 
             "Первым в голове возник образ Нади. Наше знакомство оказалось для меня неожиданностью. Мы встречались только один раз, но она всем видом показывала что я ей симпатичен."
 
         "Один" :
+            
+            $ str_for_notification = "У этого действия будут последствия"
+
+            show screen my_screen_big
+            with dissolve
 
             $ last_choise_lonly = True
 
             "А ведь и ехать не с кем... Поеду тогда один."
 
-    
+    hide screen my_screen_big
+    with dissolve
+
     scene bus station
     with fade
 
