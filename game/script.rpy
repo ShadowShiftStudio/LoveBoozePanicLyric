@@ -159,7 +159,7 @@ label first_day:
     pasha "О-о-о, панковская фамилия, я вижу! Ну такое дело надо отметить!!"
     pasha "[player_name_buf], пошли сегодня в кефас пиво пить, я тебя ещё за двадцатилетие за уши не тягал!"
     sanya_with_surname "Ну смотри, у меня одна пара, а потом никаких планов. Пошли, конечно, без проблем."
-    pasha "Ну всё, патлатый, жду тебя возле курилки после пар."
+    pasha "Ну всё, патлатый, жду тебя возле курилки после пар. Если че, у меня мобила скоро сядет. Так что давай без сюрпризов."
 
     hide pasha smiles 
     with dissolve
@@ -354,7 +354,7 @@ label first_day:
             $ kfc_with_pasha = False
         "Отказаться" :
             sanya_with_surname "Юля, давай погуляем завтра, я сегодня никак не могу – с другом уже договорился встретиться! Мы с ним тысячу лет не виделись!"
-            sanya_with_surname "Ты знаешь, что сделай, напиши мне свой ник в телеграмме, я тебе сегодня вечером ещё напишу обязательно!"
+            sanya_with_surname "Ты знаешь, что сделай, напиши мне свой ник в телеграме, я тебе сегодня вечером ещё напишу обязательно!"
             $ kfc_with_pasha = True
 
     if kfc_with_pasha :
@@ -422,7 +422,7 @@ label first_day:
             $ is_winned = True
         else:
             $ is_winned = False
-        
+            
         play music "audio/street-sound.mp3" volume 0.5
 
         scene black scen 
@@ -1176,7 +1176,7 @@ label second_day :
 
         pasha "Так, ладно, мне уже пара идти на пару. А ты, как я понял, только за документами в универ приехал?"
         sanya_with_surname "Ну, да"
-        pasha "Удачи тебе тогда, Саня! И в санатории приятно отдохнуть. Я тебе ещё вечером напишу, мемов в телеграмм накидаю!"
+        pasha "Удачи тебе тогда, Саня! И в санатории приятно отдохнуть. Я тебе ещё вечером напишу, мемов в телеграм накидаю!"
         pasha "Увидимся через неделю, значит? На этом же месте?"
         sanya_with_surname "Верно, верно, на этом же месте, ровно через неделю!"
 
@@ -1702,7 +1702,7 @@ label second_day :
 
                     "Мы продолжили разговаривать на различные темы, пока у Нади не зазвонил телефон."
 
-                    nadya "Прости, мне уже пора, добавишь меня в телеграмме?"
+                    nadya "Прости, мне уже пора, добавишь меня в телеграме?"
                     sanya_with_surname "Да, конечно."
                     nadya "Класс, мой номер: ..."
                     nadya "Ладно, мне пора идти. Ещё увидимся."
@@ -1728,7 +1728,7 @@ label second_day :
                     nadya "Ладно уж, может в следующий раз."
 
                     "Мы продолжили разговаривать на различные темы, пока у Нади не зазвонил телефон."
-                    nadya "Прости, мне уже пора, добавишь меня в телеграмме?"
+                    nadya "Прости, мне уже пора, добавишь меня в телеграме?"
                     sanya "Да, конечно."
                     nadya "Класс, мой номер: ..."
                     nadya "Ладно, мне пора идти. Ещё увидимся."
@@ -2053,17 +2053,23 @@ label third_day :
 
     menu :
         "Юля" if kfc_with_pasha == False or ussr_or_no == True :
+
             $ last_choice_yulia = True
+
             "Первым в голове возник образ Юли. Вчерашняя прогулка оставила приятное послевкусие."
             "Я и не ожидал что мы всего за пару дней так сблизимся, мы удачно совпали характерами, временами мне кажется, что мы с ней очень похожи."
             "Интересно, смогу ли я ещё встретиться с ней?"
 
         "Надя" if dilog_with_nadya == True :
+
             $ last_choice_nadya = True
+
             "Первым в голове возник образ Нади. Наше знакомство оказалось для меня неожиданностью. Мы встречались только один раз, но она всем видом показывала что я ей симпатичен."
 
         "Один" :
+            
             $ last_choise_lonly = True
+
             "А ведь и ехать не с кем... Поеду тогда один."
 
     
@@ -2074,6 +2080,7 @@ label third_day :
     "А вот и моя развалюшка..."
 
     play sound "audio/bus.mp3" fadein 1.5 fadeout 1.5 volume 0.1
+
     scene black scen 
     with fade
 
@@ -2095,8 +2102,10 @@ label third_day :
     
     scene black scen 
     with fade
+
     stop music
     play sound "audio/bus.mp3" fadein 1.5 fadeout 1.5 volume 0.1
+
     pause 6.0
     stop sound
 
@@ -2116,19 +2125,29 @@ label third_day :
 
     if last_choise_lonly :
         if dilog_with_nadya == True and (kfc_with_pasha == False or ussr_or_no == True  or go_to_yuli == True):
+
             show nadya angry at right
             with dissolve
+
             nadya "Привет! Я не понимаю, а почему ты сел один-то?!"
             sanya_with_surname "Прости... Я не очень хотел садиться к кому-то. Не было настроения."
+
             show yuli sad at left
             with dissolve
+
             yuli "Ты почему не со мной сел, Саш? Мы же так мило общались..."
             yuli "Погоди, девочка слева от меня это вообще кто?"
+
             show yuli angry at left
             with dissolve
+
             yuli "Ты что, сразу нескольким девочкам пообещал сесть, а теперь вообще садишься один?!"
-            scene black with dissolve
+
+            scene black 
+            with dissolve
+
             sanya "Девочки, давайте не будем ссориться! Ляжем спать, погоняем автобус во сне..."
+
             window hide
             call play_bus
 
@@ -2213,7 +2232,9 @@ label third_day :
         jump nadya_ch
 
     elif last_choice_yulia :
+
         $ is_bad_ask = False
+
         "Сяду-ка я к Юле - проверенный вариант, так скажем."
         sanya "Юль, привет..."
 
@@ -2228,6 +2249,7 @@ label third_day :
             menu :
                 "Да ну тебя! Я был о тебе лучшего мнения" :
                     "Я решил сесть рядом, но дальше мы особо не общались."
+
                     hide yuli happy
                     with dissolve
 
@@ -2262,18 +2284,24 @@ label third_day :
                 "Эммм.... ну если только.... мне искусственное дыхание нужно будет......."  :
 
                     play music "audio/fail.mp3" volume 0.1
+
                     centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth"
+
                     pause 4.0
                     
         
         show yuli shy
         with dissolve
+
         stop music fadeout 0.5
+        
         yuli "На самом деле, я рада, что ты тоже едешь в санаторий!"
         yuli "Кстати, а у тебя какие-то проблемы со здоровьем или ты просто так?"
         sanya_with_surname "Да у меня последнее время что-то ночи становятся все длиннее, а дни все тусклее. Надо отвлечься как-то, природа, думается мне, - самое то!"
+
         if go_or_no == True:
             "Главное не говорить, что меня мамка сюда отправила, а то не видать мне ничего с юлькой."
+
         sanya_with_surname "А ты почему едешь? Учебу прогулять хочешь?"
         
         if go_or_no == False :
@@ -2297,6 +2325,7 @@ label nadya_ch :
 
     play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1
     pause 7.0
+
     scene black scen
     with dissolve
     
@@ -2317,6 +2346,7 @@ label nadya_ch :
 
     stop music
     play sound "audio/bus.mp3" fadein 1.5 fadeout 1.5 volume 0.1
+
     pause 6.0
     stop sound
 
@@ -2419,6 +2449,7 @@ label nadya_ch :
 
         hide nadya light sad
         with dissolve
+
         scene black scen
         with fade
 
@@ -2459,13 +2490,16 @@ label yuli_sh :
         "Некоторые пристально смотрят в окно, разглядывая встречающиеся пейзажи."
         "Я время от времени разглядывал пейзажи за окном, весело болтающих ребят, учтивую сопровождающую и, конечно же, Юлю."
         "Время спустя, в автобусе все заснули, ведь дорога была долгая, к тому же в ночь..."
+
         stop music fadeout 0.5
+
         if kfc_with_pasha == False or go_to_yuli == False:
             play music "audio/einaudi_nefeli.mp3" fadein 1.5 fadeout 2.0 volume 0.1
             "Лишь мы с Юлей всё никак не могли прекратить общаться обо всём на свете..."
             "Мне с ней было так тепло и комфортно. Мы сидели в обнимку уже четвёртый час, я ощущал её любовь и трепет ко мне."
             "В глубокую ночь, когда кроме нас в автобусе не спал лишь водитель, наш разговор неожиданно затих."
             "Но не по той причине, что нам резко не о чем стало говорить, конечно нет..."
+
             show yuli flirt:
                 alpha 0.0
                 linear 2.0 alpha 1.0
@@ -2475,7 +2509,10 @@ label yuli_sh :
             "Лучший момент."
             extend " Настал."
             ""
-            hide yuli flirt with dissolve
+
+            hide yuli flirt 
+            with dissolve
+
             "После нашего первого поцелуя она прижалась ко мне ещё крепче."
             "Кажется, если бы ей хватало сил, она бы раздавила меня."
             "Я чувствовал себя прекрасно"
@@ -2640,6 +2677,10 @@ label alone_sh :
     jump end_game
 
 label end_game :
+    scene black scen
+    with fade
+    pause 5.0
+
     centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth"
     centered "{size=+24}Asind:\nМини-игры, арты, музыка, диалоги первого дня."
     centered "{size=+24}DarlingInSteam:\nИмплементация сценария в код, арты, музыка, диалоги второго дня."
