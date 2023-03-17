@@ -41,6 +41,9 @@ init python:
             self.finished = False
             self.first_render = True
 
+            self.score = 0
+            self.score_step = 1
+
         def visit(self):
             return [ self.bus, self.background, self.ground ]
 
@@ -75,8 +78,10 @@ init python:
 
             bus_y = prev_bus_y + self.bus_change_line_counter / self.bus_change_line_max * (next_bus_y - prev_bus_y)
 
-            if self.bus_change_line_counter + 1 <= self.bus_change_line_max:
-                self.bus_change_line_counter += 1
+            if self.bus_change_line_counter + self.car_factor / 5 <= self.bus_change_line_max:
+                self.bus_change_line_counter += self.car_factor / 5
+            else:
+                self.bus_change_line_counter = self.bus_change_line_max
 
             is_game_finished = False
             distance_bitween_sets = bus.width * self.distance_bitween_sets_factor
@@ -111,6 +116,13 @@ init python:
             self.ground_factor += self.counters_step
             self.background_factor += self.counters_step
             self.car_factor += self.counters_step
+
+            if self.car_counter % 50 == 0:
+                self.score += round(self.car_factor)
+
+            score_text = Text("Счет: " + str(self.score), slow=True, size=50)
+            score_text = renpy.render(score_text, width, height, st, at)
+            r.blit(score_text, (width / 10, height / 10))
 
             if self.finished:
                 play("audio/avaria.mp3")
