@@ -32,6 +32,7 @@ define dilog_with_nadya = False
 define last_choice_yulia = False
 define last_choice_nadya = False
 define last_choise_lonly = False
+define fuck_ussr = False
 define mood_counter = -5
 
 label start:
@@ -583,6 +584,7 @@ label first_day:
             show yuli greeting
             with dissolve
 
+            play music "audio/strauss-festival.mp3" fadein 4.5 volume 0.1 fadeout 1.5
             narrator "Саня нервно пробирался к набережной, надеясь, что не споткнется о собственные ноги. Он был еще немного пьян от выпитого с Пашей. Однако он был рад встрече с Юлей."
 
             narrator "Когда он увидел ее, она стояла у перил и смотрела на воду. Саня подошел к ней, и она повернулась, чтобы поприветствовать его улыбкой."
@@ -1297,8 +1299,10 @@ label second_day :
         menu :
             "СОЮЗ НЕРУШИМЫХ..." :
                 $ ussr_or_no = True
+                $ fuck_ussr = False
             "На хуй СССР!" :
                 $ ussr_or_no = False
+                $ fuck_ussr = True
 
         if ussr_or_no:
             sanya_with_surname "Честно говоря, мне кажется что в СССР было лучше, чем сейчас. Жизнь была проще, люди добродушнее..."
@@ -1812,7 +1816,7 @@ label second_day :
         sanya "А откуда я вообще знаю её номер?"
         "Я слишком устал за этот день, размышлять над этим уже не было сил."
 
-    elif ussr_or_no == False and dilog_with_nadya == False:
+    elif fuck_ussr == True and dilog_with_nadya == False:
 
         "Зайдя в квартиру, я сразу достал сигарету и пошёл к окну."
 
