@@ -1,22 +1,22 @@
-renpy.matrixcolor renpy.texture
->>>>>>> Stashed changes
-renpy.dissolve renpy.geometry
->>>>>>> origin/sms
-renpy.geometry renpy.solid
-renpy.texture
-renpy.imagedissolve renpy.imagedissolve
-renpy.alpha renpy.texture
 >>>>>>> db2c66ff8147d848fd69e8f98f5b9f9f85aa018b
-<<<<<<< Updated upstream
-renpy.geometry renpy.matrixcolor renpy.texture
-renpy.alpha renpy.geometry renpy.texture
-renpy.solid
 renpy.geometry renpy.texture
-renpy.alpha renpy.solid
-renpy.geometry renpy.imagedissolve
+renpy.matrixcolor renpy.texture
+>>>>>>> origin/sms
+>>>>>>> Stashed changes
+renpy.alpha renpy.texture
 <<<<<<< HEAD
->>>>>>> origin/heart
+renpy.geometry renpy.solid
+renpy.geometry renpy.matrixcolor renpy.texture
+renpy.texture
 =======
-renpy.dissolve renpy.dissolve
+renpy.imagedissolve renpy.imagedissolve
+renpy.alpha renpy.geometry renpy.texture
 renpy.ftl
+renpy.alpha renpy.solid
+>>>>>>> origin/heart
+<<<<<<< Updated upstream
+renpy.geometry renpy.imagedissolve
+renpy.solid
+renpy.dissolve renpy.dissolve
+renpy.dissolve renpy.geometry
 renpy.alpha renpy.geometry renpy.solid

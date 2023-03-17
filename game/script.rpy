@@ -32,8 +32,13 @@ define dilog_with_nadya = False
 define last_choice_yulia = False
 define last_choice_nadya = False
 define last_choise_lonly = False
-define fuck_ussr = False
 define mood_counter = -5
+
+define str_for_notification = "Ошибка"
+
+screen my_screen():
+    add "notification.png" xalign 1.0 yalign 0.055 xzoom 0.6
+    text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
 label start:
     jump first_day
@@ -350,13 +355,30 @@ label first_day:
 
     menu :
         "Согласиться" :
+            
+            $ str_for_notification = "Юля зпомнила это"
+                
+            show screen my_screen 
+            with dissolve
+            
             sanya_with_surname "Юля, да я же с радостью! Собирайся, мы уходим!"
             "Тут я заметил, что Юле и собираться не из чего, просто встала и пошла за мной!"
             $ kfc_with_pasha = False
+
         "Отказаться" :
+
+            $ str_for_notification = "Юля зпомнила это"
+                
+            show screen my_screen 
+            with dissolve
+
             sanya_with_surname "Юля, давай погуляем завтра, я сегодня никак не могу – с другом уже договорился встретиться! Мы с ним тысячу лет не виделись!"
             sanya_with_surname "Ты знаешь, что сделай, напиши мне свой ник в телеграме, я тебе сегодня вечером ещё напишу обязательно!"
             $ kfc_with_pasha = True
+
+    hide screen my_screen
+    with dissolve
+
 
     if kfc_with_pasha :
 
@@ -420,9 +442,9 @@ label first_day:
         call play_kfc_minigame
 
         if _return == "pasha":
-            $ is_winned = True
-        else:
             $ is_winned = False
+        elif _return == "sanya":
+            $ is_winned = True
             
         play music "audio/street-sound.mp3" volume 0.5
 
@@ -584,7 +606,6 @@ label first_day:
             show yuli greeting
             with dissolve
 
-            play music "audio/strauss-festival.mp3" fadein 4.5 volume 0.1 fadeout 1.5
             narrator "Саня нервно пробирался к набережной, надеясь, что не споткнется о собственные ноги. Он был еще немного пьян от выпитого с Пашей. Однако он был рад встрече с Юлей."
 
             narrator "Когда он увидел ее, она стояла у перил и смотрела на воду. Саня подошел к ней, и она повернулась, чтобы поприветствовать его улыбкой."
@@ -1299,10 +1320,8 @@ label second_day :
         menu :
             "СОЮЗ НЕРУШИМЫХ..." :
                 $ ussr_or_no = True
-                $ fuck_ussr = False
             "На хуй СССР!" :
                 $ ussr_or_no = False
-                $ fuck_ussr = True
 
         if ussr_or_no:
             sanya_with_surname "Честно говоря, мне кажется что в СССР было лучше, чем сейчас. Жизнь была проще, люди добродушнее..."
@@ -1816,7 +1835,7 @@ label second_day :
         sanya "А откуда я вообще знаю её номер?"
         "Я слишком устал за этот день, размышлять над этим уже не было сил."
 
-    elif fuck_ussr == True and dilog_with_nadya == False:
+    elif ussr_or_no == False and dilog_with_nadya == False:
 
         "Зайдя в квартиру, я сразу достал сигарету и пошёл к окну."
 
@@ -2071,7 +2090,7 @@ label third_day :
             "Первым в голове возник образ Нади. Наше знакомство оказалось для меня неожиданностью. Мы встречались только один раз, но она всем видом показывала что я ей симпатичен."
 
         "Один" :
-            
+
             $ last_choise_lonly = True
 
             "А ведь и ехать не с кем... Поеду тогда один."
@@ -2179,7 +2198,7 @@ label third_day :
 
             "Надя молча села рядом. Говорить дальше она ничего не хотела. Я же побоялся сделать всё ещё хуже"
 
-            jump nadya_ch
+            jump _nadya
 
         elif kfc_with_pasha == False or ussr_or_no == True  or go_to_yuli == True:
 
@@ -2196,11 +2215,11 @@ label third_day :
 
             "Юля молча села рядом. Говорить дальше она ничего не хотела. Я же побоялся сделать всё ещё хуже"
 
-            jump yuli_sh
+            jump _yuli
 
         else :
 
-            jump alone_sh
+            jump _alone
 
 
     elif last_choice_nadya :
@@ -2230,10 +2249,10 @@ label third_day :
 
             "Ну не надо делать вид, что ты идеальная и вся такая правильная - меня сейчас стошнит" :
                 "Надя обиделась и мне пришлось отсесть. Не думаю, что мы серьезно поссорились."
-                jump nadya_ch
+                jump _nadya
         
 
-        jump nadya_ch
+        jump _nadya
 
     elif last_choice_yulia :
 
@@ -2257,7 +2276,7 @@ label third_day :
                     hide yuli happy
                     with dissolve
 
-                    jump yuli_sh
+                    jump _yuli
 
                 "Да ладно тебе! Конечно извини, что тогда так вышло, но!" :
                     sanya_with_surname "Паша мне очень помогал в жизни, иногда как прихватит - так только его шутка в себя приведет."
@@ -2323,9 +2342,9 @@ label third_day :
         hide yuli shy
         with dissolve
 
-        jump yuli_sh
+        jump _yuli
 
-label nadya_ch :
+label _nadya :
 
     play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1
     pause 7.0
@@ -2457,7 +2476,7 @@ label nadya_ch :
         scene black scen
         with fade
 
-        jump end_game
+        jump _end
 
     else :
         sanya "Всем привет, меня зовут Саня, парни, у кого есть чапу стрельнуть?"
@@ -2472,9 +2491,9 @@ label nadya_ch :
         "Эта поездка и правда помогла мне встать на ноги. Я смог вдохнуть новый запах жизни."
         "Надя... Спасибо тебе."
 
-        jump end_game
+        jump _end
 
-label yuli_sh :
+label _yuli :
 
     play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1
     pause 7.0  
@@ -2619,7 +2638,7 @@ label yuli_sh :
         "Краем глаза я увидел Юлю, вскачившую со скамейки и бежавшую ко мне со слезами на глазах."
         "Она взяла мою голову в свои маленькие ручки."
 
-        show yuli wet_crying
+        show yuli wet_crying 
         with dissolve
 
         yuli "Саша, что с тобой?"
@@ -2635,7 +2654,7 @@ label yuli_sh :
         scene black scen
         with fade
 
-        jump end_game
+        jump _end
 
     else :
 
@@ -2650,9 +2669,9 @@ label yuli_sh :
         "Эта поездка и правда помогла мне встать на ноги. Я смог вновь вздохнуть полной грудью."
         "Юля... Спасибо тебе."
 
-        jump end_game
+        jump _end
 
-label alone_sh :
+label _alone :
     play sound "audio/heart.mp3" fadein 4.0 fadeout 0.5 volume 0.3
     show night:
         alpha 0.0
@@ -2678,9 +2697,9 @@ label alone_sh :
     centered "{size=+24}Автобус попал в аварию.\nПогибло два человека.\nЕдинственный Пассажир и водитель."
     $ renpy.pause(1, hard=True)
     stop sound
-    jump end_game
+    jump _end
 
-label end_game :
+label _end :
     scene black scen
     with fade
     pause 5.0

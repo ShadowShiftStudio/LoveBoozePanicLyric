@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 2435: expected simple expression
-    stop music fadeout
-                      ^
+File "game/script.rpy", line 37: expected '=' not found.
+    define str_for_notification
+                               ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Mon Mar 13 07:17:36 2023
+Sat Mar 18 00:41:16 2023
