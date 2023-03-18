@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 65: end of line expected.
+File "game/script.rpy", line 56: end of line expected.
     with dissolve :
                   ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sun Mar 19 01:32:52 2023
+Sun Mar 19 02:04:18 2023

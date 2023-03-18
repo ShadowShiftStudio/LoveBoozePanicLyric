@@ -47,12 +47,15 @@ screen my_screen_big():
 
 label splashscreen:
 
-    scene logo splashscreen
-    with dissolve
-    
-    pause 5.0
-
     image back = "#242424"
+
+    scene back
+    with dissolve
+
+    show logo studio logo at truecenter with dissolve :
+        zoom 0.52734375
+
+    pause 5.0
 
     scene back 
     with dissolve
