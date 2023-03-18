@@ -19,19 +19,19 @@ init python :
     def mstop(chan = "music", fout=1.0):
         renpy.music.stop(channel = chan, fadeout = fout)
 
-define kfc_with_pasha = False
-define go_or_no = False
-define win_or_lose_pasha = False
-define go_to_yuli = False
-define go_to_smooking = False
-define ussr_or_no = False
-define buy_sigarets = False
-define give_sigaret_nadya = False
-define choice_nadya_without_yuli = False
-define dilog_with_nadya = False
-define last_choice_yulia = False
-define last_choice_nadya = False
-define last_choise_lonly = False
+define day1_pasha_kfc = False
+define day1_sanya_wants_camp = False
+define day1_pasha_lose_in_drinking = False
+define day1_yuli_agreed_after_kfc = False
+define day2_sanya_went_to_smoke = False
+define day2_sanya_vote_for_ussr = False
+define day2_nadya_bought_sigaretts = False
+define day2_nadya_het_one_sigarett = False
+define day2_choosen_instead_yuli = False
+define day2_nadya_have_a_dialog = False
+define choice_yulia = False
+define choice_nadya = False
+define choise_lonly = False
 define mood_counter = -5
 
 define str_for_notification = "Ошибка"
@@ -367,7 +367,7 @@ label first_day:
             
             sanya_with_surname "Юля, да я же с радостью! Собирайся, мы уходим!"
             "Тут я заметил, что Юле и собираться не из чего, просто встала и пошла за мной!"
-            $ kfc_with_pasha = False
+            $ day1_pasha_kfc = False
 
         "Отказаться" :
 
@@ -378,13 +378,13 @@ label first_day:
 
             sanya_with_surname "Юля, давай погуляем завтра, я сегодня никак не могу – с другом уже договорился встретиться! Мы с ним тысячу лет не виделись!"
             sanya_with_surname "Ты знаешь, что сделай, напиши мне свой ник в телеграме, я тебе сегодня вечером ещё напишу обязательно!"
-            $ kfc_with_pasha = True
+            $ day1_pasha_kfc = True
 
     hide screen my_screen
     with dissolve
 
 
-    if kfc_with_pasha :
+    if day1_pasha_kfc :
 
         hide yuli happy
         scene nstu enter 
@@ -595,20 +595,20 @@ label first_day:
             "Отказаться" :
                 show screen my_screen 
                 with dissolve
-
+                $ mood_counter -= 1;
                 sanya_with_surname "Паша, да... Мне уже в любом случае пора бы домой идти. Если случайно встретимся, то встретимся, если нет, то не суждено значит."
-                $ go_to_yuli = False
+                $ day1_yuli_agreed_after_kfc = False
             "Согласиться" :
                 show screen my_screen 
                 with dissolve
-
+                $ mood_counter += 1;
                 pasha "Саня, Саня, теряешь такие возможности! Ну, как знаешь. Я тоже уже до хаты собираюсь. Давай, особо не теряйся!"
-                $ go_to_yuli = True
+                $ day1_yuli_agreed_after_kfc = True
 
         hide screen my_screen
         with dissolve
 
-        if go_to_yuli :
+        if day1_yuli_agreed_after_kfc :
 
             scene black scen
             with fade
@@ -857,7 +857,7 @@ label first_day:
         with fade
 
         pause 2.0
-    if not kfc_with_pasha:
+    if not day1_pasha_kfc:
         play sound "audio/sound-in-bus.mp3" volume 0.2
 
         scene bus 
@@ -900,7 +900,9 @@ label first_day:
             with dissolve
 
             sanya_with_surname "Звучит как отличная идея, может хотя бы там смогу вернуть краски в жизнь."
-            $ go_or_no = True
+            $ day1_sanya_wants_camp = True
+
+            $ mood_counter += 1; 
         "Какой-то отстой." : 
             $ str_for_notification = "У этого действия будут последствия"
             
@@ -908,7 +910,8 @@ label first_day:
             with dissolve
 
             sanya_with_surname "Да блядь, опять спам от университета, как же он бесит."
-            $ go_or_no = False
+            $ day1_sanya_wants_camp = False
+            $ mood_counter -= 1;
         
     hide screen my_screen_big
     with dissolve
@@ -921,7 +924,7 @@ label first_day:
         linear 35 yoffset 0
         repeat
 
-    if not go_to_yuli:
+    if not day1_yuli_agreed_after_kfc:
         "Почистив зубы, я быстро вернулся в свою комнату. Было тяжело найти силы даже на то, чтобы раздеться. Я упал на кровать."
         "Семестр только начался, а я уже так устал. Честно говоря, я давно начал замечать, что жизнь становится все серее и серее."
         extend " Уже нет такого озорного взгляда у меня в глазах, как был раньше."
@@ -1083,7 +1086,7 @@ label second_day :
     "Первое, что я увидел, когда вышел из автобуса, - это огромную фигуру Паши. Да его и сложно не заметить..."
     sanya_with_surname "Паша! Привет. Я хотел тебе кое-что сказать..."
 
-    if kfc_with_pasha :
+    if day1_pasha_kfc :
         "Паша быстро меня заметил и подошел ко мне"
 
         show pasha smiles
@@ -1141,7 +1144,7 @@ label second_day :
         with dissolve
 
     
-    if go_to_yuli == False and kfc_with_pasha == True:
+    if day1_yuli_agreed_after_kfc == False and day1_pasha_kfc == True:
 
         pasha "Кстати, а как там с девочкой твоей дела обстоят?"
         image night = "night color.png"
@@ -1198,7 +1201,7 @@ label second_day :
 
         "Ты, как всегда, прав..."
 
-    elif go_to_yuli == True and kfc_with_pasha == True :
+    elif day1_yuli_agreed_after_kfc == True and day1_pasha_kfc == True :
 
         sanya_with_surname "Паша, помнишь, когда я написал Юле и пошел к ней?"
 
@@ -1319,19 +1322,19 @@ label second_day :
             show screen my_screen_big
             with dissolve
 
-            $ go_to_smooking = True
+            $ day2_sanya_went_to_smoke = True
         "Забить и покурить дома" :
             $ str_for_notification = "У этого действия будут последствия"
 
             show screen my_screen_big
             with dissolve
 
-            $ go_to_smooking = False
+            $ day2_sanya_went_to_smoke = False
 
     hide screen my_screen_big
     with dissolve
 
-    if go_to_smooking :
+    if day2_sanya_went_to_smoke :
         scene black scen 
         with fade
 
@@ -1358,24 +1361,26 @@ label second_day :
 
         menu :
             "СОЮЗ НЕРУШИМЫХ..." :
+                $ mood_counter -= 1;
                 $ str_for_notification = "У этого действия будут последствия"
 
                 show screen my_screen_big
                 with dissolve
 
-                $ ussr_or_no = True
+                $ day2_sanya_vote_for_ussr = True
             "На хуй СССР!" :
+                $ mood_counter += 1;
                 $ str_for_notification = "У этого действия будут последствия"
 
                 show screen my_screen_big
                 with dissolve
 
-                $ ussr_or_no = False
+                $ day2_sanya_vote_for_ussr = False
 
         hide screen my_screen_big
         with dissolve
 
-        if ussr_or_no:
+        if day2_sanya_vote_for_ussr:
             sanya_with_surname "Честно говоря, мне кажется что в СССР было лучше, чем сейчас. Жизнь была проще, люди добродушнее..."
             "Сказав это, я заметил на себе неодобрительные взгляды одногруппников."
             "Одногруппник" "Пхахаха, ты что, в атомик харт переиграл, доходяга? Давай-ка мы национализируем твои денюжки, пионер."
@@ -1558,7 +1563,7 @@ label second_day :
             show black scen
             with fade
 
-        $ ussr_or_no = True
+        $ day2_sanya_vote_for_ussr = True
 
     else :
         
@@ -1619,24 +1624,25 @@ label second_day :
 
             "Купить сиги." :
                 $ str_for_notification = "Надя запомнила это"
-
+                $ mood_counter += 1;
                 show screen my_screen
                 with dissolve
 
-                $ buy_sigarets = True
+                $ day2_nadya_bought_sigaretts = True
 
             "Ты же малолетка. Домой иди." :
+                $ mood_counter -= 1;
                 $ str_for_notification = "Надя запомнила это"
 
                 show screen my_screen
                 with dissolve
 
-                $ buy_sigarets = False
+                $ day2_nadya_bought_sigaretts = False
 
         hide screen my_screen
         with dissolve
 
-        if buy_sigarets :
+        if day2_nadya_bought_sigaretts :
             hide nadya flirting 
             with dissolve
 
@@ -1708,22 +1714,22 @@ label second_day :
 
                 "Стрельнуть сижку, оторвать её от своей души." :
                     $ str_for_notification = "Надя запомнила это"
-
+                    $ mood_counter += 1;
                     show screen my_screen_big
                     with dissolve
-                    $ give_sigaret_nadya = True
+                    $ day2_nadya_het_one_sigarett = True
 
                 "Обойдешься без сиги." :
                     $ str_for_notification = "Надя запомнила это"
-
+                    $ mood_counter -= 1;
                     show screen my_screen_big
                     with dissolve
-                    $ give_sigaret_nadya = False
+                    $ day2_nadya_het_one_sigarett = False
 
             hide screen my_screen
             with dissolve
 
-            if give_sigaret_nadya :
+            if day2_nadya_het_one_sigarett :
 
                 "Недолго думая я достал ещё одну сигаретку и протянул милой даме."
                 
@@ -1753,9 +1759,9 @@ label second_day :
                 "Надеюсь хоть что-то хорошее придет в мою жизнь, завтра всё таки поеду в санаторий."
                 "Заниматься самобичеванием, раскуривая сигарету, мне не хотелось. Затушив её, я незамедлительно отправился домой."
 
-        if buy_sigarets == True or give_sigaret_nadya == True :
+        if day2_nadya_bought_sigaretts == True or day2_nadya_het_one_sigarett == True :
             
-            $ dilog_with_nadya = True
+            $ day2_nadya_have_a_dialog = True
             show nadya handson 
             with dissolve
 
@@ -1790,8 +1796,8 @@ label second_day :
             menu :
 
                 "Согласиться..." :
-                    $ choice_nadya_without_yuli = True
-                    
+                    $ day2_choosen_instead_yuli = True
+                    $ mood_counter += 1;
                     $ str_for_notification = "Надя запомнила это"
 
                     show screen my_screen_big
@@ -1822,8 +1828,8 @@ label second_day :
                     "На такой приятной ноте прервалось наше знакомство. Уже было достаточно поздно, поэтому недолго думая я решил отправиться прямиком к своему дому."
 
                 "Нейтральный ответ" :
-                    $ choice_nadya_without_yuli = False
-
+                    $ day2_choosen_instead_yuli = False
+                    $ mood_counter -= 1;
                     $ str_for_notification = "Надя запомнила это"
 
                     show screen my_screen_big
@@ -1853,7 +1859,7 @@ label second_day :
     scene black scen
     with fade
 
-    if give_sigaret_nadya == False and buy_sigarets == False and go_to_smooking == False:
+    if day2_nadya_het_one_sigarett == False and day2_nadya_bought_sigaretts == False and day2_sanya_went_to_smoke == False:
         "Зайдя в квартиру, я сразу достал сигарету и пошёл к окну."
 
         pause 1.5
@@ -1924,7 +1930,7 @@ label second_day :
         sanya "А откуда я вообще знаю её номер?"
         "Я слишком устал за этот день, размышлять над этим уже не было сил."
 
-    elif ussr_or_no == False and dilog_with_nadya == False:
+    elif day2_sanya_vote_for_ussr == False and day2_nadya_have_a_dialog == False:
 
         "Зайдя в квартиру, я сразу достал сигарету и пошёл к окну."
 
@@ -1960,7 +1966,7 @@ label second_day :
             linear 35 yoffset 0
             repeat
 
-    elif dilog_with_nadya == True and go_to_smooking == False:
+    elif day2_nadya_have_a_dialog == True and day2_sanya_went_to_smoke == False:
         "Зайдя в комнату, я сразу пошёл на балкон. Достав сигаретку из пачки вишневого чапмана, я сразу вспомнил о Наде."
 
         pause 1.5
@@ -1971,7 +1977,7 @@ label second_day :
         with fade
 
         "Наше знакомство в парке было очень неожиданным, но очень приятным."
-        if choice_nadya_without_yuli :
+        if day2_choosen_instead_yuli :
             "Надя мне сразу понравилась, она очень умная и необычная. В добавок курит чапу, так же, как и я. Интересно она ответит, если я ей позвоню?"
 
             stop music
@@ -2042,7 +2048,7 @@ label second_day :
 
         "Спать на ней будет явно удобнее чем на балконе."
         
-    elif kfc_with_pasha == True and ussr_or_no == True:
+    elif day1_pasha_kfc == True and day2_sanya_vote_for_ussr == True:
         "Зайдя в квартиру, я сразу пошёл к окну."
 
         pause 1.5
@@ -2106,7 +2112,7 @@ label second_day :
         "Что же вершит судьбой человека в этом мире? Некое незримое существо или закон? По крайне мере истинно то, что я не властен даже над своей волей."
         "С этими мыслями я погрузился в глубокий сон."
 
-    elif go_to_yuli == True and ussr_or_no == True:
+    elif day1_yuli_agreed_after_kfc == True and day2_sanya_vote_for_ussr == True:
 
         "Зайдя в квартиру, я сразу достал сигарету и пошёл к окну."
 
@@ -2164,38 +2170,38 @@ label third_day :
     "С кем же мне поехать в итоге?"
 
     menu :
-        "Юля" if kfc_with_pasha == False or ussr_or_no == True :
-            
+        "Юля" if day1_pasha_kfc == False or day2_sanya_vote_for_ussr == True :
+            $ mood_counter += 1;
             $ str_for_notification = "У этого действия будут последствия"
 
             show screen my_screen_big
             with dissolve
 
-            $ last_choice_yulia = True
+            $ choice_yulia = True
 
             "Первым в голове возник образ Юли. Вчерашняя прогулка оставила приятное послевкусие."
             "Я и не ожидал что мы всего за пару дней так сблизимся, мы удачно совпали характерами, временами мне кажется, что мы с ней очень похожи."
             "Интересно, смогу ли я ещё встретиться с ней?"
 
-        "Надя" if dilog_with_nadya == True :
-
+        "Надя" if day2_nadya_have_a_dialog == True :
+            $ mood_counter += 1;
             $ str_for_notification = "У этого действия будут последствия"
 
             show screen my_screen_big
             with dissolve
 
-            $ last_choice_nadya = True
+            $ choice_nadya = True
 
             "Первым в голове возник образ Нади. Наше знакомство оказалось для меня неожиданностью. Мы встречались только один раз, но она всем видом показывала что я ей симпатичен."
 
         "Один" :
-            
+            $ mood_counter -= 1;
             $ str_for_notification = "У этого действия будут последствия"
 
             show screen my_screen_big
             with dissolve
 
-            $ last_choise_lonly = True
+            $ choise_lonly = True
 
             "А ведь и ехать не с кем... Поеду тогда один."
 
@@ -2252,8 +2258,8 @@ label third_day :
     scene neew bus
     with fade
 
-    if last_choise_lonly :
-        if dilog_with_nadya == True and (kfc_with_pasha == False or ussr_or_no == True  or go_to_yuli == True):
+    if choise_lonly :
+        if day2_nadya_have_a_dialog == True and (day1_pasha_kfc == False or day2_sanya_vote_for_ussr == True  or day1_yuli_agreed_after_kfc == True):
 
             show nadya angry at right
             with dissolve
@@ -2283,13 +2289,13 @@ label third_day :
             "Проснувшись, автобус уже тронулся и я не застал Юлю на своём месте."
             "Я поднялся и прошёся по рядам... Нашёл Надю и обратился к ней"
             sanya "А ты не видела Юлю? Она же с нами садилась? Неужели из-за меня решила не ехать вовсе..."
-            $ mood_counter -= 10;
+            $ mood_counter -= 1;
             "Надя что-то буркнула в ответ, явно не желая  даже разговаривать со мной сейчас."
             "Я молча сел рядом. Будь что будет"
 
 
 
-        if dilog_with_nadya == True :
+        if day2_nadya_have_a_dialog == True :
 
             show nadya angry
             with dissolve
@@ -2306,7 +2312,7 @@ label third_day :
 
             jump _nadya
 
-        elif kfc_with_pasha == False or ussr_or_no == True  or go_to_yuli == True:
+        elif day1_pasha_kfc == False or day2_sanya_vote_for_ussr == True  or day1_yuli_agreed_after_kfc == True:
 
             show yuli angry
             with dissolve
@@ -2328,7 +2334,7 @@ label third_day :
             jump _alone
 
 
-    elif last_choice_nadya :
+    elif choice_nadya :
 
         sanya_with_surname "Привет, в этот раз запаслась чапой? А то мне кажется я взял маловато!"
 
@@ -2360,7 +2366,7 @@ label third_day :
 
         jump _nadya
 
-    elif last_choice_yulia :
+    elif choice_yulia :
 
         $ is_bad_ask = False
 
@@ -2370,14 +2376,14 @@ label third_day :
         show yuli happy
         with dissolve
 
-        if kfc_with_pasha == True :
+        if day1_pasha_kfc == True :
             yuli "Приветик! Хоть здесь ты побудешь без своего Пашки-алкаши"
             show yuli sad
             with dissolve
 
             menu :
                 "Да ну тебя! Я был о тебе лучшего мнения" :
-                    "Я решил сесть рядом, но дальше мы особо не общались."
+                "Я решил сесть рядом, но дальше мы особо не общались."
 
                     hide yuli happy
                     with dissolve
@@ -2393,7 +2399,7 @@ label third_day :
             yuli "Да ладно тебе, нужен тебе этот качок-харчок!"
             sanya_with_surname "Паша мне очень помогал в жизни, иногда как прихватит - так только его шутка в себя приведет."
 
-        if kfc_with_pasha == False and ussr_or_no == True :
+        if day1_pasha_kfc == False and day2_sanya_vote_for_ussr == True :
 
             yuli "Как думаешь, мой поцелуй..."
             "Что...?! Что она говорит! Я не готов!!"
@@ -2428,12 +2434,12 @@ label third_day :
         yuli "Кстати, а у тебя какие-то проблемы со здоровьем или ты просто так?"
         sanya_with_surname "Да у меня последнее время что-то ночи становятся все длиннее, а дни все тусклее. Надо отвлечься как-то, природа, думается мне, - самое то!"
 
-        if go_or_no == True:
+        if day1_sanya_wants_camp == True:
             "Главное не говорить, что меня мамка сюда отправила, а то не видать мне ничего с юлькой."
 
         sanya_with_surname "А ты почему едешь? Учебу прогулять хочешь?"
         
-        if go_or_no == False :
+        if day1_sanya_wants_camp == False :
             yuli "Да меня мама отправила, говорит, что отвлечься пора бы, а то я все лето проварилась в делах"
         else :
             yuli "Да пришло уведомление, я долго не думала, решила - надо ехать"
@@ -2441,7 +2447,7 @@ label third_day :
         "Мы так похожи! Но я чувствую, что сил больше на разговор у меня нет, слишком уж рано мы едем, надо бы отдохнуть"
         
 
-        if (kfc_with_pasha == True and go_to_yuli == False) or ussr_or_no == False :
+        if (day1_pasha_kfc == True and day1_yuli_agreed_after_kfc == False) or day2_sanya_vote_for_ussr == False :
             sanya_with_surname "Ты не хочешь поспать? Я чуть не умер так рано вставать"
             "Пока я говорил, Юля уже сладко спала, не дожидаясь моего предложения"
 
