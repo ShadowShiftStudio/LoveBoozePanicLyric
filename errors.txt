@@ -2,9 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 56: end of line expected.
-    with dissolve :
-                  ^
+File "game/script.rpy", line 688: expected 'image_name_component' not found.
+    show "#000"
+         ^
+
+File "game/script.rpy", line 696: expected 'image_name_component' not found.
+    hide "#000" with dissolve
+         ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sun Mar 19 02:04:18 2023
+Sun Mar 19 03:40:13 2023

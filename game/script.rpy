@@ -2,6 +2,7 @@
 define pasha = Character('Пашка Запивон', color="#ffcccc")
 define yuli = Character('Юля', color="#ffaaff")
 define nadya = Character('Надя', color="#f180a6")
+define storyteller = Character('Рассказчик', color="#5197e7")
 
 init python :
 
@@ -35,13 +36,13 @@ define choise_lonly = False
 define mood_counter = -5
 
 define player_name = "Саня"
-define str_for_notification = "Ошибка"
+define str_for_notification = ""
 
-screen my_screen():
+screen notification_popup():
     add "notification.png" xalign 1.0 yalign 0.055 xzoom 0.6
     text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
-screen my_screen_big():
+screen notification_popup_big():
     add "notification.png" xalign 1.0 yalign 0.055 
     text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
@@ -63,7 +64,7 @@ label splashscreen:
     show text "ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ: \n\nЭта игра содержит зрелые темы, включая суицидальные мысли и возможные смерти персонажей. Настоящим мы официально предупреждаем о том, что данная игра не подходит для лиц младше 18 лет, а также для тех, кто легко поддается эмоциональному воздействию.\n\nКроме того, уточняем, что все детали и события, изображенные в этой визуальной новелле, являются вымышленными и нереальными. Персонажи, события и совпадения в игре случайны и не являются отражением реальности. Мы советуем игрокам подходить к игре непредвзято и рассматривать ее как развлечение, не имеющее под собой никакой основы в реальной жизни. \n\nСоглашаясь играть в эту игру, пользователи соглашаются с тем, что они прочитали и поняли отказ от ответственности и осознают потенциальное психологическое воздействие, которое могут оказать на них сюжеты игры. Разработчики и издатели не несут никакой ответственности за любые негативные эмоциональные или психологические реакции, которые могут возникнуть в результате прохождения этой игры. \n\nБлагодарим вас за понимание и содействие." with dissolve :
         yalign 0.35 xalign 0.5 
     
-    pause 10.0
+    pause 20.0
 
     image sanya_gui = "gui/sanya.png"
     
@@ -88,7 +89,7 @@ label first_day:
     "*Звук будильника*"
     stop music
     play sound "audio/alarm-sound-end.mp3"
-    pause(2.0)
+    $ renpy.pause(2, hard=True)
     stop sound
 
     scene sanya room 
@@ -96,9 +97,9 @@ label first_day:
 
     play sound "audio/deep-moan.mp3"
     "*Вздох*"
-    stop sound
+    $ renpy.pause(1, hard=True)
 
-    play music "audio/einaudi_nefeli.mp3" volume 0.1
+    play music "audio/einaudi_nefeli.mp3" volume 0.21
 
     "Ну что, день первый пошёл..."
     "Как же меня это всё достало: эти бесконечные лабораторные работы, сдачи курсачей..."
@@ -137,7 +138,7 @@ label first_day:
     $ mstop() 
     pause(2.0)
 
-    play sound "audio/bus.mp3" volume 0.2
+    play sound "audio/bus.mp3" volume 0.15
     "*Звук подъезжающего автобуса*"
     stop sound
 
@@ -156,8 +157,8 @@ label first_day:
     scene black scen 
     with fade
     "Какой странный сон мне приснился..."
-    "Бесконечно едешь прямо... Был бы хотя бы счёт какой-то что ли..."
-    play sound "audio/bus.mp3" volume 0.2
+    "Бесконечно едешь прямо... Как далеко можно так уехать?"
+    play sound "audio/bus.mp3" volume 0.15
     $ renpy.pause (7.5)
     stop sound fadeout 1.5
     play music "audio/street-sound.mp3" volume 0.1
@@ -393,9 +394,9 @@ label first_day:
     menu :
         "Согласиться" :
             
-            $ str_for_notification = "Юля зпомнила это"
+            $ str_for_notification = "Юля запомнила это"
                 
-            show screen my_screen 
+            show screen notification_popup 
             with dissolve
             
             sanya "Юля, да я же с радостью! Собирайся, мы уходим!"
@@ -404,16 +405,16 @@ label first_day:
 
         "Отказаться" :
 
-            $ str_for_notification = "Юля зпомнила это"
+            $ str_for_notification = "Юля запомнила это"
                 
-            show screen my_screen 
+            show screen notification_popup 
             with dissolve
 
             sanya "Юля, давай погуляем завтра, я сегодня никак не могу – с другом уже договорился встретиться! Мы с ним тысячу лет не виделись!"
             sanya "Ты знаешь, что сделай, напиши мне свой ник в телеграме, я тебе сегодня вечером ещё напишу обязательно!"
             $ day1_pasha_kfc = True
 
-    hide screen my_screen
+    hide screen notification_popup
     with dissolve
 
 
@@ -479,9 +480,9 @@ label first_day:
         call play_kfc_minigame
 
         if _return == "pasha":
-            $ is_winned = False
+            $ day1_pasha_lose_in_drinking = False
         elif _return == "sanya":
-            $ is_winned = True
+            $ day1_pasha_lose_in_drinking = True
             
         play music "audio/street-sound.mp3" volume 0.5
 
@@ -513,7 +514,7 @@ label first_day:
 
         "Мы с Пашком так много выпили, а я ещё даже и не думал рассказать ему о моём знакомстве с Юлькой."
         "Да просто все мысли были о том, как же я"
-        if is_winned :
+        if day1_pasha_lose_in_drinking :
             extend " жестко его перепил сегодня, что-что, а вот пил Пашка всегда слабенько"
         else :
             extend " жестко напился сегодня, что даже Пашка меня перепил. Явно сдаю позиции. Говорю же – старость!"
@@ -626,19 +627,19 @@ label first_day:
 
         menu :
             "Отказаться" :
-                show screen my_screen 
+                show screen notification_popup 
                 with dissolve
                 $ mood_counter -= 1;
                 sanya "Паша, да... Мне уже в любом случае пора бы домой идти. Если случайно встретимся, то встретимся, если нет, то не суждено значит."
                 $ day1_yuli_agreed_after_kfc = False
             "Согласиться" :
-                show screen my_screen 
+                show screen notification_popup 
                 with dissolve
                 $ mood_counter += 1;
                 pasha "Саня, Саня, теряешь такие возможности! Ну, как знаешь. Я тоже уже до хаты собираюсь. Давай, особо не теряйся!"
                 $ day1_yuli_agreed_after_kfc = True
 
-        hide screen my_screen
+        hide screen notification_popup
         with dissolve
 
         if day1_yuli_agreed_after_kfc :
@@ -652,9 +653,9 @@ label first_day:
             show yuli greeting
             with dissolve
 
-            narrator "Саня нервно пробирался к набережной, надеясь, что не споткнется о собственные ноги. Он был еще немного пьян от выпитого с Пашей. Однако он был рад встрече с Юлей."
+            storyteller "Саня нервно пробирался к набережной, надеясь, что не споткнется о собственные ноги. Он был еще немного пьян от выпитого с Пашей. Однако он был рад встрече с Юлей."
 
-            narrator "Когда он увидел ее, она стояла у перил и смотрела на воду. Саня подошел к ней, и она повернулась, чтобы поприветствовать его улыбкой."
+            storyteller "Когда он увидел ее, она стояла у перил и смотрела на воду. Саня подошел к ней, и она повернулась, чтобы поприветствовать его улыбкой."
 
             yuli "Привет, Саша! Очень рада наконец-то с тобой познакомиться"
 
@@ -672,31 +673,48 @@ label first_day:
             sanya "Если честно, я не особо обращал внимание. Я был слишком занят разговором с тобой"
 
             show yuli wet_neutral
-            yuli "Хаха, ну надеюсь, я не сильно тебя отвлекала"
+            yuli "Ха-ха, ну надеюсь, я не сильно тебя отвлекала"
 
             "С ней так легко разговаривать. Такое чувство, что мы давно знакомы"
 
-            narrator "Пока они шли по мосту, Саня и Юля болтали о своих интересах и увлечениях. Они обнаружили, что у них много общего, и вскоре дождь прекратился, и солнце выглянуло из-за туч."
+            storyteller "Пока они шли по мосту, Саня и Юля болтали о своих интересах и увлечениях. Они обнаружили, что у них много общего, и вскоре дождь прекратился, и солнце выглянуло из-за туч."
 
             yuli "Ну что, Саша, не хочешь перекусить где-нибудь?"
 
             sanya "Да, звучит здорово. Тут неподалеку есть очень милое кафе"
             scene black scen
             with fade
+            show black
             "Я не могу поверить, как хорошо все идет. Она потрясающая. Кажется, она мне действительно нравится"
-
+            
             scene background cafe
-            with dissolve
-            show yuli happy with dissolve
-            narrator "Пока они сидели в уютном кафе, наслаждаясь едой и компанией друг друга, Саня чувствовал себя на вершине мира. Он не мог поверить, как ему повезло, что он встретил такую девушку, как Юля."
+            image foreground_cafe = "foreground cafe.png"
 
+            
+            show yuli happy:
+                xalign 0.7
+                yalign 0.65
+                zoom 0.77
+            show foreground_cafe
+            hide black with dissolve
+
+            storyteller "Пока они сидели в уютном кафе, наслаждаясь едой и компанией друг друга, Саня чувствовал себя на вершине мира. Он не мог поверить, как ему повезло, что он встретил такую девушку, как Юля."
+            show yuli horny2 with dissolve:
+                xalign 0.7
+                yalign 0.65
+                zoom 0.77
             yuli "Саша, я сегодня отлично провела время. Спасибо, что вышел ко мне под дождь"
 
             sanya "Нет, это тебе спасибо, Юля. Я тоже прекрасно провел время. Мы обязательно должны повторить это как-нибудь"
-
+            show yuli horny with dissolve:
+                xalign 0.7
+                yalign 0.65
+                zoom 0.77
             yuli "С удовольствием"
 
-            narrator "Не могу дождаться, когда увижу её вновь. Это начало чего-то особенного"
+            "Не могу дождаться, когда увижу её вновь. Это начало чего-то особенного"
+            hide yuli happy with dissolve
+            hide foreground_cafe
             scene black scen
             with fade
 
@@ -814,9 +832,9 @@ label first_day:
         with dissolve
 
         yuli "Обнимемся?"
-        narrator "Саня на мгновение замешкался, испытывая чувство вины за то, что он так плохо поступил по отношению к Паше."
-        narrator "Но, в то же время, он не мог устоять перед соблазном провести больше времени с Юлей."
-        narrator "Он наклонился и крепко обнял ее."
+        storyteller "Саня на мгновение замешкался, испытывая чувство вины за то, что он так плохо поступил по отношению к Паше."
+        storyteller "Но, в то же время, он не мог устоять перед соблазном провести больше времени с Юлей."
+        storyteller "Он наклонился и крепко обнял ее."
         sanya "Конечно, давай обнимемся."
         
         hide yuli horny
@@ -824,9 +842,9 @@ label first_day:
         scene bridge
         with fade
 
-        narrator "Пока они шли по мосту, Саня не мог отделаться от ощущения кома в горле. Он понимал, что неправильно обошёлся с товарищем."
-        narrator "Но компания Юли была так приятна, что он отогнал эту мысль на задворки сознания."
-        narrator "Когда они дошли до середины моста, Саня увидел, что к ним приближается Паша. Он ощутил приступ вины и тревоги, когда понял, что его друг ждал его всё это время."
+        storyteller "Пока они шли по мосту, Саня не мог отделаться от ощущения кома в горле. Он понимал, что неправильно обошёлся с товарищем."
+        storyteller "Но компания Юли была так приятна, что он отогнал эту мысль на задворки сознания."
+        storyteller "Когда они дошли до середины моста, Саня увидел, что к ним приближается Паша. Он ощутил приступ вины и тревоги, когда понял, что его друг ждал его всё это время."
         
         show pasha angry at truecenter
         with dissolve
@@ -855,7 +873,7 @@ label first_day:
         show pasha angry 
         with dissolve
 
-        narrator "Саня был разочарован тем, что их свидание оборвалось, но в то же время он почувствовал облегчение от того, что ему не придется встречаться с неодобрительным взглядом Паши."
+        storyteller "Саня был разочарован тем, что их свидание оборвалось, но в то же время он почувствовал облегчение от того, что ему не придется встречаться с неодобрительным взглядом Паши."
         sanya "Хорошо, хорошо. Я был рад встретиться с тобой, Юля."
 
         hide pasha angry
@@ -863,8 +881,8 @@ label first_day:
         scene black scen
         with fade
 
-        narrator "Когда они шли обратно к университету, Саня не мог отделаться от чувства вины за то, что только что произошло."
-        narrator "Он понимал, что подвел друга и совершил ошибку, решив пойти на свидание с Юлей вместо того, чтобы встретиться с Пашей."
+        storyteller "Когда они шли обратно к университету, Саня не мог отделаться от чувства вины за то, что только что произошло."
+        storyteller "Он понимал, что подвел друга и совершил ошибку, решив пойти на свидание с Юлей вместо того, чтобы встретиться с Пашей."
 
         scene nstu night 
         with fade
@@ -882,8 +900,8 @@ label first_day:
 
         pause (2.0)
 
-        narrator "С этими словами Паша ушел, оставив Саню стоять одного на улице. Саня понимал, что совершил ошибку, но он также знал, что не может вернуть то, что уже произошло."
-        narrator "Он поклялся как-нибудь загладить свою вину перед Пашей и больше никогда не предавать доверие друга."
+        storyteller "С этими словами Паша ушел, оставив Саню стоять одного на улице. Саня понимал, что совершил ошибку, но он также знал, что не может вернуть то, что уже произошло."
+        storyteller "Он поклялся как-нибудь загладить свою вину перед Пашей и больше никогда не предавать доверие друга."
         "После всех мыслей, я не нашел ничего лучше, чем поехать домой."
 
         scene black scen 
@@ -929,7 +947,7 @@ label first_day:
         "Отличная идея!" :
             $ str_for_notification = "У этого действия будут последствия"
             
-            show screen my_screen_big 
+            show screen notification_popup_big 
             with dissolve
 
             sanya "Звучит как отличная идея, может хотя бы там смогу вернуть краски в жизнь."
@@ -939,22 +957,22 @@ label first_day:
         "Какой-то отстой." : 
             $ str_for_notification = "У этого действия будут последствия"
             
-            show screen my_screen_big 
+            show screen notification_popup_big 
             with dissolve
 
             sanya "Да блядь, опять спам от университета, как же он бесит."
             $ day1_sanya_wants_camp = False
             $ mood_counter -= 1;
         
-    hide screen my_screen_big
+    hide screen notification_popup_big
     with dissolve
 
     "Родители" "Саша, мы можем оплатить санаторий, тебе будет полезно развеяться."
     "Ладно, это и правда неплохая возможность отдохнуть. Говорить о том, что он бесплатный я, конечно, не буду."
 
     scene sanya bed : 
-        linear 35 yoffset -560
-        linear 35 yoffset 0
+        linear 35 zoom 1.1
+        linear 35 zoom 1.0
         repeat
 
     if not day1_yuli_agreed_after_kfc:
@@ -1352,19 +1370,19 @@ label second_day :
         "Пойти в курилку" :
             $ str_for_notification = "У этого действия будут последствия"
 
-            show screen my_screen_big
+            show screen notification_popup_big
             with dissolve
 
             $ day2_sanya_went_to_smoke = True
         "Забить и покурить дома" :
             $ str_for_notification = "У этого действия будут последствия"
 
-            show screen my_screen_big
+            show screen notification_popup_big
             with dissolve
 
             $ day2_sanya_went_to_smoke = False
 
-    hide screen my_screen_big
+    hide screen notification_popup_big
     with dissolve
 
     if day2_sanya_went_to_smoke :
@@ -1397,7 +1415,7 @@ label second_day :
                 $ mood_counter -= 1;
                 $ str_for_notification = "У этого действия будут последствия"
 
-                show screen my_screen_big
+                show screen notification_popup_big
                 with dissolve
 
                 $ day2_sanya_vote_for_ussr = True
@@ -1405,12 +1423,12 @@ label second_day :
                 $ mood_counter += 1;
                 $ str_for_notification = "У этого действия будут последствия"
 
-                show screen my_screen_big
+                show screen notification_popup_big
                 with dissolve
 
                 $ day2_sanya_vote_for_ussr = False
 
-        hide screen my_screen_big
+        hide screen notification_popup_big
         with dissolve
 
         if day2_sanya_vote_for_ussr:
@@ -1658,7 +1676,7 @@ label second_day :
             "Купить сиги." :
                 $ str_for_notification = "Надя запомнила это"
                 $ mood_counter += 1;
-                show screen my_screen
+                show screen notification_popup
                 with dissolve
 
                 $ day2_nadya_bought_sigaretts = True
@@ -1667,12 +1685,12 @@ label second_day :
                 $ mood_counter -= 1;
                 $ str_for_notification = "Надя запомнила это"
 
-                show screen my_screen
+                show screen notification_popup
                 with dissolve
 
                 $ day2_nadya_bought_sigaretts = False
 
-        hide screen my_screen
+        hide screen notification_popup
         with dissolve
 
         if day2_nadya_bought_sigaretts :
@@ -1748,18 +1766,18 @@ label second_day :
                 "Стрельнуть сижку, оторвать её от своей души." :
                     $ str_for_notification = "Надя запомнила это"
                     $ mood_counter += 1;
-                    show screen my_screen_big
+                    show screen notification_popup_big
                     with dissolve
                     $ day2_nadya_het_one_sigarett = True
 
                 "Обойдешься без сиги." :
                     $ str_for_notification = "Надя запомнила это"
                     $ mood_counter -= 1;
-                    show screen my_screen_big
+                    show screen notification_popup_big
                     with dissolve
                     $ day2_nadya_het_one_sigarett = False
 
-            hide screen my_screen
+            hide screen notification_popup
             with dissolve
 
             if day2_nadya_het_one_sigarett :
@@ -1833,7 +1851,7 @@ label second_day :
                     $ mood_counter += 1;
                     $ str_for_notification = "Надя запомнила это"
 
-                    show screen my_screen_big
+                    show screen notification_popup_big
                     with dissolve
 
                     sanya "Конечно, я буду только рад составить тебе компанию."
@@ -1865,7 +1883,7 @@ label second_day :
                     $ mood_counter -= 1;
                     $ str_for_notification = "Надя запомнила это"
 
-                    show screen my_screen_big
+                    show screen notification_popup_big
                     with dissolve
 
                     sanya "Прости, последнее время я очень занят, может когда-нибудь в другой раз."
@@ -1886,7 +1904,7 @@ label second_day :
 
                     "Уже было достаточно поздно, поэтому недолго думая я решил отправиться прямиком к своему дому."
             
-            hide screen my_screen
+            hide screen notification_popup
             with dissolve
     
     scene black scen
@@ -1955,8 +1973,8 @@ label second_day :
         "Мне и правда сильно полегчало после разговора с Юлей, она как будто оживила меня."
 
         scene sanya bed with dissolve :
-            linear 35 yoffset -560
-            linear 35 yoffset 0
+            linear 35 zoom 1.1
+            linear 35 zoom 1.0
             repeat
 
         "Улёгшись в кровать меня посетила одна мысль."
@@ -1995,8 +2013,8 @@ label second_day :
         "Отхлынув от балкона я сразу лёг в кровать в надежде прийти в себя."
 
         scene sanya bed with dissolve :
-            linear 35 yoffset -560
-            linear 35 yoffset 0
+            linear 35 zoom 1.1
+            linear 35 zoom 1.0
             repeat
 
     elif day2_nadya_have_a_dialog and not day2_sanya_went_to_smoke:
@@ -2075,8 +2093,8 @@ label second_day :
         "В скором времени меня начало клонить в сон и я решил перебраться на кровать."
 
         scene sanya bed with dissolve :
-            linear 35 yoffset -560
-            linear 35 yoffset 0
+            linear 35 zoom 1.1
+            linear 35 zoom 1.0
             repeat
 
         "Спать на ней будет явно удобнее чем на балконе."
@@ -2135,8 +2153,8 @@ label second_day :
         "Выбравшись из ванны я направился прямиком в кровать."
 
         scene sanya bed with fade :
-            linear 35 yoffset -560
-            linear 35 yoffset 0
+            linear 35 zoom 1.1
+            linear 35 zoom 1.0
             repeat
 
         "Я всё пытался понять, что со мной не так."
@@ -2171,8 +2189,8 @@ label second_day :
         "Затушив сигарету, я сразу лёг в кровать, надеясь, что завтра наступит как можно скорее."
 
         scene sanya bed with fade :
-            linear 35 yoffset -560
-            linear 35 yoffset 0
+            linear 35 zoom 1.1
+            linear 35 zoom 1.0
             repeat
 
     scene black scen 
@@ -2185,8 +2203,8 @@ label second_day :
 label third_day :
     
     scene sanya bed with fade :
-        linear 35 yoffset -560
-        linear 35 yoffset 0
+        linear 35 zoom 1.1
+        linear 35 zoom 1.0
         repeat
 
     "Проснувшись, я понял что ничуть не отдохнул за прошедшую ночь."
@@ -2207,7 +2225,7 @@ label third_day :
             $ mood_counter += 1;
             $ str_for_notification = "У этого действия будут последствия"
 
-            show screen my_screen_big
+            show screen notification_popup_big
             with dissolve
 
             $ choice_yulia = True
@@ -2220,7 +2238,7 @@ label third_day :
             $ mood_counter += 1;
             $ str_for_notification = "У этого действия будут последствия"
 
-            show screen my_screen_big
+            show screen notification_popup_big
             with dissolve
 
             $ choice_nadya = True
@@ -2231,14 +2249,14 @@ label third_day :
             $ mood_counter -= 1;
             $ str_for_notification = "У этого действия будут последствия"
 
-            show screen my_screen_big
+            show screen notification_popup_big
             with dissolve
 
             $ choise_lonly = True
 
             "А ведь и ехать не с кем... Поеду тогда один."
 
-    hide screen my_screen_big
+    hide screen notification_popup_big
     with dissolve
 
     scene bus station
