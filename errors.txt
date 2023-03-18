@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 37: expected '=' not found.
-    define str_for_notification
-                               ^
+File "game/script.rpy", line 2386: choice menuitem expects a non-empty block.
+    "Да ну тебя! Я был о тебе лучшего мнения" :
+                                               ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sat Mar 18 00:41:16 2023
+Sun Mar 19 00:15:33 2023
