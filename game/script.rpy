@@ -1145,7 +1145,7 @@ label second_day :
         with dissolve
 
     
-    if day1_yuli_agreed_after_kfc == False and day1_pasha_kfc == True:
+    if not day1_yuli_agreed_after_kfc and day1_pasha_kfc :
 
         pasha "Кстати, а как там с девочкой твоей дела обстоят?"
         image night = "night color.png"
@@ -1202,7 +1202,7 @@ label second_day :
 
         "Ты, как всегда, прав..."
 
-    elif day1_yuli_agreed_after_kfc == True and day1_pasha_kfc == True :
+    elif day1_yuli_agreed_after_kfc and day1_pasha_kfc :
 
         sanya "Паша, помнишь, когда я написал Юле и пошел к ней?"
 
@@ -1760,7 +1760,7 @@ label second_day :
                 "Надеюсь хоть что-то хорошее придет в мою жизнь, завтра всё таки поеду в санаторий."
                 "Заниматься самобичеванием, раскуривая сигарету, мне не хотелось. Затушив её, я незамедлительно отправился домой."
 
-        if day2_nadya_bought_sigaretts == True or day2_nadya_het_one_sigarett == True :
+        if day2_nadya_bought_sigaretts or day2_nadya_het_one_sigarett :
             
             $ day2_nadya_have_a_dialog = True
             show nadya handson 
@@ -1967,7 +1967,7 @@ label second_day :
             linear 35 yoffset 0
             repeat
 
-    elif day2_nadya_have_a_dialog == True and day2_sanya_went_to_smoke == False:
+    elif day2_nadya_have_a_dialog and not day2_sanya_went_to_smoke:
         "Зайдя в комнату, я сразу пошёл на балкон. Достав сигаретку из пачки вишневого чапмана, я сразу вспомнил о Наде."
 
         pause 1.5
@@ -2049,7 +2049,7 @@ label second_day :
 
         "Спать на ней будет явно удобнее чем на балконе."
         
-    elif day1_pasha_kfc == True and day2_sanya_vote_for_ussr == True:
+    elif day1_pasha_kfc and day2_sanya_vote_for_ussr :
         "Зайдя в квартиру, я сразу пошёл к окну."
 
         pause 1.5
@@ -2113,7 +2113,7 @@ label second_day :
         "Что же вершит судьбой человека в этом мире? Некое незримое существо или закон? По крайне мере истинно то, что я не властен даже над своей волей."
         "С этими мыслями я погрузился в глубокий сон."
 
-    elif day1_yuli_agreed_after_kfc == True and day2_sanya_vote_for_ussr == True:
+    elif day1_yuli_agreed_after_kfc and day2_sanya_vote_for_ussr :
 
         "Зайдя в квартиру, я сразу достал сигарету и пошёл к окну."
 
@@ -2171,7 +2171,7 @@ label third_day :
     "С кем же мне поехать в итоге?"
 
     menu :
-        "Юля" if day1_pasha_kfc == False or day2_sanya_vote_for_ussr == True :
+        "Юля" if not day1_pasha_kfc or day2_sanya_vote_for_ussr :
             $ mood_counter += 1;
             $ str_for_notification = "У этого действия будут последствия"
 
@@ -2184,7 +2184,7 @@ label third_day :
             "Я и не ожидал что мы всего за пару дней так сблизимся, мы удачно совпали характерами, временами мне кажется, что мы с ней очень похожи."
             "Интересно, смогу ли я ещё встретиться с ней?"
 
-        "Надя" if day2_nadya_have_a_dialog == True :
+        "Надя" if day2_nadya_have_a_dialog :
             $ mood_counter += 1;
             $ str_for_notification = "У этого действия будут последствия"
 
@@ -2260,7 +2260,7 @@ label third_day :
     with fade
 
     if choise_lonly :
-        if day2_nadya_have_a_dialog == True and (day1_pasha_kfc == False or day2_sanya_vote_for_ussr == True  or day1_yuli_agreed_after_kfc == True):
+        if day2_nadya_have_a_dialog and (not day1_pasha_kfc or day2_sanya_vote_for_ussr or day1_yuli_agreed_after_kfc):
 
             show nadya angry at right
             with dissolve
@@ -2296,7 +2296,7 @@ label third_day :
 
 
 
-        if day2_nadya_have_a_dialog == True :
+        if day2_nadya_have_a_dialog :
 
             show nadya angry
             with dissolve
@@ -2313,7 +2313,7 @@ label third_day :
 
             jump _nadya
 
-        elif day1_pasha_kfc == False or day2_sanya_vote_for_ussr == True  or day1_yuli_agreed_after_kfc == True:
+        elif not day1_pasha_kfc or day2_sanya_vote_for_ussr or day1_yuli_agreed_after_kfc :
 
             show yuli angry
             with dissolve
