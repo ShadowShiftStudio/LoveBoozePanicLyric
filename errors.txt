@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 73: expected 'image_name_component' not found.
-    hide scene back
-        ^
+File "game/script.rpy", line 65: end of line expected.
+    with dissolve :
+                  ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sun Mar 19 01:23:45 2023
+Sun Mar 19 01:32:52 2023
