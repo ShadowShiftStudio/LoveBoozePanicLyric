@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 2386: choice menuitem expects a non-empty block.
-    "Да ну тебя! Я был о тебе лучшего мнения" :
-                                               ^
+File "game/script.rpy", line 73: expected 'image_name_component' not found.
+    hide scene back
+        ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sun Mar 19 00:15:33 2023
+Sun Mar 19 01:23:45 2023

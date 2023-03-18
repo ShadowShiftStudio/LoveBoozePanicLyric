@@ -45,6 +45,31 @@ screen my_screen_big():
     add "notification.png" xalign 1.0 yalign 0.055 
     text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
+label splashscreen:
+    scene logo splashscreen
+    with dissolve
+
+    
+    pause 5.0
+
+    image back = "#242424"
+
+    scene back 
+    with dissolve
+
+    show text "Дисклеймер \n" with dissolve :
+        yalign 0.35 xalign 0.5 
+    
+    pause 2.0
+
+    $ renpy.pause(5.0, hard=True)
+
+    hide text 
+    with dissolve
+
+    return
+
+
 label start:
     jump first_day
 
