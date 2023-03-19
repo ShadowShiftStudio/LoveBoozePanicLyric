@@ -1,5 +1,5 @@
 init python:
-
+    import random as r
     from renpy.audio.sound import play
     class BusMinigameDisplayable(renpy.Displayable):
         def __init__(self):
@@ -8,25 +8,27 @@ init python:
             self.bus = Image("bus top view.png")
             self.hi_score_bus = 0
 
-            self.background = Image("mg1 road background.png")
+            
+            background_path = "mg1 road background"+ str(r.randrange(0, 2)) + ".png"
+            self.background = Image(background_path)
             self.ground = Image("mg1 road ground.png")
 
-            self.ground_factor = 1
+            self.ground_factor = 5
             self.ground_counter = 0
-            self.background_counter = 0
-            self.background_factor = 5
+            self.background_counter = 0 
+            self.background_factor = 10
 
             self.cars= [Image("car1.png"), Image("car2.png"),
                         Image("car3.png"), Image("car4.png"),
                         Image("car5.png"), Image("car6.png")]
 
             self.car_counter = 0
-            self.car_factor = 4.1
+            self.car_factor = 2
 
-            self.bus_y = 0;
+            self.bus_y = 0
             self.bus_y_additional = 15
 
-            self.bus_change_line_max = 35
+            self.bus_change_line_max = 15
             self.bus_change_line_counter = self.bus_change_line_max
 
             self.bus_prev_line = 0
@@ -52,18 +54,18 @@ init python:
         def render(self, width, height, st, at):
             r = renpy.Render(width, height)
 
-            background = renpy.render(self.background, width, height, st, at)
-            background_duplicate = renpy.render(self.background, width, height, st, at)
-
-            r.blit(background, (self.background_counter * self.background_factor, 0))
-            r.blit(background_duplicate, (self.background_counter * self.background_factor - width, 0))
-
             ground = renpy.render(self.ground, width, height, st, at)
             ground_duplicate = renpy.render(self.ground, width, height, st, at)
 
             r.blit(ground, (self.ground_counter * self.ground_factor, (height - ground.height) / 2))
             r.blit(ground_duplicate, (self.ground_counter * self.ground_factor - width, (height - ground.height) / 2))
 
+            background = renpy.render(self.background, width, height, st, at)
+            background_duplicate = renpy.render(self.background, width, height, st, at)
+
+            
+
+            
             self.background_counter += 1
             if self.background_counter * self.background_factor >= width:
                 self.background_counter = 0
@@ -115,15 +117,18 @@ init python:
             r.blit(bus, (width - bus.width, bus_y))
 
             self.distance_bitween_sets_factor += self.distance_bitween_sets_step
-            self.ground_factor += self.counters_step
-            self.background_factor += self.counters_step
-            self.car_factor += self.counters_step
+            self.ground_factor += (self.counters_step)
+            self.background_factor += (self.counters_step)
+            self.car_factor += (self.counters_step)
+            self.score += 0.1
+            #if self.car_counter % 50 == 0:
+            #    self.score += round(self.car_factor)
 
-            if self.car_counter % 50 == 0:
-                self.score += round(self.car_factor)
-
-            score_text = Text("Счёт: " + str(self.score), slow=False, size=50)
+            score_text = Text("Счёт: " + str(int(self.score)), slow=False, size=50)
             hi_score_text = Text("Рекорд: " + str(self.hi_score_bus), slow=False, size=50)
+
+            r.blit(background, (self.background_counter * self.background_factor, 0))
+            r.blit(background_duplicate, (self.background_counter * self.background_factor - width, 0))
 
             score_text = renpy.render(score_text, width, height, st, at)
             r.blit(score_text, (width / 10, height / 10-30))
