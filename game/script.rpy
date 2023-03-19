@@ -2598,7 +2598,6 @@ label _sanatorium :
             "Ольга Дмитриевна неодобрительно глянула на меня."
             sanya "(шёпотом) ~Мне писец~"
 
-
         "Сдержаться" :
             $ day3_smoke_after_words_olga = False
 
