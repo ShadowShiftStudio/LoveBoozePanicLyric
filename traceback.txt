@@ -1,28 +1,28 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 516, in script
-    if is_winned :
-  File "game/script.rpy", line 516, in <module>
-    if is_winned :
-NameError: name 'is_winned' is not defined
+  File "game/script.rpy", line 2549, in script
+    scene sanatorium forest neer with san
+  File "game/script.rpy", line 2549, in <module>
+    scene sanatorium forest neer with san
+NameError: name 'san' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 516, in script
-    if is_winned :
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\ast.py", line 2115, in execute
-    if renpy.python.py_eval(condition):
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\python.py", line 1092, in py_eval
+  File "game/script.rpy", line 2549, in script
+    scene sanatorium forest neer with san
+  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 1654, in execute
+    paired = renpy.python.py_eval(self.paired)
+  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1092, in py_eval
     return py_eval_bytecode(code, globals, locals)
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\python.py", line 1085, in py_eval_bytecode
+  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1085, in py_eval_bytecode
     return eval(bytecode, globals, locals)
-  File "game/script.rpy", line 516, in <module>
-    if is_winned :
-NameError: name 'is_winned' is not defined
+  File "game/script.rpy", line 2549, in <module>
+    scene sanatorium forest neer with san
+NameError: name 'san' is not defined
 
 Windows-10-10.0.22621 AMD64
 Ren'Py 8.0.3.22090809
 Любовь, выпивка, паника, лирика 1.0
-Sun Mar 19 03:34:29 2023
+Sun Mar 19 20:47:02 2023
