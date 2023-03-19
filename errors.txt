@@ -2,13 +2,7 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 688: expected 'image_name_component' not found.
-    show "#000"
-         ^
-
-File "game/script.rpy", line 696: expected 'image_name_component' not found.
-    hide "#000" with dissolve
-         ^
+File "game/bus_minigame.rpy", line 5: name 'hi_score' is parameter and global
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sun Mar 19 03:40:13 2023
+Mon Mar 20 01:52:35 2023

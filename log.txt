@@ -1,10 +1,15 @@
+<<<<<<< Updated upstream
 Mon Mar 20 00:50:12 2023
+=======
+Mon Mar 20 01:55:58 2023
+>>>>>>> Stashed changes
 Windows-10-10.0.22621
 Ren'Py 8.0.3.22090809
  
 
 Bootstrap to the start of init.init took 0.03s
 Early init took 0.00s
+<<<<<<< Updated upstream
 Loader init took 0.03s
 Loading error handling took 0.02s
 Loading script took 0.13s
@@ -13,6 +18,16 @@ Loading persistent took 0.00s
 Faled to initialize steam: FileNotFoundError("Could not find module 'C:\\renpy-8.0.3-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
 Running init code took 0.04s
 Loading analysis data took 0.01s
+=======
+Loader init took 0.05s
+Loading error handling took 0.03s
+Loading script took 0.38s
+Loading save slot metadata. took 0.03s
+Loading persistent took 0.00s
+Faled to initialize steam: FileNotFoundError("Could not find module 'X:\\Download\\RenPy\\renpy-8.0.3-sdk\\lib\\py3-windows-x86_64\\steam_api64.dll' (or one of its dependencies). Try using the full path with constructor syntax.")
+Running init code took 0.05s
+Loading analysis data took 0.02s
+>>>>>>> Stashed changes
 Analyze and compile ATL took 0.00s
 Index archives took 0.00s
 Backing up script files to 'C:\\Users\\Артем\\AppData\\Roaming/RenPy/backups\\TechTales':
@@ -25,14 +40,25 @@ nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
 Creating interface object took 0.23s
 Cleaning stores took 0.00s
+<<<<<<< Updated upstream
 Init translation took 0.04s
 Build styles took 0.01s
+=======
+Init translation took 0.03s
+Build styles took 0.00s
+>>>>>>> Stashed changes
 Load screen analysis took 0.00s
 Analyze screens took 0.02s
 Save screen analysis took 0.02s
+<<<<<<< Updated upstream
 Prepare screens took 0.03s
 Save pyanalysis. took 0.01s
 Save bytecode. took 0.02s
+=======
+Prepare screens took 0.04s
+Save pyanalysis. took 0.01s
+Save bytecode. took 0.03s
+>>>>>>> Stashed changes
 Running _start took 0.00s
 Performance test:
 Interface start took 0.07s

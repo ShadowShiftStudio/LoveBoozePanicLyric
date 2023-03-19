@@ -1,29 +1,35 @@
 init python:
-    import random as r
+    import random as ran
+    global hi_score1
+    def _hi_score(hi_score):
+        global hi_score1
+        hi_score1 = hi_score
     from renpy.audio.sound import play
     class BusMinigameDisplayable(renpy.Displayable):
-        def __init__(self):
+        global hi_score1
+    
+        def __init__(self, hi_score):
             renpy.Displayable.__init__(self)
-
+            self.hi_score = hi_score
             self.bus = Image("bus top view.png")
             self.hi_score_bus = 0
 
             
-            background_path = "mg1 road background"+ str(r.randrange(0, 2)) + ".png"
+            background_path = "mg1 road background"+ str(ran.randrange(0, 3)) + ".png"
             self.background = Image(background_path)
             self.ground = Image("mg1 road ground.png")
 
-            self.ground_factor = 5
+            self.ground_factor = 7
             self.ground_counter = 0
             self.background_counter = 0 
-            self.background_factor = 10
+            self.background_factor = 12
 
             self.cars= [Image("car1.png"), Image("car2.png"),
                         Image("car3.png"), Image("car4.png"),
                         Image("car5.png"), Image("car6.png")]
 
             self.car_counter = 0
-            self.car_factor = 2
+            self.car_factor = 4
 
             self.bus_y = 0
             self.bus_y_additional = 15
@@ -91,8 +97,8 @@ init python:
             distance_bitween_sets = bus.width * self.distance_bitween_sets_factor
 
             for cars_set_i in range(0, len(self.cars_sets)):
-                for car_line_i in self.cars_sets[cars_set_i]:
-                    t = Transform(child=self.cars[car_line_i % 6], xsize=200, ysize=int(200 * 427 / 844))
+                for car_line_i, indexx in enumerate(self.cars_sets[cars_set_i]):
+                    t = Transform(child=self.cars[(car_line_i+2*indexx) % 6], xsize=200, ysize=int(200 * 427 / 844))
                     car = renpy.render(t, width, height, st, at)
 
                     car_x = (0 if self.first_render else car.width + width / 2) + self.car_counter * self.car_factor - cars_set_i * distance_bitween_sets
@@ -120,12 +126,12 @@ init python:
             self.ground_factor += (self.counters_step)
             self.background_factor += (self.counters_step)
             self.car_factor += (self.counters_step)
-            self.score += 0.1
+            self.score += (0.05*self.car_factor)
             #if self.car_counter % 50 == 0:
             #    self.score += round(self.car_factor)
 
-            score_text = Text("Счёт: " + str(int(self.score)), slow=False, size=50)
-            hi_score_text = Text("Рекорд: " + str(self.hi_score_bus), slow=False, size=50)
+            score_text = Text("Счёт: " + '{0:,}'.format(int(self.score)).replace(',', ' '), slow=False, size=50)
+            hi_score_text = Text("Рекорд: " + str(self.hi_score), slow=False, size=50)
 
             r.blit(background, (self.background_counter * self.background_factor, 0))
             r.blit(background_duplicate, (self.background_counter * self.background_factor - width, 0))
@@ -163,12 +169,13 @@ init python:
                         renpy.restart_interaction()
 
             if self.finished:
-                return ""
+                return str(int(max(self.score, self.hi_score)))
             else:
                 raise renpy.IgnoreEvent()
 
-screen bus():
-    default bus_minigame = BusMinigameDisplayable()
+
+screen bus(hi_score1):
+    default bus_minigame = BusMinigameDisplayable(hi_score1)
     add bus_minigame
 
 label play_bus:
@@ -184,7 +191,8 @@ label play_bus:
     show screen my_screen with dissolve
     pause(2.0)
     hide screen my_screen with dissolve
-    call screen bus 
+    call screen bus(0)
+    $ hi_score = _return 
     with fade
 
     $ quick_menu = True
