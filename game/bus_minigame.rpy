@@ -1,10 +1,12 @@
 init python:
+
     from renpy.audio.sound import play
     class BusMinigameDisplayable(renpy.Displayable):
         def __init__(self):
             renpy.Displayable.__init__(self)
 
             self.bus = Image("bus top view.png")
+            self.hi_score_bus = 0
 
             self.background = Image("mg1 road background.png")
             self.ground = Image("mg1 road ground.png")
@@ -30,7 +32,7 @@ init python:
             self.bus_prev_line = 0
             self.bus_line = 1
 
-            self.cars_sets = [[0], [1, 2], [2], [0, 1], [0, 2], [1], [1, 0], [2, 0], [2, 1]]
+            self.cars_sets = [[0], [1, 2], [2], [0, 1], [0, 2], [1], [1, 0], [2, 0], [2, 1], [1, 2], [], [0,2], [1], [2,0], [0], [1], [2], [0,2], [1,2], [], [0,1], [0,1], [1,2], [1,2], [0,1]]
 
             self.distance_bitween_sets_factor = 2
             self.distance_bitween_sets_step = 0.00005
@@ -120,9 +122,14 @@ init python:
             if self.car_counter % 50 == 0:
                 self.score += round(self.car_factor)
 
-            score_text = Text("Счет: " + str(self.score), slow=True, size=50)
+            score_text = Text("Счёт: " + str(self.score), slow=False, size=50)
+            hi_score_text = Text("Рекорд: " + str(self.hi_score_bus), slow=False, size=50)
+
             score_text = renpy.render(score_text, width, height, st, at)
-            r.blit(score_text, (width / 10, height / 10))
+            r.blit(score_text, (width / 10, height / 10-30))
+
+            hi_score_text = renpy.render(hi_score_text, width, height, st, at)
+            r.blit(hi_score_text, (width / 10, height / 10 + 30))
 
             if self.finished:
                 play("audio/avaria.mp3")
@@ -168,7 +175,7 @@ label play_bus:
     scene white
     with dissolve
     screen my_screen():
-        text "Управление стрелочками вверх и вниз" xalign 0.5 yalign 0.5 color "#000"
+        text "Управление стрелочками вверх и вниз\nТапами на верхние и нижние части экрана" xalign 0.5 yalign 0.5 color "#000"
     show screen my_screen with dissolve
     pause(2.0)
     hide screen my_screen with dissolve
