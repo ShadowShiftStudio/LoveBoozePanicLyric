@@ -37,6 +37,8 @@ define choice_nadya = False
 define choise_lonly = False
 define mood_counter = -5
 
+
+
 define player_name = "Саня"
 define str_for_notification = ""
 
