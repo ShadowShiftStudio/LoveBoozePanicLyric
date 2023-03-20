@@ -1,32 +1,22 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 2775, in script
-    "Ой..." extend "Как бы не вышло чего."
-  File "renpy/common/00library.rpy", line 303, in say
-    who(what, interact=interact, *args, **kwargs)
-Exception: Say has image attributes ('extend',), but there's no image tag associated with the speaking character.
+  File "game/script.rpy", line 2912, in script
+    grusha "Ну так иди нахуй отсюда!"
+Exception: Sayer 'grusha' is not defined.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 2775, in script
-    "Ой..." extend "Как бы не вышло чего."
-  File "D:\renpy-8.0.3-sdk\renpy\ast.py", line 921, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "D:\renpy-8.0.3-sdk\renpy\exports.py", line 1371, in say
-    renpy.store.say(who, what, *args, **kwargs)
-  File "renpy/common/00library.rpy", line 303, in say
-    who(what, interact=interact, *args, **kwargs)
-  File "D:\renpy-8.0.3-sdk\renpy\character.py", line 1206, in __call__
-    old_attr_state = self.handle_say_attributes(False, interact)
-  File "D:\renpy-8.0.3-sdk\renpy\character.py", line 1030, in handle_say_attributes
-    if self.resolve_say_attributes(predicting, attrs):
-  File "D:\renpy-8.0.3-sdk\renpy\character.py", line 956, in resolve_say_attributes
-    raise Exception("Say has image attributes %r, but there's no image tag associated with the speaking character." % (attrs,))
-Exception: Say has image attributes ('extend',), but there's no image tag associated with the speaking character.
+  File "game/script.rpy", line 2912, in script
+    grusha "Ну так иди нахуй отсюда!"
+  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 881, in execute
+    who = eval_who(self.who, self.who_fast)
+  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 774, in eval_who
+    raise Exception("Sayer '%s' is not defined." % who)
+Exception: Sayer 'grusha' is not defined.
 
-Windows-10-10.0.19045 AMD64
+Windows-10-10.0.22621 AMD64
 Ren'Py 8.0.3.22090809
 Любовь, выпивка, паника, лирика 1.0
-Mon Mar 20 20:48:30 2023
+Tue Mar 21 00:14:24 2023

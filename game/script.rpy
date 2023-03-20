@@ -4,6 +4,7 @@ define yuli = Character('Юля', color="#ffaaff")
 define nadya = Character('Надя', color="#f180a6")
 define storyteller = Character('Рассказчик', color="#5197e7")
 define olga_dmitrievna = Character('Ольга Дмитревна', color="#7d9901")
+define grusha = Character('Груша', color="#12d69b")
 define pavel = Character('Павел Геннадьевич', color="#eba205")
 
 init python :
