@@ -2,17 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 2680: expecting name after dot.
-    "Ха! А мне нравится эта бабка, надо будет с ней скорешиться".
-                                                                 ^
-
-File "game/script.rpy", line 2702: expected statement.
-    day4_move = True;
-              ^
-
-File "game/script.rpy", line 2717: expected statement.
-    day4_move = False;
-              ^
+File "game/script.rpy", line 2918: else clause expects a non-empty block.
+    else:
+         ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Mon Mar 20 19:30:32 2023
+Mon Mar 20 23:59:13 2023
