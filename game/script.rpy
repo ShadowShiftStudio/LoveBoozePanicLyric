@@ -32,9 +32,9 @@ define day2_nadya_bought_sigaretts = False
 define day2_nadya_het_one_sigarett = False
 define day2_choosen_instead_yuli = False
 define day2_nadya_have_a_dialog = False
-define day4_smoke_after_words_olga = False
-define day3_go_with_yuli = False
 define day3_go_with_nadya = False
+define day3_go_with_yuli = False
+define day4_smoke_after_words_olga = False
 define day4_move = False
 define choice_yulia = False
 define choice_nadya = False
@@ -42,8 +42,6 @@ define choise_lonly = False
 define mood_counter = -5
 
 define hi_score = 0
-
-
 
 define player_name = "Саня"
 define str_for_notification = ""
@@ -2773,8 +2771,10 @@ label _sanatorium :
         "Вышло это неожиданно громко даже для меня. За стеной послышался громкий кашель, такой сильный, что я даже испугался. "
         "Заглянув в окно, обнаружил, что Павел Геннадьевич сидит на кровати и пытается вздохнуть"
         "Голова его покраснела как помидор, а изо рта вырывался жуткий хрип."
+
         "Ой..." 
         extend "Как бы не вышло чего."
+
         "Но, слава богу, все обошлось."
         "Казалось, что это даже пошло на пользу Павлу Геннадьевичу." 
         "По крайней мере, с кровати он встал очень резво."
