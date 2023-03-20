@@ -1,70 +1,32 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 162, in script call
-    call play_bus
-  File "game/bus_minigame.rpy", line 194, in script
-    call screen bus(0)
-  File "renpy/common/000statements.rpy", line 609, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-  File "game/bus_minigame.rpy", line 177, in execute
-    screen bus(hi_score1):
-  File "game/bus_minigame.rpy", line 177, in execute
-    screen bus(hi_score1):
-  File "game/bus_minigame.rpy", line 178, in execute
-    default bus_minigame = BusMinigameDisplayable(hi_score1)
-  File "game/bus_minigame.rpy", line 178, in <module>
-    default bus_minigame = BusMinigameDisplayable(hi_score1)
-TypeError: __init__() takes 1 positional argument but 2 were given
+  File "game/script.rpy", line 2775, in script
+    "Ой..." extend "Как бы не вышло чего."
+  File "renpy/common/00library.rpy", line 303, in say
+    who(what, interact=interact, *args, **kwargs)
+Exception: Say has image attributes ('extend',), but there's no image tag associated with the speaking character.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 162, in script call
-    call play_bus
-  File "game/bus_minigame.rpy", line 194, in script
-    call screen bus(0)
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\ast.py", line 2232, in execute
-    self.call("execute")
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\ast.py", line 2220, in call
-    return renpy.statements.call(method, parsed, *args, **kwargs)
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\statements.py", line 281, in call
-    return method(parsed, *args, **kwargs)
-  File "renpy/common/000statements.rpy", line 609, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\exports.py", line 3181, in call_screen
-    rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\ui.py", line 299, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\core.py", line 3377, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\core.py", line 3810, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\core.py", line 582, in visit_all
-    d.visit_all(callback, seen)
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\core.py", line 582, in visit_all
-    d.visit_all(callback, seen)
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\core.py", line 582, in visit_all
-    d.visit_all(callback, seen)
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\screen.py", line 451, in visit_all
-    callback(self)
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\core.py", line 3810, in <lambda>
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\screen.py", line 462, in per_interact
-    self.update()
-  File "X:\Download\RenPy\renpy-8.0.3-sdk\renpy\display\screen.py", line 653, in update
-    self.screen.function(**self.scope)
-  File "game/bus_minigame.rpy", line 177, in execute
-    screen bus(hi_score1):
-  File "game/bus_minigame.rpy", line 177, in execute
-    screen bus(hi_score1):
-  File "game/bus_minigame.rpy", line 178, in execute
-    default bus_minigame = BusMinigameDisplayable(hi_score1)
-  File "game/bus_minigame.rpy", line 178, in <module>
-    default bus_minigame = BusMinigameDisplayable(hi_score1)
-TypeError: __init__() takes 1 positional argument but 2 were given
+  File "game/script.rpy", line 2775, in script
+    "Ой..." extend "Как бы не вышло чего."
+  File "D:\renpy-8.0.3-sdk\renpy\ast.py", line 921, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "D:\renpy-8.0.3-sdk\renpy\exports.py", line 1371, in say
+    renpy.store.say(who, what, *args, **kwargs)
+  File "renpy/common/00library.rpy", line 303, in say
+    who(what, interact=interact, *args, **kwargs)
+  File "D:\renpy-8.0.3-sdk\renpy\character.py", line 1206, in __call__
+    old_attr_state = self.handle_say_attributes(False, interact)
+  File "D:\renpy-8.0.3-sdk\renpy\character.py", line 1030, in handle_say_attributes
+    if self.resolve_say_attributes(predicting, attrs):
+  File "D:\renpy-8.0.3-sdk\renpy\character.py", line 956, in resolve_say_attributes
+    raise Exception("Say has image attributes %r, but there's no image tag associated with the speaking character." % (attrs,))
+Exception: Say has image attributes ('extend',), but there's no image tag associated with the speaking character.
 
-Windows-10-10.0.22621 AMD64
+Windows-10-10.0.19045 AMD64
 Ren'Py 8.0.3.22090809
 Любовь, выпивка, паника, лирика 1.0
-Mon Mar 20 01:54:54 2023
+Mon Mar 20 20:48:30 2023
