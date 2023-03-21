@@ -556,7 +556,7 @@ screen about():
 
             #label "[config.name!t]"
             text _("Любовь, выпивка, паника, лирика\n")
-            text _("Авторы:\nAsind\nDarlin In The Steam\nDanilka108\nTheNorth\nи Серёжа")
+            text _("Авторы:\nAsind\nDarlingInSteam\nDanilka108\nTheNorth\nXpomin\nArtsBer")
             text _("Ссылка на репозиторий {a=https://github.com/nstu-games/TechTales-Love-Booze-and-Code}GitHub{/a}")
 
             ## gui.about обычно установлено в options.rpy.
