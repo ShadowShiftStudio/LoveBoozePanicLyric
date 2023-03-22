@@ -1,28 +1,28 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 2706, in script
-    with disslove
-  File "game/script.rpy", line 2706, in <module>
-    with disslove
-NameError: name 'disslove' is not defined
+  File "game/script.rpy", line 2795, in script
+    with Fade
+Exception: Expected transition to be a displayable, not a <partial <function Fade at 0x0000000003aecf70> () {'old_widget': <renpy.display.layout.Fixed object at 0x0000000005dcc190>, 'new_widget': <renpy.display.layout.Fixed object at 0x0000000005bd6d90>}>
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 2706, in script
-    with disslove
-  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 1651, in execute
-    trans = renpy.python.py_eval(self.expr)
-  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1092, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1085, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/script.rpy", line 2706, in <module>
-    with disslove
-NameError: name 'disslove' is not defined
+  File "game/script.rpy", line 2795, in script
+    with Fade
+  File "D:\renpy-8.0.3-sdk\renpy\ast.py", line 1658, in execute
+    renpy.exports.with_statement(trans, paired=paired)
+  File "D:\renpy-8.0.3-sdk\renpy\exports.py", line 1657, in with_statement
+    return renpy.game.interface.do_with(trans, paired, clear=clear)
+  File "D:\renpy-8.0.3-sdk\renpy\display\core.py", line 2798, in do_with
+    return self.interact(trans_pause=True,
+  File "D:\renpy-8.0.3-sdk\renpy\display\core.py", line 3377, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
+  File "D:\renpy-8.0.3-sdk\renpy\display\core.py", line 3757, in interact_core
+    raise Exception("Expected transition to be a displayable, not a %r" % trans)
+Exception: Expected transition to be a displayable, not a <partial <function Fade at 0x0000000003aecf70> () {'old_widget': <renpy.display.layout.Fixed object at 0x0000000005dcc190>, 'new_widget': <renpy.display.layout.Fixed object at 0x0000000005bd6d90>}>
 
-Windows-10-10.0.22621 AMD64
+Windows-10-10.0.19045 AMD64
 Ren'Py 8.0.3.22090809
 Любовь, выпивка, паника, лирика 1.0
-Wed Mar 22 00:00:11 2023
+Thu Mar 23 00:01:33 2023
