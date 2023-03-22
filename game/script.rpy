@@ -3395,6 +3395,7 @@ label _excursion :
 label _end :
     scene black scen
     with fade
+    
     pause 5.0
 
     centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth"
