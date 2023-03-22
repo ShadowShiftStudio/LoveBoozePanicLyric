@@ -1,6 +1,0 @@
-Wed Mar 22 23:41:00 2023
-Windows-10-10.0.22621
-Ren'Py 8.0.3.22090809
- 
-
-Bootstrap to the start of init.init took 0.03s

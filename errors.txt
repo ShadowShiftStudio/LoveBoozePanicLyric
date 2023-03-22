@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 2919: end of line expected.
-    sanya "Ну сам и употребляй, а я кушать пойду". 
-                                                 ^
+File "game/script.rpy", line 2835: expected 'simple_expression' not found.
+    ypos 
+         ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Wed Mar 22 23:40:48 2023
+Thu Mar 23 00:18:03 2023
