@@ -1,28 +1,65 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/script.rpy", line 2706, in script
-    with disslove
-  File "game/script.rpy", line 2706, in <module>
-    with disslove
-NameError: name 'disslove' is not defined
+Executing ATL code at game/script.rpy:2766
+  File "game/script.rpy", line 2769, in script
+    "С этими словами неунывающая Ольга Дмитриевна ушла, оставив меня наедине с Павлом Геннадьевичем, что в ответ ей произнес что-то нечленораздельное. "
+Exception: Too many arguments passed to ATL transform.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 2706, in script
-    with disslove
-  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 1651, in execute
-    trans = renpy.python.py_eval(self.expr)
-  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1092, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1085, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/script.rpy", line 2706, in <module>
-    with disslove
-NameError: name 'disslove' is not defined
+  File "game/script.rpy", line 2769, in script
+    "С этими словами неунывающая Ольга Дмитриевна ушла, оставив меня наедине с Павлом Геннадьевичем, что в ответ ей произнес что-то нечленораздельное. "
+  File "D:\renpy-8.0.3-sdk\renpy\ast.py", line 921, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "D:\renpy-8.0.3-sdk\renpy\exports.py", line 1373, in say
+    who(what, *args, **kwargs)
+  File "D:\renpy-8.0.3-sdk\renpy\character.py", line 1266, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "D:\renpy-8.0.3-sdk\renpy\character.py", line 927, in do_display
+    display_say(who,
+  File "D:\renpy-8.0.3-sdk\renpy\character.py", line 666, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "D:\renpy-8.0.3-sdk\renpy\ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "D:\renpy-8.0.3-sdk\renpy\display\core.py", line 3377, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
+  File "D:\renpy-8.0.3-sdk\renpy\display\core.py", line 3912, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "D:\renpy-8.0.3-sdk\renpy\display\core.py", line 2602, in draw_screen
+    surftree = renpy.display.render.render_screen(
+  File "render.pyx", line 495, in renpy.display.render.render_screen
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "D:\renpy-8.0.3-sdk\renpy\display\layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "D:\renpy-8.0.3-sdk\renpy\display\layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "D:\renpy-8.0.3-sdk\renpy\display\layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "D:\renpy-8.0.3-sdk\renpy\display\transform.py", line 747, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 148, in renpy.display.accelerator.transform_render
+  File "D:\renpy-8.0.3-sdk\renpy\display\transform.py", line 926, in update_state
+    fr = self.execute(self, self.st, self.at)
+  File "D:\renpy-8.0.3-sdk\renpy\atl.py", line 596, in execute
+    action, arg, pause = block.execute(trans, timebase, self.atl_state, events)
+  File "D:\renpy-8.0.3-sdk\renpy\atl.py", line 839, in execute
+    action, arg, pause = stmt.execute(trans, target - start, child_state, events)
+  File "D:\renpy-8.0.3-sdk\renpy\atl.py", line 1308, in execute
+    value = interpolate(complete, old, new, PROPERTIES[k])
+  File "D:\renpy-8.0.3-sdk\renpy\atl.py", line 148, in interpolate
+    rv = b(a_origin, t)
+  File "D:\renpy-8.0.3-sdk\renpy\atl.py", line 451, in __call__
+    raise Exception("Too many arguments passed to ATL transform.")
+Exception: Too many arguments passed to ATL transform.
 
-Windows-10-10.0.22621 AMD64
+Windows-10-10.0.19045 AMD64
 Ren'Py 8.0.3.22090809
 Любовь, выпивка, паника, лирика 1.0
-Wed Mar 22 00:00:11 2023
+Wed Mar 22 21:58:57 2023
