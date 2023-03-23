@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 90: expected end of line
-    stop sound with fadeout
-               ^
+File "game/script.rpy", line 3452: expected statement.
+    continue 
+             ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Thu Mar 23 01:45:15 2023
+Thu Mar 23 15:13:34 2023
