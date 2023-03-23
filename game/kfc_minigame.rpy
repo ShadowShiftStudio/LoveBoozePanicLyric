@@ -318,7 +318,7 @@ init python:
             self.gg_bar = BarDisplayable(100, 1)
             self.gg_glass = GlassDisplayable([], 1)
 
-            self.pasha_image = Image("pasha neutral.png")
+            self.pasha_image = Image("pasha/neutral.png")
             self.bowl_image = Image("kfc_bowl.png")
             self.ground_image = Image("kfc_ground.png")
             self.background_image = Image("kfc inside.png")

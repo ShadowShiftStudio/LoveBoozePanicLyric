@@ -184,7 +184,6 @@ label first_day:
 
     show pasha neutral:
         alpha 0.0 xalign 0.5 yalign 1.0
-
         # Take 1.0 seconds to move things back to the left.
         linear 1.0 xalign 0.6 alpha 1.0
 
@@ -2901,6 +2900,7 @@ label _sanatorium :
                 
                 "Жетско затянуться" :
                     $ day4_smoke_old_siggarete = True
+                    $ day4_take_pill = True
                     $ str_for_notification = "У этого действия будут последствия"
             
                     show screen notification_popup_big
@@ -2975,6 +2975,7 @@ label _sanatorium :
 
                 "Я ещё не обедал, закон Архимеда не позволяет" :
                     $ day4_smoke_old_siggarete = False
+                    $ day4_take_pill = False
                     $ str_for_notification = "У этого действия будут последствия"
             
                     show screen notification_popup_big
