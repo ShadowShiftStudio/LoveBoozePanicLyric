@@ -62,6 +62,17 @@ screen notification_popup_big():
     add "notification.png" xalign 1.0 yalign 0.055 
     text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
+screen toska():
+    add "night color.png":
+        at transform:
+            xalign 0.5 yalign 0.5
+            alpha 0.0
+            linear 4.0 alpha 1.0
+            block:
+                linear 1.0 zoom 1.2 alpha 0.9
+                linear 0.6 zoom 1.0 alpha 1.0
+                repeat
+
 label splashscreen:
     play sound "audio/intro_sound.mp3" 
     image back = "#272727"
@@ -927,7 +938,7 @@ label first_day:
     if not day1_pasha_kfc:
         play sound "audio/sound-in-bus.mp3" volume 0.2
 
-        scene bus 
+        scene bus night
         show night
 
         "Как обычно, по пути домой я глубоко погрузился в себя. Мои мысли перескакивали со скучных лекций и лаб на Пашку, на новую подругу Юлю и обратно."
