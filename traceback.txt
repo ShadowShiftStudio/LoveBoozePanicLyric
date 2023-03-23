@@ -8,14 +8,16 @@ Exception: Couldn't find a place to stop rolling back. Perhaps the script change
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/common/_layout/screen_load_save.rpym", line 35, in script
-    $ ui.interact()
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
   File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 1131, in execute
     renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
   File "C:\renpy-8.0.3-sdk\renpy\python.py", line 1061, in py_exec_bytecode
     exec(bytecode, globals, locals)
-  File "renpy/common/_layout/screen_load_save.rpym", line 35, in <module>
-    $ ui.interact()
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
+    python hide:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
+    ui.interact()
   File "C:\renpy-8.0.3-sdk\renpy\ui.py", line 299, in interact
     rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
   File "C:\renpy-8.0.3-sdk\renpy\display\core.py", line 3377, in interact
@@ -24,6 +26,8 @@ Full traceback:
     rv = root_widget.event(ev, x, y, 0)
   File "C:\renpy-8.0.3-sdk\renpy\display\layout.py", line 1175, in event
     rv = i.event(ev, x - xo, y - yo, cst)
+  File "C:\renpy-8.0.3-sdk\renpy\display\transition.py", line 53, in event
+    return self.new_widget.event(ev, x, y, st) # E1101
   File "C:\renpy-8.0.3-sdk\renpy\display\layout.py", line 1175, in event
     rv = i.event(ev, x - xo, y - yo, cst)
   File "C:\renpy-8.0.3-sdk\renpy\display\layout.py", line 1175, in event
@@ -38,14 +42,18 @@ Full traceback:
     rv = d.event(ev, x - xo, y - yo, st)
   File "C:\renpy-8.0.3-sdk\renpy\display\layout.py", line 1175, in event
     rv = i.event(ev, x - xo, y - yo, cst)
+  File "C:\renpy-8.0.3-sdk\renpy\display\layout.py", line 1399, in event
+    rv = super(Window, self).event(ev, x, y, st)
+  File "C:\renpy-8.0.3-sdk\renpy\display\layout.py", line 279, in event
+    rv = d.event(ev, x - xo, y - yo, st)
   File "C:\renpy-8.0.3-sdk\renpy\display\layout.py", line 1175, in event
     rv = i.event(ev, x - xo, y - yo, cst)
+  File "C:\renpy-8.0.3-sdk\renpy\display\layout.py", line 279, in event
+    rv = d.event(ev, x - xo, y - yo, st)
   File "C:\renpy-8.0.3-sdk\renpy\display\behavior.py", line 1073, in event
     return handle_click(self.clicked)
   File "C:\renpy-8.0.3-sdk\renpy\display\behavior.py", line 1008, in handle_click
     rv = run(action)
-  File "C:\renpy-8.0.3-sdk\renpy\display\behavior.py", line 322, in run
-    new_rv = run(i, *args, **kwargs)
   File "C:\renpy-8.0.3-sdk\renpy\display\behavior.py", line 329, in run
     return action(*args, **kwargs)
   File "renpy/common/00action_file.rpy", line 463, in __call__
@@ -63,4 +71,4 @@ Exception: Couldn't find a place to stop rolling back. Perhaps the script change
 Windows-10-10.0.22621 AMD64
 Ren'Py 8.0.3.22090809
 Любовь, выпивка, паника, лирика 1.0
-Thu Mar 23 17:17:58 2023
+Thu Mar 23 17:41:16 2023

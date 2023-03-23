@@ -3582,11 +3582,13 @@ label _end :
     
     pause 5.0
 
-    centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth"
+    centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth,\nArtsBer,\nJuravl"
     centered "{size=+24}Asind:\nМини-игры, арты, музыка, диалоги первого дня."
     centered "{size=+24}DarlingInSteam:\nИмплементация сценария в код, арты, музыка, диалоги второго дня."
     centered "{size=+24}Danilka108:\nМини-игры, работа с нейросетью, покушал."
     centered "{size=+24}TheNorth:\nСценарий, диалоги второго и третьего дня."
     centered "{size=+24}Xpomin:\nСобрал шкаф, собрал компьютер, сценарий, диалоги второго и третьего дня."
+    centered "{size=+24}ArtsBer:\nУстал, писал сценарий, устал писать сценарий."
+    centered "{size=+24}Juravl:\nФоновые звуки, саунды."
     centered "{size=+24}В разделе \"Об игре\" можно найти ссылку на репозиторий GitHub"
     centered "{size=+24}Спасибо за прохождение данной новеллы. Мы благодарны за Ваше внимание."
