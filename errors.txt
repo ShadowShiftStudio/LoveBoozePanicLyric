@@ -2,9 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 3452: expected statement.
-    continue 
-             ^
+File "game/script.rpy", line 3482: if statement expects a non-empty block.
+    if day4_siggaret_or_room :
+                              ^
+
+File "game/script.rpy", line 3486: expected statement.
+    else :
+         ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Thu Mar 23 15:13:34 2023
+Fri Mar 24 02:24:32 2023
