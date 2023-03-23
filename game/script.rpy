@@ -8,6 +8,7 @@ define grusha = Character('Агриппина Владимировна', color="
 define pavel = Character('Павел Геннадьевич', color="#eba205")
 define skin = Character('Мыкало', color="#cf6674")
 define noname = Character('Незнакомец', color="#808080")
+define emili = Character('Эмилия', color="#641059")
 
 init python :
 
@@ -46,6 +47,7 @@ define day4_nadya_meal = False
 define day4_smoke_old_siggarete = False
 define day4_siggaret_or_room = False
 define day4_suicide = False
+define day4_go_with_emili = False
 define choice_yulia = False
 define choice_nadya = False
 define choise_lonly = False
@@ -3478,7 +3480,9 @@ label _sanatorium :
                     $ day4_siggaret_or_room = True
                 "Пойду посплю..." :
                     $ day4_siggaret_or_room = False
-                    
+            
+            #спрайты
+
             if day4_siggaret_or_room :
                 "Хотелось побыть одному, в комнате сто процентов был Павел Геннадьевич, так что выбор пал на курилку. Там обычно никого не было, да и созерцание красивых видов успокаивает. "
                 "Так что кинув прощальный взгляд на злую тетку, не разрешающую курить где попало, я медленно побрел в свое сакральное место. "
@@ -3493,7 +3497,9 @@ label _sanatorium :
 
                 menu :
                     "Ебать мусорка, пойду мимо." :
-                        
+
+                        $ day4_go_with_emili = False
+
                         "Мне льстило, что о моем психическом здоровье кто-то поинтересовался, но слишком уж много девушек за последнее время сделали мне от ворот поворот, не хочется обжигаться снова. "
                         "Оставив розоволосую позади, я поспешил в курилку."
 
@@ -3529,7 +3535,11 @@ label _sanatorium :
                             jump day4_end
 
                     "Может... Поболтать?" :
-                        ""
+
+                        $ day4_go_with_emili = True
+
+                        "Доделать"
+                        # доделать
 
 
             else :
@@ -3587,7 +3597,7 @@ label _sanatorium :
                     "Раздевшись, я лег в кровать. В груди что-то болело, но я не обращал на это внимания. "
                     "Наверное, все же зря я так. Кто знает, что преподнесет мне следующий день? "
                     "Отрешившись от всех мыслей, я постарался заснуть. " 
-                    
+
                     jump day4_end
 
     else:
@@ -3729,5 +3739,5 @@ label _end :
     centered "{size=+24}Xpomin:\nСобрал шкаф, собрал компьютер, сценарий, диалоги второго и третьего дня."
     centered "{size=+24}ArtsBer:\nУстал, писал сценарий, устал писать сценарий."
     centered "{size=+24}Juravl:\nФоновые звуки, саунды."
-    centered "{size=+24}В разделе \"Об игре\" можно найти ссылку на репозиторий GitHub"
+    centered "{size=+24}В разделе \"Об игре\" можно найти ссылку на репозиторий GitHub."
     centered "{size=+24}Спасибо за прохождение данной новеллы. Мы благодарны за Ваше внимание."
