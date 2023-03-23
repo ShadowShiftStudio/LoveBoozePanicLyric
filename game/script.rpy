@@ -1496,15 +1496,15 @@ label second_day :
             show yuli empathy
             with dissolve
 
-            yuli "Я подожду тебя снаружи. Не люблю такие магазины."
+            yuli "Я подожду тебя снаружи. Не люблю такие магазины. Не забудь купить мороженное девушке, как настоящий джентельмен!"
             sanya "Хорошо! Скоро буду."
 
             hide yuli empathy
             scene magazine inside
             with fade
             
-            sanya "Можно, пожалуйста, пачку чапы ванильной."
-            "Кассир" "Да, с вас ..."
+            sanya "Можно, пожалуйста, пачку чапы ванильной. И ту морожку..."
+            "Кассир" "Да, с вас..."
 
             pause 2.0
 
@@ -1513,7 +1513,7 @@ label second_day :
             show yuli empathy
             with dissolve
 
-            sanya "Ну все, пойдем дальше."
+            sanya "Ну все, пойдем дальше. Бери свою морожку от настоящего джентельмена."
 
             hide yuli empathy
             scene black scen
@@ -2446,18 +2446,6 @@ label third_day :
             show yuli sad
             with dissolve
 
-            menu :
-                "Да ну тебя! Я был о тебе лучшего мнения" :
-                    "Я решил сесть рядом, но дальше мы особо не общались."
-
-                    hide yuli happy
-                    with dissolve
-
-                    jump _yuli
-
-                "Да ладно тебе! Конечно извини, что тогда так вышло, но!" :
-                    sanya "Паша мне очень помогал в жизни, иногда как прихватит - так только его шутка в себя приведет."
-
         else :
 
             sanya "Жалко конечно, что Паша не поехал, мне будет его не хватать"
@@ -2729,7 +2717,6 @@ label _sanatorium :
     
     show olga olga happy:
         ypos 0.1
-        zoom 1.5
         linear 0.1 xalign 0.1
     with Dissolve(0.5)
 
@@ -2765,8 +2752,7 @@ label _sanatorium :
         "Смотря на это вонючее нечто, что уже по хозяйски развалилось на кровати, раскидав носки с тапочками в разные стороны, я понял одно."
         sanya "Я не собираюсь с ним жить."
             
-        show olga olga angry:
-            zoom 1
+        show olga olga angry
         with dissolve
 
         olga_dmitrievna "Ну как же это! Павел Генадьевич очень хороший молодой человек! Культурный, аккуратный, чистоплотный..."
@@ -2862,7 +2848,6 @@ label _sanatorium :
 
             show olga olga angry at truecenter:
                 ypos 0.6
-                zoom 1
             with dissolve
 
             "Шли мы недалеко, комната была буквально через пару дверей. "
