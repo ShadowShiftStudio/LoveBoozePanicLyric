@@ -62,18 +62,18 @@ screen notification_popup_big():
     text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
 label splashscreen:
-
+    play sound "audio/intro_sound.mp3" 
     image back = "#272727"
 
     scene back
     with dissolve
 
-    show logo studio logo at truecenter with dissolve
+    show logo studio logo at truecenter with Dissolve(1.6)
 
-    pause 5.0
+    pause 2.0
 
     scene back 
-    with dissolve
+    with Dissolve(1.5)
 
     show logo disclaimer with dissolve
     
@@ -88,7 +88,7 @@ label splashscreen:
 
     scene sanya_gui
     with dissolve
-
+    stop sound
     return
 
 label start:
