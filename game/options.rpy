@@ -222,7 +222,7 @@ init -1 python hide:
 
     ## The default text speed in characters per second. 0 is infinite.
 
-    config.default_text_cps = 50
+    config.default_text_cps = 60
 
     ## The default auto-forward time setting.
 
@@ -243,5 +243,5 @@ init -1 python hide:
     #style.say_dialogue.outlines = [(1, "#4E4E4E", 0, 0)]
     style.say_dialogue.drop_shadow = [(1.5,1.5)]
     style.say_dialogue.drop_shadow_color = "#00000060"
-    style.say_dialogue.line_spacing = -14
+    style.say_dialogue.line_spacing = -10
     style.choice_button_text.outlines = [(2, "#4242428c", 0, 0)]
