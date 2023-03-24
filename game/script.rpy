@@ -661,7 +661,7 @@ label first_day:
                 show screen notification_popup 
                 with dissolve
                 $ mood_counter += 1;
-                pasha "Саня, Саня, теряешь такие возможности! Ну, как знаешь. Я тоже уже до хаты собираюсь. Давай, особо не теряйся!"
+                pasha "Саня, Саня, не теряй такие возможности! Я тоже уже как раз до хаты собираюсь. Давай, расскажешь завтра, как оно там!"
                 $ day1_yuli_agreed_after_kfc = True
             "Отказаться" :
                 show screen notification_popup 
