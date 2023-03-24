@@ -4,3 +4,6 @@
 *.rpyb
 cache
 saves
+game/saves/navigation.json
+game/saves/persistent
+game/tl/None/common.rpymc

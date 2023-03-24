@@ -506,7 +506,7 @@ label first_day:
         hide pasha smiles
         with dissolve
 
-        play music "audio/deadline_music.mp3" volume 0.33
+        play music "audio/deadline_music.mp3" volume 0.13
 
         call play_kfc_minigame from _call_play_kfc_minigame
 
@@ -704,7 +704,8 @@ label first_day:
 
             sanya "Если честно, я не особо обращал внимание. Я был слишком занят разговором с тобой"
 
-            show yuli wet_neutral
+            show yuli wet neutral 
+            with dissolve
             yuli "Ха-ха, ну надеюсь, я не сильно тебя отвлекала"
 
             "С ней так легко разговаривать. Такое чувство, что мы давно знакомы"
@@ -715,32 +716,36 @@ label first_day:
 
             sanya "Да, звучит здорово. Тут неподалеку есть очень милое кафе"
             scene black scen
-            with fade
-            show black
-            "Я не могу поверить, как хорошо все идет. Она потрясающая. Кажется, она мне действительно нравится"
+            with Fade(2.0, 0.0, 1.0)
             
-            scene background cafe
+            "Я не могу поверить, как хорошо все идет. Она потрясающая. Кажется, она мне действительно нравится"
             image foreground_cafe = "foreground cafe.png"
 
-            
+            scene background cafe
             show yuli happy:
                 xalign 0.7
-                yalign 0.65
+                yalign 0.5
                 zoom 0.77
             show foreground_cafe
-            hide black with dissolve
+            show black
+            hide black  with Fade(2.0, 0.0, 2.0)
+            
+           
+            
+            play sound "audio/kfc-sound.mp3" volume 0.1
+            
 
             storyteller "Пока они сидели в уютном кафе, наслаждаясь едой и компанией друг друга, Саня чувствовал себя на вершине мира. Он не мог поверить, как ему повезло, что он встретил такую девушку, как Юля."
             show yuli horny2 with dissolve:
                 xalign 0.7
-                yalign 0.65
+                yalign 0.5
                 zoom 0.77
             yuli "Саша, я сегодня отлично провела время. Спасибо, что вышел ко мне под дождь"
 
             sanya "Нет, это тебе спасибо, Юля. Я тоже прекрасно провел время. Мы обязательно должны повторить это как-нибудь"
             show yuli horny with dissolve:
                 xalign 0.7
-                yalign 0.65
+                yalign 0.5
                 zoom 0.77
             yuli "С удовольствием"
 
@@ -749,6 +754,7 @@ label first_day:
             hide foreground_cafe
             scene black scen
             with fade
+            stop sound
 
         else :
             play music "audio/slow_sad_classical_music.mp3"  fadein 4.5 volume 0.4 fadeout 5.5
@@ -942,7 +948,7 @@ label first_day:
 
         pause 2.0
     if not day1_pasha_kfc:
-        play sound "audio/sound-in-bus.mp3" volume 0.2
+        play sound "audio/sound-in-bus.mp3" volume 0.1
 
         scene bus night
         show night
@@ -1003,7 +1009,7 @@ label first_day:
     "Родители" "Саша, мы можем оплатить санаторий, тебе будет полезно развеяться."
     "Ладно, это и правда неплохая возможность отдохнуть. Говорить о том, что он бесплатный я, конечно, не буду."
 
-    scene sanya bed : 
+    scene sanya bed with dissolve: 
         linear 35 zoom 1.1
         linear 35 zoom 1.0
         repeat
@@ -1028,7 +1034,7 @@ label first_day:
 
     stop music fadeout 3.0
 
-    show black
+    show black with Fade(3.0, 0.0, 2.0)
 
     jump second_day
 
@@ -1040,7 +1046,7 @@ label second_day :
 
     "И опять же... Я проснулся с ощущением тяжкого груза на сердце."
     "Господи, какой же срач. Как вообще отыскать здесь то, что мне нужно?"
-
+    play music "audio/space-floating.mp3" fadein 2.5 loop fadeout 3.0 volume 0.1
     # определим фон игры, время игры в секундах
     # и зададим параметры игры - спрайты и положение для собираемых предметов
     $ hf_init("sanya room", 8,
@@ -1056,7 +1062,7 @@ label second_day :
         # включаем инвентарь с убиранием из него найденных предметов
         inventory=True,
         # включаем подсказки
-        hint=False,
+        hint=True,
         # включаем подсветку предмета при наведении
         hover=brightness(.1),
         # уменьшаем размеры ячеек инвентаря, чтобы не мешали собирать предметы
@@ -1075,7 +1081,7 @@ label second_day :
 
     # жёсткая пауза, чтобы игрок перестал кликать и не пропустил результаты
     $ renpy.pause(1, hard=True)
-
+    play music "audio/einaudi_nefeli.mp3" fadein 1.0 fadeout 2.0 volume 0.2
     # результаты
     if hf_return == 0:
         centered "{size=+24}Предметы собраны успешно.\n Но все пачки пусты.."
@@ -1092,7 +1098,7 @@ label second_day :
     "Единственное, что мне нужно прямо сейчас, - это чапа."
     extend " Только сигарета поможет мне забыться."
     
-    play music "audio/einaudi_nefeli.mp3" fadein 1.0 fadeout 2.0 volume 0.2
+    
     scene sanya cry
     with fade
 
@@ -1160,13 +1166,12 @@ label second_day :
 
     stop sound
 
-    play music "audio/street-sound.mp3" fadein 1.5 fadeout 2.5 volume 0.1
-
     scene bus station near nstu
     with fade
     show pasha neutral
     with dissolve
-    play music "audio/street-sound.mp3" fadein 2.0 fadeout 2.0 volume 0.2
+
+    play sound "audio/street-sound.mp3" loop volume 0.2
     "Первое, что я увидел, когда вышел из автобуса, - это огромную фигуру Паши. Да его и сложно не заметить..."
     sanya "Паша! Привет. Я хотел тебе кое-что сказать..."
 
@@ -1286,7 +1291,7 @@ label second_day :
         "Ты, как всегда, прав..."
 
     elif day1_yuli_agreed_after_kfc and day1_pasha_kfc :
-
+        play music "audio/keys-of-moon-a-little-fantasy.mp3" fadein 3.5 fadeout 1.0 volume 0.1
         sanya "Паша, помнишь, когда я написал Юле и пошел к ней?"
 
         show pasha neutral
@@ -1303,7 +1308,7 @@ label second_day :
         show pasha smiles 
         with dissolve
 
-        pasha "Ах ты ж красавец то а! Всё правильно сделал. Идеальнее некуда."
+        pasha "Ах ты ж красавец то! а! Всё правильно сделал. Идеальнее некуда."
         pasha "Видишь же? Не зря я тебя заставил ей написать. Радуйся, что у тебя такой друг есть."
         pasha "Напомню ещё раз: \"Когда будешь летать, не забывай с кем ползал!\""
 
@@ -1326,17 +1331,18 @@ label second_day :
 
     "Распрощавшись с Пашкой, я направился прямиком в деканат. Желания возиться с документами у меня не было совсем."
     sanya "Ненавижу, блядь, бюрократию..."
-    stop music
+    stop music fadeout 2.0
+    stop sound fadeout 2.0
 
     scene nstu que
     with fade
-    
+    play sound "audio/people-noise.mp3" fadein 2.0 loop volume 0.05
     "Возле деканата меня повергла в шок необычайно длинная очередь. Видимо, второкурсники пришли брать допуск на пересдачу."
     "Моё ожидание продлилось больше часа, в конце концов я зашёл в деканат."
     
     "В момент, когда я уже должен был заходить следующим, сзади в меня влетела какая-то рыжая девчонка."
     "От чего все мои документы рассыпались по всему холлу."
-
+    play music "audio/space-floating.mp3" fadein 2.5 loop fadeout 3.0 volume 0.1
     "Боже, парень передо мной уже вот-вот выйдет. Надо как можно быстрее собрать всё обратно!"
     window hide
     # ивент со сбором документов
@@ -1392,9 +1398,9 @@ label second_day :
         "Ай, да и чёрт с ним, может и так примут, кто вообще эти документы смотреть-то будет?"
         "Идиотская бумажная волокита!"
     scene black with fade
+    stop music fadeout 3.0
 
-
-
+    stop sound fadeout 0.5
     "Уже вечерело, времени ушло куда больше, чем я ожидал. У выхода из корпуса я заметил несколько одногруппников, по разговору было понятно, что они направляются в курилку."
     "Может тоже сходить?"
 

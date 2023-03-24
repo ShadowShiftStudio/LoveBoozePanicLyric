@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 1: expected statement.
-    ﻿define sanya = Character("[player_name] ", color="#aad2ff")
-                  ^
+File "game/script.rpy", line 1013: end of line expected.
+    with dissolve: 
+                 ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Fri Mar 24 15:37:57 2023
+Sat Mar 25 02:09:24 2023
