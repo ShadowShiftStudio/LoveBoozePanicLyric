@@ -208,3 +208,40 @@ init python:
 ## разделённые дробью.
 
 # define build.itch_project = "renpytom/test-project"
+init -1 python hide:
+    #########################################
+    ## Default values of Preferences.
+
+    ## Note: These options are only evaluated the first time a
+    ## game is run. To have them run a second time, delete
+    ## game/saves/persistent
+
+    ## Should we start in fullscreen mode?
+
+    config.default_fullscreen = False
+
+    ## The default text speed in characters per second. 0 is infinite.
+
+    config.default_text_cps = 60
+
+    ## The default auto-forward time setting.
+
+    config.default_afm_time = 10
+
+    #########################################
+    ## More customizations can go here.
+    
+    #style.say_label.font = "fonts/cmunssdc.ttf"
+    #style.say_label.size = 50
+    style.say_label.outlines = [(2, "#4d4d4d", 0, 0)]
+    #style.say_label.drop_shadow = [(2.2,1.5)]
+    style.say_label.drop_shadow_color = "#00000017"
+    #style.say_label.bold = False
+    
+    # style.say_dialogue.font = "action man.ttf"
+    style.say_dialogue.color = "#ffffff"
+    #style.say_dialogue.outlines = [(1, "#4E4E4E", 0, 0)]
+    style.say_dialogue.drop_shadow = [(1.5,1.5)]
+    style.say_dialogue.drop_shadow_color = "#00000060"
+    style.say_dialogue.line_spacing = -10
+    style.choice_button_text.outlines = [(2, "#4242428c", 0, 0)]

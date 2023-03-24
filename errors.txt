@@ -2,13 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 3482: if statement expects a non-empty block.
-    if day4_siggaret_or_room :
-                              ^
-
-File "game/script.rpy", line 3486: expected statement.
-    else :
-         ^
+File "game/script.rpy", line 1: expected statement.
+    ﻿define sanya = Character("[player_name] ", color="#aad2ff")
+                  ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Fri Mar 24 02:24:32 2023
+Fri Mar 24 15:37:57 2023

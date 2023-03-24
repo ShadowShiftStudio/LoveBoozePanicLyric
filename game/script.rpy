@@ -1,14 +1,14 @@
-﻿define sanya = Character("[player_name]", color="#f5fcc4")
-define pasha = Character('Пашка Запивон', color="#ffcccc")
-define yuli = Character('Юля', color="#ffaaff")
-define nadya = Character('Надя', color="#f180a6")
-define storyteller = Character('Рассказчик', color="#5197e7")
-define olga_dmitrievna = Character('Ольга Дмитревна', color="#7d9901")
-define grusha = Character('Агриппина Владимировна', color="#12d69b")
-define pavel = Character('Павел Геннадьевич', color="#eba205")
-define skin = Character('Мыкало', color="#cf6674")
-define noname = Character('Незнакомец', color="#808080")
-define emili = Character('Эмилия', color="#641059")
+﻿define sanya = Character("[player_name] ", color="#aad2ff")
+define pasha = Character('Пашка Запивон ', color="#ffc9aa")
+define yuli = Character('Юля ', color="#ffaaff")
+define nadya = Character('Надя ', color="#ffaab1")
+define storyteller = Character('Рассказчик ', color="#b3aaff")
+define olga_dmitrievna = Character('Ольга Дмитревна ', color="#aaffd7")
+define grusha = Character('Агриппина Владимировна ', color="#12d69b")
+define pavel = Character('Павел Геннадьевич ', color="#ffb4aa")
+define skin = Character('Мыкало ', color="#e1ffaa")
+define noname = Character('Незнакомец ', color="#4d4d4d")
+define emili = Character('Эмилия', color="#e28cd7")
 
 init python :
 
@@ -51,7 +51,7 @@ define day4_go_with_emili = False
 define choice_yulia = False
 define choice_nadya = False
 define choise_lonly = False
-define mood_counter = -5
+define mood_counter = 0
 
 define hi_score = 0
 
