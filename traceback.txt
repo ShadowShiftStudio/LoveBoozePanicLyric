@@ -1,54 +1,22 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 181, in script
-    call screen bus(hi_score)
-  File "renpy/common/000statements.rpy", line 609, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-TypeError: Too many arguments in call (expected 0, got 1).
+  File "game/bus_minigame.rpy", line 369, in script
+    label play_bus:
+Exception: Could not find return label '_call_play_bus_1'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 181, in script
-    call screen bus(hi_score)
-  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 2232, in execute
-    self.call("execute")
-  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 2220, in call
-    return renpy.statements.call(method, parsed, *args, **kwargs)
-  File "C:\renpy-8.0.3-sdk\renpy\statements.py", line 281, in call
-    return method(parsed, *args, **kwargs)
-  File "renpy/common/000statements.rpy", line 609, in execute_call_screen
-    store._return = renpy.call_screen(name, *args, **kwargs)
-  File "C:\renpy-8.0.3-sdk\renpy\exports.py", line 3181, in call_screen
-    rv = renpy.ui.interact(mouse="screen", type="screen", roll_forward=roll_forward)
-  File "C:\renpy-8.0.3-sdk\renpy\ui.py", line 299, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "C:\renpy-8.0.3-sdk\renpy\display\core.py", line 3377, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, pause_modal=pause_modal, **kwargs) # type: ignore
-  File "C:\renpy-8.0.3-sdk\renpy\display\core.py", line 3810, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "C:\renpy-8.0.3-sdk\renpy\display\core.py", line 582, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\renpy-8.0.3-sdk\renpy\display\core.py", line 582, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\renpy-8.0.3-sdk\renpy\display\core.py", line 582, in visit_all
-    d.visit_all(callback, seen)
-  File "C:\renpy-8.0.3-sdk\renpy\display\screen.py", line 451, in visit_all
-    callback(self)
-  File "C:\renpy-8.0.3-sdk\renpy\display\core.py", line 3810, in <lambda>
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "C:\renpy-8.0.3-sdk\renpy\display\screen.py", line 462, in per_interact
-    self.update()
-  File "C:\renpy-8.0.3-sdk\renpy\display\screen.py", line 653, in update
-    self.screen.function(**self.scope)
-  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 294, in apply_arguments
-    return parameters.apply(args, kwargs, ignore_errors)
-  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 156, in apply
-    raise TypeError("Too many arguments in call (expected 0, got %d)." % len(args))
-TypeError: Too many arguments in call (expected 0, got 1).
+  File "game/bus_minigame.rpy", line 369, in script
+    label play_bus:
+  File "C:\renpy-8.0.3-sdk\renpy\ast.py", line 1782, in execute
+    next_node(renpy.game.context().lookup_return(pop=True))
+  File "C:\renpy-8.0.3-sdk\renpy\execution.py", line 726, in lookup_return
+    raise Exception("Could not find return label {!r}.".format(self.return_stack[-1]))
+Exception: Could not find return label '_call_play_bus_1'.
 
 Windows-10-10.0.22621 AMD64
 Ren'Py 8.0.3.22090809
 Любовь, выпивка, паника, лирика 1.0
-Fri Mar 24 02:25:35 2023
+Fri Mar 24 15:23:38 2023

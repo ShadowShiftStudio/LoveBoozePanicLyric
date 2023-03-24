@@ -51,7 +51,7 @@ define day4_go_with_emili = False
 define choice_yulia = False
 define choice_nadya = False
 define choise_lonly = False
-define mood_counter = -5
+define mood_counter = 0
 
 define hi_score = 0
 
@@ -3504,6 +3504,7 @@ label _sanatorium :
                         "Оставив розоволосую позади, я поспешил в курилку."
 
                         if day4_drink :
+                            ""
                             #выпил с палычем
                         else :
                             "Кажется, эта беседка становится мне роднее дома. Сев на скамейку, я закурил. Первая глубокая тяжка немного прочистила сознание, освободив места для разных мыслей. Далеко не самых приятных. "
