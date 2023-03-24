@@ -63,6 +63,7 @@ define config.has_voice = True
 ## игры, если не будет остановлен, или не начнёт проигрываться другой аудиофайл.
 
 define config.main_menu_music = "audio/seven-summer.mp3"
+define config.main_menu_music_fadein = 2.0
 
 
 ## Переходы ####################################################################

@@ -220,8 +220,8 @@ style choice_button is button
 style choice_button_text is button_text
 
 style choice_vbox:
-    xalign 0.5
-    ypos 405
+    xalign 0.1
+    ypos 0.5
     yanchor 0.5
 
     spacing gui.choice_spacing
@@ -244,21 +244,47 @@ screen quick_menu():
     zorder 100
 
     if quick_menu:
-
         hbox:
+            
             style_prefix "quick"
 
             xalign 0.5
             yalign 1.0
+            imagebutton auto "gui/button/back_button_%s.png" xpos 0 ypos 0 action Rollback()
+            imagebutton auto "gui/button/history_button_%s.png" xpos 0 ypos 0 action ShowMenu('history')
+            imagebutton auto "gui/button/skip_button_%s.png" xpos 0 ypos 0 action Skip() alternate Skip(fast=True, confirm=True)
+            imagebutton auto "gui/button/auto_button_%s.png" xpos 0 ypos 0 action Preference("auto-forward", "toggle")
+            imagebutton auto "gui/button/save_button_%s.png" xpos 0 ypos 0 action ShowMenu('save')
+            imagebutton auto "gui/button/load_button_%s.png" xpos 0 ypos 0 action ShowMenu('load')
+            imagebutton auto "gui/button/settings_button_%s.png" xpos 0 ypos 0 action ShowMenu('preferences')
 
-            textbutton _("Назад") action Rollback()
-            textbutton _("История") action ShowMenu('history')
-            textbutton _("Пропуск") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Авто") action Preference("auto-forward", "toggle")
-            textbutton _("Сохранить") action ShowMenu('save')
-            textbutton _("Б.Сохр") action QuickSave()
-            textbutton _("Б.Загр") action QuickLoad()
-            textbutton _("Опции") action ShowMenu('preferences')
+        # hbox:
+            
+        #     style_prefix "quick"
+
+        #     xalign 0.01
+        #     yalign 0.01
+        #     imagebutton auto "gui/button/back_button_%s.png" xpos 0 ypos 0 action Rollback()
+        #     imagebutton auto "gui/button/auto_button_%s.png" xpos 0 ypos 0 action Preference("auto-forward", "toggle")
+        #     imagebutton auto "gui/button/skip_button_%s.png" xpos 0 ypos 0 action Skip() alternate Skip(fast=True, confirm=True)
+
+            
+
+        # hbox:
+        #     style_prefix "quick"
+
+        #     xalign 0.5
+        #     yalign 1.0
+
+            
+        #     textbutton _("Назад") action Rollback()
+        #     textbutton _("История") action ShowMenu('history')
+        #     textbutton _("Пропуск") action Skip() alternate Skip(fast=True, confirm=True)
+        #     textbutton _("Авто") action Preference("auto-forward", "toggle")
+        #     textbutton _("Сохранить") action ShowMenu('save')
+        #     textbutton _("Б.Сохр") action QuickSave()
+        #     textbutton _("Б.Загр") action QuickLoad()
+        #     textbutton _("Опции") action ShowMenu('preferences')
 
 
 ## Данный код гарантирует, что экран быстрого меню будет показан в игре в любое
@@ -1200,13 +1226,23 @@ screen skip_indicator():
     frame:
 
         hbox:
-            spacing 9
+            spacing 1
 
-            text _("Пропускаю")
+            text _("П") at delayed_blink(0.0, 1.8) style "skip_triangle"
+            text _("р") at delayed_blink(0.1, 1.8) style "skip_triangle"
+            text _("о") at delayed_blink(0.2, 1.8) style "skip_triangle"
+            text _("п") at delayed_blink(0.3, 1.8) style "skip_triangle"
+            text _("у") at delayed_blink(0.4, 1.8) style "skip_triangle"
+            text _("с") at delayed_blink(0.5, 1.8) style "skip_triangle"
+            text _("к") at delayed_blink(0.6, 1.8) style "skip_triangle"
+            text _("а") at delayed_blink(0.7, 1.8) style "skip_triangle"
+            text _("ю") at delayed_blink(0.8, 1.8) style "skip_triangle"
+            text _(".") at delayed_blink(0.9, 1.8) style "skip_triangle"
+            text _(".") at delayed_blink(1.0, 1.8) style "skip_triangle"
+            text _(".") at delayed_blink(1.1, 1.8) style "skip_triangle"
 
-            text "▸" at delayed_blink(0.0, 1.0) style "skip_triangle"
-            text "▸" at delayed_blink(0.2, 1.0) style "skip_triangle"
-            text "▸" at delayed_blink(0.4, 1.0) style "skip_triangle"
+
+            
 
 
 ## Эта трансформация используется, чтобы мигать стрелками одна за другой.
@@ -1237,7 +1273,8 @@ style skip_text:
 
 style skip_triangle:
     ## Нам надо использовать шрифт, имеющий в себе символ U+25B8 (стрелку выше).
-    font "DejaVuSans.ttf"
+    size 24
+    font "fonts/Rostov.ttf"
 
 
 ## Экран уведомлений ###########################################################
@@ -1414,17 +1451,30 @@ screen quick_menu():
     zorder 100
 
     if quick_menu:
-
         hbox:
+            
             style_prefix "quick"
 
-            xalign 0.5
-            yalign 1.0
+            xalign 0.99
+            yalign 0.01
+            # imagebutton auto "gui/button/back_button_%s.png" xpos 0 ypos 0 action Rollback()
+            imagebutton auto "gui/button/history_button_%s.png" xpos 0 ypos 0 action ShowMenu('history')
+            # imagebutton auto "gui/button/skip_button_%s.png" xpos 0 ypos 0 action Skip() alternate Skip(fast=True, confirm=True)
+            # Гоimagebutton auto "gui/button/auto_button_%s.png" xpos 0 ypos 0 action Preference("auto-forward", "toggle")
+            imagebutton auto "gui/button/save_button_%s.png" xpos 0 ypos 0 action ShowMenu('save')
+            imagebutton auto "gui/button/load_button_%s.png" xpos 0 ypos 0 action ShowMenu('load')
+            imagebutton auto "gui/button/settings_button_%s.png" xpos 0 ypos 0 action ShowMenu('preferences')
 
-            textbutton _("Назад") action Rollback()
-            textbutton _("Пропуск") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Авто") action Preference("auto-forward", "toggle")
-            textbutton _("Меню") action ShowMenu()
+        hbox:
+            
+            style_prefix "quick"
+
+            xalign 0.01
+            yalign 0.01
+            imagebutton auto "gui/button/back_button_%s.png" xpos 0 ypos 0 action Rollback()
+            imagebutton auto "gui/button/auto_button_%s.png" xpos 0 ypos 0 action Preference("auto-forward", "toggle")
+            imagebutton auto "gui/button/skip_button_%s.png" xpos 0 ypos 0 action Skip() alternate Skip(fast=True, confirm=True)
+
 
 
 style window:

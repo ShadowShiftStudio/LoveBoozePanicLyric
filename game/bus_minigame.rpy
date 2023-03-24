@@ -1,5 +1,6 @@
 init python:
     SECONDS_PER_UPDATE = 1 / 120
+    from renpy.audio.sound import play
 
     class Shift():
         def __init__(self, step):
@@ -159,7 +160,7 @@ init python:
             self.lines = [CarsLine(speed, road)]
 
         def calc_distance_step(self, speed):
-            return 0.25 + 0.03*speed
+            return 0.7 + 0.1*speed
 
         def render(self, r, width, height, st, at):
             for line_i in range(0, len(self.lines)):
@@ -225,7 +226,7 @@ init python:
 
         def update_speed(self, speed):
             self.speed = speed
-            self.track_counter.update_step(self.counter_step_factor * speed)
+            self.track_counter.update_step(self.counter_step_factor * speed * 2)
 
         def render(self, r, width, height, st, at):
             transformed_bus = Transform(self.image, zoom=0.38)
@@ -285,7 +286,7 @@ init python:
             self.score_step = 1
             self.score_increase_timer = PercentCounter(10)
 
-            self.speed = 2
+            self.speed = 5
 
             self.prev_time = None
             self.background = Background(self.speed, textures_index)
@@ -298,6 +299,7 @@ init python:
 
         def surrender(self):
             self.finished = True
+            
             renpy.timeout(0)
 
         def render(self, width, height, st, at):
@@ -315,7 +317,7 @@ init python:
             self.score_increase_timer.next()
             if self.score_increase_timer.percent_val() == 0:
                 self.score += self.score_step
-                self.speed += self.score_step / 250
+                self.speed += self.score_step / 100
 
                 self.road.update_speed(self.speed)
                 self.background.update_speed(self.speed)
@@ -358,6 +360,8 @@ init python:
                     renpy.restart_interaction()
 
             if self.finished:
+                
+                play("audio/gameover.ogg")
                 return str(self.score if self.score > self.high_score else self.high_score)
             else:
                 raise renpy.IgnoreEvent()

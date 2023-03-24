@@ -629,7 +629,7 @@ label first_day:
         pasha "Что пишет? Не томи!"
         hide pasha sad
         window hide
-        $ sms_show(_("Юлолия"), False)
+        $ sms_show(_("Юлолия"), True)
         with dissolve
 
         sms_yuli "Привет, Саша, я сразу и не поняла, кто мне пишет такие романсы)))"
@@ -640,7 +640,7 @@ label first_day:
         window hide
         hide pasha neutral
 
-        $ sms_show(_("Юлолия"), False)
+        $ sms_show(_("Юлолия"), True)
         sms_yuli "Я сейчас на набережной стою, скучаю как раз"
         sms_yuli "Хочешь, приходи"
         $ sms_hide()
@@ -657,18 +657,18 @@ label first_day:
         pasha "Ну и чего ты ждёшь? Беги к ней обниматься-целоваться!"
 
         menu :
-            "Отказаться" :
-                show screen notification_popup 
-                with dissolve
-                $ mood_counter -= 1;
-                sanya "Паша, да... Мне уже в любом случае пора бы домой идти. Если случайно встретимся, то встретимся, если нет, то не суждено значит."
-                $ day1_yuli_agreed_after_kfc = False
             "Согласиться" :
                 show screen notification_popup 
                 with dissolve
                 $ mood_counter += 1;
                 pasha "Саня, Саня, теряешь такие возможности! Ну, как знаешь. Я тоже уже до хаты собираюсь. Давай, особо не теряйся!"
                 $ day1_yuli_agreed_after_kfc = True
+            "Отказаться" :
+                show screen notification_popup 
+                with dissolve
+                $ mood_counter -= 1;
+                sanya "Паша, да... Мне уже в любом случае пора бы домой идти. Если случайно встретимся, то встретимся, если нет, то не суждено значит."
+                $ day1_yuli_agreed_after_kfc = False
 
         hide screen notification_popup
         with dissolve
@@ -677,10 +677,11 @@ label first_day:
 
             scene black scen
             with fade
-
+            play music "audio/love_music.mp3" fadein 4.5 volume 0.4 fadeout 5.5
             scene bridge
             with fade
 
+            
             show yuli greeting
             with dissolve
 
@@ -693,7 +694,7 @@ label first_day:
             sanya "Привет, Юля. Я тоже рад тебя видеть"
 
             "Вау, она выглядит еще красивее, чем я помнил"
-            show yuli wet_disappointed 
+            show yuli wet disappointed 
             with dissolve
             yuli "На улице идет сильный дождь, но я подумала, что мы все равно можем прогуляться по мосту"
 
@@ -750,10 +751,11 @@ label first_day:
             with fade
 
         else :
-
+            play music "audio/slow_sad_classical_music.mp3"  fadein 4.5 volume 0.4 fadeout 5.5
             scene black scen
             with fade
-
+            "Я действительно не хотел встречи с Юлей, поэтому решил пробираться через закрытый мост."
+            "Юля ждала меня совсем в другом месте. Скажу ей, что просто передумал встречаться, или побоялся, что слишком пьян..."
             "Прогуливаясь по ночным улочкам, я дошёл до моста. Передо мной воцарилась та самая, уже классическая надпись:"
 
             scene bridge
@@ -773,7 +775,7 @@ label first_day:
 
             sanya "Набережная большая, Юля, а ты... такая маленькая на её фоне"
 
-            show yuli wet_disappointed 
+            show yuli wet disappointed 
             with dissolve
             
             yuli "Саш, ты порой такую чепуху несёшь..."
@@ -782,7 +784,7 @@ label first_day:
             
             sanya "Не переживай, Юля! *ик* Я тебя в обиду никому не дам!"
 
-            show yuli wet_sad with dissolve
+            show yuli wet sad with dissolve
             yuli "Защити меня сперва от себя, пожалуйста..."
 
             yuli "Я же вижу, что ты меня не рад видеть уже. Мы с тобой не друзья даже..."
@@ -795,15 +797,16 @@ label first_day:
 
             sanya "И ведь это даже не самое главное..."
 
-            yuli "Не говори этого, Саша. Я знаю, что ты хотел сказать, но это неправда. Мы едва знаем друг друга. Давай просто наслаждаться видом."
+            yuli "Не говори этого, Саша. Я знаю, что ты хотел сказать, но это неправда. Мы едва знаем друг друга. "
+            yuli "Давай просто наслаждаться видом."
 
-            show yuli wet_neutral
+            show yuli wet neutral
 
             "Мы стояли молча, смотрели на темную воду и отражающиеся на ее поверхности огни."
 
             sanya "Юля, извини, если я что-то не так сказал. Я не хотел тебя напугать или еще что-то."
 
-            sanya "Все нормально, Саша. Я просто немного нервничаю. Я не привыкла к таким вещам."
+            yuli "Все нормально, Саша. Я просто немного нервничаю. Я не привыкла к таким вещам."
 
             sanya "К чему?"
 
@@ -815,7 +818,6 @@ label first_day:
 
             "Мы поговорили еще немного, о школе, о наших интересах, о наших семьях. Это было приятно, но было заметно, что Юля не интересуется мной в романтическом плане."
 
-            stop music
             scene black scen
             with fade
 
