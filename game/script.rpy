@@ -1,4 +1,4 @@
-﻿﻿define sanya = Character("[player_name] ", color="#aad2ff")
+﻿define sanya = Character("[player_name] ", color="#aad2ff")
 define pasha = Character('Пашка Запивон ', color="#ffc9aa")
 define yuli = Character('Юля ', color="#ffaaff")
 define nadya = Character('Надя ', color="#ffaab1")
