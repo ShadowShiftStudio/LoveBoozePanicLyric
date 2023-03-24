@@ -508,7 +508,7 @@ label first_day:
 
         play music "audio/deadline_music.mp3" volume 0.33
 
-        call play_kfc_minigame
+        call play_kfc_minigame from _call_play_kfc_minigame
 
         if _return == "pasha":
             $ day1_pasha_lose_in_drinking = False
@@ -1144,7 +1144,7 @@ label second_day :
     "Проезжая мимо старых домов и разбитых дорог, я поймал себя на мысли, что мой город либо статичен в своём развитии, либо я уже перестал видеть краски жизни..."
     "После этих мыслей я начал погружаться в сон"
 
-    call play_bus
+    call play_bus from _call_play_bus
     
 
     stop music
@@ -2312,7 +2312,7 @@ label third_day :
 
     "Посплю пока. Главное не проспать остановку..."
 
-    call play_bus
+    call play_bus from _call_play_bus_1
     
 
     "Снова тот же сон..."
@@ -2367,7 +2367,7 @@ label third_day :
             sanya "Девочки, давайте не будем ссориться! Ляжем спать, погоняем автобус во сне..."
 
             window hide
-            call play_bus
+            call play_bus from _call_play_bus_2
 
             "Проснувшись, автобус уже тронулся и я не застал Юлю на своём месте."
             "Я поднялся и прошёся по рядам... Нашёл Надю и обратился к ней"
