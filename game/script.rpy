@@ -1490,15 +1490,15 @@ label second_day :
             show yuli afraid
             with dissolve
 
-            stop music
-            play music "audio/street-music.mp3" fadein 1.5 fadeout 2.5 volume 0.1
+            play music "audio/keys-of-moon-a-little-fantasy.mp3" fadein 3.5 fadeout 2.5 volume 0.1
 
             yuli "Саша, что с тобой случилось? Выглядишь ужасно подавленным."
             sanya "Да так, ничего серьезного, день с самого утра не задался, не стоит так беспокоится."
-            yuli "Ну, раз ты так говоришь, главное помни, что ты всегда можешь ко мне обратиться."
-
             show yuli happy
             with dissolve
+            yuli "Ну, раз ты так говоришь... Главное помни, что ты всегда можешь ко мне обратиться."
+
+            
 
             yuli "Пойдем, я провожу тебя до дома, может тебе полегчает в моей компании."
             sanya "Пойдем, конечно."
@@ -1518,30 +1518,31 @@ label second_day :
             show yuli empathy
             with dissolve
 
-            yuli "Я подожду тебя снаружи. Не люблю такие магазины. Не забудь купить мороженное девушке, как настоящий джентельмен!"
+            yuli "Я подожду тебя снаружи. Не люблю такие магазины..."
             sanya "Хорошо! Скоро буду."
 
             hide yuli empathy
             scene magazine inside
             with fade
             
-            sanya "Можно, пожалуйста, пачку чапы ванильной. И ту морожку..."
+            sanya "Можно, пожалуйста, пачку чапы ванильной."
+            "Немного погодя, я добавил:"
+            sanya "И два советских пломбира в вафельном стаканчике!"
             "Кассир" "Да, с вас..."
 
-            pause 2.0
-
             scene red white
-            with fade
+            with Fade(2.0, 0.0, 1.0)
             show yuli empathy
             with dissolve
 
-            sanya "Ну все, пойдем дальше. Бери свою морожку от настоящего джентельмена."
+            sanya "Ну всё, пойдем дальше. Мне что-то захотелось мороженого, я и тебе взял!"
+            show yuli horny
+            with dissolve
+            yuli "Советское! Обожаю!"
 
-            hide yuli empathy
+            
             scene black scen
-            with fade
-
-            pause 3.0
+            with Fade(2.0, 0.0, 2.0)
 
             "Через пять минут мы уже были около моего дома."
 
@@ -1556,7 +1557,7 @@ label second_day :
             "Конечно, знакомы мы не так долго, но с ней мне легко и приятно. Почему нет?.."
             "Жаль, правда, что Паша не захотел."
             sanya "Слушай, а ты не хочешь съездить со мной в санаторий на недельку?"
-            "Чёрт, я же перебил её. Надеюсь не обидется"
+            "Чёрт, я же перебил её. Надеюсь не обидется."
 
             show yuli horny
             with dissolve
@@ -1570,17 +1571,17 @@ label second_day :
             show yuli horny2
             with dissolve
 
-            yuli "Прости, Саш. Мама уже зовёт домой, сегодня не получится, поздновато"
-            "Мы обнялись на прощание"
+            yuli "Прости, Саш. Мама уже зовёт домой, сегодня не получится, поздновато."
+            "Мы обнялись на прощание."
             sanya "Тогда завтра в 8:00 встретимся у университета."
             yuli "Конечно, буду ждать с нетерпением!"
-            "Пиздец... Снова не повезло."
+            "Да... Снова не повезло."
 
-            stop music
+            stop music fadeout 3.0
 
             hide yuli horny2
             show black scen
-            with fade
+            with Fade(2.0, 0.0, 1.0)
 
         else:
             sanya "Согласен, сейчас жизнь куда лучше, ни то что в совке, посмотреть только на то, куда он нас привел, в кошмарную перестройку."
@@ -1949,7 +1950,7 @@ label second_day :
     scene black scen
     with fade
 
-    if day2_nadya_het_one_sigarett == False and day2_nadya_bought_sigaretts == False and day2_sanya_went_to_smoke == False:
+    if not day2_nadya_het_one_sigarett and not day2_nadya_bought_sigaretts and not day2_sanya_went_to_smoke:
         "Зайдя в квартиру, я сразу достал сигарету и пошёл к окну."
 
         pause 1.5
@@ -2020,7 +2021,7 @@ label second_day :
         sanya "А откуда я вообще знаю её номер?"
         "Я слишком устал за этот день, размышлять над этим уже не было сил."
 
-    elif day2_sanya_vote_for_ussr == False and day2_nadya_have_a_dialog == False:
+    elif not day2_sanya_vote_for_ussr and not day2_nadya_have_a_dialog:
         "Зайдя в квартиру, я сразу достал сигарету и пошёл к окну."
 
         pause 1.5
@@ -2137,7 +2138,7 @@ label second_day :
 
         "Спать на ней будет явно удобнее чем на балконе."
         
-    elif day1_pasha_kfc and day2_sanya_vote_for_ussr :
+    elif day1_pasha_kfc and not day1_yuli_agreed_after_kfc and day2_sanya_vote_for_ussr:
         "Зайдя в квартиру, я сразу пошёл к окну."
 
         pause 1.5
@@ -2148,7 +2149,7 @@ label second_day :
         with fade
 
         "Настроение было, мягко говоря, ужасным."
-        "Конченые одногруппники, все деньги забрали даже на курево не оставили, ничего они не понимают."
+        "Конченые одногруппники, все деньги забрали, даже на курево не оставили... Ничего они не понимают!"
         "С этими словами я пошёл к шкафу и достал оттуда пачку сигарет \"Космос\", припасённую ещё дедушкой."
         "Встав у окна, я прикурил сигарету. Она оказалась весьма крепкой, аж горло сковало."
         "После пары затяжек я привык."
@@ -2201,7 +2202,7 @@ label second_day :
         "Что же вершит судьбой человека в этом мире? Некое незримое существо или закон? По крайне мере истинно то, что я не властен даже над своей волей."
         "С этими мыслями я погрузился в глубокий сон."
 
-    elif day1_yuli_agreed_after_kfc and day2_sanya_vote_for_ussr :
+    elif (day1_yuli_agreed_after_kfc or not day1_pasha_kfc) and day2_sanya_vote_for_ussr:
 
         "Зайдя в квартиру, я сразу достал сигарету и пошёл к окну."
 
@@ -2226,21 +2227,19 @@ label second_day :
 
         "Затушив сигарету, я сразу лёг в кровать, надеясь, что завтра наступит как можно скорее."
 
-        scene sanya bed with fade :
+        scene sanya bed with Dissolve(3.0):
             linear 35 zoom 1.1
             linear 35 zoom 1.0
             repeat
-
+    stop music fadeout 7.0
     scene black scen 
-    with dissolve
-
-    pause 6.0
+    with Fade(3.0, 0.0, 3.0)
 
     jump third_day
 
 label third_day :
     
-    scene sanya bed with fade :
+    scene sanya bed with Fade(0.0, 1.0, 4.0) :
         linear 35 zoom 1.1
         linear 35 zoom 1.0
         repeat
@@ -2254,7 +2253,7 @@ label third_day :
     "Выйдя на улицу, я достал одну сигаретку и глубоко затянулся, головная боль ушла, а мысли переключились на вчерашний день."
 
     scene sanya home
-    with dissolve
+    with Fade(1.0, 1.0, 1.9)
 
     "С кем же мне поехать в итоге?"
 
