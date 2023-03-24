@@ -53,8 +53,7 @@ define config.has_voice = True
 
 ## Чтобы разрешить игроку тестировать громкость на звуковом или голосовом
 ## каналах, раскомментируйте строчку и настройте пример звука для прослушивания.
-
-# define config.sample_sound = "sample-sound.ogg"
+define config.sample_sound = "audio/gamewin.ogg"
 # define config.sample_voice = "sample-voice.ogg"
 
 
@@ -62,8 +61,7 @@ define config.has_voice = True
 ## проигрываться в главном меню. Этот файл продолжит проигрываться во время
 ## игры, если не будет остановлен, или не начнёт проигрываться другой аудиофайл.
 
-define config.main_menu_music = "audio/seven-summer.mp3"
-define config.main_menu_music_fadein = 2.0
+define config.main_menu_music = "audio/lobby_music.mp3"
 
 
 ## Переходы ####################################################################
