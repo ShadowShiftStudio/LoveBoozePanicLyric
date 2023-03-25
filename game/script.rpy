@@ -4260,7 +4260,8 @@ label _sanatorium :
 
         jump day4_end
 
-label _excursion :
+label day4_end :
+    "Конец дня епта"
 
 label _end :
     scene black scen
