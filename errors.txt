@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 1013: end of line expected.
-    with dissolve: 
-                 ^
+File "game/script.rpy", line 3445: expected end of line
+    play sound "audio/door_open.mp3" noloopfadein 0.1 fadeout 0.1 
+                                     ^
 
 Ren'Py Version: Ren'Py 8.0.3.22090809
-Sat Mar 25 02:09:24 2023
+Sat Mar 25 15:51:06 2023
