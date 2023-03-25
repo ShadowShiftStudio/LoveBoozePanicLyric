@@ -218,7 +218,7 @@ define gui.choice_button_text_font = "fonts/sfpro_semibold.ttf"
 define gui.choice_button_text_size = gui.text_size
 define gui.choice_button_text_xalign = 0.5
 define gui.choice_button_text_yalign = 0.5
-define gui.choice_button_text_idle_color = "#739fff"
+define gui.choice_button_text_idle_color = "#d3e1ff"
 define gui.choice_button_text_hover_color = "#ffffff"
 define gui.choice_button_text_insensitive_color = "#444444"
 

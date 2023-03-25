@@ -10,3 +10,5 @@ game/tl/None/common.rpymc
 game/saves/navigation.json
 game/saves/persistent
 *.rpymc
+game/saves/navigation.json
+game/saves/persistent
