@@ -2635,7 +2635,7 @@ label _sanatorium :
             with dissolve
 
             "Ольга Дмитриевна неодобрительно глянула на меня."
-            sanya "(шёпотом) ~Мне писец~"   
+            sanya "Мне пиздец..."   
 
             "От этого взгляда мурашки пошли по спине. Надеюсь она не заставит таскать мешки с сахаром по всему санаторию."
             olga_dmitrievna "А сейчас давайте я вам проведу небольшую экскурсию, пока мы идем до ваших комнат."
@@ -4200,7 +4200,7 @@ label _sanatorium :
         sanya "Блядство!"
         
         # TODO (возможно поменять)
-        play music "audio/fight.mp3" fadein 3.0 fadeout 2.0 volume 0.1
+        play music "audio/heart.mp3" fadein 3.0 fadeout 2.0 volume 0.1
         with vpunch
         
         "Упав на землю, я пару раз перекатился, набивая синяки везде, где только можно."
@@ -4218,6 +4218,9 @@ label _sanatorium :
         noname "Саша?"
         "Отвлекшись от ноги, я поднял голову."
         "В кустах стояла Юля..."
+
+        show screen toska
+        with dissolve
 
         show yuli empty
         with dissolve
@@ -4240,6 +4243,8 @@ label _sanatorium :
         "Дыхание становилось быстрее и быстрее с каждой секундой. Сердце, казалось, сломает грудную клетку."
         "Туман подползал ближе. Лицо Юли становилось ближе."
         
+        hide screen toska
+        with dissolve
         scene black
         with Fade(0.2, 0.3, 0.2, color="#000")
         
