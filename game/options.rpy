@@ -244,3 +244,5 @@ init -1 python hide:
     style.say_dialogue.drop_shadow_color = "#00000060"
     style.say_dialogue.line_spacing = -10
     style.choice_button_text.outlines = [(2, "#4242428c", 0, 0)]
+
+    config.main_menu_music
