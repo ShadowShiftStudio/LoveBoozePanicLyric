@@ -3887,7 +3887,7 @@ label _sanatorium :
                             "Нужно просто осознать..."
 
                             stop music
-                            jump day4_end
+                            jump _day5
 
                         else:
                             scene sanatorium alcove
@@ -3951,7 +3951,7 @@ label _sanatorium :
                             scene black
                             with Fade(0.4, 0.5, 0.4, color="#000")
                             
-                            jump day4_end
+                            jump _day5
 
                         if day4_move:   
                             
@@ -3983,7 +3983,7 @@ label _sanatorium :
                             "Жить - пиздато. Пизже некуда."
                             
                             stop music fadeout 3.0
-                            jump day4_end
+                            jump _day5
 
                     "Может... Поболтать?" :
 
@@ -4092,7 +4092,7 @@ label _sanatorium :
                         "Жизнь - продолжается!"
 
                         stop music fadeout 2.0
-                        jump day4_end
+                        jump _day5
 
             else :
                 
@@ -4199,7 +4199,7 @@ label _sanatorium :
                     sanya "Какой же я долбоеб."
                     "Как ни странно, но это придало мне сил. С мрачными мыслями и плохим настроением, я все же смог уснуть."
 
-                    jump day4_end
+                    jump _day5
                 else :
                     "Темнота внизу зачаровывала. И в этой темноте появилось лицо родителей и Пашки."
                     sanya "Блять!.."
@@ -4221,7 +4221,7 @@ label _sanatorium :
                     "Наверное, все же зря я так. Кто знает, что преподнесет мне следующий день?"
                     "Отрешившись от всех мыслей, я постарался заснуть."
 
-                    jump day4_end
+                    jump _day5
         else:
             "Процедуры оказались..."
             extend "довольно приятными."
@@ -4344,7 +4344,7 @@ label _sanatorium :
             "По-дурацки улыбаясь, я пошел в комнату."
             "Жить - пиздато!"
 
-            jump day4_end
+            jump _day5
     else:
         "Процедуры оказались... "
         extend "довольно приятными."
@@ -4494,11 +4494,165 @@ label _sanatorium :
         
         stop music fadeout 3.0
 
-        jump day4_end
+        jump _day5
 
-label day4_end :
-    "Конец дня епта"
+label _day5 :
 
+    if day4_suicide :
+        "Утро красит нежным светом... стены санатория. На новом месте спалось неплохо. Хотя ночь выдалась... Не самой приятной."
+        "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
+        
+        if day4_move and (day4_smoke_old_siggarete or not day4_smoke_old_siggarete) :
+
+            scene sanatorium dormitory room
+            with dissolve
+
+            play music "audio/snore_big.mp3" fadeout 2.0 volume 0.4
+
+            "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. Встав с кровати, я протер веки. На соседней кровати похрапывал Мыкало."
+
+            stop music
+
+        else :
+            
+            scene sanatorium skin dormitory room
+            with dissolve
+
+            play music "audio/snore_big.mp3" fadeout 2.0 volume 0.4
+            
+            "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. Встав с кровати, я протер веки. На соседней кровати похрапывал Павел Геннадьевич."
+
+            stop music
+        
+        "Потянувшись, я вышел на балкон."
+
+        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 2.5
+
+        scene sanatorium balcony
+        with dissolve
+
+        "Прохладный свежий воздух взбодрил. Пускай сейчас начало сентября, но погода держалась все еще летняя. Хотя ночами и утром было довольно прохладно. Листья пока только начали желтеть и в основном везде было зелено. Красота! "
+        "Вдохнув полной грудью пьянящий лесной воздух, я посмотрел вниз. "
+        sanya "В темноте земля казалась дальше..." 
+        "Зайдя внутрь, пошел выполнять утренние процедуры. До завтрака еще пара часов, так что торопиться некуда."
+
+        stop music
+    
+    if day4_nadya_meal :
+        "Утро красит нежным светом... стены санатория. На новом месте спалось неплохо. Хотя ночь выдалась... Не самой приятной."
+        "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
+
+        if day4_move and (day4_smoke_old_siggarete or not day4_smoke_old_siggarete) :
+
+            scene sanatorium dormitory room
+            with dissolve
+
+            play music "audio/snore_big.mp3" fadeout 2.0 volume 0.4
+
+            "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. Встав с кровати, я протер веки. На соседней кровати похрапывал Мыкало."
+
+            stop music
+            
+        else :
+            
+            scene sanatorium skin dormitory room
+            with dissolve
+
+            play music "audio/snore_big.mp3" fadeout 2.0 volume 0.4
+            
+            "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. Встав с кровати, я протер веки. На соседней кровати похрапывал Павел Геннадьевич."
+
+            stop music
+        
+        "Потянувшись, я вышел на балкон."
+
+        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 2.5
+
+        scene sanatorium balcony
+        with dissolve
+
+        "Прохладный свежий воздух взбодрил. Пускай сейчас начало сентября, но погода держалась все еще летняя."
+        "Хотя ночами и утром было довольно прохладно. Листья пока только начали желтеть и в основном везде было зелено. Красота!"
+
+        stop music
+    
+    if day4_go_with_emili :
+        "Утро красит нежным светом... стены санатория. На новом месте спалось неплохо. Хотя ночь выдалась... Не самой приятной."
+        "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
+
+        if day4_move and (day4_smoke_old_siggarete or not day4_smoke_old_siggarete) :
+
+            scene sanatorium dormitory room
+            with dissolve
+
+            play music "audio/snore_big.mp3" fadeout 2.0 volume 0.4
+
+            "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. Встав с кровати, я протер веки. На соседней кровати похрапывал Мыкало."
+
+            stop music
+            
+        else :
+            
+            scene sanatorium skin dormitory room
+            with dissolve
+
+            play music "audio/snore_big.mp3" fadeout 2.0 volume 0.4
+            
+            "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. Встав с кровати, я протер веки. На соседней кровати похрапывал Павел Геннадьевич."
+
+            stop music
+
+        "Потянувшись, я вышел на балкон."
+
+        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 2.5
+
+        scene sanatorium balcony
+        with dissolve
+
+        "Прохладный свежий воздух взбодрил. Пускай сейчас начало сентября, но погода держалась все еще летняя."
+        "Хотя ночами и утром было довольно прохладно. Листья пока только начали желтеть и в основном везде было зелено. Красота!"
+
+        stop music
+    
+    if not day4_go_with_emili and (day4_drink or not day4_drink) :
+        "Утро красит нежным светом... стены санатория. На новом месте спалось неплохо. Хотя ночь выдалась... Не самой приятной."
+        "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
+
+        if day4_move and (day4_smoke_old_siggarete or not day4_smoke_old_siggarete) :
+
+            scene sanatorium dormitory room
+            with dissolve
+
+            play music "audio/snore_big.mp3" fadeout 2.0 volume 0.4
+
+            "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. Встав с кровати, я протер веки. На соседней кровати похрапывал Мыкало."
+
+            stop music
+            
+        else :
+            
+            scene sanatorium skin dormitory room
+            with dissolve
+
+            play music "audio/snore_big.mp3" fadeout 2.0 volume 0.4
+            
+            "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. Встав с кровати, я протер веки. На соседней кровати похрапывал Павел Геннадьевич."
+
+            stop music
+
+        "Хмыкнув, я поднялся и вышел на балкон."
+
+        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 2.5
+
+        scene sanatorium balcony
+        with dissolve
+
+        "Прохладный свежий воздух взбодрил. Пускай сейчас начало сентября, но погода держалась все еще летняя."
+        "Хотя ночами и утром было довольно прохладно. Листья пока только начали желтеть и в основном везде было зелено. Красота!"
+
+        stop music
+
+    
 label _end :
     scene black scen
     with fade
