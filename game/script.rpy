@@ -9,6 +9,64 @@ define pavel = Character('Павел Геннадьевич ', color="#ffb4aa")
 define skin = Character('Мыкало ', color="#e1ffaa")
 define noname = Character('Незнакомец ', color="#4d4d4d")
 define emili = Character('Эмилия', color="#e28cd7")
+init:
+
+    python:
+    
+        import math
+
+        class Shaker(object):
+        
+            anchors = {
+                'top' : 0.0,
+                'center' : 0.5,
+                'bottom' : 1.0,
+                'left' : 0.0,
+                'right' : 1.0,
+                }
+        
+            def __init__(self, start, child, dist):
+                if start is None:
+                    start = child.get_placement()
+                #
+                self.start = [ self.anchors.get(i, i) for i in start ]  # central position
+                self.dist = dist    # maximum distance, in pixels, from the starting point
+                self.child = child
+                
+            def __call__(self, t, sizes):
+                # Float to integer... turns floating point numbers to
+                # integers.                
+                def fti(x, r):
+                    if x is None:
+                        x = 0
+                    if isinstance(x, float):
+                        return int(x * r)
+                    else:
+                        return x
+
+                xpos, ypos, xanchor, yanchor = [ fti(a, b) for a, b in zip(self.start, sizes) ]
+
+                xpos = xpos - xanchor
+                ypos = ypos - yanchor
+                
+                nx = xpos + (1.0-t) * self.dist * (renpy.random.random()*2-1)
+                ny = ypos + (1.0-t) * self.dist * (renpy.random.random()*2-1)
+
+                return (int(nx), int(ny), 0, 0)
+        
+        def _Shake(start, time, child=None, dist=100.0, **properties):
+
+            move = Shaker(start, child, dist=dist)
+        
+            return renpy.display.layout.Motion(move,
+                    time,
+                    child,
+                    add_sizes=True,
+                    **properties)
+
+        Shake = renpy.curry(_Shake)
+    
+
 
 init python :
 
@@ -25,6 +83,9 @@ init python :
         # остановить мелодию
     def mstop(chan = "music", fout=1.0):
         renpy.music.stop(channel = chan, fadeout = fout)
+
+init:
+    $ sshake = Shake((0, 0, 0, 0), 1.0, dist=15)
 
 define day1_pasha_kfc = False
 define day1_sanya_wants_camp = False
@@ -2674,19 +2735,25 @@ label _sanatorium :
 
     pause 2.0   
     
-    play music "audio/sound-in-bus.mp3" fadein 1.0 fadeout 2.0 volume 0.3
+    play music "audio/sound-in-bus.mp3" fadein 1.0 fadeout 2.0 volume 0.06
+    play sound "audio/forest-sound.mp3" fadein 3.0 fadeout 2.0 volume 0.06
 
-    "Мы наконец-то подъезжаем к \"Новомыс\" - санаторию, в котором мне придется провести целых две недели. Надеюсь, это будет стоить того."
 
-    scene sanatorium forest neer san
-    with dissolve
+    "Мы наконец-то подъезжаем к \"Новомысу\" - санаторию, в котором мне придётся провести целых две недели. Надеюсь, это будет стоить того."
 
-    "Красивая природа дала понять, что санаторий находится в глуши. Всё вокруг отдовало зелёными оттенками и говорило тебе о первозданности."
+    scene sanatorium forest neer san at truecenter with dissolve:
+        block:
+            linear 0.9 zoom 1.01 yalign 0.99
+            linear 0.9 zoom 1.0 yalign 1.0
+            repeat
+
+
+    "Красивая природа дала понять, что санаторий находится в глуши. Всё вокруг отдавало зелёными оттенками и говорило о первозданности."
     "Высокие и пушистые деревья рядом с обочиной заставляли каждую часть тела расслабиться, почувствовать себя свободным."
-    "Река, которая проходило под небольшим мостом текла в неизвестную мне даль, но я чувствовал потрясающий интерес к ней."
+    "Река, которая проходила под небольшим мостом, текла в неизвестную мне даль, я ощущал потрясающую энергетику этого удивительного места."
     "Наблюдая за этой природой, я не заметил, как мы начали заезжать на территорию санатория."
-
     stop music fadeout 2.0
+    stop sound fadeout 2.0
 
     play sound "audio/bus.mp3" noloop fadein 1.5 fadeout 1.0 volume 0.1
     pause 2.0
