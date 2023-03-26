@@ -2776,7 +2776,6 @@ label _sanatorium :
     with Dissolve(1.0)
  
     show olga olga happy:
-        ypos 0.1
         linear 0.1 xalign 0.1
     with Dissolve(0.5)
 
