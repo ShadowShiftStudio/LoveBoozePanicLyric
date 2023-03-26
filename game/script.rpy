@@ -51,7 +51,7 @@ define day4_go_with_emili = False
 define day4_fight = False
 define choice_yulia = False
 define choice_nadya = False
-define choise_lonly = False
+define choise_lonely = False
 define mood_counter = 0
 
 define rel_yuli = 0
@@ -60,7 +60,7 @@ define rel_pasha = 0
 define rel_pavel = 0
 define rel_skin = 0
 define rel_emily = 0
-define rel_valery = 0
+define rel_valeria = 0
 
 define hi_score = 0
 
@@ -196,7 +196,7 @@ label first_day:
     
     scene black with fade
     centered "{size=+24}Используйте стрелочки вверх-вниз или клавиши W, A{/size}" # TODO: изменить на мобилки
-    
+    window hide
     call screen busday1
 
 
@@ -447,29 +447,30 @@ label first_day:
 
     menu :
         "Согласиться" :
-            
-            $ str_for_notification = "Юля запомнила это"
+            $ rel_yuli += 3
+            $ rel_pasha -= 3
+            $ str_for_notification = "Юля и Паша запомнят это"
                 
-            show screen notification_popup 
+            show screen notification_popup_big
             with dissolve
-            
             sanya "Юля, да я же с радостью! Собирайся, мы уходим!"
             "Тут я заметил, что Юле и собираться не из чего, просто встала и пошла за мной!"
             $ day1_pasha_kfc = False
+            
 
         "Отказаться" :
-
-            $ str_for_notification = "Юля запомнила это"
+            
+            $ str_for_notification = "Это действие имеет последствия"
                 
-            show screen notification_popup 
+            show screen notification_popup_big
             with dissolve
 
             sanya "Юля, давай погуляем завтра, я сегодня никак не могу – с другом уже договорился встретиться! Мы с ним тысячу лет не виделись!"
             sanya "Ты знаешь, что сделай, напиши мне свой ник в телеграме, я тебе сегодня вечером ещё напишу обязательно!"
             $ day1_pasha_kfc = True
-
-    hide screen notification_popup
+    hide screen notification_popup_big
     with dissolve
+    
 
 
     if day1_pasha_kfc :
@@ -683,12 +684,14 @@ label first_day:
             "Согласиться" :
                 show screen notification_popup 
                 with dissolve
-                $ mood_counter += 1;
+                $ mood_counter += 1
+                $ rel_yuli += 3
                 pasha "Саня, Саня, не теряй такие возможности! Я тоже уже как раз до хаты собираюсь. Давай, расскажешь завтра, как оно там!"
                 $ day1_yuli_agreed_after_kfc = True
             "Отказаться" :
                 show screen notification_popup 
                 with dissolve
+                $ rel_yuli -= 3
                 $ mood_counter -= 1;
                 sanya "Паша, да... Мне уже в любом случае пора бы домой идти. Если случайно встретимся, то встретимся, если нет, то не суждено значит."
                 $ day1_yuli_agreed_after_kfc = False
@@ -1194,7 +1197,7 @@ label second_day :
     screen bus_day2:
         default bus_minigame = BusMinigameDisplayable(hi_score, 1)
         add bus_minigame
-
+    window hide
     call screen bus_day2
 
     if int(_return) > int(hi_score):
@@ -1417,7 +1420,7 @@ label second_day :
         # включаем инвентарь с убиранием из него найденных предметов
         inventory=True,
         # включаем подсказки
-        hint=False,
+        hint=True,
         # включаем подсветку предмета при наведении
         hover=brightness(.17),
         # уменьшаем размеры ячеек инвентаря, чтобы не мешали собирать предметы
@@ -1462,11 +1465,12 @@ label second_day :
 
         "Пойти в курилку" :
             $ str_for_notification = "У этого действия будут последствия"
-
+            $ rel_yuli += 3
             show screen notification_popup_big
             with dissolve
 
             $ day2_sanya_went_to_smoke = True
+
         "Забить и покурить дома" :
             $ str_for_notification = "У этого действия будут последствия"
 
@@ -1772,13 +1776,13 @@ label second_day :
                 $ mood_counter += 1;
                 show screen notification_popup
                 with dissolve
-
+                $ rel_nadya += 2
                 $ day2_nadya_bought_sigaretts = True
 
             "Ты же малолетка. Домой иди." :
                 $ mood_counter -= 1;
                 $ str_for_notification = "Надя запомнила это"
-
+                $ rel_nadya -= 2
                 show screen notification_popup
                 with dissolve
 
@@ -1860,6 +1864,7 @@ label second_day :
                 "Стрельнуть сижку, оторвать её от своей души." :
                     $ str_for_notification = "Надя запомнила это"
                     $ mood_counter += 1;
+                    $ rel_nadya += 2
                     show screen notification_popup_big
                     with dissolve
                     $ day2_nadya_het_one_sigarett = True
@@ -1867,11 +1872,12 @@ label second_day :
                 "Обойдешься без сиги." :
                     $ str_for_notification = "Надя запомнила это"
                     $ mood_counter -= 1;
+                    $ rel_nadya -= 2
                     show screen notification_popup_big
                     with dissolve
                     $ day2_nadya_het_one_sigarett = False
 
-            hide screen notification_popup
+            hide screen notification_popup_big
             with dissolve
 
             if day2_nadya_het_one_sigarett :
@@ -1943,6 +1949,7 @@ label second_day :
                 "Согласиться..." :
                     $ day2_choosen_instead_yuli = True
                     $ mood_counter += 1;
+                    $ rel_nadya += 1
                     $ str_for_notification = "Надя запомнила это"
 
                     show screen notification_popup_big
@@ -1976,7 +1983,7 @@ label second_day :
                     $ day2_choosen_instead_yuli = False
                     $ mood_counter -= 1;
                     $ str_for_notification = "Надя запомнила это"
-
+                    
                     show screen notification_popup_big
                     with dissolve
 
@@ -1998,7 +2005,7 @@ label second_day :
 
                     "Уже было достаточно поздно, поэтому недолго думая я решил отправиться прямиком к своему дому."
             
-            hide screen notification_popup
+            hide screen notification_popup_big
             with dissolve
     
     scene black scen
@@ -2049,11 +2056,9 @@ label second_day :
         sanya "Юля, я так хотел тебя услышать, мне очень тяжело сейчас."
         yuli "Саш, что случилось, я тебя искала, но так и не смогла найти. Где ты был?"
         sanya "Прости меня. Я был в парке, решил прогуляться после пар."
-        yuli "В следующий раз найди меня. Пойдем домой вместе, как раз узнаешь где я живу и вообще, мы можем почаще видеться."
+        yuli "В следующий раз найди меня. Пойдем домой вместе, как раз узнаешь где я живу. И вообще, мы можем почаще видеться."
         sanya "Спасибо, я очень рад это слышать. С этого дня мы будем ходить домой вместе."
-        yuli "Слушай, мне недавно приходило уведомление из универа, ты не хочешь съездить со мной в санаторий?"
-        sanya "Тебе тоже, я как раз туда собираюсь, завтра уже отъезд."
-        yuli "Ура, я знала что ты мне не откажешь."
+        
         "Следующие пятнадцать минут мы болтали о том, о сем."
         yuli "Саш, я никогда тебя не спрашивала, а когда у тебя день рождения?"
         sanya "Ха-ха, попробуй угадать, уверен у тебя не получится."
@@ -2277,7 +2282,7 @@ label second_day :
         "Поскорее бы настало завтра, я так хочу её увидеть."
         "Для меня она единственный лучик счастья в этом бренном мире."
         sanya "Может позвонить ей?"
-        sanya "Хотя уже поздно... Она, наверное, спит."
+        sanya "Хотя... уже поздно... Она, наверное, спит."
 
         "Затушив сигарету, я сразу лёг в кровать, надеясь, что завтра наступит как можно скорее."
 
@@ -2314,6 +2319,7 @@ label third_day :
     menu :
         "Юля" if not day1_pasha_kfc or day2_sanya_vote_for_ussr :
             $ mood_counter += 1;
+            $ rel_yuli += 3
             $ str_for_notification = "У этого действия будут последствия"
 
             show screen notification_popup_big
@@ -2327,6 +2333,8 @@ label third_day :
 
         "Надя" if day2_nadya_have_a_dialog :
             $ mood_counter += 1;
+            $ rel_nadya += 3
+
             $ str_for_notification = "У этого действия будут последствия"
 
             show screen notification_popup_big
@@ -2337,13 +2345,13 @@ label third_day :
             "Первым в голове возник образ Нади. Наше знакомство оказалось для меня неожиданностью. Мы встречались только один раз, но она всем видом показывала что я ей симпатичен."
 
         "Один" :
-            $ mood_counter -= 1;
+            $ mood_counter -= 5;
             $ str_for_notification = "У этого действия будут последствия"
 
             show screen notification_popup_big
             with dissolve
 
-            $ choise_lonly = True
+            $ choise_lonely = True
 
             "А ведь и ехать не с кем... Поеду тогда один."
 
@@ -2374,7 +2382,7 @@ label third_day :
     screen bus_day3:
         default bus_minigame = BusMinigameDisplayable(hi_score, 2)
         add bus_minigame
-
+    window hide
     call screen bus_day3
 
     if int(_return) > int(hi_score):
@@ -2412,7 +2420,7 @@ label third_day :
     scene neew bus
     with fade
 
-    if choise_lonly :
+    if choise_lonely :
         if day2_nadya_have_a_dialog and (not day1_pasha_kfc or day2_sanya_vote_for_ussr or day1_yuli_agreed_after_kfc):
 
             show nadya angry at right
@@ -2438,7 +2446,20 @@ label third_day :
             sanya "Девочки, давайте не будем ссориться! Ляжем спать, погоняем автобус во сне..."
 
             window hide
-            call play_bus from _call_play_bus_2
+            screen bus_day0:
+                default bus_minigame = BusMinigameDisplayable(hi_score, 0)
+                add bus_minigame
+            
+            call screen bus_day0
+
+            if int(_return) > int(hi_score):
+                scene black
+                centered "{size=+50}Новый рекорд!{/size}"
+                centered "{size=+50}Счёт: [_return]{/size}"
+
+
+            $ hi_score = max(hi_score, int(_return))
+    
 
             "Проснувшись, автобус уже тронулся и я не застал Юлю на своём месте."
             "Я поднялся и прошёся по рядам... Нашёл Надю и обратился к ней"
@@ -2512,6 +2533,7 @@ label third_day :
                 nadya "Слушай, ты тоже не выспался? Давай поспим пока едем? Не могу соображать ничего, что ты говорил? Сплю уже"
 
             "Ну не надо делать вид, что ты идеальная и вся такая правильная - меня сейчас стошнит" :
+                $ rel_nadya -= 1
                 "Надя обиделась и мне пришлось отсесть. Не думаю, что мы серьезно поссорились."
                 jump _sanatorium
         
@@ -2554,11 +2576,13 @@ label third_day :
 
             menu :
                 "У нас ещё весь вечер впереди, Юлечка!" :
+                    $ rel_yuli += 1
                     stop music fadeout 0.3
                     play music "audio/sigma.mp3" volume 0.3
                     pause 4.0
 
                 "Эммм.... ну если только.... мне искусственное дыхание нужно будет......."  :
+                    $ rel_yuli -= 1
                     stop music fadeout 0.3
                     play music "audio/fail.mp3" volume 0.1
 
@@ -2613,7 +2637,25 @@ label _alone :
     play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1 
 
     "Всё, что мне оставалось, - это молча смотреть в окно и наблюдать на проезжающие леса, дома,"
-    #call play_bus
+    
+    screen bus_day0:
+        default bus_minigame = BusMinigameDisplayable(hi_score, 0)
+        add bus_minigame
+
+    scene black with Fade(3.0, 0.0, 0.0)
+    $ hi_score = 1000
+    centered "{size=+24}Побейте рекорд в {color=#b23}1000 очков{/color}, чтобы избежать трагедии.{/size}"
+    window hide
+    call screen bus_day0
+
+    if int(_return) > int(hi_score):
+        scene black
+        centered "{size=+50}Новый рекорд!{/size}"
+        centered "{size=+50}Счёт: [_return]{/size}"
+        jump _sanatorium
+
+    $ hi_score = max(hi_score, int(_return))
+
     play sound "audio/diskoteka_avaria.mp3"
     extend " ИКАРУС????"
     window hide
@@ -2634,7 +2676,7 @@ label _sanatorium :
     
     play music "audio/sound-in-bus.mp3" fadein 1.0 fadeout 2.0 volume 0.3
 
-    "Мы наконец-то подъезжаем к \"Синереченску\" - санаторию, в котором мне придется провести целых две недели. Надеюсь, это будет стоить того."
+    "Мы наконец-то подъезжаем к \"Новомыс\" - санаторию, в котором мне придется провести целых две недели. Надеюсь, это будет стоить того."
 
     scene sanatorium forest neer san
     with dissolve
@@ -2681,7 +2723,7 @@ label _sanatorium :
     menu :
         "Жестко раскурить чапу" :
             $ day4_smoke_after_words_olga = True
-
+            $ rel_valeria -= 3
             "Поездка была настолько долгая, что отказать в сигаретке себе я никак не мог, даже не смотря на запрет со стороны вожатой."
             
             play sound "audio/cigarette.mp3" noloop fadein 0.5 fadeout 0.5
@@ -2707,7 +2749,7 @@ label _sanatorium :
             sanya "Мне пиздец..."   
 
             "От этого взгляда мурашки пошли по спине. Надеюсь она не заставит таскать мешки с сахаром по всему санаторию."
-            olga_dmitrievna "А сейчас давайте я вам проведу небольшую экскурсию, пока мы идем до ваших комнат."
+            olga_dmitrievna "А сейчас, давайте я вам проведу небольшую экскурсию, пока мы идем до ваших комнат."
 
             hide olga angry 
             with dissolve
@@ -2716,7 +2758,7 @@ label _sanatorium :
             $ day4_smoke_after_words_olga = False
 
             "Ольга Дмитриевна неодобрительно посмотрела на тех, кто ее проигнорировал и с вежливой улыбкой произнесла."
-            olga_dmitrievna "А сейчас давайте я вам проведу небольшую экскурсию, пока мы идем до ваших комнат."
+            olga_dmitrievna "А сейчас, давайте я вам проведу небольшую экскурсию, пока мы идем до ваших комнат."
 
             hide olga happy
             with dissolve
@@ -2735,8 +2777,10 @@ label _sanatorium :
 
     play sound "audio/forest-sound.mp3" loop fadein 1.0 fadein 2.0 volume 0.1
 
-    "Я плелся без особого энтузиазма, лениво поглядывая по сторонам, но вот семьи, молодые и не очень, с детьми и адекватные, весело шагали в ногу, следуя за энергичной сопровождающей."
-    "Среди всей когорты приехавших на лечение, было мало молодых, что тоже отнюдь не добавляло мне настроения. Провести пол месяца со старыми пердунами и молодыми парочками мне точно не улыбалось."
+    "Я плелся без особого энтузиазма, лениво поглядывая по сторонам, но вот семьи: молодые и не очень; с детьми и адекватные..."
+    "Весело шагали в ногу, следуя за энергичной сопровождающей."
+    "Среди всей когорты приехавших на лечение, было мало молодых, что тоже отнюдь не добавляло мне настроения."
+    "Провести пол месяца со старыми пердунами и молодыми парочками мне точно не улыбалось."
     "Старость, думал я, подступает незаметно. Как и всякая другая болезнь." 
     "Вот ты здоров, силен, молод и можешь выдуть чикушку за раз, а на утро выпить крепкого чаю и быть в строю."
     "А потом раз - и вот ты уже хрустишь коленками и боишься лишний раз наклониться, потому что темнеет в глазах." 
@@ -2747,23 +2791,20 @@ label _sanatorium :
 
     if day3_go_with_yuli :
         "Я незаметно оглянулся в поисках Юли, в мыслях уже готовый пригласить ее на совместное принятие грязевой ванны."
-    if day3_go_with_nadya :
-        "Я незаметно оглянулся в поисках Нади, в мыслях уже готовый пригласить ее на совместное принятие грязевой ванны."
-    
-    if day3_go_with_yuli :
         "Как бы я не крутил головой, никак не мог найти ее. Юли нигде видно не было. Может, она пошла к себе в комнату, минуя экскурсию? А может ей стало плохо?"
         "Гадать бессмысленно, в любом случае мы встретимся - санаторий небольшой. Может и вовсе процедуры проходить вместе будем, хе-хе..."
         "Но все равно неприятно, с ней бы в любом случае экскурсия была бы веселее."
         "Разочарованно вздохнув, я ускорил шаг, догоняя наш отряд молодых и не очень. Поправив рюкзак, с еще более дерьмовым настроением, поплелся в самом конце."
-
-    if day3_go_with_nadya :
+    elif day3_go_with_nadya :
+        "Я незаметно оглянулся в поисках Нади, в мыслях уже готовый пригласить ее на совместное принятие грязевой ванны."
         $ mood_counter -= 1
-        "Найдя искомую в компании какого-то парня, я приветливо махнул ей. Надя помахала в ответ, и продолжила щебетать с этим пацанчиком, что в довесок со своей сумкой, тянул и ее вещи. Что-то не помню его в автобусе."
+        "Найдя искомую в компании какого-то парня, я приветливо махнул ей." 
+        "Надя помахала в ответ, и продолжила щебетать с этим пацанчиком, что в довесок со своей сумкой, тянул и ее вещи. Что-то не помню его в автобусе."
         "Где-то под сердцем неприятно затянуло, а изнутри начала подниматься тихая волна жгучей злобы. Но я тут же одернул себя, немного удивившись порыву."
         "Мы с ней даже толком не знакомы, что это я тут начал. К тому же, не факт, что это ее парень."
         "Может знакомый или родственник? Да и вообще какое мне дело!"
         "Потряся головой, словно отгоняя наваждение, я поправил рюкзак и с еще более дерьмовым настроением, поплелся в самом конце."
-
+           
     "Фоном неслась складная, явно много раз произнесенная речь Ольги Дмитриевны."
     "Там мелькали объяснения режима, правил и процедур, но я особо не слушал, обращая внимание больше на окружение."
     "В конце концов, мне тут жить еще пару недель."
