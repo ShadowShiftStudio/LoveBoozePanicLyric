@@ -54,6 +54,14 @@ define choice_nadya = False
 define choise_lonly = False
 define mood_counter = 0
 
+define rel_yuli = 0
+define rel_nadya = 0
+define rel_pasha = 0
+define rel_pavel = 0
+define rel_skin = 0
+define rel_emily = 0
+define rel_valery = 0
+
 define hi_score = 0
 
 define player_name = "Саня"
@@ -77,6 +85,11 @@ screen toska():
                 linear 1.0 zoom 1.2 alpha 0.9
                 linear 0.6 zoom 1.0 alpha 1.0
                 repeat
+
+screen busday1:
+        default bus_minigame = BusMinigameDisplayable(hi_score, 0)
+        add bus_minigame
+
 
 label splashscreen:
     play sound "audio/intro_sound.mp3" 
@@ -154,7 +167,7 @@ label first_day:
     scene black scen 
     with fade
 
-    $ mplay("audio/street-music.mp3")
+    play sound "audio/street-music.mp3" volume 0.4
     pause (2.0)
     scene bus station 
     with fade
@@ -164,15 +177,15 @@ label first_day:
     "Из бесконечного потока мыслей меня смог вытащить только гудок подъезжающего ЛИАЗа."
     "А вот и мой автобус подъезжает."    
     sanya "Ладно, пора и честь знать."
+    stop sound fadeout 1.0
 
-    $ mstop() 
-    pause(2.0)
+    pause(1.0)
 
-    play sound "audio/bus.mp3" volume 0.15
+    play sound "audio/bus.mp3" volume 0.07
     "*Звук подъезжающего автобуса*"
     stop sound
 
-    play sound "audio/sound-in-bus.mp3" volume 0.2
+    play sound "audio/sound-in-bus.mp3" volume 0.03
 
     scene bus 
     with fade
@@ -180,18 +193,27 @@ label first_day:
     "Вчера с мужиками пришли пиво попить, последний день лета проводить, скажем так, а она меня поджидает у туалета и говорит:"
     "\"Хоть бы раз домой вернулся с девчонкой какой-нибудь красивенькой, а не как обычно с парнями в зассаных майках\", — \"Мама, ну мы же панки\"..."
     "Впрочем, ладно. У меня есть немного времени, чтобы поспать. Надо было ночью не заниматься хернёй..."
-    #$ _hi_score(hi_score)
-    call screen bus
-    # TODO: ЗАКОНЧИТЬ РЕКОРД
-    "[_return]"
-    #call play_bus 
+    
+    scene black with fade
+    centered "{size=+24}Используйте стрелочки вверх-вниз или клавиши W, A{/size}" # TODO: изменить на мобилки
+    
+    call screen busday1
+
+
+    if int(_return) > int(hi_score):
+        scene black
+        centered "{size=+50}Новый рекорд!{/size}"
+        centered "{size=+50}Счёт: [_return]{/size}"
+
+
+    $ hi_score = max(hi_score, int(_return))
     
 
     scene black scen 
     with fade
     "Какой странный сон мне приснился..."
     "Бесконечно едешь прямо... Как далеко можно так уехать?"
-    play sound "audio/bus.mp3" volume 0.15
+    play sound "audio/bus.mp3" volume 0.03
     $ renpy.pause (7.5)
     stop sound fadeout 1.5
     play music "audio/street-sound.mp3" volume 0.1
@@ -846,25 +868,38 @@ label first_day:
         scene black scen
         with fade
 
-        "Мы говорили обо всём на свете: об учёбе, о семье, о людях, что нас окружают."
-        "С ней я забыл свои многочисленные проблемы."
+        storyteller "Саня прогуливался вдоль набережной вместе с Юлей"
+        storyteller "Конечно, они ещё не держались за ручку и не шли в обнимку, но уже явно были ближе друг к другу"
 
+        scene promenade yuli
+        with Dissolve(1.5)
+        sanya "Да, дух захватывает. Я рад, что тебе тоже здесь нравится."
+        yuli "Мне нравится, как солнце садится за реку. Это похоже на произведение искусства."
+        sanya "Не могу не согласиться. Знаешь, редко встретишь человека, который так ценит мелочи жизни."
+        yuli "Я понимаю, о чем ты. Мне кажется, что большинство людей слишком зациклены на своих проблемах, чтобы замечать красоту вокруг."
+        sanya "Именно! Это будто глоток свежего воздуха, когда встречаешь кого-то, кто видит вещи так же, как я."
+        yuli "Как будто мы на одной волне."
+        sanya "Да, мы словно родственные души."
+        yuli "Мне кажется, что мы могли бы говорить часами и никогда не исчерпать запас слов."
+        sanya "Я тоже. Не часто я встречаю кого-то, с кем мне так быстро становится комфортно."
+        yuli "Я чувствую то же самое. Я рада, что мы встретились."
+        sanya "Я тоже. Знаешь, я тут подумал, не хочешь ли ты как-нибудь со мной куда-нибудь сходить? Может быть, выпить кофе или еще что-нибудь?"
+        yuli "С удовольствием. Звучит здорово."
+
+        "Довольно резво тучи закрыли всё небо."
+        "Начал собираться дождь."
+        stop music fadeout 6.0
         scene rain yuli
-        with fade
-
+        with Fade(2.0, 0.0, 2.0)
+        play sound "audio/rain.mp3" fadein 15.0 volume 0.06 loop
         show yuli neutral
         with dissolve
         
         "Она подошла к забору и молча смотрела на правый берег."
+        play music "audio/Love.mp3" fadein 0.5 volume 0.1 fadeout 1.5
         yuli "Саша, здесь так красиво..."
-        
-        stop music
 
-        play music "audio/stop_breaths.mp3" fadein 1.5 volume 0.5
-        "Я перестаю дышать..."
-        stop music fadeout 2.0
-
-        play music "audio/strauss-festival.mp3" fadein 4.5 volume 0.1 fadeout 1.5
+       
 
         sanya "Мне тоже очень нравится."
 
@@ -878,7 +913,7 @@ label first_day:
         sanya "Конечно, давай обнимемся."
         
         hide yuli horny
-
+        
         scene bridge
         with fade
 
@@ -886,37 +921,42 @@ label first_day:
         storyteller "Но компания Юли была так приятна, что он отогнал эту мысль на задворки сознания."
         storyteller "Когда они дошли до середины моста, Саня увидел, что к ним приближается Паша. Он ощутил приступ вины и тревоги, когда понял, что его друг ждал его всё это время."
         
-        show pasha angry at center
-        with dissolve
-
-        show yuli disappointed at right
-        with dissolve
+        show pasha angry at center with dissolve:
+            blur 5.0
+        show yuli disappointed at right with dissolve
+        
+        show pasha angry at center with Dissolve(0.1):
+            blur 0.0
+        show yuli disappointed at right with Dissolve(0.1):
+            blur 7.0
 
         pasha "Эй, мужик, что происходит? Я ждал тебя в кефасе больше часа!"
         sanya "А, привет, Паша. Извини, я что-то закрутился..."
+        
 
-        show yuli shy at right
-        with dissolve
+        show pasha angry at center with Dissolve(0.1):
+            blur 7.0
+        show yuli shy at right with Dissolve(0.6):
+            blur 0.0
 
         "Юля смутилась и начала возиться с телефоном."
 
-        hide pasha angry 
-        with dissolve 
+        stop music fadeout 10.0
+        
+        show pasha angry at center with Dissolve(0.1):
+            blur 7.0
+        show yuli sad at right with Dissolve(0.7):
+            blur 0.0
 
         yuli "Эм, мне, наверное, пора. Только что звонила мама, ей нужно, чтобы я скорее возвращалась домой."
 
-        hide yuli shy 
-        with dissolve
-
-        stop music fadeout 3.0
-
-        show pasha angry 
-        with dissolve
 
         storyteller "Саня был разочарован тем, что их свидание оборвалось, но в то же время он почувствовал облегчение от того, что ему не придется встречаться с неодобрительным взглядом Паши."
         sanya "Хорошо, хорошо. Я был рад встретиться с тобой, Юля."
 
-        hide pasha angry
+        hide yuli sad with Dissolve(0.5)
+        show pasha angry at center with Dissolve(0.5):
+            blur 0.0
 
         scene black scen
         with fade
@@ -926,11 +966,11 @@ label first_day:
 
         scene nstu night 
         with fade
-
+        stop sound fadeout 3.0
         show pasha sad at center
         with dissolve
 
-        play music "audio/einaudi_nefeli.mp3" fadein 2.0 fadeout 2.0 volume 0.2
+        play music "audio/einaudi_nefeli.mp3" fadein 2.0 fadeout 2.0 volume 0.15
         pasha "Знаешь, Саня, я думал, что мы друзья. Но, похоже, ты не ценишь нашу дружбу так, как я."
         sanya "Да нет же, Паша, всё не так. Извини, я просто увлёкся делами..."
         pasha "Да какая разница. Я не хочу больше об этом говорить. Просто не делай так больше."
@@ -949,26 +989,26 @@ label first_day:
 
         pause 2.0
     if not day1_pasha_kfc:
-        play sound "audio/sound-in-bus.mp3" volume 0.1
+        play sound "audio/sound-in-bus.mp3" volume 0.03
 
         scene bus night
-        show night
 
         "Как обычно, по пути домой я глубоко погрузился в себя. Мои мысли перескакивали со скучных лекций и лаб на Пашку, на новую подругу Юлю и обратно."
         
-        stop sound
-        play sound "audio/bus.mp3" volume 0.1
+        stop sound fadeout 0.5
+        play sound "audio/bus.mp3" volume 0.03
 
-        $ renpy.pause(7.0)
+        pause(2.0)
 
-        stop sound
-        play music "audio/home-sad.mp3" volume 0.2
+        stop sound fadeout 0.5
+        play music "audio/home-sad.mp3" fadein 1.0  volume 0.2
 
-        scene sanya cry
-        with fade
-
-        # звук открытия двери и ходьбы
+        
+        scene black with Fade(1.0, 0.0, 1.0)
+        play sound "audio/footsteps.mp3"
         "Открыв дверь домой, я первым делом пошёл к окну."
+        scene sanya cry
+        with Fade(2.0, 0.0, 2.0)
         sanya "За столько лет я так и не смог бросить"
         "Достав последнюю сигаретку из пачки ванильного чапмана, я пару раз затянулся."
         sanya "Фух, сразу полегчало. На днях надо будет купить ещё пару пачек в кб"
@@ -1050,19 +1090,19 @@ label second_day :
     play music "audio/space-floating.mp3" fadein 2.5 loop fadeout 3.0 volume 0.1
     # определим фон игры, время игры в секундах
     # и зададим параметры игры - спрайты и положение для собираемых предметов
-    $ hf_init("sanya room", 8,
-        ("backpack", 1613, 630, _("Рюкзак РЕДАН")),
-        ("light", 111, 800, _("Зажигалка")),
-        ("marlboro1", 630, 660, _("Пачка сигарет (пустая)")),
-        ("marlboro2", 1413, 850, _("Пачка сигарет (пуста)")),
-        ("t-shirt", 855, 900, _("Футболка")),
-        ("pants", 440, 761, _("Трусы")),
+    $ hf_init("sanya room", 20,
+        ("backpack", 1232, 436, _("Рюкзак ЖУК-РЕДАН")),
+        ("light", 610, 930, _("Зажигалка")),
+        ("marlboro1", 1147, 927, _("Пачка сигарет (пустая)")),
+        ("marlboro2", 1610, 690, _("Пачка сигарет (пуста)")),
+        ("t-shirt", 1038, 798, _("Футболка")),
+        ("pants", 568, 200, _("Трусы")),
         # НЕОБЯЗАТЕЛЬНЫЕ ПАРАМЕТРЫ:
         # включаем смену курсора при наведении
         mouse=True,
         # включаем инвентарь с убиранием из него найденных предметов
         inventory=True,
-        # включаем подсказки
+        # включаем подсказкиD
         hint=True,
         # включаем подсветку предмета при наведении
         hover=brightness(.1),
@@ -1075,7 +1115,7 @@ label second_day :
     $ hf_bg()
     with dissolve
 
-    centered "{size=+24}Найдите все предметы за 8 секунд.\nНажмите ЛКМ, чтобы начать."
+    centered "{size=+24}{color=#000}Найдите все предметы за 20 секунд.\nНажмите ЛКМ, чтобы начать.{/color}{/size}"
     window hide
     # запустим игру
     $ hf_start()
@@ -1085,12 +1125,12 @@ label second_day :
     play music "audio/einaudi_nefeli.mp3" fadein 1.0 fadeout 2.0 volume 0.2
     # результаты
     if hf_return == 0:
-        centered "{size=+24}Предметы собраны успешно.\n Но все пачки пусты.."
+        centered "{size=+24}{color=#000}Предметы собраны успешно.\n Но все пачки пусты..{/color}{/size}"
     else:
         if hf_return == 1:
-            centered "{size=+24}GAME OVER\nНе нашёлся 1 предмет."
+            centered "{size=+24}{color="#000"}GAME OVER\nНе нашёлся 1 предмет.{/color}{/size}"
         else:
-            centered "{size=+24}GAME OVER\nНе нашлось [hf_return] предмета(-ов)"
+            centered "{size=+24}{color="#000"}GAME OVER\nНе нашлось [hf_return] предмета(-ов){/color}{/size}"
 
     $ hf_hide()
     with dissolve
@@ -1138,9 +1178,9 @@ label second_day :
  
     play sound "audio/bus.mp3" fadein 0.5 fadeout 1.5 volume 0.1
 
-    pause 7.0
+    pause 4.0
 
-    stop sound
+    stop sound fadeout 1.0
 
     scene bus 
     with fade
@@ -1151,10 +1191,22 @@ label second_day :
     "Проезжая мимо старых домов и разбитых дорог, я поймал себя на мысли, что мой город либо статичен в своём развитии, либо я уже перестал видеть краски жизни..."
     "После этих мыслей я начал погружаться в сон"
 
-    call play_bus from _call_play_bus
+    screen bus_day2:
+        default bus_minigame = BusMinigameDisplayable(hi_score, 1)
+        add bus_minigame
+
+    call screen bus_day2
+
+    if int(_return) > int(hi_score):
+        scene black
+        centered "{size=+50}Новый рекорд!{/size}"
+        centered "{size=+50}Счёт: [_return]{/size}"
+
+
+    $ hi_score = max(hi_score, int(_return))
     
 
-    stop music
+    stop music fadeout 2.0
     
     scene black scen
     with fade
@@ -1208,10 +1260,10 @@ label second_day :
 
         pasha "Может и приходило. Ты же знаешь, что я весь спам от универа даже не читаю. Тем более про санатории, которые каждый год предлагают."
         sanya "Бесплатно же. Чего бы не скататься. Так ещё можно родакам сказать, что универ не оплачивает поездку. Денег получить."
-        pasha "Бесплатный сыр только в мышеловке, запомни!"
 
         show pasha giggles
         with dissolve
+        pasha "Бесплатный сыр только в мышеловке, запомни!"
 
         pasha "Они тебе, может, там вообще зонд в жопу запихнут, пока ты спать будешь!"
         "А-а-а, так вот для чего им справка о целостности ануса нужна..."
@@ -1228,7 +1280,7 @@ label second_day :
         show pasha smiles
         with dissolve
 
-        pasha "Ладно, Санёк, был рад повидаться! Мне на пары пора"
+        pasha "Ладно, Санёк, был рад повидаться! Мне на пары пора."
 
         hide pasha smiles
         with dissolve
@@ -1377,7 +1429,7 @@ label second_day :
     $ hf_bg()
     with dissolve
 
-    centered "{size=+24}Найдите расскиданные справки за 20 секунд.\nНажмите ЛКМ, чтобы начать."
+    centered "{size=+24}Найдите расскиданные справки за 8 секунд.\nНажмите ЛКМ, чтобы начать.{/size}"
 
     # запустим игру
     $ hf_start()
@@ -1387,15 +1439,15 @@ label second_day :
 
     # результаты
     if hf_return == 0:
-        centered "{size=+24}Все справки собраны!"
+        centered "{size=+24}Все справки собраны!{/size}"
         $ hf_hide()
         with dissolve
         "Фух, теперь можно со спокойной душой заходить в кабинет..."
     else:
         if hf_return == 1:
-            centered "{size=+24}GAME OVER\nНе нашлась одна справка..."
+            centered "{size=+24}GAME OVER\nНе нашлась одна справка...{/size}"
         else:
-            centered "{size=+24}GAME OVER\nНе нашлось [hf_return] справки(-ок)"
+            centered "{size=+24}GAME OVER\nНе нашлось [hf_return] справки(-ок){/size}"
         "Ай, да и чёрт с ним, может и так примут, кто вообще эти документы смотреть-то будет?"
         "Идиотская бумажная волокита!"
     scene black with fade
@@ -1403,7 +1455,8 @@ label second_day :
 
     stop sound fadeout 0.5
     "Уже вечерело, времени ушло куда больше, чем я ожидал. У выхода из корпуса я заметил несколько одногруппников, по разговору было понятно, что они направляются в курилку."
-    "Может тоже сходить?"
+    "Может, мне тоже сходить?"
+    "Хотя, с другой стороны, сегодня хорошая погода, можно пойти домой через парк..."
 
     menu :
 
@@ -2318,7 +2371,19 @@ label third_day :
 
     "Посплю пока. Главное не проспать остановку..."
 
-    call play_bus from _call_play_bus_1
+    screen bus_day3:
+        default bus_minigame = BusMinigameDisplayable(hi_score, 2)
+        add bus_minigame
+
+    call screen bus_day3
+
+    if int(_return) > int(hi_score):
+        scene black
+        centered "{size=+50}Новый рекорд!{/size}"
+        centered "{size=+50}Счёт: [_return]{/size}"
+
+
+    $ hi_score = max(hi_score, int(_return))
     
 
     "Снова тот же сон..."
@@ -2497,7 +2562,7 @@ label third_day :
                     stop music fadeout 0.3
                     play music "audio/fail.mp3" volume 0.1
 
-                    centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth"
+                    centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth{/size}"
 
                     pause 4.0
         stop music fadeout 0.5 
@@ -2555,7 +2620,7 @@ label _alone :
 
     play music "audio/seven-summer.mp3" fadein 1.5 fadeout 1.5 volume 0.2
 
-    centered "{size=+24}Автобус попал в аварию.\nПогибло два человека.\nЕдинственный Пассажир и водитель."
+    centered "{size=+24}Автобус попал в аварию.\nПогибло два человека.\nЕдинственный Пассажир и водитель.{/size}"
     $ renpy.pause(1, hard=True)
     stop sound
     jump _end
@@ -4659,13 +4724,13 @@ label _end :
     
     pause 5.0
 
-    centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth,\nArtsBer,\nJuravl"
-    centered "{size=+24}Asind:\nМини-игры, арты, музыка, диалоги первого дня."
-    centered "{size=+24}DarlingInSteam:\nИмплементация сценария в код, арты, музыка, диалоги второго дня."
-    centered "{size=+24}Danilka108:\nМини-игры, работа с нейросетью, покушал."
-    centered "{size=+24}TheNorth:\nСценарий, диалоги второго и третьего дня.\nКод, сценарий, звуки четвертого дня.\nБог, блять"
-    centered "{size=+24}Xpomin:\nСобрал шкаф, собрал компьютер, сценарий, диалоги второго и третьего дня."
-    centered "{size=+24}ArtsBer:\nУстал, писал сценарий, устал писать сценарий."
-    centered "{size=+24}Juravl:\nФоновые звуки, саунды."
-    centered "{size=+24}В разделе \"Об игре\" можно найти ссылку на репозиторий GitHub."
-    centered "{size=+24}Спасибо за прохождение данной новеллы. Мы благодарны за Ваше внимание."
+    centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth,\nArtsBer,\nJuravl{/size}"
+    centered "{size=+24}Asind:\nМини-игры, арты, музыка, диалоги первого дня.{/size}"
+    centered "{size=+24}DarlingInSteam:\nИмплементация сценария в код, арты, музыка, диалоги второго дня.{/size}"
+    centered "{size=+24}Danilka108:\nМини-игры, работа с нейросетью, покушал.{/size}"
+    centered "{size=+24}TheNorth:\nСценарий, диалоги второго и третьего дня.\nКод, сценарий, звуки четвертого дня.\nБог, блять{/size}"
+    centered "{size=+24}Xpomin:\nСобрал шкаф, собрал компьютер, сценарий, диалоги второго и третьего дня.{/size}"
+    centered "{size=+24}ArtsBer:\nУстал, писал сценарий, устал писать сценарий.{/size}"
+    centered "{size=+24}Juravl:\nФоновые звуки, саунды.{/size}"
+    centered "{size=+24}В разделе \"Об игре\" можно найти ссылку на репозиторий GitHub.{/size}"
+    centered "{size=+24}Спасибо за прохождение данной новеллы. Мы благодарны за Ваше внимание.{/size}"

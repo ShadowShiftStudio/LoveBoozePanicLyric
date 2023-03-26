@@ -1,6 +1,9 @@
 init python:
     SECONDS_PER_UPDATE = 1 / 120
     from renpy.audio.sound import play
+    from renpy.audio.music import play as play_music
+    from renpy.audio.music import stop as stop_music
+    import time 
 
     class Shift():
         def __init__(self, step):
@@ -225,10 +228,12 @@ init python:
             self.max_track_index = 2
 
         def update_speed(self, speed):
+            
             self.speed = speed
             self.track_counter.update_step(self.counter_step_factor * speed * 2)
 
         def render(self, r, width, height, st, at):
+            
             transformed_bus = Transform(self.image, zoom=0.38)
             bus = renpy.render(transformed_bus, width, height, st, at)
 
@@ -237,20 +242,23 @@ init python:
 
             r.blit(bus, (xpos, ypos))
             self.track_counter.next()
-
+            
             return self.cars.is_intersect(Rect(bus.width, bus.height, xpos, ypos, 0.1))
 
         def __change_track(self, track_i):
+            
             if track_i >= 0 and track_i <= self.max_track_index and track_i != self.curr_track_i and self.track_counter.percent_val() == 1:
                 self.prev_track_i = self.curr_track_i
                 self.curr_track_i = track_i
                 self.track_counter.reset()
         
         def increase_track(self):
+            
             if self.curr_track_i + 1 <= self.max_track_index:
                 self.__change_track(self.curr_track_i + 1)
 
         def decrease_track(self):
+            
             if self.curr_track_i - 1 >= 0:
                 self.__change_track(self.curr_track_i - 1)
     
@@ -265,7 +273,7 @@ init python:
         def render(self, width, height, st, at):
             r = renpy.Render(width, height)
             btn = renpy.render(self.image, width, height, st, at)
-            r.blit(btn, (0, 0))
+            r.blit(btn, (30, 30))
 
             self.rect = Rect(btn.width, btn.height, 0, 0)
 
@@ -278,8 +286,12 @@ init python:
                 self.on_click()
 
     class BusMinigameDisplayable(renpy.Displayable):
+
+
         def __init__(self, high_score, textures_index):
             renpy.Displayable.__init__(self)
+
+            
 
             self.high_score = high_score
             self.score = 0
@@ -296,6 +308,12 @@ init python:
             self.surrender_btn = SurrenderBtn(self.surrender)
 
             self.finished = False
+            self.first_time = True
+            
+        def music_start(self):
+            self.first_time = False
+            play("audio/bus_road.ogg", relative_volume=0.2, loop=True)
+            play_music("audio/space-floating.mp3", relative_volume=0.1)
 
         def surrender(self):
             self.finished = True
@@ -303,7 +321,9 @@ init python:
             renpy.timeout(0)
 
         def render(self, width, height, st, at):
-            import time 
+            if self.first_time:
+                self.music_start()
+            
             curr_time = time.time()
             elepsed = curr_time - (self.prev_time if self.prev_time != None else 0)
             self.prev_time = curr_time
@@ -333,8 +353,8 @@ init python:
             high_score_text = Text("Рекорд: " + str(self.high_score), slow=False, size=50)
             high_score_text = renpy.render(high_score_text, width, height, st, at)
 
-            r.blit(score_text, (width / 10, height / 10-30))
-            r.blit(high_score_text, (width / 10, height / 10 + 30))
+            r.blit(score_text, (width / 10 + 40, height / 10-30))
+            r.blit(high_score_text, (width / 10 + 40, height / 10 + 30))
 
             surrender_btn = renpy.render(self.surrender_btn, width, height, st, at)
             r.blit(surrender_btn, (width / 100, width / 50))
@@ -360,11 +380,13 @@ init python:
                     renpy.restart_interaction()
 
             if self.finished:
+                stop_music()
+                play("audio/gameover.ogg", relative_volume=0.5)
                 
-                play("audio/gameover.ogg")
-                return str(self.score if self.score > self.high_score else self.high_score)
+                return str(self.score if self.score >= self.high_score else self.high_score)
             else:
                 raise renpy.IgnoreEvent()
+            
 
 screen bus():
     default bus_minigame = BusMinigameDisplayable(1000, 1)
