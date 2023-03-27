@@ -9,6 +9,64 @@ define pavel = Character('Павел Геннадьевич ', color="#ffb4aa")
 define skin = Character('Мыкало ', color="#e1ffaa")
 define noname = Character('Незнакомец ', color="#4d4d4d")
 define emili = Character('Эмилия', color="#e28cd7")
+init:
+
+    python:
+    
+        import math
+
+        class Shaker(object):
+        
+            anchors = {
+                'top' : 0.0,
+                'center' : 0.5,
+                'bottom' : 1.0,
+                'left' : 0.0,
+                'right' : 1.0,
+                }
+        
+            def __init__(self, start, child, dist):
+                if start is None:
+                    start = child.get_placement()
+                #
+                self.start = [ self.anchors.get(i, i) for i in start ]  # central position
+                self.dist = dist    # maximum distance, in pixels, from the starting point
+                self.child = child
+                
+            def __call__(self, t, sizes):
+                # Float to integer... turns floating point numbers to
+                # integers.                
+                def fti(x, r):
+                    if x is None:
+                        x = 0
+                    if isinstance(x, float):
+                        return int(x * r)
+                    else:
+                        return x
+
+                xpos, ypos, xanchor, yanchor = [ fti(a, b) for a, b in zip(self.start, sizes) ]
+
+                xpos = xpos - xanchor
+                ypos = ypos - yanchor
+                
+                nx = xpos + (1.0-t) * self.dist * (renpy.random.random()*2-1)
+                ny = ypos + (1.0-t) * self.dist * (renpy.random.random()*2-1)
+
+                return (int(nx), int(ny), 0, 0)
+        
+        def _Shake(start, time, child=None, dist=100.0, **properties):
+
+            move = Shaker(start, child, dist=dist)
+        
+            return renpy.display.layout.Motion(move,
+                    time,
+                    child,
+                    add_sizes=True,
+                    **properties)
+
+        Shake = renpy.curry(_Shake)
+    
+
 
 init python :
 
@@ -25,6 +83,9 @@ init python :
         # остановить мелодию
     def mstop(chan = "music", fout=1.0):
         renpy.music.stop(channel = chan, fadeout = fout)
+
+init:
+    $ sshake = Shake((0, 0, 0, 0), 1.0, dist=15)
 
 define day1_pasha_kfc = False
 define day1_sanya_wants_camp = False
@@ -51,8 +112,16 @@ define day4_go_with_emili = False
 define day4_fight = False
 define choice_yulia = False
 define choice_nadya = False
-define choise_lonly = False
+define choise_lonely = False
 define mood_counter = 0
+
+define rel_yuli = 0
+define rel_nadya = 0
+define rel_pasha = 0
+define rel_pavel = 0
+define rel_skin = 0
+define rel_emily = 0
+define rel_valeria = 0
 
 define hi_score = 0
 
@@ -77,6 +146,11 @@ screen toska():
                 linear 1.0 zoom 1.2 alpha 0.9
                 linear 0.6 zoom 1.0 alpha 1.0
                 repeat
+
+screen busday1:
+        default bus_minigame = BusMinigameDisplayable(hi_score, 0)
+        add bus_minigame
+
 
 label splashscreen:
     play sound "audio/intro_sound.mp3" 
@@ -154,7 +228,7 @@ label first_day:
     scene black scen 
     with fade
 
-    $ mplay("audio/street-music.mp3")
+    play sound "audio/street-music.mp3" volume 0.4
     pause (2.0)
     scene bus station 
     with fade
@@ -164,15 +238,15 @@ label first_day:
     "Из бесконечного потока мыслей меня смог вытащить только гудок подъезжающего ЛИАЗа."
     "А вот и мой автобус подъезжает."    
     sanya "Ладно, пора и честь знать."
+    stop sound fadeout 1.0
 
-    $ mstop() 
-    pause(2.0)
+    pause(1.0)
 
-    play sound "audio/bus.mp3" volume 0.15
+    play sound "audio/bus.mp3" volume 0.07
     "*Звук подъезжающего автобуса*"
     stop sound
 
-    play sound "audio/sound-in-bus.mp3" volume 0.2
+    play sound "audio/sound-in-bus.mp3" volume 0.03
 
     scene bus 
     with fade
@@ -180,18 +254,27 @@ label first_day:
     "Вчера с мужиками пришли пиво попить, последний день лета проводить, скажем так, а она меня поджидает у туалета и говорит:"
     "\"Хоть бы раз домой вернулся с девчонкой какой-нибудь красивенькой, а не как обычно с парнями в зассаных майках\", — \"Мама, ну мы же панки\"..."
     "Впрочем, ладно. У меня есть немного времени, чтобы поспать. Надо было ночью не заниматься хернёй..."
-    #$ _hi_score(hi_score)
-    call screen bus
-    # TODO: ЗАКОНЧИТЬ РЕКОРД
-    "[_return]"
-    #call play_bus 
+    
+    scene black with fade
+    centered "{size=+24}Используйте стрелочки вверх-вниз или клавиши W, A{/size}" # TODO: изменить на мобилки
+    window hide
+    call screen busday1
+
+
+    if int(_return) > int(hi_score):
+        scene black
+        centered "{size=+50}Новый рекорд!{/size}"
+        centered "{size=+50}Счёт: [_return]{/size}"
+
+
+    $ hi_score = max(hi_score, int(_return))
     
 
     scene black scen 
     with fade
     "Какой странный сон мне приснился..."
     "Бесконечно едешь прямо... Как далеко можно так уехать?"
-    play sound "audio/bus.mp3" volume 0.15
+    play sound "audio/bus.mp3" volume 0.03
     $ renpy.pause (7.5)
     stop sound fadeout 1.5
     play music "audio/street-sound.mp3" volume 0.1
@@ -425,29 +508,30 @@ label first_day:
 
     menu :
         "Согласиться" :
-            
-            $ str_for_notification = "Юля запомнила это"
+            $ rel_yuli += 3
+            $ rel_pasha -= 3
+            $ str_for_notification = "Юля и Паша запомнят это"
                 
-            show screen notification_popup 
+            show screen notification_popup_big
             with dissolve
-            
             sanya "Юля, да я же с радостью! Собирайся, мы уходим!"
             "Тут я заметил, что Юле и собираться не из чего, просто встала и пошла за мной!"
             $ day1_pasha_kfc = False
+            
 
         "Отказаться" :
-
-            $ str_for_notification = "Юля запомнила это"
+            
+            $ str_for_notification = "Это действие имеет последствия"
                 
-            show screen notification_popup 
+            show screen notification_popup_big
             with dissolve
 
             sanya "Юля, давай погуляем завтра, я сегодня никак не могу – с другом уже договорился встретиться! Мы с ним тысячу лет не виделись!"
             sanya "Ты знаешь, что сделай, напиши мне свой ник в телеграме, я тебе сегодня вечером ещё напишу обязательно!"
             $ day1_pasha_kfc = True
-
-    hide screen notification_popup
+    hide screen notification_popup_big
     with dissolve
+    
 
 
     if day1_pasha_kfc :
@@ -661,12 +745,14 @@ label first_day:
             "Согласиться" :
                 show screen notification_popup 
                 with dissolve
-                $ mood_counter += 1;
+                $ mood_counter += 1
+                $ rel_yuli += 3
                 pasha "Саня, Саня, не теряй такие возможности! Я тоже уже как раз до хаты собираюсь. Давай, расскажешь завтра, как оно там!"
                 $ day1_yuli_agreed_after_kfc = True
             "Отказаться" :
                 show screen notification_popup 
                 with dissolve
+                $ rel_yuli -= 3
                 $ mood_counter -= 1;
                 sanya "Паша, да... Мне уже в любом случае пора бы домой идти. Если случайно встретимся, то встретимся, если нет, то не суждено значит."
                 $ day1_yuli_agreed_after_kfc = False
@@ -846,25 +932,38 @@ label first_day:
         scene black scen
         with fade
 
-        "Мы говорили обо всём на свете: об учёбе, о семье, о людях, что нас окружают."
-        "С ней я забыл свои многочисленные проблемы."
+        storyteller "Саня прогуливался вдоль набережной вместе с Юлей"
+        storyteller "Конечно, они ещё не держались за ручку и не шли в обнимку, но уже явно были ближе друг к другу"
 
+        scene promenade yuli
+        with Dissolve(1.5)
+        sanya "Да, дух захватывает. Я рад, что тебе тоже здесь нравится."
+        yuli "Мне нравится, как солнце садится за реку. Это похоже на произведение искусства."
+        sanya "Не могу не согласиться. Знаешь, редко встретишь человека, который так ценит мелочи жизни."
+        yuli "Я понимаю, о чем ты. Мне кажется, что большинство людей слишком зациклены на своих проблемах, чтобы замечать красоту вокруг."
+        sanya "Именно! Это будто глоток свежего воздуха, когда встречаешь кого-то, кто видит вещи так же, как я."
+        yuli "Как будто мы на одной волне."
+        sanya "Да, мы словно родственные души."
+        yuli "Мне кажется, что мы могли бы говорить часами и никогда не исчерпать запас слов."
+        sanya "Я тоже. Не часто я встречаю кого-то, с кем мне так быстро становится комфортно."
+        yuli "Я чувствую то же самое. Я рада, что мы встретились."
+        sanya "Я тоже. Знаешь, я тут подумал, не хочешь ли ты как-нибудь со мной куда-нибудь сходить? Может быть, выпить кофе или еще что-нибудь?"
+        yuli "С удовольствием. Звучит здорово."
+
+        "Довольно резво тучи закрыли всё небо."
+        "Начал собираться дождь."
+        stop music fadeout 6.0
         scene rain yuli
-        with fade
-
+        with Fade(2.0, 0.0, 2.0)
+        play sound "audio/rain.mp3" fadein 15.0 volume 0.06 loop
         show yuli neutral
         with dissolve
         
         "Она подошла к забору и молча смотрела на правый берег."
+        play music "audio/Love.mp3" fadein 0.5 volume 0.1 fadeout 1.5
         yuli "Саша, здесь так красиво..."
-        
-        stop music
 
-        play music "audio/stop_breaths.mp3" fadein 1.5 volume 0.5
-        "Я перестаю дышать..."
-        stop music fadeout 2.0
-
-        play music "audio/strauss-festival.mp3" fadein 4.5 volume 0.1 fadeout 1.5
+       
 
         sanya "Мне тоже очень нравится."
 
@@ -878,7 +977,7 @@ label first_day:
         sanya "Конечно, давай обнимемся."
         
         hide yuli horny
-
+        
         scene bridge
         with fade
 
@@ -886,37 +985,42 @@ label first_day:
         storyteller "Но компания Юли была так приятна, что он отогнал эту мысль на задворки сознания."
         storyteller "Когда они дошли до середины моста, Саня увидел, что к ним приближается Паша. Он ощутил приступ вины и тревоги, когда понял, что его друг ждал его всё это время."
         
-        show pasha angry at center
-        with dissolve
-
-        show yuli disappointed at right
-        with dissolve
+        show pasha angry at center with dissolve:
+            blur 5.0
+        show yuli disappointed at right with dissolve
+        
+        show pasha angry at center with Dissolve(0.1):
+            blur 0.0
+        show yuli disappointed at right with Dissolve(0.1):
+            blur 7.0
 
         pasha "Эй, мужик, что происходит? Я ждал тебя в кефасе больше часа!"
         sanya "А, привет, Паша. Извини, я что-то закрутился..."
+        
 
-        show yuli shy at right
-        with dissolve
+        show pasha angry at center with Dissolve(0.1):
+            blur 7.0
+        show yuli shy at right with Dissolve(0.6):
+            blur 0.0
 
         "Юля смутилась и начала возиться с телефоном."
 
-        hide pasha angry 
-        with dissolve 
+        stop music fadeout 10.0
+        
+        show pasha angry at center with Dissolve(0.1):
+            blur 7.0
+        show yuli sad at right with Dissolve(0.7):
+            blur 0.0
 
         yuli "Эм, мне, наверное, пора. Только что звонила мама, ей нужно, чтобы я скорее возвращалась домой."
 
-        hide yuli shy 
-        with dissolve
-
-        stop music fadeout 3.0
-
-        show pasha angry 
-        with dissolve
 
         storyteller "Саня был разочарован тем, что их свидание оборвалось, но в то же время он почувствовал облегчение от того, что ему не придется встречаться с неодобрительным взглядом Паши."
         sanya "Хорошо, хорошо. Я был рад встретиться с тобой, Юля."
 
-        hide pasha angry
+        hide yuli sad with Dissolve(0.5)
+        show pasha angry at center with Dissolve(0.5):
+            blur 0.0
 
         scene black scen
         with fade
@@ -926,11 +1030,11 @@ label first_day:
 
         scene nstu night 
         with fade
-
+        stop sound fadeout 3.0
         show pasha sad at center
         with dissolve
 
-        play music "audio/einaudi_nefeli.mp3" fadein 2.0 fadeout 2.0 volume 0.2
+        play music "audio/einaudi_nefeli.mp3" fadein 2.0 fadeout 2.0 volume 0.15
         pasha "Знаешь, Саня, я думал, что мы друзья. Но, похоже, ты не ценишь нашу дружбу так, как я."
         sanya "Да нет же, Паша, всё не так. Извини, я просто увлёкся делами..."
         pasha "Да какая разница. Я не хочу больше об этом говорить. Просто не делай так больше."
@@ -949,26 +1053,26 @@ label first_day:
 
         pause 2.0
     if not day1_pasha_kfc:
-        play sound "audio/sound-in-bus.mp3" volume 0.1
+        play sound "audio/sound-in-bus.mp3" volume 0.03
 
         scene bus night
-        show night
 
         "Как обычно, по пути домой я глубоко погрузился в себя. Мои мысли перескакивали со скучных лекций и лаб на Пашку, на новую подругу Юлю и обратно."
         
-        stop sound
-        play sound "audio/bus.mp3" volume 0.1
+        stop sound fadeout 0.5
+        play sound "audio/bus.mp3" volume 0.03
 
-        $ renpy.pause(7.0)
+        pause(2.0)
 
-        stop sound
-        play music "audio/home-sad.mp3" volume 0.2
+        stop sound fadeout 0.5
+        play music "audio/home-sad.mp3" fadein 1.0  volume 0.2
 
-        scene sanya cry
-        with fade
-
-        # звук открытия двери и ходьбы
+        
+        scene black with Fade(1.0, 0.0, 1.0)
+        play sound "audio/footsteps.mp3"
         "Открыв дверь домой, я первым делом пошёл к окну."
+        scene sanya cry
+        with Fade(2.0, 0.0, 2.0)
         sanya "За столько лет я так и не смог бросить"
         "Достав последнюю сигаретку из пачки ванильного чапмана, я пару раз затянулся."
         sanya "Фух, сразу полегчало. На днях надо будет купить ещё пару пачек в кб"
@@ -1050,19 +1154,19 @@ label second_day :
     play music "audio/space-floating.mp3" fadein 2.5 loop fadeout 3.0 volume 0.1
     # определим фон игры, время игры в секундах
     # и зададим параметры игры - спрайты и положение для собираемых предметов
-    $ hf_init("sanya room", 8,
-        ("backpack", 1613, 630, _("Рюкзак РЕДАН")),
-        ("light", 111, 800, _("Зажигалка")),
-        ("marlboro1", 630, 660, _("Пачка сигарет (пустая)")),
-        ("marlboro2", 1413, 850, _("Пачка сигарет (пуста)")),
-        ("t-shirt", 855, 900, _("Футболка")),
-        ("pants", 440, 761, _("Трусы")),
+    $ hf_init("sanya room", 20,
+        ("backpack", 1232, 436, _("Рюкзак ЖУК-РЕДАН")),
+        ("light", 610, 930, _("Зажигалка")),
+        ("marlboro1", 1147, 927, _("Пачка сигарет (пустая)")),
+        ("marlboro2", 1610, 690, _("Пачка сигарет (пуста)")),
+        ("t-shirt", 1038, 798, _("Футболка")),
+        ("pants", 568, 200, _("Трусы")),
         # НЕОБЯЗАТЕЛЬНЫЕ ПАРАМЕТРЫ:
         # включаем смену курсора при наведении
         mouse=True,
         # включаем инвентарь с убиранием из него найденных предметов
         inventory=True,
-        # включаем подсказки
+        # включаем подсказкиD
         hint=True,
         # включаем подсветку предмета при наведении
         hover=brightness(.1),
@@ -1075,7 +1179,7 @@ label second_day :
     $ hf_bg()
     with dissolve
 
-    centered "{size=+24}Найдите все предметы за 8 секунд.\nНажмите ЛКМ, чтобы начать."
+    centered "{size=+24}{color=#000}Найдите все предметы за 20 секунд.\nНажмите ЛКМ, чтобы начать.{/color}{/size}"
     window hide
     # запустим игру
     $ hf_start()
@@ -1085,12 +1189,12 @@ label second_day :
     play music "audio/einaudi_nefeli.mp3" fadein 1.0 fadeout 2.0 volume 0.2
     # результаты
     if hf_return == 0:
-        centered "{size=+24}Предметы собраны успешно.\n Но все пачки пусты.."
+        centered "{size=+24}{color=#000}Предметы собраны успешно.\n Но все пачки пусты..{/color}{/size}"
     else:
         if hf_return == 1:
-            centered "{size=+24}GAME OVER\nНе нашёлся 1 предмет."
+            centered "{size=+24}{color="#000"}GAME OVER\nНе нашёлся 1 предмет.{/color}{/size}"
         else:
-            centered "{size=+24}GAME OVER\nНе нашлось [hf_return] предмета(-ов)"
+            centered "{size=+24}{color="#000"}GAME OVER\nНе нашлось [hf_return] предмета(-ов){/color}{/size}"
 
     $ hf_hide()
     with dissolve
@@ -1138,9 +1242,9 @@ label second_day :
  
     play sound "audio/bus.mp3" fadein 0.5 fadeout 1.5 volume 0.1
 
-    pause 7.0
+    pause 4.0
 
-    stop sound
+    stop sound fadeout 1.0
 
     scene bus 
     with fade
@@ -1151,10 +1255,22 @@ label second_day :
     "Проезжая мимо старых домов и разбитых дорог, я поймал себя на мысли, что мой город либо статичен в своём развитии, либо я уже перестал видеть краски жизни..."
     "После этих мыслей я начал погружаться в сон"
 
-    call play_bus from _call_play_bus
+    screen bus_day2:
+        default bus_minigame = BusMinigameDisplayable(hi_score, 1)
+        add bus_minigame
+    window hide
+    call screen bus_day2
+
+    if int(_return) > int(hi_score):
+        scene black
+        centered "{size=+50}Новый рекорд!{/size}"
+        centered "{size=+50}Счёт: [_return]{/size}"
+
+
+    $ hi_score = max(hi_score, int(_return))
     
 
-    stop music
+    stop music fadeout 2.0
     
     scene black scen
     with fade
@@ -1208,10 +1324,10 @@ label second_day :
 
         pasha "Может и приходило. Ты же знаешь, что я весь спам от универа даже не читаю. Тем более про санатории, которые каждый год предлагают."
         sanya "Бесплатно же. Чего бы не скататься. Так ещё можно родакам сказать, что универ не оплачивает поездку. Денег получить."
-        pasha "Бесплатный сыр только в мышеловке, запомни!"
 
         show pasha giggles
         with dissolve
+        pasha "Бесплатный сыр только в мышеловке, запомни!"
 
         pasha "Они тебе, может, там вообще зонд в жопу запихнут, пока ты спать будешь!"
         "А-а-а, так вот для чего им справка о целостности ануса нужна..."
@@ -1228,7 +1344,7 @@ label second_day :
         show pasha smiles
         with dissolve
 
-        pasha "Ладно, Санёк, был рад повидаться! Мне на пары пора"
+        pasha "Ладно, Санёк, был рад повидаться! Мне на пары пора."
 
         hide pasha smiles
         with dissolve
@@ -1365,7 +1481,7 @@ label second_day :
         # включаем инвентарь с убиранием из него найденных предметов
         inventory=True,
         # включаем подсказки
-        hint=False,
+        hint=True,
         # включаем подсветку предмета при наведении
         hover=brightness(.17),
         # уменьшаем размеры ячеек инвентаря, чтобы не мешали собирать предметы
@@ -1377,7 +1493,7 @@ label second_day :
     $ hf_bg()
     with dissolve
 
-    centered "{size=+24}Найдите расскиданные справки за 20 секунд.\nНажмите ЛКМ, чтобы начать."
+    centered "{size=+24}Найдите расскиданные справки за 8 секунд.\nНажмите ЛКМ, чтобы начать.{/size}"
 
     # запустим игру
     $ hf_start()
@@ -1387,15 +1503,15 @@ label second_day :
 
     # результаты
     if hf_return == 0:
-        centered "{size=+24}Все справки собраны!"
+        centered "{size=+24}Все справки собраны!{/size}"
         $ hf_hide()
         with dissolve
         "Фух, теперь можно со спокойной душой заходить в кабинет..."
     else:
         if hf_return == 1:
-            centered "{size=+24}GAME OVER\nНе нашлась одна справка..."
+            centered "{size=+24}GAME OVER\nНе нашлась одна справка...{/size}"
         else:
-            centered "{size=+24}GAME OVER\nНе нашлось [hf_return] справки(-ок)"
+            centered "{size=+24}GAME OVER\nНе нашлось [hf_return] справки(-ок){/size}"
         "Ай, да и чёрт с ним, может и так примут, кто вообще эти документы смотреть-то будет?"
         "Идиотская бумажная волокита!"
     scene black with fade
@@ -1403,17 +1519,19 @@ label second_day :
 
     stop sound fadeout 0.5
     "Уже вечерело, времени ушло куда больше, чем я ожидал. У выхода из корпуса я заметил несколько одногруппников, по разговору было понятно, что они направляются в курилку."
-    "Может тоже сходить?"
+    "Может, мне тоже сходить?"
+    "Хотя, с другой стороны, сегодня хорошая погода, можно пойти домой через парк..."
 
     menu :
 
         "Пойти в курилку" :
             $ str_for_notification = "У этого действия будут последствия"
-
+            $ rel_yuli += 3
             show screen notification_popup_big
             with dissolve
 
             $ day2_sanya_went_to_smoke = True
+
         "Забить и покурить дома" :
             $ str_for_notification = "У этого действия будут последствия"
 
@@ -1719,13 +1837,13 @@ label second_day :
                 $ mood_counter += 1;
                 show screen notification_popup
                 with dissolve
-
+                $ rel_nadya += 2
                 $ day2_nadya_bought_sigaretts = True
 
             "Ты же малолетка. Домой иди." :
                 $ mood_counter -= 1;
                 $ str_for_notification = "Надя запомнила это"
-
+                $ rel_nadya -= 2
                 show screen notification_popup
                 with dissolve
 
@@ -1807,6 +1925,7 @@ label second_day :
                 "Стрельнуть сижку, оторвать её от своей души." :
                     $ str_for_notification = "Надя запомнила это"
                     $ mood_counter += 1;
+                    $ rel_nadya += 2
                     show screen notification_popup_big
                     with dissolve
                     $ day2_nadya_het_one_sigarett = True
@@ -1814,11 +1933,12 @@ label second_day :
                 "Обойдешься без сиги." :
                     $ str_for_notification = "Надя запомнила это"
                     $ mood_counter -= 1;
+                    $ rel_nadya -= 2
                     show screen notification_popup_big
                     with dissolve
                     $ day2_nadya_het_one_sigarett = False
 
-            hide screen notification_popup
+            hide screen notification_popup_big
             with dissolve
 
             if day2_nadya_het_one_sigarett :
@@ -1890,6 +2010,7 @@ label second_day :
                 "Согласиться..." :
                     $ day2_choosen_instead_yuli = True
                     $ mood_counter += 1;
+                    $ rel_nadya += 1
                     $ str_for_notification = "Надя запомнила это"
 
                     show screen notification_popup_big
@@ -1923,7 +2044,7 @@ label second_day :
                     $ day2_choosen_instead_yuli = False
                     $ mood_counter -= 1;
                     $ str_for_notification = "Надя запомнила это"
-
+                    
                     show screen notification_popup_big
                     with dissolve
 
@@ -1945,7 +2066,7 @@ label second_day :
 
                     "Уже было достаточно поздно, поэтому недолго думая я решил отправиться прямиком к своему дому."
             
-            hide screen notification_popup
+            hide screen notification_popup_big
             with dissolve
     
     scene black scen
@@ -1996,11 +2117,9 @@ label second_day :
         sanya "Юля, я так хотел тебя услышать, мне очень тяжело сейчас."
         yuli "Саш, что случилось, я тебя искала, но так и не смогла найти. Где ты был?"
         sanya "Прости меня. Я был в парке, решил прогуляться после пар."
-        yuli "В следующий раз найди меня. Пойдем домой вместе, как раз узнаешь где я живу и вообще, мы можем почаще видеться."
+        yuli "В следующий раз найди меня. Пойдем домой вместе, как раз узнаешь где я живу. И вообще, мы можем почаще видеться."
         sanya "Спасибо, я очень рад это слышать. С этого дня мы будем ходить домой вместе."
-        yuli "Слушай, мне недавно приходило уведомление из универа, ты не хочешь съездить со мной в санаторий?"
-        sanya "Тебе тоже, я как раз туда собираюсь, завтра уже отъезд."
-        yuli "Ура, я знала что ты мне не откажешь."
+        
         "Следующие пятнадцать минут мы болтали о том, о сем."
         yuli "Саш, я никогда тебя не спрашивала, а когда у тебя день рождения?"
         sanya "Ха-ха, попробуй угадать, уверен у тебя не получится."
@@ -2224,7 +2343,7 @@ label second_day :
         "Поскорее бы настало завтра, я так хочу её увидеть."
         "Для меня она единственный лучик счастья в этом бренном мире."
         sanya "Может позвонить ей?"
-        sanya "Хотя уже поздно... Она, наверное, спит."
+        sanya "Хотя... уже поздно... Она, наверное, спит."
 
         "Затушив сигарету, я сразу лёг в кровать, надеясь, что завтра наступит как можно скорее."
 
@@ -2261,6 +2380,7 @@ label third_day :
     menu :
         "Юля" if not day1_pasha_kfc or day2_sanya_vote_for_ussr :
             $ mood_counter += 1;
+            $ rel_yuli += 3
             $ str_for_notification = "У этого действия будут последствия"
 
             show screen notification_popup_big
@@ -2274,6 +2394,8 @@ label third_day :
 
         "Надя" if day2_nadya_have_a_dialog :
             $ mood_counter += 1;
+            $ rel_nadya += 3
+
             $ str_for_notification = "У этого действия будут последствия"
 
             show screen notification_popup_big
@@ -2284,13 +2406,13 @@ label third_day :
             "Первым в голове возник образ Нади. Наше знакомство оказалось для меня неожиданностью. Мы встречались только один раз, но она всем видом показывала что я ей симпатичен."
 
         "Один" :
-            $ mood_counter -= 1;
+            $ mood_counter -= 5;
             $ str_for_notification = "У этого действия будут последствия"
 
             show screen notification_popup_big
             with dissolve
 
-            $ choise_lonly = True
+            $ choise_lonely = True
 
             "А ведь и ехать не с кем... Поеду тогда один."
 
@@ -2318,7 +2440,19 @@ label third_day :
 
     "Посплю пока. Главное не проспать остановку..."
 
-    call play_bus from _call_play_bus_1
+    screen bus_day3:
+        default bus_minigame = BusMinigameDisplayable(hi_score, 2)
+        add bus_minigame
+    window hide
+    call screen bus_day3
+
+    if int(_return) > int(hi_score):
+        scene black
+        centered "{size=+50}Новый рекорд!{/size}"
+        centered "{size=+50}Счёт: [_return]{/size}"
+
+
+    $ hi_score = max(hi_score, int(_return))
     
 
     "Снова тот же сон..."
@@ -2347,7 +2481,7 @@ label third_day :
     scene neew bus
     with fade
 
-    if choise_lonly :
+    if choise_lonely :
         if day2_nadya_have_a_dialog and (not day1_pasha_kfc or day2_sanya_vote_for_ussr or day1_yuli_agreed_after_kfc):
 
             show nadya angry at right
@@ -2373,7 +2507,20 @@ label third_day :
             sanya "Девочки, давайте не будем ссориться! Ляжем спать, погоняем автобус во сне..."
 
             window hide
-            call play_bus from _call_play_bus_2
+            screen bus_day0:
+                default bus_minigame = BusMinigameDisplayable(hi_score, 0)
+                add bus_minigame
+            
+            call screen bus_day0
+
+            if int(_return) > int(hi_score):
+                scene black
+                centered "{size=+50}Новый рекорд!{/size}"
+                centered "{size=+50}Счёт: [_return]{/size}"
+
+
+            $ hi_score = max(hi_score, int(_return))
+    
 
             "Проснувшись, автобус уже тронулся и я не застал Юлю на своём месте."
             "Я поднялся и прошёся по рядам... Нашёл Надю и обратился к ней"
@@ -2447,6 +2594,7 @@ label third_day :
                 nadya "Слушай, ты тоже не выспался? Давай поспим пока едем? Не могу соображать ничего, что ты говорил? Сплю уже"
 
             "Ну не надо делать вид, что ты идеальная и вся такая правильная - меня сейчас стошнит" :
+                $ rel_nadya -= 1
                 "Надя обиделась и мне пришлось отсесть. Не думаю, что мы серьезно поссорились."
                 jump _sanatorium
         
@@ -2489,15 +2637,17 @@ label third_day :
 
             menu :
                 "У нас ещё весь вечер впереди, Юлечка!" :
+                    $ rel_yuli += 1
                     stop music fadeout 0.3
                     play music "audio/sigma.mp3" volume 0.3
                     pause 4.0
 
                 "Эммм.... ну если только.... мне искусственное дыхание нужно будет......."  :
+                    $ rel_yuli -= 1
                     stop music fadeout 0.3
                     play music "audio/fail.mp3" volume 0.1
 
-                    centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth"
+                    centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth{/size}"
 
                     pause 4.0
         stop music fadeout 0.5 
@@ -2548,14 +2698,32 @@ label _alone :
     play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1 
 
     "Всё, что мне оставалось, - это молча смотреть в окно и наблюдать на проезжающие леса, дома,"
-    #call play_bus
+    
+    screen bus_day0:
+        default bus_minigame = BusMinigameDisplayable(hi_score, 0)
+        add bus_minigame
+
+    scene black with Fade(3.0, 0.0, 0.0)
+    $ hi_score = 1000
+    centered "{size=+24}Побейте рекорд в {color=#b23}1000 очков{/color}, чтобы избежать трагедии.{/size}"
+    window hide
+    call screen bus_day0
+
+    if int(_return) > int(hi_score):
+        scene black
+        centered "{size=+50}Новый рекорд!{/size}"
+        centered "{size=+50}Счёт: [_return]{/size}"
+        jump _sanatorium
+
+    $ hi_score = max(hi_score, int(_return))
+
     play sound "audio/diskoteka_avaria.mp3"
     extend " ИКАРУС????"
     window hide
 
     play music "audio/seven-summer.mp3" fadein 1.5 fadeout 1.5 volume 0.2
 
-    centered "{size=+24}Автобус попал в аварию.\nПогибло два человека.\nЕдинственный Пассажир и водитель."
+    centered "{size=+24}Автобус попал в аварию.\nПогибло два человека.\nЕдинственный Пассажир и водитель.{/size}"
     $ renpy.pause(1, hard=True)
     stop sound
     jump _end
@@ -2565,17 +2733,27 @@ label _sanatorium :
     scene black scen
     with dissolve
 
-    pause 2.0
+    pause 2.0   
+    
+    play music "audio/sound-in-bus.mp3" fadein 1.0 fadeout 2.0 volume 0.06
+    play sound "audio/forest-sound.mp3" fadein 3.0 fadeout 2.0 volume 0.06
 
-    "Мы наконец-то подъезжаем к \"Синереченску\" - санаторию, в котором мне придется провести целых две недели. Надеюсь, это будет стоить того."
 
-    scene sanatorium forest neer san
-    with dissolve
+    "Мы наконец-то подъезжаем к \"Новомысу\" - санаторию, в котором мне придётся провести целых две недели. Надеюсь, это будет стоить того."
 
-    "Красивая природа дала понять, что санаторий находится в глуши. Всё вокруг отдовало зелёными оттенками и говорило тебе о первозданности."
+    scene sanatorium forest neer san at truecenter with dissolve:
+        block:
+            linear 0.9 zoom 1.01 yalign 0.99
+            linear 0.9 zoom 1.0 yalign 1.0
+            repeat
+
+
+    "Красивая природа дала понять, что санаторий находится в глуши. Всё вокруг отдавало зелёными оттенками и говорило о первозданности."
     "Высокие и пушистые деревья рядом с обочиной заставляли каждую часть тела расслабиться, почувствовать себя свободным."
-    "Река, которая проходило под небольшим мостом текла в неизвестную мне даль, но я чувствовал потрясающий интерес к ней."
+    "Река, которая проходила под небольшим мостом, текла в неизвестную мне даль, я ощущал потрясающую энергетику этого удивительного места."
     "Наблюдая за этой природой, я не заметил, как мы начали заезжать на территорию санатория."
+    stop music fadeout 2.0
+    stop sound fadeout 2.0
 
     play sound "audio/bus.mp3" noloop fadein 1.5 fadeout 1.0 volume 0.1
     pause 2.0
@@ -2590,7 +2768,8 @@ label _sanatorium :
     play sound "audio/forest-sound.mp3" loop fadein 1.5 fadeout 3.0 volume 0.1
 
     "Конструктивный стиль, полный острых углов и кубических форм."
-    "Никаких архитектурных излишеств, но много зелени, клумб, серо-белые цвета бетонных строений."
+    "Никаких архитектурных излишеств, но много зелени, клумб"
+    "Серо-белые цвета бетонных строений."
     "Вся эта свистопляска буйной цветастой зелени, бесцветных стен, да и общая атмосфера легкой запущенности - все это веяло легкой меланхолией, словно весь этот санаторий - отражений моей жизни."
     "Человек из толпы" "Будто в прошлое попал!"
     "Не могу не согласиться, вид старенького санатория оставлял приятные, душевные чувства где-то в глубине меня."
@@ -2598,7 +2777,6 @@ label _sanatorium :
     "От него я наслышался о небывалой красоте и атмосферности тех самых, советских лагерей и санаториев."
     "Я мог часами слушать его рассказы о том, как он ходил в походы, играл в лапту, выступал на концертах, рисовал плакаты и мастерил всякие вещи в клубе электронщиков."
     "С тех пор, я мечтал посетить какой-нибудь пост-советский лагерь и окунуться в прошлое, но годы шли, а мечта всё отдалялась от меня."
-    "Я продолжил смотреть в окно автобуса, подскакивающего на редких ухабах давно не ремонтированной дороги, с нетерпением, дожидаясь нашего приезда."
     "Встав, я в числе первых вышел на воздух. Он мне показался необычайно свежим, видимо годы жизни в городе дали о себе знать."
     "Водитель уже открыл багажное отделение и, с неохотой,  доставал наши сумки, ставя их прямо на пыльный бетон."
     "Достав пачку чапмана и вынув сигарету, я сунул сладковатый фильтр в рот, планируя как следует затянуться после долгой дороги."
@@ -2612,7 +2790,7 @@ label _sanatorium :
     menu :
         "Жестко раскурить чапу" :
             $ day4_smoke_after_words_olga = True
-
+            $ rel_valeria -= 3
             "Поездка была настолько долгая, что отказать в сигаретке себе я никак не мог, даже не смотря на запрет со стороны вожатой."
             
             play sound "audio/cigarette.mp3" noloop fadein 0.5 fadeout 0.5
@@ -2638,7 +2816,7 @@ label _sanatorium :
             sanya "Мне пиздец..."   
 
             "От этого взгляда мурашки пошли по спине. Надеюсь она не заставит таскать мешки с сахаром по всему санаторию."
-            olga_dmitrievna "А сейчас давайте я вам проведу небольшую экскурсию, пока мы идем до ваших комнат."
+            olga_dmitrievna "А сейчас, давайте я вам проведу небольшую экскурсию, пока мы идем до ваших комнат."
 
             hide olga angry 
             with dissolve
@@ -2647,7 +2825,7 @@ label _sanatorium :
             $ day4_smoke_after_words_olga = False
 
             "Ольга Дмитриевна неодобрительно посмотрела на тех, кто ее проигнорировал и с вежливой улыбкой произнесла."
-            olga_dmitrievna "А сейчас давайте я вам проведу небольшую экскурсию, пока мы идем до ваших комнат."
+            olga_dmitrievna "А сейчас, давайте я вам проведу небольшую экскурсию, пока мы идем до ваших комнат."
 
             hide olga happy
             with dissolve
@@ -2666,8 +2844,10 @@ label _sanatorium :
 
     play sound "audio/forest-sound.mp3" loop fadein 1.0 fadein 2.0 volume 0.1
 
-    "Я плелся без особого энтузиазма, лениво поглядывая по сторонам, но вот семьи, молодые и не очень, с детьми и адекватные, весело шагали в ногу, следуя за энергичной сопровождающей."
-    "Среди всей когорты приехавших на лечение, было мало молодых, что тоже отнюдь не добавляло мне настроения. Провести пол месяца со старыми пердунами и молодыми парочками мне точно не улыбалось."
+    "Я плелся без особого энтузиазма, лениво поглядывая по сторонам, но вот семьи: молодые и не очень; с детьми и адекватные..."
+    "Весело шагали в ногу, следуя за энергичной сопровождающей."
+    "Среди всей когорты приехавших на лечение, было мало молодых, что тоже отнюдь не добавляло мне настроения."
+    "Провести пол месяца со старыми пердунами и молодыми парочками мне точно не улыбалось."
     "Старость, думал я, подступает незаметно. Как и всякая другая болезнь." 
     "Вот ты здоров, силен, молод и можешь выдуть чикушку за раз, а на утро выпить крепкого чаю и быть в строю."
     "А потом раз - и вот ты уже хрустишь коленками и боишься лишний раз наклониться, потому что темнеет в глазах." 
@@ -2678,23 +2858,20 @@ label _sanatorium :
 
     if day3_go_with_yuli :
         "Я незаметно оглянулся в поисках Юли, в мыслях уже готовый пригласить ее на совместное принятие грязевой ванны."
-    if day3_go_with_nadya :
-        "Я незаметно оглянулся в поисках Нади, в мыслях уже готовый пригласить ее на совместное принятие грязевой ванны."
-    
-    if day3_go_with_yuli :
         "Как бы я не крутил головой, никак не мог найти ее. Юли нигде видно не было. Может, она пошла к себе в комнату, минуя экскурсию? А может ей стало плохо?"
         "Гадать бессмысленно, в любом случае мы встретимся - санаторий небольшой. Может и вовсе процедуры проходить вместе будем, хе-хе..."
         "Но все равно неприятно, с ней бы в любом случае экскурсия была бы веселее."
         "Разочарованно вздохнув, я ускорил шаг, догоняя наш отряд молодых и не очень. Поправив рюкзак, с еще более дерьмовым настроением, поплелся в самом конце."
-
-    if day3_go_with_nadya :
+    elif day3_go_with_nadya :
+        "Я незаметно оглянулся в поисках Нади, в мыслях уже готовый пригласить ее на совместное принятие грязевой ванны."
         $ mood_counter -= 1
-        "Найдя искомую в компании какого-то парня, я приветливо махнул ей. Надя помахала в ответ, и продолжила щебетать с этим пацанчиком, что в довесок со своей сумкой, тянул и ее вещи. Что-то не помню его в автобусе."
+        "Найдя искомую в компании какого-то парня, я приветливо махнул ей." 
+        "Надя помахала в ответ, и продолжила щебетать с этим пацанчиком, что в довесок со своей сумкой, тянул и ее вещи. Что-то не помню его в автобусе."
         "Где-то под сердцем неприятно затянуло, а изнутри начала подниматься тихая волна жгучей злобы. Но я тут же одернул себя, немного удивившись порыву."
         "Мы с ней даже толком не знакомы, что это я тут начал. К тому же, не факт, что это ее парень."
         "Может знакомый или родственник? Да и вообще какое мне дело!"
         "Потряся головой, словно отгоняя наваждение, я поправил рюкзак и с еще более дерьмовым настроением, поплелся в самом конце."
-
+           
     "Фоном неслась складная, явно много раз произнесенная речь Ольги Дмитриевны."
     "Там мелькали объяснения режима, правил и процедур, но я особо не слушал, обращая внимание больше на окружение."
     "В конце концов, мне тут жить еще пару недель."
@@ -2776,7 +2953,6 @@ label _sanatorium :
     with Dissolve(1.0)
  
     show olga olga happy:
-        ypos 0.1
         linear 0.1 xalign 0.1
     with Dissolve(0.5)
 
@@ -2977,7 +3153,7 @@ label _sanatorium :
             with dissolve
             
             play music "audio/skin_music.mp3" fadein 5.0 fadeout 2.0 volume 0.2
-            skin "Тихо, блять, ты мешаешь моему слиянию с бесконечно вечным!"
+            skin "Тихо, блядь! ты мешаешь моему слиянию с бесконечно вечным!"
             "Знатненькой прихуев с такого приветствия, я пробурчал извинения и виновато прошел к свободной кровати, поставив сумку."
             
             hide skin
@@ -2985,8 +3161,8 @@ label _sanatorium :
             
             "Заебись, из огня да в полымя, охуенно переселился. "
             "Раскладывая свои вещи, я украдкой посматривал на скинхеда. "
-            "Выглядел он, конечно, колоритно. Кожаная жилетка на голое тело, джинсы, толстенная серьга в ухе и абсолютно лысый череп. "
-            "Находится в комнате с этим чудаком было не очень комфортно, решение переселиться от вонючего, но обычного алкаша уже не выглядело хорошим. "
+            "Выглядел он, конечно, колоритно. Кожанка на чёрную кофту, джинсы, абсолютно лысый череп. "
+            "Находиться в комнате с этим чудаком было не очень комфортно. Решение переселиться от вонючего, но заурядного алкаша, уже не выглядело хорошим. "
             
             show skin angry
             with dissolve
@@ -2994,7 +3170,7 @@ label _sanatorium :
             skin "Да бля, че ты на меня зыришь?"
             "От неожиданности я вновь оторопел, не зная, что ответить. Он же с закрытыми глазами был, как он увидел?"
             skin "Ладно, бля, похуй..." 
-            "Он резко вскочил с кровати и замер в странной позе, постояв так пару секунд он потянулся, хрустнув костями, и неожиданно протянул руку."
+            "Он резко вскочил с кровати и замер в странной позе, постояв так пару секунд, он потянулся, хрустнув костями, и неожиданно протянул руку."
 
             show skin neutral
             with dissolve
@@ -3005,7 +3181,7 @@ label _sanatorium :
             sanya "Здрав..." 
             "Вот это имечко конечно.."
             skin "Располагайся, че замер-то, помочь чем что ли?"
-            "Я осознал, что я неприлично долго разглядываю своего необычного соседа, так что одернув руку (резче, чем хотелось бы) и буркнул:"
+            "Я осознал, что я неприлично долго разглядываю своего необычного соседа, так что резко одернув руку, я буркнул:"
             sanya "Все нормально, я сам как-нибудь."
             "Развернувшись, я продолжил разбирать свои вещи, стараясь сделать это как можно быстрее, чтобы смыться из комнаты на обед."
 
@@ -3014,7 +3190,7 @@ label _sanatorium :
 
             skin "Странный ты какой-то..."
             "На себя посмотри, древняя реликвия... Вслух я это, конечно, не сказал. "
-            skin "О, я тебя вспомнил, ты с кислой мордой шел позади всех на экскурсии"
+            skin "О, я тебя вспомнил, ты с кислой мордой шел позади всех на экскурсии."
             sanya "Ну, было дело..."
             skin "А все потому, что у тебя энергетика загрязнена!" 
             sanya "Чего?"
@@ -3022,14 +3198,14 @@ label _sanatorium :
             "Он чуть ли не с головой зарылся в свою сумку, увлеченно там что-то разыскивая."
             sanya "Слабительное что ли?"
             skin "Во!"
-            "Он воздел в руку в потолок, в ней было зажато что-то, что было подозрительно похоже на самокрутку..."
+            "Он воздел руку в потолок, в ней было зажато что-то, что было подозрительно похоже на самокрутку..."
 
-            skin "По древним рецептам наших славных предков! Сушеные листья клена, береза, акации и куча разных полезных трав! Вмиг встанешь на ноги!"
+            skin "По древним рецептам наших славных предков! Сушеные листья клена, березы, акации и куча разных полезных трав! Вмиг встанешь на ноги!"
             
             "Это он мне древнерусский косячок предлагает?"
 
             menu :
-                "Жетско затянуться" :
+                "Жестко вспомнить предков" :
                     $ day4_smoke_old_siggarete = True
                     $ day4_take_pill = True
                     $ str_for_notification = "У этого действия будут последствия"
@@ -3053,11 +3229,11 @@ label _sanatorium :
                     sanya "И где ты эти рецепты откопал?"
                     "Не то, чтобы мне было интересно, но иногда забавно слушать вот таких вот... индивидов. Мыкало, услышав вопрос по теме, радостно начал объяснять."
                     skin "Я когда у бабушки на чердаке убирался, одну книгу нашел, можно сказать, манускрипт!"
-                    extend "Русскими рунами писано было, Родом клянусь! И бумага такая, будто из кожи сделана, ну ты понимаешь о чем я..."
+                    extend " Русскими рунами писано было, Родом клянусь! И бумага такая, будто из кожи сделана, ну, ты понимаешь, о чем я..."
                     sanya "Ну как сказать..."
                     skin "Короче, я на один форум зашел, там мне все и объяснили. Сказали, это древний травник, возможно, созданный еще при рюриковичах, представь!"
                     sanya "А ты, оказывается, не один такой..."
-                    skin "Вот, я его изучил поподробнее, там некоторые слова понятны были, и понял, что медицина в сравнении с этим - чепуха полная! Вот ты знал, что все проблемы со здоровьем от нестабильной связи с землей идут?"
+                    skin "Вот, я его изучил поподробнее, там некоторые слова понятны были, и понял, что медицина в сравнении с этим - чепуха полная! Ты знал, что все проблемы со здоровьем - от нестабильной связи с землей идут?"
                     sanya "Ну хоть не с Нибиру..."
                     skin "Я тоже сначала смеялся, а потом попробовал - и прозрел!"
                     
@@ -3078,7 +3254,7 @@ label _sanatorium :
                     play sound "audio/cigarette.mp3" noloop fadein 0.2 fadeout 0.2
                     pause 3.0
 
-                    "Я достал из кармана жигу, и чиркнув кремнем подпалил краешек травяной папиросы."
+                    "Я достал из кармана жигу и, чиркнув кремнем, подпалил краешек травяной папиросы."
                     "По комнате распространился запах горелой травы, но не то, чтобы он неприятно пах. Ободренный этим фактом, я затянулся. "
                     
                     play sound "audio/pavel_cough.mp3" noloop fadein 0.1 fadeout 0.1
@@ -3087,7 +3263,7 @@ label _sanatorium :
                     "Легкие обожгло огнем, а в голове зашумело. Кашель был настолько сильный, что меня чуть не вырвало. "
                     extend "Дышать я не мог, так что очень скоро начал задыхаться."
                     skin "Ой, я тебе, кажется, не ту дал! Щас, подожди... Где же она..."
-                    "Он под мой нестерпимый кашель вновь принялся копаться в своей сумке, и в скором времени извлек оттуда новую скрутку. "
+                    "Под мой нестерпимый кашель он вновь принялся копаться в своей сумке, и в скором времени извлек оттуда новую скрутку. "
                     
                     play sound "audio/pavel_cough.mp3" noloop fadein 0.1 fadeout 0.1
                     
@@ -3109,7 +3285,7 @@ label _sanatorium :
                     
                     "Ох-х-х, как же мне хуево..."
                     "Перед глазами все вертелось и кружилось, а во рту будто бы насрали кошки. Причем несколько раз."
-                    "Легкие болели так, будто бы его прострелили. Нахуй я согласился?.. Щас бы сидел в столовой, пил чаек с девчонками и в ус не дул."
+                    "Легкие болели так, будто бы их прострелили. Нахуй я согласился?.. Щас бы сидел в столовой, пил чаек с девчонками и в ус не дул."
 
                     scene medicina
                     with Fade(0.4, 0.5, 0.4, color="#000")
@@ -3733,6 +3909,9 @@ label _sanatorium :
     stop music fadeout 2.0 
     
     if day4_take_pill:
+
+        play music "audio/love_music.mp3" fadein 1.0 fadeout 2.0 volume 0.4
+
         "По пути на процедуры, вспомнил про таблетку. Забежав в столовую, кинул ее в рот и запил водой из под крана."
         
         "Ну вот! Другое дело, теперь можно и в грязевую ванную залезть, и зонд в жопу засунуть."
@@ -4045,7 +4224,7 @@ label _sanatorium :
                         "Эмилия на это лишь грустно улыбнулась, медленно покачав головой."
                         "Поняв, что это не лучшая тема для разговора, я поспешил ее сменить."
                         sanya "А шаурму ты ела?"
-                        "Еба-а-а-а-а, а а еще тупее вопрос не мог задать?"
+                        "Еба-а-а-а-а, а еще тупее вопрос не мог задать?"
                         "Девушка смутилась, став расправлять складки платья на коленях."
 
                         show emily green happy
@@ -4070,10 +4249,10 @@ label _sanatorium :
                         emili "Надеюсь, мы сможем видеться, когда я вернусь на учебу..."
                         sanya "Пф! Конечно! Как говориться, кто школу... " 
                         extend "то есть универ не гулял, тот жизни не видал! " 
-                        extend "В конце, концов, впереди новогодние каникулы, да и выходные есть."
+                        extend "В конце концов, впереди новогодние каникулы, да и выходные есть."
                         emili "Ну да."
                         "Эмилия вновь улыбнулась, но глаза ее остались грустными."
-                        "Не желая больше расстраивать новую знакомую, я перевел разговор на более приятные темы. Но зарубку себе в памяти сделал - во что бы то не стало найти Эмилию после санатория и угостить ее шаурмой!"
+                        "Не желая больше расстраивать новую знакомую, я перевел разговор на более приятные темы. Но зарубку себе в памяти сделал - во что бы то ни стало, найти Эмилию после санатория и угостить ее шаурмой!"
 
                         hide emily
 
@@ -4471,7 +4650,7 @@ label _sanatorium :
         sanya "кх-къх"
 
         "Крик застрял в горле."
-        "Воздух сгустился и перестал быть прозрачным. Черные щупальца потянулись ко мне их тумана, в который он превратился."
+        "Воздух сгустился и перестал быть прозрачным, превратившись в туман. Из него потянулись черные щупальца."
         "Дыхание становилось быстрее и быстрее с каждой секундой. Сердце, казалось, сломает грудную клетку."
         "Туман подползал ближе. Лицо Юли становилось ближе."
         
@@ -4483,7 +4662,7 @@ label _sanatorium :
             ypos 1.3
         with dissolve 
 
-        "Паническая атака накрыла с головой и я забыл как дышать. Чувства отключились и я словно попал в сонный паралич."
+        "Паническая атака накрыла с головой. Я забыл, как дышать. Чувства отключились, я словно попал в сонный паралич."
         "Перед глазами - мертвое лицо Юли."
         "Кислородное голодание - я теряю сознание."
         hide screen toska
@@ -4497,6 +4676,9 @@ label _sanatorium :
         jump _day5
 
 label _day5 :
+
+    scene black
+    with dissolve
 
     if day4_suicide :
         "Утро красит нежным светом... стены санатория. На новом месте спалось неплохо. Хотя ночь выдалась... Не самой приятной."
@@ -4614,7 +4796,11 @@ label _day5 :
 
         stop music
     
+<<<<<<< HEAD
     if not day4_go_with_emili:
+=======
+    if not day4_go_with_emili and (day4_drink or not day4_drink) and day4_take_pill :
+>>>>>>> 694bdf567d5832adeab2e5fa3ba17f96c2a25a78
         "Утро красит нежным светом... стены санатория. На новом месте спалось неплохо. Хотя ночь выдалась... Не самой приятной."
         "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
 
@@ -4659,13 +4845,13 @@ label _end :
     
     pause 5.0
 
-    centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth,\nArtsBer,\nJuravl"
-    centered "{size=+24}Asind:\nМини-игры, арты, музыка, диалоги первого дня."
-    centered "{size=+24}DarlingInSteam:\nИмплементация сценария в код, арты, музыка, диалоги второго дня."
-    centered "{size=+24}Danilka108:\nМини-игры, работа с нейросетью, покушал."
-    centered "{size=+24}TheNorth:\nСценарий, диалоги второго и третьего дня.\nКод, сценарий, звуки четвертого дня.\nБог, блять"
-    centered "{size=+24}Xpomin:\nСобрал шкаф, собрал компьютер, сценарий, диалоги второго и третьего дня."
-    centered "{size=+24}ArtsBer:\nУстал, писал сценарий, устал писать сценарий."
-    centered "{size=+24}Juravl:\nФоновые звуки, саунды."
-    centered "{size=+24}В разделе \"Об игре\" можно найти ссылку на репозиторий GitHub."
-    centered "{size=+24}Спасибо за прохождение данной новеллы. Мы благодарны за Ваше внимание."
+    centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth,\nArtsBer,\nJuravl{/size}"
+    centered "{size=+24}Asind:\nМини-игры, арты, музыка, диалоги первого дня.{/size}"
+    centered "{size=+24}DarlingInSteam:\nИмплементация сценария в код, арты, музыка, диалоги второго дня.{/size}"
+    centered "{size=+24}Danilka108:\nМини-игры, работа с нейросетью, покушал.{/size}"
+    centered "{size=+24}TheNorth:\nСценарий, диалоги второго и третьего дня.\nКод, сценарий, звуки четвертого дня.\nБог, блять{/size}"
+    centered "{size=+24}Xpomin:\nСобрал шкаф, собрал компьютер, сценарий, диалоги второго и третьего дня.{/size}"
+    centered "{size=+24}ArtsBer:\nУстал, писал сценарий, устал писать сценарий.{/size}"
+    centered "{size=+24}Juravl:\nФоновые звуки, саунды.{/size}"
+    centered "{size=+24}В разделе \"Об игре\" можно найти ссылку на репозиторий GitHub.{/size}"
+    centered "{size=+24}Спасибо за прохождение данной новеллы. Мы благодарны за Ваше внимание.{/size}"
