@@ -4614,11 +4614,11 @@ label _day5 :
 
         stop music
     
-    if not day4_go_with_emili and (day4_drink or not day4_drink) :
+    if not day4_go_with_emili:
         "Утро красит нежным светом... стены санатория. На новом месте спалось неплохо. Хотя ночь выдалась... Не самой приятной."
         "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
 
-        if day4_move and (day4_smoke_old_siggarete or not day4_smoke_old_siggarete) :
+        if day4_move:
 
             scene sanatorium dormitory room
             with dissolve
