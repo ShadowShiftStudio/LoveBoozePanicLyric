@@ -9,6 +9,7 @@ define pavel = Character('Павел Геннадьевич ', color="#ffb4aa")
 define skin = Character('Мыкало ', color="#e1ffaa")
 define noname = Character('Незнакомец ', color="#4d4d4d")
 define emili = Character('Эмилия', color="#e28cd7")
+
 init:
 
     python:
@@ -110,9 +111,9 @@ define day4_siggaret_or_room = False
 define day4_suicide = False
 define day4_go_with_emili = False
 define day4_fight = False
-define choice_yulia = False
-define choice_nadya = False
-define choise_lonely = False
+define day3_choice_yulia = False
+define day3_choice_nadya = False
+define day3_choise_lonely = False
 define mood_counter = 0
 
 define rel_yuli = 0
@@ -2430,7 +2431,7 @@ label third_day :
             show screen notification_popup_big
             with dissolve
 
-            $ choice_yulia = True
+            $ day3_choice_yulia = True
 
             "Первым в голове возник образ Юли. Вчерашняя прогулка оставила приятное послевкусие."
             "Я и не ожидал что мы всего за пару дней так сблизимся, мы удачно совпали характерами, временами мне кажется, что мы с ней очень похожи."
@@ -2445,7 +2446,7 @@ label third_day :
             show screen notification_popup_big
             with dissolve
 
-            $ choice_nadya = True
+            $ day3_choice_nadya = True
 
             "Первым в голове возник образ Нади. Наше знакомство оказалось для меня неожиданностью. Мы встречались только один раз, но она всем видом показывала что я ей симпатичен."
 
@@ -2456,7 +2457,7 @@ label third_day :
             show screen notification_popup_big
             with dissolve
 
-            $ choise_lonely = True
+            $ day3_choise_lonely = True
 
             "А ведь и ехать не с кем... Поеду тогда один."
 
@@ -2525,7 +2526,7 @@ label third_day :
     scene neew bus
     with fade
 
-    if choise_lonely :
+    if day3_choise_lonely :
         if day2_nadya_have_a_dialog and (not day1_pasha_kfc or day2_sanya_vote_for_ussr or day1_yuli_agreed_after_kfc):
 
             show nadya angry at right
@@ -2612,7 +2613,7 @@ label third_day :
             jump _alone
 
 
-    elif choice_nadya :
+    elif day3_choice_nadya :
 
         sanya "Привет, в этот раз запаслась чапой? А то мне кажется я взял маловато!"
 
@@ -2645,7 +2646,7 @@ label third_day :
 
         jump _sanatorium
 
-    elif choice_yulia :
+    elif day3_choice_yulia :
 
         $ is_bad_ask = False
 
@@ -2874,7 +2875,7 @@ label _sanatorium :
             hide valeria happy
             with dissolve
         
-        "Снести кабину" if choise_lonely :
+        "Снести кабину" if day3_choise_lonely :
             $ day4_smoke_after_words_valeria = True
             $ rel_valeria -= 10
             
@@ -2932,13 +2933,13 @@ label _sanatorium :
     "Вот и я, как и эти старые пердуны, незаметно для себя постарел. В их естественной среде обитания комфортно себя чувствую, буду те же процедуры что и они проходить."
     "Ну, рядом хотя бы есть парочка жгучих красоток, которые вполне могут скрасить мои оздоровительные процедуры. А может и дополнить их... Хе-хе.  "
     play music "audio/life_blossom.mp3" fadein 2.5 fadeout 3.0 volume 0.3
-    if choice_yulia :
+    if day3_choice_yulia :
         "Я незаметно оглянулся в поисках Юли, в мыслях уже готовый пригласить ее на совместное принятие грязевой ванны."
         "Как бы я не крутил головой, никак не мог найти ее. Юли нигде видно не было. Может, она пошла к себе в комнату, минуя экскурсию? А может ей стало плохо?"
         "Гадать бессмысленно, в любом случае мы встретимся - санаторий небольшой. Может и вовсе процедуры проходить вместе будем, хе-хе..."
         "Но все равно неприятно, с ней бы в любом случае экскурсия была бы веселее."
         "Разочарованно вздохнув, я ускорил шаг, догоняя наш отряд молодых и не очень. Поправив рюкзак, с еще более дерьмовым настроением, поплелся в самом конце."
-    elif choice_nadya :
+    elif day3_choice_nadya :
         "Я незаметно оглянулся в поисках Нади, в мыслях уже готовый пригласить ее на совместное принятие грязевой ванны."
         $ mood_counter -= 1
         "Найдя искомую в компании какого-то парня, я приветливо махнул ей." 
@@ -4063,7 +4064,8 @@ label _sanatorium :
                 extend "Исчезновение Юли больно ударило по настроению и самооценке, что сказывалось и на \"светлости моего лика\"."
                 "Думаю, такой хмурой рожи у меня давненько не было. Наверное, если я посмотрюсь в зеркало - оно треснет нахуй."
                 
-                play music "audio/life_blossom.mp3" fadein 3.0 fadeout 0.5 volume 0.6                                    
+                play music "audio/life_blossom.mp3" fadein 3.0 fadeout 0.5 volume 0.6  
+
                 noname "Извини, у тебя что-то случилось?"
                 "Тоненький голосок, раздавшийся сзади, застал меня врасплох. Неловко дернувшись, я обернулся."
 
@@ -4147,9 +4149,11 @@ label _sanatorium :
                             "Нужно просто осознать..."
 
                             stop music
+
                             jump _day5
 
                         else:
+
                             scene sanatorium alcove
                             with Fade(0.2, 0.3, 0.2, color="#000")
                             
@@ -4243,6 +4247,7 @@ label _sanatorium :
                             "Жить - пиздато. Пизже некуда."
                             
                             stop music fadeout 3.0
+
                             jump _day5
 
                     "Может... Поболтать?" :
@@ -4352,6 +4357,7 @@ label _sanatorium :
                         "Жизнь - продолжается!"
 
                         stop music fadeout 2.0
+
                         jump _day5
 
             else :
@@ -4362,10 +4368,13 @@ label _sanatorium :
                 
                 scene sanatorium walkway
                 with Fade(0.4, 0.3, 0.7, color="#000")
+
                 pause 2
                 
                 play sound "audio/door_open.mp3" noloop fadein 0.3 fadeout 0.3
+
                 pause 1.0
+
                 play sound "audio/door_close.mp3" noloop fadein 0.3 fadeout 0.3
 
                 scene sanatorium dormitory room
@@ -4376,14 +4385,18 @@ label _sanatorium :
                 extend "Пройдя на балкон, я упал в кресло и достал последнюю сигарету чапы."
 
                 play sound "audio/door_open.mp3" noloop fadein 0.3 fadeout 0.3
+
                 pause 1.0
+
                 play sound "audio/door_close.mp3" noloop fadein 0.3 fadeout 0.3
 
                 scene sanatorium balcony night
                 with Fade(0.3, 0.4, 0.3, color="#000")
 
                 play music "audio/love_music.mp3" fadein 1.5 fadeout 2.5 volume 0.25
+
                 play sound "audio/cigarette.mp3" noloop fadein 0.2 fadeout 0.2
+
                 pause 2.0
 
                 "Смеркалось. Был поздний вечер и солнце уже почти закатилось за горизонт. "
@@ -4402,6 +4415,7 @@ label _sanatorium :
                 "Можно ли это назвать жизнью после смерти? Нет. Очевидно, что нет."
 
                 play sound "audio/cigarette_one_shot.mp3" noloop fadein 0.2 fadeout 0.2
+
                 "От сигареты осталась половина."
                 "Звезд на небе стало больше."
                 "Я подошел к краю балкона."
@@ -4411,7 +4425,9 @@ label _sanatorium :
                 "Каждый день по восемь часов пахать, чтобы в конце месяца получить зарплату. Потом слить ее быстрые удовольствия и все по новой."
                 "У меня нет хобби, нет собственной семьи, да и появится она вообще у меня?"
                 "Та девушка, с которой я действительно захочу прожить жизнь. А не вариант попроще, как у сотен других."
+
                 play sound "audio/cigarette_one_shot.mp3" noloop fadein 0.2 fadeout 0.2
+
                 "Какое же дерьмо... Двадцать лет жизни... Кажется, так мало, только начал жить, но по факту... Кажется, я уже заруинил свои характеристики персонажа и мне придётся жить на костылях всю мою жизнь. "
                 "Или не придется?"
                 "Сигарета почти догорела, бычок жег пальцы, но я не обратил на это внимание."
@@ -4420,9 +4436,11 @@ label _sanatorium :
                 "Я просто хочу, чтобы все это закончилось. Может даже сейчас."
                 
                 stop music fadeout 3.0
+
                 "Просто перенести усилие чуть вперед и мое бессмысленное существование наконец закончиться."
 
                 play music "audio/heart.mp3" fadein 1.0 fadeout 2.0 volume 0.2
+
                 show screen toska
                 
                 menu :
@@ -4439,10 +4457,13 @@ label _sanatorium :
                     
                     hide screen toska
                     with dissolve
+
                     stop music fadeout 0.5
                     
                     play music "audio/fall.mp3" fadein 0.3 fadeout 0.5 volume 0.3
+
                     pause 1.0
+
                     stop music
                     
                     "Я дернулся назад от неожиданности. Бычок улетел в темноту."
@@ -4450,7 +4471,9 @@ label _sanatorium :
                     "Вытерев их о штаны, я поспешил в кровать."
                     
                     play sound "audio/door_open.mp3" noloop fadein 0.3 fadeout 0.3
+
                     pause 1.0
+
                     play sound "audio/door_close.mp3" noloop fadein 0.3 fadeout 0.3
     
                     scene sanatorium dormitory room
@@ -4465,7 +4488,9 @@ label _sanatorium :
                     sanya "Блять!.."
                     
                     play sound "audio/door_open.mp3" noloop fadein 0.3 fadeout 0.3
+
                     pause 1.0
+
                     play sound "audio/door_close.mp3" noloop fadein 0.3 fadeout 0.3
 
                     hide screen toska
@@ -4483,8 +4508,10 @@ label _sanatorium :
 
                     jump _day5
         else:
+
             "Процедуры оказались..."
             extend "довольно приятными."
+
             play music "audio/love_music.mp3" fadein 2.0 fadeout 2.0 volume 0.3
             
             scene sanatorium evening park
@@ -4494,6 +4521,7 @@ label _sanatorium :
             "А также прочие приколдесы, после которых ты чувствуешь себя человеком."
             
             play sound "audio/footsteps_asphalt.mp3" noloop fadein 0.2 fadeout 0.2
+
             "Расслабленный, отдохнувший и довольный я шел по парку в сторону курилки, намереваясь шлифануть все ароматной сигареткой чапмана, и провести время в компании прекрасной девушки."
                         
             "Эх, жить хорошо и жизнь хороша!"
@@ -4606,6 +4634,7 @@ label _sanatorium :
 
             jump _day5
     else:
+
         "Процедуры оказались... "
         extend "довольно приятными."
         "Горячая сауна, грязевая ванна, массажик, пускай делала его и не сексапильная девочка, а огромная женщина, руки которой были толщиной с мою голову."
@@ -4622,6 +4651,7 @@ label _sanatorium :
         noname "Скучал?"
 
         play music "audio/love_music.mp3" fadein 4.0 fadeout 2.0 volume 0.3
+
         show yuli greeting
         with dissolve
 
@@ -4765,7 +4795,7 @@ label _day5 :
         "Утро красит нежным светом... стены санатория. На новом месте спалось неплохо. Хотя ночь выдалась... Не самой приятной."
         "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
         
-        if day4_move and (day4_smoke_old_siggarete or not day4_smoke_old_siggarete) :
+        if day4_move :
 
             scene sanatorium dormitory room
             with dissolve
@@ -4805,7 +4835,7 @@ label _day5 :
         "Утро красит нежным светом... стены санатория. На новом месте спалось неплохо. Хотя ночь выдалась... Не самой приятной."
         "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
 
-        if day4_move and (day4_smoke_old_siggarete or not day4_smoke_old_siggarete) :
+        if day4_move :
 
             scene sanatorium dormitory room
             with dissolve
@@ -4840,10 +4870,11 @@ label _day5 :
         stop music
     
     if day4_go_with_emili :
+
         "Утро красит нежным светом... стены санатория. На новом месте спалось неплохо. Хотя ночь выдалась... Не самой приятной."
         "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
 
-        if day4_move and (day4_smoke_old_siggarete or not day4_smoke_old_siggarete) :
+        if day4_move :
 
             scene sanatorium dormitory room
             with dissolve
@@ -4878,6 +4909,7 @@ label _day5 :
         stop music
     
     if not day4_go_with_emili:
+
         "Утро красит нежным светом... стены санатория. На новом месте спалось неплохо. Хотя ночь выдалась... Не самой приятной."
         "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
 
@@ -4914,7 +4946,6 @@ label _day5 :
         "Хотя ночами и утром было довольно прохладно. Листья пока только начали желтеть и в основном везде было зелено. Красота!"
 
         stop music
-
     
 label _end :
     scene black scen
