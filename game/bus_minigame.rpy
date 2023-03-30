@@ -163,7 +163,7 @@ init python:
             self.lines = [CarsLine(speed, road)]
 
         def calc_distance_step(self, speed):
-            return 0.7 + 0.1*speed
+            return 0.3 + 0.1*speed
 
         def render(self, r, width, height, st, at):
             for line_i in range(0, len(self.lines)):
@@ -223,7 +223,7 @@ init python:
             self.image = Image("bus top view.png")
             self.prev_track_i = 1
             self.curr_track_i = 1
-            self.counter_step_factor = 1.2
+            self.counter_step_factor = 1.5
             self.track_counter = PercentCounter(speed * self.counter_step_factor, 100, False)
             self.max_track_index = 2
 
@@ -238,7 +238,7 @@ init python:
             bus = renpy.render(transformed_bus, width, height, st, at)
 
             ypos = self.road.ypos() + (self.road.height() / 3 - bus.height) / 2 + (self.prev_track_i + (self.curr_track_i - self.prev_track_i) * self.track_counter.percent_val()) * self.road.height() / 3
-            xpos = width - bus.width
+            xpos = width - bus.width - 30
 
             r.blit(bus, (xpos, ypos))
             self.track_counter.next()
@@ -298,7 +298,7 @@ init python:
             self.score_step = 1
             self.score_increase_timer = PercentCounter(10)
 
-            self.speed = 5
+            self.speed = 4
 
             self.prev_time = None
             self.background = Background(self.speed, textures_index)
@@ -337,7 +337,7 @@ init python:
             self.score_increase_timer.next()
             if self.score_increase_timer.percent_val() == 0:
                 self.score += self.score_step
-                self.speed += self.score_step / 100
+                self.speed += (self.score_step / 100 * max(1, self.score/500))
 
                 self.road.update_speed(self.speed)
                 self.background.update_speed(self.speed)
