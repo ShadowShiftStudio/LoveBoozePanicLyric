@@ -4834,7 +4834,7 @@ label _day5 :
         stop music
 
     #пока нет продолжения в сюжете
-    if not day4_go_with_emili:
+    elif not day4_go_with_emili:
 
         "Утро красит нежным светом... стены санатория. На новом месте спалось неплохо. Хотя ночь выдалась... Не самой приятной."
         "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
@@ -4873,86 +4873,87 @@ label _day5 :
 
         stop music
 
-label day5_nadya :
-    "Утро красит нежным светом... стены санатория. "
-    extend "На новом месте спалось неплохо. "
-    extend "Хотя ночь выдалась... Не самой приятной."
-    "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
+    elif day4_go_with_emili :
 
-    if day4_move and not day4_fight:
-        scene sanatorium skin dormitory room
-        with Fade(0.3, 0.4, 0.3, color="#000")
+        "Утро красит нежным светом... стены санатория. "
+        extend "На новом месте спалось неплохо. "
+        extend "Хотя ночь выдалась... Не самой приятной."
+        "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
 
-        play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
-        "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. "
-        extend "Встав с кровати, я протер веки. "
-        extend "На соседней кровати похрапывал Мыкало."
-    else :
-        scene sanatorium dormitory room
-        with Fade(0.3, 0.4, 0.3, color="#000")
+        if day4_fight :
 
-        play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
-            
-        "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. "
-        extend "Встав с кровати, я протер веки. "
-        extend "На соседней кровати похрапывал Павел Геннадьевич."
-        
-    "Потянувшись, я вышел на балкон."
+            scene sanatorium dormitory room
+            with dissolve
 
-    play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 0.3
+            play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
+            "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. "
+            extend "Встав с кровати, я протер веки. "
+            extend "На соседней кровати похрапывал Мыкало."
 
-    scene sanatorium balcony
-    with Fade(0.3, 0.4, 0.3, color="#000")
+        else :
 
-    "Прохладный свежий воздух взбодрил. "
-    extend "Пускай сейчас начало сентября, но погода держалась все еще летняя."
-    "Хотя ночами и утром было довольно прохладно. "
-    extend "Листья пока только начали желтеть и в основном везде было зелено. "
-    extend "Красота!"
+            scene sanatorium skin dormitory room
+            with dissolve
 
-    stop music
+            play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
+            "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. "
+            extend "Встав с кровати, я протер веки. "
+            extend "На соседней кровати похрапывал Павел Геннадьевич."
 
-label day5_emili :
-    "Утро красит нежным светом... стены санатория. "
-    extend "На новом месте спалось неплохо. "
-    extend "Хотя ночь выдалась... Не самой приятной."
-    "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
+        "Потянувшись, я вышел на балкон."
 
-    if day4_fight :
+        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 2.5
 
-        scene sanatorium dormitory room
+        scene sanatorium balcony
         with dissolve
 
-        play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
-        "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. "
-        extend "Встав с кровати, я протер веки. "
-        extend "На соседней кровати похрапывал Мыкало."
-            
-    else :
-            
-        scene sanatorium skin dormitory room
-        with dissolve
+        "Прохладный свежий воздух взбодрил. "
+        extend "Пускай сейчас начало сентября, но погода держалась все еще летняя."
+        "Хотя ночами и утром было довольно прохладно. "
+        extend "Листья пока только начали желтеть и в основном везде было зелено. " 
+        extend "Красота!"
 
-        play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
-        "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. "
-        extend "Встав с кровати, я протер веки. "
-        extend "На соседней кровати похрапывал Павел Геннадьевич."
+        stop music
 
-    "Потянувшись, я вышел на балкон."
+    elif day4_nadya_meal :
 
-    play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 2.5
+        "Утро красит нежным светом... стены санатория. "
+        extend "На новом месте спалось неплохо. "
+        extend "Хотя ночь выдалась... Не самой приятной."
+        "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
 
-    scene sanatorium balcony
-    with dissolve
+        if day4_move and not day4_fight:
+            scene sanatorium skin dormitory room
+            with Fade(0.3, 0.4, 0.3, color="#000")
 
-    "Прохладный свежий воздух взбодрил. "
-    extend "Пускай сейчас начало сентября, но погода держалась все еще летняя."
-    "Хотя ночами и утром было довольно прохладно. "
-    extend "Листья пока только начали желтеть и в основном везде было зелено. " 
-    extend "Красота!"
+            play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
+            "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. "
+            extend "Встав с кровати, я протер веки. "
+            extend "На соседней кровати похрапывал Мыкало."
+        else :
+            scene sanatorium dormitory room
+            with Fade(0.3, 0.4, 0.3, color="#000")
 
-    stop music
+            play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
 
+            "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. "
+            extend "Встав с кровати, я протер веки. "
+            extend "На соседней кровати похрапывал Павел Геннадьевич."
+
+        "Потянувшись, я вышел на балкон."
+
+        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 0.3
+
+        scene sanatorium balcony
+        with Fade(0.3, 0.4, 0.3, color="#000")
+
+        "Прохладный свежий воздух взбодрил. "
+        extend "Пускай сейчас начало сентября, но погода держалась все еще летняя."
+        "Хотя ночами и утром было довольно прохладно. "
+        extend "Листья пока только начали желтеть и в основном везде было зелено. "
+        extend "Красота!"
+
+        stop music
 
 label _end :
     scene black scen
