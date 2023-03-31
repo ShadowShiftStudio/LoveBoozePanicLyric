@@ -371,14 +371,22 @@ init python:
                 if ev.key == pygame.K_DOWN or ev.key == pygame.K_s:
                     self.bus.increase_track()
                     renpy.restart_interaction()
-                if ev.key == pygame.K_UP or ev.key == pygame.K_w:
+                elif ev.key == pygame.K_UP or ev.key == pygame.K_w:
                     self.bus.decrease_track()
+                    renpy.restart_interaction()
+
+            elif ev.type == pygame.FINGERDOWN:
+                if y < renpy.screen.height * 0.5:
+                    self.bus.decrease_track()
+                    renpy.restart_interaction()
+                elif y > renpy.screen.height * 0.5:
+                    self.bus.increase_track()
                     renpy.restart_interaction()
 
             if self.finished:
                 stop_music()
                 play("audio/gameover.ogg", relative_volume=0.5)
-                
+
                 return str(self.score if self.score >= self.high_score else self.high_score)
             else:
                 raise renpy.IgnoreEvent()
