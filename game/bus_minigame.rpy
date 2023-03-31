@@ -374,12 +374,13 @@ init python:
                 elif ev.key == pygame.K_UP or ev.key == pygame.K_w:
                     self.bus.decrease_track()
                     renpy.restart_interaction()
-
-            elif ev.type == pygame.FINGERDOWN:
-                if y < renpy.screen.height * 0.5:
+            
+            # Добавляем обработку событий мыши
+            if ev.type == pygame.MOUSEBUTTONDOWN:
+                if y < 1080 / 2:
                     self.bus.decrease_track()
                     renpy.restart_interaction()
-                elif y > renpy.screen.height * 0.5:
+                else:
                     self.bus.increase_track()
                     renpy.restart_interaction()
 

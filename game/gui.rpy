@@ -443,22 +443,24 @@ init python:
         gui.label_text_size = 51
 
         ## Регулирует местоположение текстового окна.
-        gui.textbox_height = 360
-        gui.name_xpos = 120
-        gui.dialogue_xpos = 135
-        gui.dialogue_width = 1650
+        gui.textbox_height = 350
+        gui.name_xpos = 231
+        gui.name_ypos = -55
+        gui.dialogue_xpos = 235
+        gui.dialogue_width = 1450
 
         ## Изменяет размеры и интервалы различных объектов.
-        gui.slider_size = 54
+        gui.slider_size = 64
 
-        gui.choice_button_width = 1860
-        gui.choice_button_text_size = 45
+        gui.choice_button_width = None
+        gui.choice_button_text_size = 60
 
         gui.navigation_spacing = 30
         gui.pref_button_spacing = 15
 
         gui.history_height = 285
-        gui.history_text_width = 1035
+        gui.history_text_width = 835
+        gui.history_text_xpos = 0.3
 
         gui.quick_button_text_size = 30
 
