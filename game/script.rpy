@@ -5426,6 +5426,7 @@ label _day5 :
 
             hide screen toska
             with dissolve
+            stop music
             hide grusha angry
             with dissolve
 
