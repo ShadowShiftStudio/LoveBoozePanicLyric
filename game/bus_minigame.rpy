@@ -286,12 +286,8 @@ init python:
                 self.on_click()
 
     class BusMinigameDisplayable(renpy.Displayable):
-
-
         def __init__(self, high_score, textures_index):
             renpy.Displayable.__init__(self)
-
-            
 
             self.high_score = high_score
             self.score = 0

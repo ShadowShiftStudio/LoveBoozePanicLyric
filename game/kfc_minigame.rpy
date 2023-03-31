@@ -114,10 +114,17 @@ init python:
             renpy.Displayable.__init__(self)
 
             self.background = Solid("#ffffff")
-            self.foreground = Solid("#bd3186")
+            self.foreground = Solid("#932866")
             self.percent = percent
             self.pos = pos
             self.score = 0
+
+        def background_height(self, width):
+            background_width = width / 2.5
+            background_height = background_width / 20
+
+            return background_height
+
         
         def render(self, width, height, st, at):
             r = renpy.Render(width, height)
@@ -128,6 +135,7 @@ init python:
 
             foreground_width = background_width * self.percent / 100
             foreground_height = background_height
+            self.height = foreground_height
             foreground = renpy.render(self.foreground, foreground_width, foreground_height, st, at)
 
             background_pos_x = 0
@@ -137,7 +145,7 @@ init python:
 
             text_pos_x = 0
 
-            text = Text("Очков: " + str(self.score), slow=True, size=50)
+            text = Text("Счёт: " + str(self.score), slow=True, size=50)
             text = renpy.render(text, width, height, st, at)
 
             if self.pos == -1:
@@ -153,7 +161,7 @@ init python:
             r.blit(background, (background_pos_x, pos_y))
             r.blit(foreground, (foreground_pos_x, pos_y))
 
-            r.blit(text, (text_pos_x, pos_y + background.height))
+            r.blit(text, (text_pos_x, pos_y + background.height + 10))
 
             return r
 
@@ -306,8 +314,15 @@ init python:
             return r
 
     class KfcMinigameDisplayable(renpy.Displayable):
-        def __init__(self):
+        def __init__(self, enemy_image_path = "pasha/neutral.png", enemy_name = "pasha", player_name = "sanya"):
             renpy.Displayable.__init__(self)
+
+            self.surrender_image = Image("surrender drink.png")
+            self.surrender_btn_coords = None
+            self.surrender_btn = None
+
+            self.player_name = player_name
+            self.enemy_name = enemy_name
 
             self.bite_button = ButtonDisplayble(self.on_gg_bite, Image("kfc_bite.png"), Image("kfc_button_fade.png"), -1)
             self.not_bite_button = ButtonDisplayble(self.on_gg_not_bite, Image("kfc_not_bite.png"), Image("kfc_button_fade.png"), 1)
@@ -318,10 +333,12 @@ init python:
             self.gg_bar = BarDisplayable(100, 1)
             self.gg_glass = GlassDisplayable([], 1)
 
-            self.pasha_image = Image("pasha/neutral.png")
+            self.pasha_image = Image(enemy_image_path)
             self.bowl_image = Image("kfc_bowl.png")
             self.ground_image = Image("kfc_ground.png")
             self.background_image = Image("kfc inside.png")
+
+            self.gg_image = Image("sanya/neutral.png")
 
             self.round_starting_counter = Counter(100)
 
@@ -365,12 +382,12 @@ init python:
             self.gg_bar.add_score((100 - self.gg_bar.percent) * 10)
 
             if self.pasha_bar.percent <= 0:
-                self.winner = "sanya"
+                self.winner = self.player_name
                 renpy.timeout(0.001)
                 return
 
             if self.gg_bar.percent <= 0:
-                self.winner = "pasha"
+                self.winner = self.enemy_name
                 renpy.timeout(0.001)
                 return
 
@@ -390,8 +407,15 @@ init python:
             background = renpy.render(background_transformed , width, height, st, at)
             r.blit(background, (0, 0))
 
+            pasha_bar = renpy.render(self.pasha_bar, width, height, st, at)
+            gg_bar = renpy.render(self.gg_bar, width, height, st, at)
+
             pasha = renpy.render(self.pasha_image, width, height, st, at)
             r.blit(pasha, (width / 4 - pasha.width / 2, height - pasha.height))
+
+            gg_sized_image = Transform(self.gg_image, zoom=0.6)
+            gg = renpy.render(gg_sized_image, width, height, st, at)
+            r.blit(gg, (width - gg.width + 1, 64))
 
             ground = renpy.render(self.ground_image, width, height, st, at)
             r.blit(ground, (0, 0))
@@ -404,11 +428,8 @@ init python:
 
             r.blit(bite_button, (0, 0))
             r.blit(not_bite_button, (0, 0))
-
-            pasha_bar = renpy.render(self.pasha_bar, width, height, st, at)
             r.blit(pasha_bar, (0, 0))
 
-            gg_bar = renpy.render(self.gg_bar, width, height, st, at)
             r.blit(gg_bar, (0, 0))
 
             pasha_glass = renpy.render(self.pasha_glass, width, height, st, at)
@@ -420,6 +441,10 @@ init python:
             round_text = renpy.render(self.round_text, width, height, st, at)
             r.blit(round_text, (0, 0))
 
+            self.surrender_btn = renpy.render(self.surrender_image, width, height, st, at)
+            self.surrender_btn_coords = ((width - self.surrender_btn.width ) / 2, height - self.surrender_btn.height * 1.1)
+            r.blit(self.surrender_btn, self.surrender_btn_coords)
+
             if self.round_changed:
                 self.round_changed = False
                 self.round_text.display("Раунд " + str(self.round_count))
@@ -429,8 +454,16 @@ init python:
             return r
 
         def event(self, ev, x, y, st):
+            import pygame as pg
+
             self.bite_button.event(ev, x, y, st)
             self.not_bite_button.event(ev, x, y, st)
+
+            if self.surrender_btn != None and self.surrender_btn_coords != None\
+                and x >= self.surrender_btn_coords[0] and x <= self.surrender_btn_coords[0] + self.surrender_btn.width\
+                and y >= self.surrender_btn_coords[1] and y <= self.surrender_btn_coords[1] + self.surrender_btn.height \
+                and ev.type == pg.MOUSEBUTTONDOWN and ev.button == 1:
+                self.winner = self.enemy_name
 
             if self.winner != "":
                 return self.winner
@@ -453,7 +486,6 @@ label play_kfc_minigame:
 
     $ quick_menu = True
     window show
-
 
 if _return == "pasha":
     "Саня конкретно перебрал с выпивкой в этот раз... Ноги еле идут..."
