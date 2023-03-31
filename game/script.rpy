@@ -8,7 +8,7 @@ define grusha = Character('Агриппина Филипповна ', color="#12
 define pavel = Character('Павел Геннадьевич ', color="#ffb4aa")
 define skin = Character('Мыкало ', color="#e1ffaa")
 define noname = Character('Незнакомец ', color="#4d4d4d")
-define emili = Character('Эмилия', color="#e28cd7")
+define emily = Character('Эмилия', color="#e28cd7")
 
 #для рекламы в будущем
 
@@ -132,7 +132,7 @@ define day4_nadya_meal = False
 define day4_smoke_old_siggarete = False
 define day4_walk_in_park = False
 define day4_suicide = False
-define day4_go_with_emili = False
+define day4_go_with_emily = False
 define day4_smoke_with_pavel = False
 define day4_fight = False
 define day5_good_mood = False
@@ -4323,7 +4323,7 @@ label _sanatorium :
                             jump _day5
 
                     "Мне одиноко. Быть может, она составит мне компанию?" :
-                        $ day4_go_with_emili = True
+                        $ day4_go_with_emily = True
                         $ rel_emily += 3
                         $ mood_counter += 2
 
@@ -4341,7 +4341,7 @@ label _sanatorium :
                         
                         noname "Меня Эмилия зовут!"
                         sanya "Саша..."
-                        emili "Приятно познакомиться! Так что у тебя случилось?"
+                        emily "Приятно познакомиться! Так что у тебя случилось?"
 
                         hide emily
                         with dissolve
@@ -4377,7 +4377,7 @@ label _sanatorium :
                         show emily green sad
                         with dissolve 
                         
-                        emili "Мне мама запрещает..."
+                        emily "Мне мама запрещает..."
                         "Смущается она, конечно, убийственно мило."
                         sanya "Но ведь тебе двадцать! Ты же можешь просто уйти из дома и делать все, что захочешь"
                         "Эмилия на это лишь грустно улыбнулась, медленно покачав головой."
@@ -4389,27 +4389,27 @@ label _sanatorium :
                         show emily green happy
                         with dissolve
 
-                        emili "Нет, но мне подружка сказала, что она очень вкусная."
+                        emily "Нет, но мне подружка сказала, что она очень вкусная."
                         sanya "Ты серьезно не ела шаурму?"
                         "Моему удивлению не было предела."
                         "Эмилия покачала головой."
-                        emili "У меня диета. Я кушаю только дома..."
+                        emily "У меня диета. Я кушаю только дома..."
                         sanya "Капец, подруга, твоя жизнь проходит зря! Как только выйдем отсюда, я тебе покажу насколько прекрасна юность и шаурма!"
 
                         show emily green flirting
                         with dissolve
 
-                        emili "Ловлю на слове!"
+                        emily "Ловлю на слове!"
                         "Эмилия звонко рассмеялась. Потом чуть грустно произнесла:"
 
                         show emily green kind
                         with dissolve
 
-                        emili "Надеюсь, мы сможем видеться, когда я вернусь на учебу..."
+                        emily "Надеюсь, мы сможем видеться, когда я вернусь на учебу..."
                         sanya "Пф! Конечно! Как говориться, кто школу... " 
                         extend "то есть универ не гулял, тот жизни не видал! " 
                         extend "В конце концов, впереди новогодние каникулы, да и выходные есть."
-                        emili "Ну да."
+                        emily "Ну да."
                         "Эмилия вновь улыбнулась, но глаза её остались грустными."
                         "Не желая больше расстраивать новую знакомую, я перевел разговор на более приятные темы. Но зарубку себе в памяти сделал - во что бы то ни стало, найти Эмилию после санатория и угостить её шаурмой!"
 
@@ -4908,18 +4908,24 @@ label _day5 :
             "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. Встав с кровати, я протер веки. На соседней кровати похрапывал Павел Геннадьевич."
         
         "Потянувшись, я вышел на балкон."
-
-        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 0.4
+        play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
+        pause 1.0
 
         scene sanatorium balcony
-        with dissolve
+        with Fade(0.3, 0.4, 0.3)
+        
+        play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
 
+        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 0.4
         "Прохладный свежий воздух взбодрил. Пускай сейчас начало сентября, но погода держалась все ещё летняя. Хотя ночами и утром было довольно прохладно. Листья пока только начали желтеть и в основном везде было зелено. Красота! "
         "Вдохнув полной грудью пьянящий лесной воздух, я посмотрел вниз."
         sanya "В темноте земля казалась дальше..."
         "Зайдя внутрь, пошёл выполнять утренние процедуры. До завтрака ещё пара часов, так что торопиться некуда."
+        
+        scene black 
+        with Fade(0.3, 0.4, 0.3, color="#000")
 
-        stop music
+        stop music fadeout 2.0
 
     #пока нет продолжения в сюжете
     elif day4_smoke_with_pavel:
@@ -4949,17 +4955,26 @@ label _day5 :
 
         "Хмыкнув, я поднялся и вышел на балкон."
 
-        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 2.5
+        play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
+        pause 1.0
 
         scene sanatorium balcony
-        with dissolve
+        with Fade(0.3, 0.4, 0.3)
+        
+        play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
+
+        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 0.4
+
 
         "Прохладный свежий воздух взбодрил. Пускай сейчас начало сентября, но погода держалась все ещё летняя."
         "Хотя ночами и утром было довольно прохладно. Листья пока только начали желтеть и в основном везде было зелено. Красота!"
+        
+        scene black 
+        with Fade(0.3, 0.4, 0.3, color="#000")
 
-        stop music
+        stop music fadeout 2.0
 
-    elif day4_go_with_emili :
+    elif day4_go_with_emily :
 
         "Утро красит нежным светом... стены санатория. "
         extend "На новом месте спалось неплохо. "
@@ -4987,18 +5002,28 @@ label _day5 :
 
         "Потянувшись, я вышел на балкон."
 
-        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 0.3
+        play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
+        pause 1.0
 
         scene sanatorium balcony
-        with Fade(0.3, 0.4, 0.3, color="#000")
+        with Fade(0.3, 0.4, 0.3)
+        
+        play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
 
+        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 0.4
+        
         "Прохладный свежий воздух взбодрил. "
         extend "Пускай сейчас начало сентября, но погода держалась все ещё летняя."
         "Хотя ночами и утром было довольно прохладно. "
         extend "Листья пока только начали желтеть и в основном везде было зелено. "
         extend "Красота!"
 
-        stop music
+        scene black 
+        with Fade(0.3, 0.4, 0.3, color="#000")
+
+        stop music fadeout 2.0
+        play sound "audio/footsteps_asphalt.mp3" noloop fadein 0.1 fadeout 0.1
+        pause 2.0
 
     elif day4_nadya_meal :
 
@@ -5027,18 +5052,30 @@ label _day5 :
 
         "Потянувшись, я вышел на балкон."
 
-        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 0.3
+        play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
+        pause 1.0
 
         scene sanatorium balcony
-        with Fade(0.3, 0.4, 0.3, color="#000")
+        with Fade(0.3, 0.4, 0.3)
+        
+        play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
 
+        play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 0.4
+        
         "Прохладный свежий воздух взбодрил. "
         extend "Пускай сейчас начало сентября, но погода держалась все ещё летняя."
         "Хотя ночами и утром было довольно прохладно. "
         extend "Листья пока только начали желтеть и в основном везде было зелено. "
         extend "Красота!"
+        
+        scene black 
+        with Fade(0.3, 0.4, 0.3, color="#000")
 
-        stop music
+        stop music fadeout 2.0
+        
+    scene sanatorium canteen
+    with Fade(0.3, 0.4, 0.3, color="#000")
+    play music "audio/kfc-sound.mp3" fadein 1.0 fadeout 1.0 volume 0.1 
 
     "В столовой было немноголюдно. "
     extend "Видимо, ещё рановато для общего завтрака, но так лаже лучше. "
@@ -5047,7 +5084,11 @@ label _day5 :
     "Молочный суп, сырники со сгущенкой и кофейный напиток. "
     extend "Как в лагере, честное слово. "
     extend "Взяв свою порцию, я огляделся выбирая куда сесть."
+<<<<<<< HEAD
+    if day4_go_with_emily :
+=======
     if day4_go_with_emili :
+>>>>>>> b82488914bca3bd894d82ba8eec5804a6ab9f85f
         "К моей радости, в столовой уже сидела Эмилия и Надя, но Юли все ещё не было видно. "
     else :
         "К моей радости, в столовой уже сидела Надя, но Юли все ещё не было видно. "
@@ -5060,7 +5101,11 @@ label _day5 :
         "Подсяду к Наде." if day4_nadya_meal or day2_nadya_have_a_dialog and rel_nadya >= 3:
             $ day5_nadya_in_cafe = True
             $ rel_nadya += 1
+<<<<<<< HEAD
+        "Подсяду к Эмилии" if day4_go_with_emily and rel_emily >= 3:
+=======
         "Подсяду к Эмилии" if day4_go_with_emili and rel_emily >= 3:
+>>>>>>> b82488914bca3bd894d82ba8eec5804a6ab9f85f
             $ day5_emily_in_cafe = True
             $ rel_emily += 2
 
@@ -5282,15 +5327,28 @@ label _day5 :
         extend "Наш вчерашний разговор был настолько приятным, что я всю ночь не мог не думать о ней."
         sanya "Привет, Эмилия! "
         extend "Я подсяду?"
+        
+        show emily green flirting
+        with dissolve
+
         emily "О, Саша, привет! " 
         extend "Конечно, садись!"
+        play sound "audio/chair_crack.mp3" noloop fadein 0.1 fadeout 0.1
         "Я сел напротив Эмилии. Хоть свободных столов и было достаточно, я хотел поесть именно с ней."
         "Надеюсь, что ей тоже приятна моя компания."
         sanya "Эмилия, как спалось?"
+
+        show emily kind
+        with dissolve
+
         emily "Честно говоря, просто чудесно! "
         extend "Я спала с открытым окном, и с утра на улице было весьма свежо, и я проснулась от сильного сквозняка."
         "Эмилия такая болтушка на самом деле, но, учитывая какой я неразговорчивый, это даже отлично, что она может вести диалог сама часами..."
         emily "Было так холодно, что я по-быстренькому достала свои тёплые носочки, которые додумалась взять c собой, и надела поверх обычных носочков!" 
+
+        show emily happy
+        with dissolve
+
         emily "Саша, ты бы знал, какой это кайф ходить по холодному полу в тёплых-тёплых носочках!"
         sanya "Да, Эмилия, твоё утро было прямо-таки приключением."
         "Даже смешно немного, что это всё, что я смог сказать."
@@ -5301,6 +5359,10 @@ label _day5 :
         extend "Как ты думаешь, сегодня вечером, когда солнце уйдет за горизонт, давай пойдем гулять? "
         extend "Я покажу тебе все самые красивые места!"
         "Эмилия было задумалась на секунду, но затем продолжила."
+
+        show emily green cute
+        with dissolve
+
         emily "Да, конечно, почему бы и нет. "
         extend "Я с радостью пойду с тобой на прогулку."
         "Она вела себя спокойно и размерено, все её действия будто было прокручены тысячу раз в голове, прежде чем сделаны."
@@ -5308,10 +5370,7 @@ label _day5 :
         sanya "Ну вот и отлично!"
         "Я ударил по столу в знак одобрения. "
         extend "Мне казалось это смешным, но уже постфактум я понял, насколько это глупый поступок."
-
-        show emily smiles 
-        with dissolve
-
+        #TODO: продолжения нет
     elif day5_loneliness_in_cafe :
         "Чувство некой усталости подсказало мне, что моя социальная батарейка на нуле."
         "Особого желания с кем-то общаться не было, поэтому я решил сесть один."
@@ -5381,6 +5440,7 @@ label _day5 :
                 "Да уж... "
                 extend "Впервые отказал девушке, если честно. Странное чувство."
                 "Без аппетита доев свой завтрак, я пошел на утренние процедуры."
+                # TODO: продолжение
 label _end :
     scene black scen
     with fade
