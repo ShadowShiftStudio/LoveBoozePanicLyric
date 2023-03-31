@@ -141,6 +141,7 @@ define day5_bad_mood = False
 define day5_loneliness_in_cafe = False
 define day5_nadya_in_cafe = False
 define day5_emily_in_cafe = False
+define day5_almost_sex_with_nadya = False
 define mood_counter = 0
 
 define rel_yuli = 0
@@ -5084,11 +5085,7 @@ label _day5 :
     "Молочный суп, сырники со сгущенкой и кофейный напиток. "
     extend "Как в лагере, честное слово. "
     extend "Взяв свою порцию, я огляделся выбирая куда сесть."
-<<<<<<< HEAD
     if day4_go_with_emily :
-=======
-    if day4_go_with_emili :
->>>>>>> b82488914bca3bd894d82ba8eec5804a6ab9f85f
         "К моей радости, в столовой уже сидела Эмилия и Надя, но Юли все ещё не было видно. "
     else :
         "К моей радости, в столовой уже сидела Надя, но Юли все ещё не было видно. "
@@ -5101,11 +5098,7 @@ label _day5 :
         "Подсяду к Наде." if day4_nadya_meal or day2_nadya_have_a_dialog and rel_nadya >= 3:
             $ day5_nadya_in_cafe = True
             $ rel_nadya += 1
-<<<<<<< HEAD
         "Подсяду к Эмилии" if day4_go_with_emily and rel_emily >= 3:
-=======
-        "Подсяду к Эмилии" if day4_go_with_emili and rel_emily >= 3:
->>>>>>> b82488914bca3bd894d82ba8eec5804a6ab9f85f
             $ day5_emily_in_cafe = True
             $ rel_emily += 2
 
@@ -5292,13 +5285,14 @@ label _day5 :
             menu :
                 "Предложить пойти к Наде" :
                     if day4_nadya_meal :
+                        $ day5_almost_sex_with_nadya = True
                         $ rel_nadya += 3
                         "Сексо в комнате"
                     else :
                         "Психо секос с самим собой"
 
-
                 "Пойти к себе в комнату" :
+                    $ rel_nadya -= 3
                     ""
 
         else :
