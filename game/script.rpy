@@ -150,7 +150,6 @@ define rel_nadya = 0
 define rel_pasha = 0
 define rel_pavel = 0
 define rel_skin = 0
-define rel_emily = 0
 define rel_valeria = 0
 define rel_emily = 2
 define hi_score = 0
@@ -5425,7 +5424,7 @@ label _day5 :
             grusha "Возможно. Полегчало? Можешь идти"
             "Посмотрев на хмурую женщину, я кивнул. Благо, боль полностью прошла."
 
-            hide scene toska
+            hide screen toska
             with dissolve
             hide grusha angry
             with dissolve
@@ -5468,13 +5467,12 @@ label _day5 :
             with dissolve
 
         else :
-
-        if day4_tried_move and not day4_fight :
-            scene sanatorium skin dormitory room
-            with fade
-        else :
-            scene sanatorium dormitory room
-            with fade
+            if day4_tried_move and not day4_fight :
+                scene sanatorium skin dormitory room
+                with fade
+            else :
+                scene sanatorium dormitory room
+                with fade
 
             sanya "Ты как вообще сюда попала?"
             "Заявиться ко мне без проса, да и еще и гнать на меня. Ну не наглость ли?"
