@@ -5747,6 +5747,7 @@ label _day5 :
 
             else :
                 
+                
             
     elif day5_emily_in_cafe :
         "Я решил подсесть к Эмилии. "
