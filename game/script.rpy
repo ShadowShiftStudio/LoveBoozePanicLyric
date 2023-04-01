@@ -3380,7 +3380,9 @@ label _sanatorium :
                     show skin happy at center:
                         zoom 1.0
                     with dissolve
+                    
                     sanya "У меня своя."
+
                     stop music fadeout 2.0
 
                     play sound "audio/cigarette.mp3" noloop fadein 0.2 fadeout 0.2
@@ -3409,7 +3411,9 @@ label _sanatorium :
                     "Да чтоб ещё раз я что-то пробовал из рук незнакомцев! "
 
                     stop music fadeout 2.0 
+
                     play sound "audio/Fall.mp3" noloop fadein 0.1 fadeout 0.1
+                    
                     scene black
                     with Fade(0.4, 0.5, 0.4, color="#000")
                     
@@ -3423,6 +3427,7 @@ label _sanatorium :
                     with Fade(0.4, 0.5, 0.4, color="#000")
                     
                     play music "audio/medicine_sound.mp3" fadein 1.0 fadeout 1.0
+
                     play sound "audio/pressure_apparat.mp3" noloop fadein 1.0 fadeout 1.0 volume 0.2
 
                     show grusha happy
@@ -3467,9 +3472,11 @@ label _sanatorium :
 
                     show sanatorium medical post
                     with Fade(0.4, 0.5, 0.4, color="#000")
+
                     pause 0.3
                     
                     play sound "audio/door_close.mp3" noloop fadein 0.1 fadeout 0.1 
+
                     extend "Никогда так быстро в себя не приходил, хотя считай при смерти был. Баба Груша реально волшебница! "
                     "В животе заурчало, но аппетита как такового не было, поскольку чувство насранности во рту не пропало. Хотелось чем-то прополоскать рот, желательно пивком..."
 
@@ -3526,8 +3533,10 @@ label _sanatorium :
         "Кажется, даже окна задрожали."
 
         play sound "audio/door_open.mp3" noloop fadein 0.3 fadeout 0.3 
+
         scene sanatorium balcony
         with Fade(0.3, 0.2, 0.3, color="#000")
+
         play music "audio/forest_walk.mp3" fadein 2.0 fadeout 3.0 volume 0.2
 
         "Выйдя на балкон, оказавшийся скорее лоджией, я невольно залюбовался открывшейся передо мной картиной."
@@ -3541,10 +3550,12 @@ label _sanatorium :
 
         "Даже курить не хотелось! Вот настолько плодотворно воздействовала на меня местная природа."
 
-        play sound "audio/chair_crack.mp3" noloop fadein 0.2 fadeout 0.2        
+        play sound "audio/chair_crack.mp3" noloop fadein 0.2 fadeout 0.2  
+
         "Плюнув на все, я плюхнулся в кресло и любуясь видом все таки достал свой вишневый чапман."
 
         play sound "audio/cigarette.mp3" noloop fadein 0.3 fadeout 0.3
+
         pause 4.0
 
         "Красота! Ляпота!"
@@ -3583,6 +3594,7 @@ label _sanatorium :
         "Плюхнувшись на свободное кресло, которое жалобно скрипнуло под ним, но все же стоически выдержало, он закурил."
         
         play sound "audio/cigarette_one_shot.mp3" noloop fadein 0.2 fadeout 0.2
+
         show pavel smokes
         with dissolve
         
@@ -3647,9 +3659,11 @@ label _sanatorium :
         
         menu:
             "Отметим":
+
                 $ day4_drink = True
                 $ rel_pavel += 3
                 $ mood_counter -= 1
+
                 "Ну, почему бы и не посидеть с хорошим человеком?"
                 sanya "А давайте!"
 
@@ -3676,7 +3690,9 @@ label _sanatorium :
                 with dissolve
                 
                 pavel "Ну, за знакомство!"
+
             "Да ну его":
+
                 $ day4_drink = False
                 $ str_for_notification = "Это действие имеет последствия..."
                 $ rel_pavel -= 1
@@ -3694,6 +3710,7 @@ label _sanatorium :
                 pavel "Ничего, Саня, все нормально. Мы же тут неделю будем, ещё успеется!"
 
                 hide pavel neutral
+
                 "С этими словами он встал, хрустнув коленями, и прошёл в комнату."
                 "Я, чувствуя легкий голод, спустился в столовую, находящуюся на первом этаже."
 
@@ -3716,7 +3733,9 @@ label _sanatorium :
                 pause 2.0
 
         if day4_drink == True:
+
             $ day4_take_pill = True
+
             "За первой бутылкой последовала вторая, за ней третья. Казалось, сумка Павлка Геннадьевича была бездонной."
             pavel "Ты, Санька, хороший парень! Тока тощий, шо тростинка." 
             pavel "Тебе бы ко мне в деревню на недельку, в поля, сразу в нормального мужика превратишься!"
@@ -3797,7 +3816,9 @@ label _sanatorium :
 
     scene sanatorium canteen
     with dissolve
+
     stop music fadeout 0.5
+
     play music "audio/kfc-sound.mp3" fadein 1.0 fadeout 2.0 volume 0.2
 
     "Зайдя в столовую, я сразу почувствовал приятный запах котлеток."
@@ -3809,12 +3830,14 @@ label _sanatorium :
     sanya "Балдёж!..."
     "Поместив пищу на поднос, я осмотрелся, выбирая куда сесть. Места было много, но в одиночестве сидеть не хотелось."
     "В дальнем углу приметил Юлю, сидящую в одиночестве." 
+
     if day2_nadya_have_a_dialog:
         "а также Надю, которая сидела в противоположной стороне у окна, и тоже, к счастью, одна."
         "К кому бы мне подсесть?"
     
     menu:
         "Подсяду к Юле":
+
             $ day4_yuli_meal = True
             $ str_for_notification = "Это действие имеет последствия..."
             $ rel_yuli += 2
@@ -3836,6 +3859,7 @@ label _sanatorium :
             yuli "Ой, Сашенька, привет, конечно присаживайся."
 
             play sound "audio/chair_crack.mp3" noloop fadein 0.1 fadeout 0.1
+
             pause 1.0
 
             sanya "А где ты была? Я тебя искал во время экскурсии."
@@ -3857,12 +3881,15 @@ label _sanatorium :
             "А салатик идеально сочетал в себе свои ингредиенты и этот баланс создавал прекрасную гармонию вкуса."
             
             play sound "audio/deep-moan.mp3" fadein 0.2 fadeout 0.2
+
             "Откинувшись на спинку стула, я с удовольствием выдохнул, чувствуя приятную сытость."
+
             pause 1.0
 
             "Сверху шлифанул плотным какао, не слишком сладким и не водянистым, прямо как я люблю!"
             
             sanya "Блаженство, не ожидал что еда здесь будет настолько вкусная."
+
             pause 2.0
 
             yuli "И не говори."
@@ -3899,8 +3926,11 @@ label _sanatorium :
 
             "Ей служила отдаленная беседка на живописном берегу реки. На столе стояли пепельницы, однако в них не было ни одного окурка."
             "Видимо, это место пользуется особой популярностью."
+
             play sound "audio/cigarette.mp3" fadein 0.2 fadeout 0.2
+
             "Достав сигаретку, я закурил."
+
             pause 3.0
 
             show yuli empathy
@@ -3970,7 +4000,9 @@ label _sanatorium :
             "А салатик идеально сочетал в себе свои ингредиенты и этот баланс создавал прекрасную гармонию вкуса."
             
             play sound "audio/deep-moan.mp3" fadein 0.2 fadeout 0.2
+
             "Откинувшись на спинку стула, я с удовольствием выдохнул, чувствуя приятную сытость."
+
             pause 1.0
 
             "Сверху шлифанул плотным какао, не слишком сладким и не водянистым, прямо как я люблю!"
@@ -3994,6 +4026,7 @@ label _sanatorium :
             "Она протянула мне руку и я с радостью взял её."
             
             "Чтобы лишний раз не нарушать местные уставы, мы направились прямиком в курилку."
+
             stop music fadeout 2.0
             
             scene black
@@ -4067,6 +4100,7 @@ label _sanatorium :
         with Fade(0.2, 0.3, 0.2, color="#000")
    
         if day4_yuli_meal:
+
             $ mood_counter -= 1
             $ rel_yuli -= 1
 
@@ -4149,6 +4183,7 @@ label _sanatorium :
 
                 menu :
                     "Красивая... Но настроения нет. Лучше пойду мимо.":
+
                         $ day4_smoke_with_pavel = True
                         $ rel_emily -= 1
                         $ mood_counter += 1
@@ -4158,6 +4193,7 @@ label _sanatorium :
                         "Оставив розоволосую позади, я поспешил к беседке."
 
                         if day4_drink:
+
                             $ rel_pavel += 1
                             $ mood_counter += 1
 
@@ -4294,6 +4330,7 @@ label _sanatorium :
                             jump _day5
 
                         if day4_tried_move:   
+
                             $ mood_counter -= 1
 
                             scene sanatorium balcony night
@@ -4328,6 +4365,7 @@ label _sanatorium :
                             jump _day5
 
                     "Мне одиноко. Быть может, она составит мне компанию?" :
+
                         $ day4_go_with_emily = True
                         $ rel_emily += 3
                         $ mood_counter += 2
@@ -4429,6 +4467,7 @@ label _sanatorium :
                         
                         scene sanatorium night
                         with Fade(0.3, 0.4, 0.3, color="#000")
+
                         show emily green neutral
                         with dissolve
 
@@ -4568,8 +4607,11 @@ label _sanatorium :
                     
                     sanya "Какой же я долбоеб."
                     "Как ни странно, но это придало мне сил. С мрачными мыслями и плохим настроением, я все же смог уснуть."
+
                     stop music fadeout 3.0
+
                     jump _day5
+
                 else :
                     "Темнота внизу зачаровывала. И в этой темноте появилось лицо родителей и Пашки."
                     sanya "Блять!.."
@@ -4595,6 +4637,7 @@ label _sanatorium :
 
                     jump _day5
         else:
+
             $ rel_nadya += 2
             $ mood_counter += 1
 
@@ -4711,7 +4754,9 @@ label _sanatorium :
             "Пока мы шли до корпуса, то не проронили ни единого слова. Атмосфера неловкости, царящая между нами, как-то не настраивала на беседу."
             "Однако эта неловкость была какой-то романтичной..."
 
-            scene sanatorium night with fade
+            scene sanatorium night 
+            with fade
+
             show nadya smiles
             with dissolve
             
@@ -4721,13 +4766,18 @@ label _sanatorium :
             "От неожиданности я впал в ступор. Отмерев, я потёр щёку, которую поцеловала Надя."
             sanya "День закончился определённо удачно..."
             "По-дурацки улыбаясь, я пошёл в комнату."
-            scene black with fade
+
+            scene black 
+            with fade
+
             stop music fadeout 3.0
+
             "Жить - пиздато!"
             
 
             jump _day5
     else:
+
         $ rel_yuli += 2
         $ mood_counter += 1
 
@@ -4799,6 +4849,7 @@ label _sanatorium :
         "Приняв вызов, я рванул за весело хохочущей девушкой."
 
         play sound "audio/footsteps_asphalt.mp3" fadein 0.2 fadeout 0.2
+
         scene sanatorium path
         with Fade(0.4, 0.5, 0.4, color="#000")
         
@@ -4875,6 +4926,7 @@ label _sanatorium :
         "Паническая атака накрыла с головой. Я забыл, как дышать. Чувства отключились, я словно попал в сонный паралич."
         "Перед глазами - мертвое лицо Юли."
         "Кислородное голодание - я теряю сознание."
+
         hide screen toska
         with dissolve
 
@@ -4898,13 +4950,16 @@ label _day5 :
         "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
         
         if day4_tried_move :
+
             scene sanatorium dormitory room
             with dissolve
 
             play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
             
             "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. Встав с кровати, я протер веки. На соседней кровати похрапывал Мыкало."
+
         else :
+
             scene sanatorium skin dormitory room
             with dissolve
 
@@ -4913,7 +4968,9 @@ label _day5 :
             "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. Встав с кровати, я протер веки. На соседней кровати похрапывал Павел Геннадьевич."
         
         "Потянувшись, я вышел на балкон."
+
         play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
+
         pause 1.0
 
         scene sanatorium balcony
@@ -4922,6 +4979,7 @@ label _day5 :
         play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
 
         play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.0 volume 0.4
+
         "Прохладный свежий воздух взбодрил. Пускай сейчас начало сентября, но погода держалась все ещё летняя. Хотя ночами и утром было довольно прохладно. Листья пока только начали желтеть и в основном везде было зелено. Красота! "
         "Вдохнув полной грудью пьянящий лесной воздух, я посмотрел вниз."
         sanya "В темноте земля казалась дальше..."
@@ -4939,10 +4997,12 @@ label _day5 :
         "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
 
         if day4_tried_move:
+
             scene sanatorium dormitory room
             with dissolve
 
             play music "audio/snore_big.mp3" fadeout 2.0 volume 0.4
+
             "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. Встав с кровати, я протер веки. На соседней кровати похрапывал Мыкало."
 
             stop music
@@ -4961,6 +5021,7 @@ label _day5 :
         "Хмыкнув, я поднялся и вышел на балкон."
 
         play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
+
         pause 1.0
 
         scene sanatorium balcony
@@ -4988,14 +5049,17 @@ label _day5 :
         "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
 
         if day4_tried_move and not day4_fight:
+
             scene sanatorium skin dormitory room
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
+
             "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. "
             extend "Встав с кровати, я протер веки. "
             extend "На соседней кровати похрапывал Мыкало."
         else :
+
             scene sanatorium dormitory room
             with Fade(0.3, 0.4, 0.3, color="#000")
 
@@ -5008,6 +5072,7 @@ label _day5 :
         "Потянувшись, я вышел на балкон."
 
         play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
+
         pause 1.0
 
         scene sanatorium balcony
@@ -5027,7 +5092,9 @@ label _day5 :
         with Fade(0.3, 0.4, 0.3, color="#000")
 
         stop music fadeout 2.0
+
         play sound "audio/footsteps_asphalt.mp3" noloop fadein 0.1 fadeout 0.1
+
         pause 2.0
 
     elif day4_nadya_meal :
@@ -5038,14 +5105,18 @@ label _day5 :
         "Проснувшись на рассвете от лучика солнца на своем лице, я зажмурился и открыл глаза."
 
         if day4_tried_move and not day4_fight:
+
             scene sanatorium skin dormitory room
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
+
             "Немного гудела голова, да и глаза слипались, но спать дальше желания не было. "
             extend "Встав с кровати, я протер веки. "
             extend "На соседней кровати похрапывал Мыкало."
+
         else :
+
             scene sanatorium dormitory room
             with Fade(0.3, 0.4, 0.3, color="#000")
 
@@ -5058,6 +5129,7 @@ label _day5 :
         "Потянувшись, я вышел на балкон."
 
         play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
+
         pause 1.0
 
         scene sanatorium balcony
@@ -5080,6 +5152,7 @@ label _day5 :
         
     scene sanatorium canteen
     with Fade(0.3, 0.4, 0.3, color="#000")
+
     play music "audio/kfc-sound.mp3" fadein 1.0 fadeout 1.0 volume 0.1 
 
     "В столовой было немноголюдно. "
@@ -5089,28 +5162,37 @@ label _day5 :
     "Молочный суп, сырники со сгущенкой и кофейный напиток. "
     extend "Как в лагере, честное слово. "
     extend "Взяв свою порцию, я огляделся выбирая куда сесть."
+
     if day4_go_with_emily :
+
         show emily green neutral at right
         with dissolve
+
         show nadya light sad at left
         with dissolve
 
         "К моей радости, в столовой уже сидела Эмилия и Надя, но Юли все ещё не было видно. "
+
     else :
+
         "К моей радости, в столовой уже сидела Надя, но Юли все ещё не было видно. "
+
     extend "Ладно... К кому бы сесть?"
 
     menu :
         "Сяду один." :
+
             $ day5_loneliness_in_cafe = True
             $ mood_counter -= 2
 
             hide emily green neutral
             with dissolve
+
             hide nadya light sad
             with dissolve
 
         "Подсяду к Наде." if day4_nadya_meal or day2_nadya_have_a_dialog and rel_nadya >= 3:
+
             $ day5_nadya_in_cafe = True
             $ rel_nadya += 1
 
@@ -5121,6 +5203,7 @@ label _day5 :
             with dissolve
 
         "Подсяду к Эмилии" if day4_go_with_emily and rel_emily >= 3:
+
             $ day5_emily_in_cafe = True
             $ rel_emily += 2
 
@@ -5176,6 +5259,7 @@ label _day5 :
         
         scene black scen
         with fade
+
         stop music fadeout 1.0
 
         if rel_yuli >= 3:
@@ -5297,6 +5381,7 @@ label _day5 :
         menu:
             "Пойти на свидание с Надей." :
                 yuli "Ну и вали с этой сукой хоть на все четыре стороны!"
+
                 $ day5_nadya_date = True
                 $ rel_yuli -= 3
 
@@ -5304,6 +5389,7 @@ label _day5 :
                 with dissolve
 
             "Успокоить Юлю." :
+
                 $ day5_nadya_date = False
                 $ rel_nadya -= 3
         
@@ -5315,9 +5401,11 @@ label _day5 :
             with Fade(0.3, 0.4, 0.3, color="#000")
             
             play sound "audio/door_close.mp3" noloop fadein 0.1 fadeout 0.1
+
             pause 1.0
             
             play sound "audio/footsteps_asphalt.mp3" noloop fadein 0.1 fadeout 0.1
+
             pause 1.0
 
             stop music fadeout 0.5
@@ -5351,12 +5439,14 @@ label _day5 :
             nadya "Что-то случилось?"
 
             stop sound fadeout 0.3
+
             hide screen toska
             with dissolve
 
             #TODO: Надя беспокоица
 
             play music "audio/nadya_theme.mp3" fadein 0.6 fadeout 2.0 volume 0.25
+
             "Меня подхватила Надина тонкая, но удивительно сильная рука."
             sanya "Да, да, все нормально, голова просто закружилась..."
             nadya "Давай присядем?"
@@ -5391,6 +5481,7 @@ label _day5 :
             "Голову пронзила резкая вспышка боли, которая была даже сильнее, чем предыдущая. "
 
             show screen toska
+
             play music "audio/heart.mp3" fadein 1.0 fadeout 2.0 volume 0.5
             
             show nadya white expressionless
@@ -5430,6 +5521,7 @@ label _day5 :
             "Тут у меня вновь случился приступ, от которого я чуть не потерял сознание."
             with vpunch
             "Все поплыло, ноги начали подкашиваться, но тут меня тут же кто-то подхватил подмышки и куда-то повел. "
+
             hide grusha grusha neutral
             with dissolve
 
@@ -5484,6 +5576,7 @@ label _day5 :
             with dissolve
 
             play music "audio/nadya_theme.mp3" fadein 1.5 fadeout 2.0 volume 0.25
+
             nadya "Ну, как ты?" 
             sanya "Все нормально, Агриппина Владимировна сказала завтра еще к ней зайти."
             nadya "Хорошо."
@@ -5519,6 +5612,7 @@ label _day5 :
                     if day4_nadya_meal :
                         $ day5_almost_sex_with_nadya = True
                         $ rel_nadya += 3
+
                         sanya "Может, зайдем к тебе? "
                         extend "Ты вроде говорила у тебя никого нет..."
                         nadya "Только ненадолго, не хочу завтра долго спать..."
@@ -5528,12 +5622,14 @@ label _day5 :
                         with dissolve
 
                         play sound "audio/footsteps_asphalt.mp3" noloop fadein 0.1 fadeout 0.1
+
                         pause 1.6
                         
                         show sanatorium walkway
                         with dissolve
 
                         play sound "audio/footsteps.mp3" noloop fadein 0.1 fadeout 0.1
+
                         pause 1.6
 
                         play sound "audio/door_open.mp3" noloop fadein 0.1 fadeout 0.1
@@ -5541,9 +5637,13 @@ label _day5 :
                         "У комнаты она остановилась и бросив через плечо: \"Подожди здесь\", юркнула за дверь."
 
                         play sound "audio/rustle.mp3" noloop fadein 0.3 fadeout 0.7 volume 0.15
+
                         "Послышался шорох и шум, словно что-то передвигали."
+
                         pause 2.0
+
                         play sound "audio/door_open.mp3" noloop fadein 0.1 fadeout 0.1
+
                         extend "Через пару минут дверь открылась, и чуть растрепанная девушка впустила меня."
                         "Тут царил легкий беспорядок, видимо не успела до конца убраться."
                         "На полу лежало пару носков, которые она тут же убрала, кровать была наспех заправлена, на столе стояла косметика."
@@ -5809,7 +5909,9 @@ label _day5 :
 
         emily "О, Саша, привет! " 
         extend "Конечно, садись!"
+
         play sound "audio/chair_crack.mp3" noloop fadein 0.1 fadeout 0.1
+
         "Я сел напротив Эмилии. Хоть свободных столов и было достаточно, я хотел поесть именно с ней."
         "Надеюсь, что ей тоже приятна моя компания."
         sanya "Эмилия, как спалось?"
@@ -5925,8 +6027,9 @@ label _day6 :
     "день шестой сука блять"
 
 label _end :
+
     play music "audio/lobby_music.mp3" fadein 2.0 fadeout 2.5 volume 0.3
-    
+
     scene black scen
     with fade
     
