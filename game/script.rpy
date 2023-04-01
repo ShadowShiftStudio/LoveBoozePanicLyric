@@ -5607,16 +5607,73 @@ label _day5 :
                         sanya "Почту за честь, моя леди..."
                         
                     else :
-                        "Психо секос с самим собой"
+                        sanya "Может, зайдем к тебе? Ты вроде говорила у тебя никого нет..."
+                        
+                        show nadya neutral
+                        with dissolve
+
+                        nadya "Извини, мне завтра рано вставать, я хочу выспаться"
+                        "Иголочка разочарования кольнула грудь, но я отнесся с пониманием. В конце-концов, мы слишком мало знакомы. "
+                        sanya "Хорошо, тогда спокойной ночи. Было весело!"
+
+                        show nadya smiles
+                        with dissolve
+
+                        "Улыбнувшись, Надя ушла в свою комнату. Я же пошел в свою. В целом, день прошел очень неплохо. Отдохнул, пообщался, эх, пивка бы и вообще шикарно было бы... "
+
+                        hide nadya smiles 
+                        with dissolve
+
+                        if day4_tried_move and not day4_fight :
+                            scene sanatorium skin dormitory room
+                            with fade
+
+                            "Мыкало не было, так что умывшись, я лег в кровать. Спокойной мне ночи! "
+                        else :
+                            scene sanatorium dormitory room
+                            with fade
+
+                            "Павла Геннадьевича не было, так что умывшись, я лег в кровать. Спокойной мне ночи! "
+
+                        scene black scen
+                        with dissolve
 
                 "Пойти к себе в комнату" :
                     $ rel_nadya -= 3
-                    ""
+                    sanya "Спокойно ночи. Завтра еще встретимся?"
+
+                    show nadya smiles
+                    with dissolve
+
+                    nadya "Конечно! Все равно тут заняться нечем"
+                    "Она удалилась в свою комнату, я же пошел в свою. В целом, день прошел очень неплохо. Отдохнул, пообщался, эх, пивка бы и вообще шикарно было бы... "
+
+                    hide nadya smiles
+                    with dissolve
+
+                    if day4_tried_move and not day4_fight :
+                        scene sanatorium skin dormitory room
+                        with fade
+
+                        "Мыкало не было, так что умывшись, я лег в кровать. Спокойной мне ночи! "
+                    else :
+                        scene sanatorium dormitory room
+                        with fade
+
+                        "Павла Геннадьевича не было, так что умывшись, я лег в кровать. Спокойной мне ночи! "
+
+                    scene black scen
+                    with dissolve
+
+                    pause 2.0
+
+                    jump 
 
             hide nadya happy
             with dissolve
 
         else :
+            
             if day4_tried_move and not day4_fight :
                 scene sanatorium skin dormitory room
                 with fade
@@ -5774,6 +5831,12 @@ label _day5 :
                 extend "Впервые отказал девушке, если честно. Странное чувство."
                 "Без аппетита доев свой завтрак, я пошел на утренние процедуры."
                 # TODO: продолжение
+
+
+label _day6 :
+
+    "день шестой сука блять"
+
 label _end :
     scene black scen
     with fade
