@@ -5324,12 +5324,17 @@ label _day5 :
 
             play sound "audio/forest-sound.mp3" noloop fadein 0.5 fadeout 0.5 volume 0.2
 
-            scene sanatorium park
+            scene nadya white meet art
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             "Мрачное настроение сразу же исчезло, как только я встретил Надю."
+            
+            pause 2.0
 
-            show nadya happy
+            scene sanatorium park
+            with Fade(0.3, 0.4, 0.3, color="#000")
+
+            show nadya white happy
             with dissolve
 
             "Легкое серое платье, босоножки и легкая походка."
@@ -5359,22 +5364,18 @@ label _day5 :
             extend "Головокружение отпустило и в глазах прояснилось."
             sanya "Надо просто меньше чапы курить..."
 
-            show nadya giggles
+            show nadya white shy
             with dissolve
 
             "Надя сдержано посмеялась. "
             extend "Неловкая шутка помогла немного разрядить атмосферу, и вскоре мы уже свободно болтали о том и сем."
             
-            show nadya happy
+            show nadya white happy
             with dissolve
 
             "Несмотря на то, что сидели мы в курилке, к сигам нас не тянуло."
             "Мы спокойно общались на разные отвлеченные темы, вскоре и вовсе переместившись в парк. "
             extend "Решили, так сказать, размять ноги. "
-
-            show nadya smiles
-            with dissolve
-
             nadya "Я думаю, эпоха барокко снова возвращается к нам. " 
             extend "Вся вот эта театральность, интерес к культуре смерти да и в целом некая мрачность появляется и сейчас."
             nadya "Раньше барокко считали чем-то низким, тем что нельзя, так сказать, упоминать. "
@@ -5392,7 +5393,7 @@ label _day5 :
             show screen toska
             play music "audio/heart.mp3" fadein 1.0 fadeout 2.0 volume 0.5
             
-            show nadya light sad
+            show nadya white expressionless
             with dissolve
 
             nadya "Саш?"
@@ -5479,7 +5480,7 @@ label _day5 :
             "На улице меня ждала обеспокоенная Надя. "
             extend "Увидев, что я выхожу на своих ногах, она сразу расцвела."
 
-            show nadya light sad
+            show nadya white expressionless
             with dissolve
 
             play music "audio/nadya_theme.mp3" fadein 1.5 fadeout 2.0 volume 0.25
@@ -5487,7 +5488,7 @@ label _day5 :
             sanya "Все нормально, Агриппина Владимировна сказала завтра еще к ней зайти."
             nadya "Хорошо."
 
-            show nadya happy
+            show nadya white happy
             with dissolve
 
             "Кажется, она облегченно выдохнула."
@@ -5499,7 +5500,7 @@ label _day5 :
             extend "Разве я могу терять шанс провести время с такой интересной и красивой девушкой?"
             "Надя звонко рассмеялась, а я галантно предложил свой локоть, на который она с готовностью оперлась."
             
-            show sanatorium river
+            scene nadya white river art
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             "Все-таки осень начинала входить в свои права, поэтому после заката температура опускалась достаточно низко."
@@ -5507,7 +5508,7 @@ label _day5 :
 
             extend "Именно из-за этого погуляли мы не очень долго, в конце-концов придя к корпусу."
 
-            show sanatorium night
+            scene sanatorium night
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             "Остановившись около его входа, мы замерли в нерешительности. "
@@ -5547,7 +5548,7 @@ label _day5 :
                         "Тут царил легкий беспорядок, видимо не успела до конца убраться."
                         "На полу лежало пару носков, которые она тут же убрала, кровать была наспех заправлена, на столе стояла косметика."
                         
-                        show nadya smiles
+                        show nadya white happy
                         with dissolve
                         
                         nadya "Извини за беспорядок, я не ожидала, что ты придешь."
@@ -5556,7 +5557,7 @@ label _day5 :
                         "Я разулся."
                         sanya "Я схожу в ванную?"
                         
-                        show nadya flirting
+                        show nadya white shy
                         with dissolve
 
                         nadya "Конечно, тогда можешь еще подождать там, я переоденусь?"
@@ -5570,27 +5571,23 @@ label _day5 :
                         "Весь в предвкушении, я вышел из ванной."
                         "На кровати, в зеленой пижаме сидела Надя, сжимая в руках подушку."
                         
-                        show nadya happy
+                        show nadya white happy
                         with dissolve
 
                         nadya "Садись на вторую."
                         "Она указала на соседнюю кровать, на которую я и приземлился."
                         sanya "Тебе идет эта пижама, подходит к твоим волосам."
                         
-                        show nadya giggles
+                        show nadya white shy
                         with dissolve
                         
                         "Надя немного зарделась."
                         nadya "Спасибо."
                         "Посидели, помолчали, глядя друг на друга. И тут я выдал:"
                         sanya "На самом деле, я считаю тебя самой красивой девушкой, которая только есть в моем окружении."
-                        
-                        show nadya handson
-                        with dissolve
-
                         "Повисла тишина. Надя покраснела до кончиков ушей, но хитро мне улыбнулась."
                         
-                        show nadya flirting
+                        show nadya white shy
                         with dissolve
 
                         nadya "Ты тоже ничего."
@@ -5610,19 +5607,19 @@ label _day5 :
                     else :
                         sanya "Может, зайдем к тебе? Ты вроде говорила у тебя никого нет..."
                         
-                        show nadya neutral
+                        show nadya white expressionless
                         with dissolve
 
                         nadya "Извини, мне завтра рано вставать, я хочу выспаться"
                         "Иголочка разочарования кольнула грудь, но я отнесся с пониманием. В конце-концов, мы слишком мало знакомы. "
                         sanya "Хорошо, тогда спокойной ночи. Было весело!"
 
-                        show nadya smiles
+                        show nadya white happy
                         with dissolve
 
                         "Улыбнувшись, Надя ушла в свою комнату. Я же пошел в свою. В целом, день прошел очень неплохо. Отдохнул, пообщался, эх, пивка бы и вообще шикарно было бы... "
 
-                        hide nadya smiles 
+                        hide nadya 
                         with dissolve
 
                         if day4_tried_move and not day4_fight :
@@ -5643,13 +5640,13 @@ label _day5 :
                     $ rel_nadya -= 3
                     sanya "Спокойно ночи. Завтра еще встретимся?"
 
-                    show nadya smiles
+                    show nadya white happy
                     with dissolve
 
                     nadya "Конечно! Все равно тут заняться нечем"
                     "Она удалилась в свою комнату, я же пошел в свою. В целом, день прошел очень неплохо. Отдохнул, пообщался, эх, пивка бы и вообще шикарно было бы... "
 
-                    hide nadya smiles
+                    hide nadya
                     with dissolve
 
                     if day4_tried_move and not day4_fight :
@@ -5668,9 +5665,9 @@ label _day5 :
 
                     pause 2.0
 
-                    jump 
+                    jump _day6
 
-            hide nadya happy
+            hide nadya
             with dissolve
 
         else :
