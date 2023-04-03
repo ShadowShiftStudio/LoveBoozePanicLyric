@@ -113,6 +113,12 @@
                 }
             },
             {
+                "scope": "renpy.meta.color.#000",
+                "settings": {
+                    "foreground": "#000"
+                }
+            },
+            {
                 "scope": "renpy.meta.color.#cfc",
                 "settings": {
                     "foreground": "#cfc"
@@ -137,9 +143,135 @@
                 }
             },
             {
-                "scope": "renpy.meta.color.#000",
+                "scope": "renpy.meta.color.й сц",
                 "settings": {
-                    "foreground": "#000"
+                    "foreground": "й сц"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.or=#",
+                "settings": {
+                    "foreground": "or=#"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.olor",
+                "settings": {
+                    "foreground": "olor"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.=#3b",
+                "settings": {
+                    "foreground": "=#3b"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.й {c",
+                "settings": {
+                    "foreground": "й {c"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.й ви",
+                "settings": {
+                    "foreground": "й ви"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.colo",
+                "settings": {
+                    "foreground": "colo"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.твен",
+                "settings": {
+                    "foreground": "твен"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.венн",
+                "settings": {
+                    "foreground": "венн"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.#3b7",
+                "settings": {
+                    "foreground": "#3b7"
+                }
+            },
+            {
+                "scope": "renpy.meta.color. по ",
+                "settings": {
+                    "foreground": " по "
+                }
+            },
+            {
+                "scope": "renpy.meta.color. {co",
+                "settings": {
+                    "foreground": " {co"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.ры:\\",
+                "settings": {
+                    "foreground": "ры:\\"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.{col",
+                "settings": {
+                    "foreground": "{col"
+                }
+            },
+            {
+                "scope": "renpy.meta.color. соп",
+                "settings": {
+                    "foreground": " соп"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.r=#3",
+                "settings": {
+                    "foreground": "r=#3"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.я : ",
+                "settings": {
+                    "foreground": "я : "
+                }
+            },
+            {
+                "scope": "renpy.meta.color.я те",
+                "settings": {
+                    "foreground": "я те"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.: {c",
+                "settings": {
+                    "foreground": ": {c"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.м сц",
+                "settings": {
+                    "foreground": "м сц"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.с ар",
+                "settings": {
+                    "foreground": "с ар"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.наст",
+                "settings": {
+                    "foreground": "наст"
                 }
             }
         ]

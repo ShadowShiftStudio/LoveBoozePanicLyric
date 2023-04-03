@@ -5221,10 +5221,11 @@ label _day5 :
         "Поставив ей на стол поднос с едой, я поинтересовался:"
         sanya "Как дела?"
         "Девушка прожевала, посмотрела на меня и выдала:"
-        nadya "Когда я ем - я глух и нем! "
-
         show nadya laughs
         with dissolve
+        nadya "Когда я ем - я глух и нем! "
+
+        
 
         extend "Так что извини, но я не люблю болтать за столом."
         "С этими словами она закинула себе в рот новую порцию молочного супа и принялась активно жевать."
@@ -5958,7 +5959,7 @@ label _day5 :
                 "Пересилив себя, я пополз в сторону балкона. "
                 extend "В принципе, высота достаточная, чтобы прекратить эту боль."
 
-                hide yuliu
+                hide yuli
                 with dissolve
 
                 scene sanatorium balcony
@@ -6124,15 +6125,20 @@ label _end :
     scene black scen
     with fade
     
-    pause 5.0
+    pause 4.0
 
-    centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth,\nArtsBer,\nJuravl{/size}"
-    centered "{size=+24}Asind:\nМини-игры, арты, музыка, диалоги первого дня.{/size}"
-    centered "{size=+24}DarlingInSteam:\nИмплементация сценария в код, арты, музыка, диалоги второго дня.{/size}"
-    centered "{size=+24}Danilka108:\nМини-игры, работа с нейросетью, покушал.{/size}"
-    centered "{size=+24}TheNorth:\nСценарий, диалоги второго и третьего дня.\nКод, сценарий, звуки четвертого дня.\nБог, блять{/size}"
-    centered "{size=+24}Xpomin:\nСобрал шкаф, собрал компьютер, сценарий, диалоги второго и третьего дня.{/size}"
-    centered "{size=+24}ArtsBer:\nУстал, писал сценарий, устал писать сценарий.{/size}"
-    centered "{size=+24}Juravl:\nФоновые звуки, саунды.{/size}"
+    centered "{size=+24}Участие принимали:\n{color=#3B7}Asind\nDarlingInSteam\nDanilka108\nXpomin\nTheNorth\nArtsBer\nJuravl\nrero{/color}{/size}"
+    centered "{size=+24}Сценарий:\n Главный сценарист: {color=#3B7}ArtsBer{/color}\nГеймджем сценарий первого и второго дня: {color=#3B7}Xpomin{/color}{/size}"
+    centered "{size=+24}Игровая режиссура:\n {color=#3B7}Asind, DarlingInSteam, TheNorth{/color}{/size}"
+    centered "{size=+24}Дизайн:\nОтветственный за визуал: {color=#3B7}Asind{/color}\nРабота с артами: {color=#3B7}Asind, DarlingInSteam{/color}\nОтветственные за саунд-дизайн: {color=#3B7}Juravl, TheNorth, Asind, DarlingInSteam{/color}{/size}"
+    centered "{size=+24}Мини-игры:\n\"Автобус\" и \"Перепей соперника\": {color=#3B7}Danilka108{/color}\n\"Найди предмет\": {color=#3B7}Asind{/color}{/size}"
+    centered "{size=+24}Музыка:\n Главная тема и музыка концовок: {color=#3B7}rero{/color}\nМузыка настроений: {color=#3B7}Juravl{/color}{/size}"
+
+    centered "Отдельная благодарность за работу:"
+    centered "Andrey Usikov - Rostov Font\nChristian Robertson - Roboto Font\nSan Francisco Pro Font - © 2015-2017 Apple Inc. All rights reserved.\nCMU Sans Serif Font - under SIL Open Font License\n Perun. Copyright © Stefan Peev, Context Ltd, 2016"
+    centered "Strauss Festival Orchestra Vienna\nLudovico Einaudi - Nefeli\nSymphony No. 4 in A Major, Op. 90, MWV N16, \"Italian\": IV. Saltarello. Presto. Симфонический орекстр Бирмингема.\nSchumann: Kinderszenen, Op. 15 - 7. Traumerei. Владимир Самойлович Горовиц"
+    centered "Awakening Dew - Keys of Moon\nForest Walk - Alexander Nakarada\nCherry Metal - Arthur Vyncke\nSpace Floating - FSM Team feat. < e s c p >"
+    #centered "" 
+
     centered "{size=+24}В разделе \"Об игре\" можно найти ссылку на репозиторий GitHub.{/size}"
     centered "{size=+24}Спасибо за прохождение данной новеллы. Мы благодарны за Ваше внимание.{/size}"
