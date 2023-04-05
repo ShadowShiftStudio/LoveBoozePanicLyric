@@ -199,16 +199,6 @@ label splashscreen:
     show logo disclaimer with dissolve
     
     pause 100.0
-
-    image sanya_gui = "gui/sanya.png"
-    
-    hide logo disclaimer
-    with dissolve
-
-    pause 0.1
-
-    scene sanya_gui
-    with dissolve
     stop sound
     return
 
