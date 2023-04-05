@@ -6237,7 +6237,7 @@ label _day5 :
                 $ day5_go_look_for_emilia = True
 
             "Пойти в комнату":
-                day5_go_look_for_emilia = False
+                $ day5_go_look_for_emilia = False
                 "Продолжения нет."
 
         if day5_go_look_for_emilia :
