@@ -316,47 +316,126 @@ style quick_button_text:
 screen navigation():
 
     vbox:
-        style_prefix "navigation"
-
+        #style_prefix "navigation"
         xpos gui.navigation_xpos
         yalign 0.8
-
+        xalign 0.5
+        box_wrap True
+        
         spacing gui.navigation_spacing
 
         if main_menu:
 
-            textbutton _("Начать") action Start()
+            textbutton _("{size=60}Новая Игра{/size}") action Start():
+                xalign 0.5
+                text_align 0.5
 
         else:
 
-            textbutton _("История") action ShowMenu("history")
+            textbutton _("{size=60}История{/size}") action ShowMenu("history"):
+                xalign 0.5
+                text_align 0.5
 
-            textbutton _("Сохранить") action ShowMenu("save")
+            textbutton _("{size=60}Сохранить{/size}") action ShowMenu("save"):
+                xalign 0.5
+                text_align 0.5
 
-        textbutton _("Загрузить") action ShowMenu("load")
+        textbutton _("{size=60}Загрузить{/size}") action ShowMenu("load"):
+            xalign 0.5
+            text_align 0.5
 
-        textbutton _("Настройки") action ShowMenu("preferences")
+        textbutton _("{size=60}Настройки{/size}") action ShowMenu("preferences"):
+            xalign 0.5
+            text_align 0.5
+                
 
         if _in_replay:
 
-            textbutton _("Завершить повтор") action EndReplay(confirm=True)
+            textbutton _("{size=60}Завершить повтор{/size}") action EndReplay(confirm=True):
+                xalign 0.5
+                text_align 0.5
 
         elif not main_menu:
 
-            textbutton _("Главное меню") action MainMenu()
+            textbutton _("{size=60}Главное меню{/size}") action MainMenu():
+                xalign 0.5
+                text_align 0.5
 
-        textbutton _("Об игре") action ShowMenu("about")
-
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
-
-            ## Помощь не необходима и не относится к мобильным устройствам.
-            textbutton _("Помощь") action ShowMenu("help")
+        textbutton _("{size=60}Об игре{/size}") action ShowMenu("about"):
+            xalign 0.5
+            text_align 0.5
 
         if renpy.variant("pc"):
 
             ## Кнопка выхода блокирована в iOS и не нужна на Android и в веб-
             ## версии.
-            textbutton _("Выход") action Quit(confirm=not main_menu)
+            textbutton _("{size=60}Выход{/size}") action Quit(confirm=not main_menu):
+                xalign 0.5
+                text_align 0.5
+
+screen navigation_for_game():
+
+    image "gui/logotype.png":
+                xalign 0.033
+                yalign 0.1
+                zoom 0.5
+    vbox:
+        #style_prefix "navigation"
+        xpos 0.11
+        yalign 0.7
+        xalign 0.5
+        box_wrap True
+        
+        spacing gui.navigation_spacing
+
+        if main_menu:
+
+            textbutton _("{size=60}Новая Игра{/size}") action Start():
+                xalign 0.5
+                text_align 0.5
+
+        else:
+
+            textbutton _("{size=60}История{/size}") action ShowMenu("history"):
+                xalign 0.5
+                text_align 0.5
+
+            textbutton _("{size=60}Сохранить{/size}") action ShowMenu("save"):
+                xalign 0.5
+                text_align 0.5
+
+        textbutton _("{size=60}Загрузить{/size}") action ShowMenu("load"):
+            xalign 0.5
+            text_align 0.5
+
+        textbutton _("{size=60}Настройки{/size}") action ShowMenu("preferences"):
+            xalign 0.5
+            text_align 0.5
+                
+
+        if _in_replay:
+
+            textbutton _("{size=60}Завершить повтор{/size}") action EndReplay(confirm=True):
+                xalign 0.5
+                text_align 0.5
+
+        elif not main_menu:
+
+            textbutton _("{size=60}Главное меню{/size}") action MainMenu():
+                xalign 0.5
+                text_align 0.5
+
+        textbutton _("{size=60}Об игре{/size}") action ShowMenu("about"):
+            xalign 0.5
+            text_align 0.5
+
+        if renpy.variant("pc"):
+
+            ## Кнопка выхода блокирована в iOS и не нужна на Android и в веб-
+            ## версии.
+            textbutton _("{size=60}Выход{/size}") action Quit(confirm=not main_menu):
+                xalign 0.5
+                text_align 0.5
 
 
 style navigation_button is gui_button
@@ -391,17 +470,22 @@ screen main_menu():
     ## Оператор use включает отображение другого экрана в данном. Актуальное
     ## содержание главного меню находится на экране навигации.
     use navigation
-
+    image "gui/logotype.png":
+                xalign 0.02
+                yalign 0.1
     if gui.show_name:
+        
 
         vbox:
             style "main_menu_vbox"
 
-            text "[config.name!t]":
-                style "main_menu_title"
+            
 
-            text "[config.version]":
-                style "main_menu_version"
+            # text "[config.name!t]":
+            #     style "main_menu_title"
+
+            # text "[config.version]":
+            #     style "main_menu_version"
 
 
 style main_menu_frame is empty
@@ -411,7 +495,7 @@ style main_menu_title is main_menu_text
 style main_menu_version is main_menu_text
 
 style main_menu_frame:
-    xsize 220
+    xsize 420
     yfill True
 
     background "gui/overlay/main_menu.png"
@@ -448,9 +532,9 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
     if main_menu:
         add gui.main_menu_background
-    else:
-        add gui.game_menu_background
-
+    # else:
+    #     add gui.game_menu_background
+    
     frame:
         style "game_menu_outer_frame"
 
@@ -496,11 +580,12 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
                     transclude
 
-    use navigation
+    use navigation_for_game
 
-    textbutton _("Вернуться"):
+    textbutton _("{size=60}Вернуться{/size}"):
         style "return_button"
-
+        text_align 0.5
+        xalign 0.047
         action Return()
 
     label title
@@ -525,7 +610,7 @@ style return_button_text is navigation_button_text
 style game_menu_outer_frame:
     bottom_padding 45
     top_padding 180
-
+    #background Movie(play="gui/classic_sanya.webm")
     background "gui/overlay/game_menu.png"
 
 style game_menu_navigation_frame:
@@ -1451,12 +1536,12 @@ screen quick_menu():
     zorder 100
 
     if quick_menu:
-        hbox:
+        vbox:
             
             style_prefix "quick"
-
             xalign 0.99
-            yalign 0.01
+            yalign 0.99
+
             # imagebutton auto "gui/button/back_button_%s.png" xpos 0 ypos 0 action Rollback()
             imagebutton auto "gui/button/history_button_%s.png" xpos 0 ypos 0 action ShowMenu('history')
             # imagebutton auto "gui/button/skip_button_%s.png" xpos 0 ypos 0 action Skip() alternate Skip(fast=True, confirm=True)
@@ -1465,12 +1550,12 @@ screen quick_menu():
             imagebutton auto "gui/button/load_button_%s.png" xpos 0 ypos 0 action ShowMenu('load')
             imagebutton auto "gui/button/settings_button_%s.png" xpos 0 ypos 0 action ShowMenu('preferences')
 
-        hbox:
+        vbox:
             
             style_prefix "quick"
-
             xalign 0.01
-            yalign 0.01
+            yalign 0.99
+
             imagebutton auto "gui/button/back_button_%s.png" xpos 0 ypos 0 action Rollback()
             imagebutton auto "gui/button/auto_button_%s.png" xpos 0 ypos 0 action Preference("auto-forward", "toggle")
             imagebutton auto "gui/button/skip_button_%s.png" xpos 0 ypos 0 action Skip() alternate Skip(fast=True, confirm=True)
@@ -1499,7 +1584,7 @@ style main_menu_frame:
 
 style game_menu_outer_frame:
     variant "small"
-    background "gui/phone/overlay/game_menu.png"
+    background "gui/phone/overlay/confirm.png"
 
 style game_menu_navigation_frame:
     variant "small"
