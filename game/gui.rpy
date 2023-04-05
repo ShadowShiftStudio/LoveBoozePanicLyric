@@ -66,7 +66,7 @@ define gui.text_font = "fonts/cmunssdc.ttf"
 define gui.name_text_font = "fonts/Rostov.ttf"
 
 ## Шрифт, используемый текстом вне игры.
-define gui.interface_text_font = "fonts/Perun.ttf"
+define gui.interface_text_font = "fonts/PlainScriptCTT.ttf"
 
 ## Размер нормального текста диалога.
 define gui.text_size = 43
@@ -255,7 +255,7 @@ define gui.file_slot_rows = 2
 
 ## Местоположение левого края навигационных кнопок по отношению к левому краю
 ## экрана.
-define gui.navigation_xpos = 50
+define gui.navigation_xpos = 340
 
 ## Вертикальная позиция индикатора пропуска.
 define gui.skip_ypos = 15

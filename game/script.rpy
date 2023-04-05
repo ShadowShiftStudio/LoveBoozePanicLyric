@@ -186,7 +186,7 @@ screen busday1():
 label splashscreen:
     play sound "audio/intro_sound.mp3" 
     image back = "#272727"
-
+    image sanya_first_frame = "gui/sanya.png" #
     scene back
     with dissolve
 
@@ -5958,6 +5958,7 @@ label _day5 :
                 "Какая же она она все-таки странная, а раньше казалась идеальной."
                 "Жаль, конечно, но я и правда ничего ей не обещал, так что доеб, как говорится, непонятен."
                 "Надо бы уже выходить, иначе опоздаю на встречу."
+                play music "audio/strashilka_rero.mp3" volume 0.5 noloop
                 noname "ТЫ НИКУДА НЕ ПОЙДЕШЬ!"
 
                 show yuli insult
@@ -6014,8 +6015,9 @@ label _day5 :
                 show yuli wet sad
                 with dissolve
 
+                stop music fadeout 1.0
                 yuli "Прощай, Сашенька."
-
+                
                 jump _end
 
 
