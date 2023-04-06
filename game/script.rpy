@@ -5195,7 +5195,7 @@ label _day5 :
             hide emily green neutral
             with dissolve
 
-            show nadya happy
+            show nadya happy at center
             with dissolve
 
         "Подсяду к Эмилии" if day4_go_with_emily and rel_emily >= 3:
@@ -5215,14 +5215,12 @@ label _day5 :
         "Издали помахал ей рукой. "
         extend "Она махнула, в ответ, почти не подняв лица от тарелки."
         "Поставив ей на стол поднос с едой, я поинтересовался:"
+        play sound "audio/chair_crack.mp3" noloop fadein 0.2 fadeout 0.2
         sanya "Как дела?"
         "Девушка прожевала, посмотрела на меня и выдала:"
         show nadya laughs
         with dissolve
         nadya "Когда я ем - я глух и нем! "
-
-        
-
         extend "Так что извини, но я не люблю болтать за столом."
         "С этими словами она закинула себе в рот новую порцию молочного супа и принялась активно жевать."
         "Что ж... "
@@ -5338,17 +5336,22 @@ label _day5 :
         "Прихорошившись, я подошел к зеркалу, стоящему у входа."
 
         play music "audio/bad_dream.mp3" fadein 1.0 fadeout 1.0 volume 0.6
+        play sound "audio/heart.mp3" fadein 0.2 fadeout 0.2
         noname "И куда это ты такой красивый вырядился?"
 
-        show yuli empty glitch at left
+
+        show yuli empty glitch at left:
+            alpha 0.7
         with dissolve
 
-        pause 1.5
+        pause 0.3
 
         hide yuli empty glitch
         with dissolve
 
         "Вздрогнув от неожиданности, я резко обернулся."
+
+        stop sound fadeout 0.3 
         "На моей кровати беззаботно болтая ножками сидела улыбающаяся Юля."
 
         show yuli empathy
@@ -5423,7 +5426,7 @@ label _day5 :
             "Эх... "
             extend "Кажется, именно этого не хватало мне в моей серой и бессмысленной жизни."
             noname "Да что ты!"
-
+            stop music fadeout 0.3
             show screen toska
             play sound "audio/heart.mp3" fadein 1.0 fadeout 2.0 volume 0.8
 
@@ -5456,7 +5459,8 @@ label _day5 :
             "Мы сели на скамейку в курилке. "
             extend "Головокружение отпустило и в глазах прояснилось."
             sanya "Надо просто меньше чапы курить..."
-            
+
+            play sound "audio/girl_laugh3.mp3" noloop fadein 0.2 fadeout 0.2 
             show nadya white happy
             with dissolve
 
@@ -5464,8 +5468,7 @@ label _day5 :
             extend "Неловкая шутка помогла немного разрядить атмосферу, и вскоре мы уже свободно болтали о том и сем."
             
             "Несмотря на то, что сидели мы в курилке, к сигам нас не тянуло."
-
-
+            
             hide nadya
             with dissolve
             scene black scen
@@ -5474,7 +5477,6 @@ label _day5 :
             pause 2.0
 
             "Мы спокойно общались на разные отвлеченные темы, вскоре и вовсе переместившись в парк. "
-
 
             scene sanatorium evening park
             with dissolve
@@ -5494,6 +5496,9 @@ label _day5 :
             extend "А сейчас?"
             nadya "Сейчас же происходит то же самое, старперы говорят, что раньше было лучше, бла-бла-бла, но ведь темы те же, содержание то же, лишь форма меняется, трансформируется..."
             sanya "М-м-м..."
+
+            play sound "audio/pain.mp3" noloop fadein 0.2 fadeout 0.2 volume 2.0
+
             "Голову пронзила резкая вспышка боли, которая была даже сильнее, чем предыдущая. "
 
             show screen toska
@@ -5507,12 +5512,15 @@ label _day5 :
             "Голос Нади звучал словно через пелену. "
             extend "Голова кружилась, боль пульсировала в висках, подняв взгляд, я с трудом смог его сфокусировать."
 
-            show yuli scremer
+            show yuli empty glitch:
+                ypos 0.05
+                alpha 0.7 
             with dissolve
 
             pause 1.0
 
             hide yuli
+            with dissolve
 
             "Вдруг передо мной на секунду возникло ухмыляющееся лицо Юли, а боль словно усилилась. "
             "Я не смог сдержать стон."
@@ -5521,7 +5529,18 @@ label _day5 :
             sanya "Голова... болит."
             "Слова давались с большим трудом."
             nadya "Тебе нужно в медпункт!"
+
+            play sound "audio/footsteps_asphalt.mp3" noloop fadein 0.2 fadeout 0.2
+            show nadya:
+                linear 0.6 zoom 1.1
+                linear 0.6 ypos 1.15
+            pause 1.2
             "Я почувствовал, что она взяла меня под руку и мягко, но настойчиво потянула вверх."
+            
+            show nadya:
+                linear 0.6 ypos 1.0
+                linear 0.6 zoom 1.0
+
             nadya "Давай, тут как раз недалеко."
 
             scene black
@@ -5537,10 +5556,14 @@ label _day5 :
             "Агриппина сидела около своей вотчины и, попыхивая трубку, смотрела с задумчивым видом вдаль. "
             "Однако, увидев меня, идущего на прицепе у Нади, Агриппина сузила глаза и встала с кресла, потушив трубку."
 
-            show grusha grusha neutral
+            show grusha grusha neutral at left
             with dissolve
-
-            grusha "Что с ним?" 
+            show nadya white open mouth at right:
+                zoom 1.2
+                ypos 1.2
+            with dissolve
+            grusha "Что с ним?"
+            nadya "Голова резко заболела!" 
             with hpunch
             "Тут у меня вновь случился приступ, от которого я чуть не потерял сознание."
             with vpunch
@@ -5572,6 +5595,10 @@ label _day5 :
             "До слуха донеслось какое-то копошение и в рот вдруг что-то вбрызнули. "
             extend "Что-то до жути горькое. "
             "Закашлявшись, я чуть не брякнулся с кушетки, но меня поддержали. "
+            hide screen toska
+            with dissolve
+            stop sound fadeout 1.0
+            play music "audio/medicine_sound.mp3" noloop fadein 0.2 fadeout 0.2 volume 0.7
             "Калейдоскоп начал замедлятся, пульсирующая боль становилась слабее. "
             sanya "Спасибо..."
             "Агриппина Владимировна ничего не ответила, подняв мне веко и посветив туда фонариком."
@@ -5584,9 +5611,7 @@ label _day5 :
             "Посмотрев на хмурую женщину, я кивнул. "
             extend "Благо, боль полностью прошла."
 
-            hide screen toska
-            with dissolve
-            
+                        
             stop music
             
             hide grusha angry
@@ -5598,10 +5623,12 @@ label _day5 :
             "На улице меня ждала обеспокоенная Надя. "
             extend "Увидев, что я выхожу на своих ногах, она сразу расцвела."
 
-            show nadya white shy
-            with dissolve
-
             play music "audio/nadya_theme.mp3" fadein 1.5 fadeout 2.0 volume 0.25
+            
+            show nadya white shy at center:
+                ypos 1.2
+                linear 0.5 zoom 1.3
+            with dissolve
 
             nadya "Ну, как ты?" 
             sanya "Всё нормально, Агриппина Владимировна сказала завтра еще к ней зайти."
@@ -5749,29 +5776,47 @@ label _day5 :
                         show nadya white expressionless
                         with dissolve
 
-                        nadya "Извини, мне завтра рано вставать, я хочу выспаться"
-                        "Иголочка разочарования кольнула грудь, но я отнесся с пониманием. В конце-концов, мы слишком мало знакомы. "
-                        sanya "Хорошо, тогда спокойной ночи. Было весело!"
+                        nadya "Извини, мне завтра рано вставать, я хочу выспаться."
+                        "Иголочка разочарования кольнула грудь, но я отнесся с пониманием. "
+                        extend "В конце-концов, мы слишком мало знакомы."
+                        sanya "Хорошо, тогда спокойной ночи. "
+                        extend "Было весело!"
 
                         show nadya white happy
                         with dissolve
 
-                        "Улыбнувшись, Надя ушла в свою комнату. Я же пошел в свою. В целом, день прошел очень неплохо. Отдохнул, пообщался, эх, пивка бы и вообще шикарно было бы... "
-
+                        "Улыбнувшись, Надя ушла в свою комнату. Я же пошел в свою. "
                         hide nadya 
                         with dissolve
 
+                        play sound "audio/footsteps.mp3" noloop fadein 0.2 fadeout 0.2
+                        scene sanatorium walkway
+                        with dissolve
+                        pause 1.0
+                        play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
+                        pause 0.5
+                        
                         if day4_tried_move and not day4_fight :
                             scene sanatorium skin dormitory room
                             with fade
 
-                            "Мыкало не было, так что умывшись, я лег в кровать. Спокойной мне ночи! "
+                            play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
+                            
+                            "В целом, день прошел очень неплохо. "
+                            extend "Отдохнул, пообщался, эх, пивка бы и вообще шикарно было бы..."
+                            "Мыкало не было, так что умывшись, я лег в кровать. "
+                            extend "Спокойной мне ночи!"
                         else :
                             scene sanatorium dormitory room
                             with fade
 
-                            "Павла Геннадьевича не было, так что умывшись, я лег в кровать. Спокойной мне ночи! "
-
+                            play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
+                            
+                            "В целом, день прошел очень неплохо. "
+                            extend "Отдохнул, пообщался, эх, пивка бы и вообще шикарно было бы..."
+                            "Павла Геннадьевича не было, так что умывшись, я лег в кровать. "
+                            extend "Спокойной мне ночи!"
+                        
                         scene black scen
                         with dissolve
 
@@ -5886,9 +5931,19 @@ label _day5 :
 
                 sanya "Ну... думаю, что скорее да, чем нет..."
 
-                show yuli horny
+                show yuli horny:
+                    linear 0.9 zoom 1.1
+                with dissolve
+                pause 1.0
+                
+                hide yuli
                 with dissolve
                 
+                play sound "audio/heart.mp3" fadein 0.2 fadeout 0.2
+
+                show screen toska
+                with dissolve 
+
                 "Юля загадочно улыбнулась и сделала шаг вперед, истаяв туманом."
                 yuli "Это правильный ответ..."
                 "И тут я почувствовал, что будто куда-то падаю. "
@@ -5899,6 +5954,7 @@ label _day5 :
 
                 "Зажмурившись, я увидел перед собой плачущую Юлю."
                 yuli "Однако за то, что ты меня расстроил, пообщавшись с той девкой, придется тебя немного наказать."
+                play audio "audio/pain.mp3" noloop fadein 0.2 fadeout 0.2 volume 3.0
                 "Я почувствовал острую боль на запястьях. "
                 extend "Посмотрев на них, обнаружил глубокие кровоточащие царапины, которые появлялись прямо на глазах."
                 "Руки онемели от боли, однако вставший в горле ком страха помешал закричать."
@@ -5910,10 +5966,21 @@ label _day5 :
                 extend "Теперь, каждый раз когда будешь думать об измене, посматривай на них. "
                 extend "И будь хорошим мальчиком. "
                 extend "Отдыхай."
+
+                hide yuli
+                with dissolve
+
+                with vpunch
+                play audio "audio/Fall.mp3" noloop fadein 0.2 fadeout 0.2
+                
                 "Меня словно затянуло в водоворот, выплюнув прямо на пол в комнаты. "
                 extend "Кое-как поднявшись, я осмотрелся. "
                 extend "Руки болели и плохо слушались."
                 "Сознание плыло, да и в целом ощущения были не самые приятные."
+                
+                hide screen toska
+                with dissolve
+                
                 sanya "Это что нахуй было..."
                 "Юли в комнате уже не было. "
                 extend "Забравшись на кровать, я осмотрел руки. "
@@ -5953,22 +6020,39 @@ label _day5 :
                 hide yuli
                 with dissolve
 
+                play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
+                pause 0.7
+                play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
+                
                 "С этими словами она вышла из комнаты. "
                 extend "Я покачал головой."
                 "Какая же она она все-таки странная, а раньше казалась идеальной."
                 "Жаль, конечно, но я и правда ничего ей не обещал, так что доеб, как говорится, непонятен."
                 "Надо бы уже выходить, иначе опоздаю на встречу."
-                play music "audio/strashilka_rero.mp3" volume 0.5 noloop
-                noname "ТЫ НИКУДА НЕ ПОЙДЕШЬ!"
-
-                show yuli insult
-                with dissolve
                 
                 show screen toska
                 with dissolve
+                
+                play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2 volume 3.0
+                with hpunch
 
+                noname "ТЫ НИКУДА НЕ ПОЙДЕШЬ!"
+
+                play sound "audio/pain.mp3" noloop fadein 0.2 fadeout 0.2 volume 2.0
+                
                 "Голову пронзила сильнейшая вспышка боли. "
+                
+                play sound "audio/Fall.mp3" noloop fadein 0.2 fadeout 0.2 
+                
                 extend "Ноги подкосились, и я рухнул на пол, схватившись за голову."
+                
+                play music "audio/strashilka_rero.mp3" volume 0.5 noloop
+                
+                show yuli insult:
+                    ypos 0.06
+                    linear 1.0 xalign 0.5
+                with dissolve
+
                 "В комнату медленно словно призрак вплыла Юля."
                 yuli "Саша, Сашенька, почему ты так считаешь? "
                 extend "Я думала, мы уже пара!"
@@ -5998,7 +6082,7 @@ label _day5 :
 
                 yuli "Саша, я очень люблю тебя. "
                 extend "И мне больно, что ты не отвечаешь мне взаимностью."
-                "Ты предпочел меня каким-то новым телкам, и это печально. "
+                yuli "Ты предпочел меня каким-то новым телкам, и это печально. "
                 extend "Думаю, ты плохой человек, а плохие люди не должны жить на этом свете."
                 "Открыв окно, я навалился на подоконник. "
                 extend "Я уже не мог соображать. "
@@ -6015,9 +6099,9 @@ label _day5 :
                 show yuli wet sad
                 with dissolve
 
-                stop music fadeout 1.0
                 yuli "Прощай, Сашенька."
-                
+                stop music fadeout 1.0
+
                 jump _end
 
 
