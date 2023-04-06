@@ -255,7 +255,7 @@ define gui.file_slot_rows = 2
 
 ## Местоположение левого края навигационных кнопок по отношению к левому краю
 ## экрана.
-define gui.navigation_xpos = 340
+define gui.navigation_xpos = 351
 
 ## Вертикальная позиция индикатора пропуска.
 define gui.skip_ypos = 15

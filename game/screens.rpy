@@ -532,8 +532,8 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
     if main_menu:
         add gui.main_menu_background
-    # else:
-    #     add gui.game_menu_background
+    else:
+        add gui.game_menu_background
     
     frame:
         style "game_menu_outer_frame"
