@@ -2723,7 +2723,7 @@ label third_day :
                     play music "audio/sigma.mp3" volume 0.3
                     pause 4.0
 
-                "Эммм.... ну если только.... мне искусственное дыхание нужно будет......."  :
+                "Ну если только мне искусственное дыхание нужно будет..."  :
                     $ rel_yuli -= 1
                     stop music fadeout 0.3
                     play music "audio/fail.mp3" volume 0.1
@@ -2731,6 +2731,7 @@ label third_day :
                     centered "{size=+24}Участие принимали:\nAsind,\nDarlingInSteam,\nDanilka108,\nXpomin,\nTheNorth{/size}"
 
                     pause 4.0
+                    
         stop music fadeout 0.5 
         play music "audio/sound-in-bus.mp3" fadein 3.0 fadeout 5.0 volume 0.10
 
@@ -2883,7 +2884,7 @@ label _sanatorium :
             show valeria angry
             with dissolve
 
-            $ str_for_notification = "У этого действия будут последствия"
+            $ str_for_notification = "{size=-12}Валерия запомнит это{/size}"
                 
             show screen notification_popup_big
             with dissolve
@@ -2906,6 +2907,17 @@ label _sanatorium :
             $ day4_smoke_after_words_valeria = False
 
             "Валерия Владимировна неодобрительно посмотрела на тех, кто её проигнорировал и с вежливой улыбкой произнесла."
+
+            $ str_for_notification = "{size=-12}Валерия запомнит это{/size}"
+                
+            show screen notification_popup_big
+            with dissolve
+
+            pause 2.0
+
+            hide screen notification_popup_big
+            with dissolve
+
             valeria "А сейчас, давайте я вам проведу небольшую экскурсию, пока мы идём до ваших комнат."
 
             hide valeria happy
@@ -3079,24 +3091,36 @@ label _sanatorium :
 
     menu:
         "А можно мне другого соседа...":
+            $ str_for_notification = "{size=-12}Павел запомнит это{/size}"
+                
+            show screen notification_popup_big
+            with dissolve
+
+            pause 2.0
+
+            hide screen notification_popup_big
+            with dissolve
+
             $ day4_tried_move = True;
             $ rel_pavel -= 1
             play music "audio/prepare-to-fight.mp3" fadein 2.5 fadeout 3.0 volume 0.15
                     
         "Ну и я не идеален.":
+            $ str_for_notification = "{size=-12}Павел запомнит это{/size}"
+                
+            show screen notification_popup_big
+            with dissolve
+
+            pause 2.0
+
+            hide screen notification_popup_big
+            with dissolve
+
+
             $ day4_tried_move = False;
             $ rel_pavel += 1
     
     if day4_tried_move == True:
-        $ str_for_notification = "У этого действия будут последствия"
-            
-        show screen notification_popup_big
-        with dissolve
-
-        pause 2.0
-
-        hide screen notification_popup_big
-        with dissolve
 
         "Смотря на это вонючее нечто, что уже по-хозяйски развалилось на кровати, раскидав носки с тапочками в разные стороны, я понял одно."
         sanya "Я не собираюсь с ним жить."
@@ -3329,10 +3353,11 @@ label _sanatorium :
                 "Жестко вспомнить предков" :
                     $ day4_smoke_old_siggarete = True
                     $ day4_take_pill = True
-                    $ str_for_notification = "У этого действия будут последствия"
                     $ mood_counter -= 1
                     $ rel_skin += 3
 
+                    $ str_for_notification = "{size=-12}Мыкола запомнит это{/size}"
+                        
                     show screen notification_popup_big
                     with dissolve
 
@@ -3340,6 +3365,7 @@ label _sanatorium :
 
                     hide screen notification_popup_big
                     with dissolve
+
 
                     show skin neutral at center:
                         linear 0.1 ypos 1.2
@@ -3475,10 +3501,11 @@ label _sanatorium :
                 "Я ещё не обедал, закон Архимеда не работает" :
                     $ day4_smoke_old_siggarete = False
                     $ day4_take_pill = False
-                    $ str_for_notification = "У этого действия будут последствия"
                     $ mood_counter += 1
                     $ rel_skin -= 1
 
+                    $ str_for_notification = "{size=-12}У этого действия будут последствия{/size}"
+                        
                     show screen notification_popup_big
                     with dissolve
 
@@ -3651,6 +3678,16 @@ label _sanatorium :
         
         menu:
             "Отметим":
+                
+                $ str_for_notification = "{size=-12}Павел запомнит это{/size}"
+                        
+                show screen notification_popup_big
+                with dissolve
+
+                pause 2.0
+
+                hide screen notification_popup_big
+                with dissolve
 
                 $ day4_drink = True
                 $ rel_pavel += 3
@@ -3686,9 +3723,11 @@ label _sanatorium :
             "Да ну его":
 
                 $ day4_drink = False
-                $ str_for_notification = "Это действие имеет последствия..."
                 $ rel_pavel -= 1
                 $ mood_counter -= 1
+
+                $ str_for_notification = "{size=-12}У этого действия будут последствия{/size}"
+                    
                 show screen notification_popup_big
                 with dissolve
 
@@ -3831,10 +3870,11 @@ label _sanatorium :
         "Подсяду к Юле":
 
             $ day4_yuli_meal = True
-            $ str_for_notification = "Это действие имеет последствия..."
             $ rel_yuli += 2
             $ mood_counter += 2
 
+            $ str_for_notification = "{size=-12}Юля запомнит это{/size}"
+                
             show screen notification_popup_big
             with dissolve
 
@@ -3953,10 +3993,11 @@ label _sanatorium :
 
         "Подсяду к Наде" if day2_nadya_have_a_dialog:
             $ day4_nadya_meal = True
-            $ str_for_notification = "Это действие имеет последствия..."
             $ rel_nadya += 2
             $ mood_counter += 2
 
+            $ str_for_notification = "{size=-12}Надя запомнит это{/size}"
+                
             show screen notification_popup_big
             with dissolve
 
@@ -4136,8 +4177,30 @@ label _sanatorium :
             
             menu :
                 "Прогуляюсь по парку..." :
+                    
+                    $ str_for_notification = "{size=-12}У этого действия будут последствия{/size}"
+                        
+                    show screen notification_popup_big
+                    with dissolve
+
+                    pause 2.0
+
+                    hide screen notification_popup_big
+                    with dissolve
+
                     $ day4_walk_in_park = True
                 "Пойду посплю..." :
+
+                    $ str_for_notification = "{size=-12}У этого действия будут последствия{/size}"
+                        
+                    show screen notification_popup_big
+                    with dissolve
+
+                    pause 2.0
+
+                    hide screen notification_popup_big
+                    with dissolve
+
                     $ day4_walk_in_park = False
             
             if day4_walk_in_park:
@@ -4175,6 +4238,16 @@ label _sanatorium :
 
                 menu :
                     "Красивая... Но настроения нет. Лучше пойду мимо.":
+                        
+                        $ str_for_notification = "{size=-12}У этого действия будут последствия{/size}"
+                            
+                        show screen notification_popup_big
+                        with dissolve
+
+                        pause 2.0
+
+                        hide screen notification_popup_big
+                        with dissolve
 
                         $ day4_smoke_with_pavel = True
                         $ rel_emily -= 1
@@ -4357,6 +4430,16 @@ label _sanatorium :
                             jump _day5
 
                     "Мне одиноко. Быть может, она составит мне компанию?" :
+                        
+                        $ str_for_notification = "{size=-12}У этого действия будут последствия{/size}"
+                        
+                        show screen notification_popup_big
+                        with dissolve
+
+                        pause 2.0
+
+                        hide screen notification_popup_big
+                        with dissolve
 
                         $ day4_go_with_emily = True
                         $ rel_emily += 3
@@ -4568,8 +4651,30 @@ label _sanatorium :
                 
                 menu :
                     "Шаг вперед." :
+                        
+                        $ str_for_notification = "{size=-12}У этого действия будут последствия{/size}"
+                        
+                        show screen notification_popup_big
+                        with dissolve
+
+                        pause 2.0
+
+                        hide screen notification_popup_big
+                        with dissolve
+
                         $ day4_suicide = True
                     "Пойти спать" :
+                        
+                        $ str_for_notification = "{size=-12}У этого действия будут последствия{/size}"
+                        
+                        show screen notification_popup_big
+                        with dissolve
+
+                        pause 2.0
+
+                        hide screen notification_popup_big
+                        with dissolve
+
                         $ day4_suicide = False
 
                 if day4_suicide :
@@ -5179,6 +5284,16 @@ label _day5 :
     menu :
         "Сяду один." :
 
+            $ str_for_notification = "{size=-12}У этого действия будут последствия{/size}"
+                        
+            show screen notification_popup_big
+            with dissolve
+
+            pause 2.0
+
+            hide screen notification_popup_big
+            with dissolve
+
             $ day5_loneliness_in_cafe = True
             $ mood_counter -= 2
 
@@ -5190,6 +5305,16 @@ label _day5 :
 
         "Подсяду к Наде." if day4_nadya_meal or day2_nadya_have_a_dialog and rel_nadya >= 3:
 
+            $ str_for_notification = "{size=-12}Надя запомнит это{/size}"
+                
+            show screen notification_popup_big
+            with dissolve
+
+            pause 2.0
+
+            hide screen notification_popup_big
+            with dissolve
+
             $ day5_nadya_in_cafe = True
             $ rel_nadya += 1
 
@@ -5200,6 +5325,16 @@ label _day5 :
             with dissolve
 
         "Подсяду к Эмилии" if day4_go_with_emily and rel_emily >= 3:
+
+            $ str_for_notification = "{size=-12}Эмилия запомнит это{/size}"
+                
+            show screen notification_popup_big
+            with dissolve
+
+            pause 2.0
+
+            hide screen notification_popup_big
+            with dissolve
 
             $ day5_emily_in_cafe = True
             $ rel_emily += 2
@@ -5385,6 +5520,17 @@ label _day5 :
 
         menu:
             "Пойти на свидание с Надей." :
+
+                $ str_for_notification = "{size=-12}Юля запомнит это{/size}"
+                    
+                show screen notification_popup_big
+                with dissolve
+
+                pause 2.0
+
+                hide screen notification_popup_big
+                with dissolve
+
                 yuli "Ну и вали с этой сукой хоть на все четыре стороны!"
 
                 $ day5_nadya_date = True
@@ -5394,6 +5540,16 @@ label _day5 :
                 with dissolve
 
             "Успокоить Юлю." :
+                
+                $ str_for_notification = "{size=-12}Юля запомнит это{/size}"
+                    
+                show screen notification_popup_big
+                with dissolve
+
+                pause 2.0
+
+                hide screen notification_popup_big
+                with dissolve
 
                 $ day5_nadya_date = False
                 $ rel_nadya -= 3
@@ -5667,6 +5823,17 @@ label _day5 :
 
             menu :
                 "Предложить пойти к Наде" :
+
+                    $ str_for_notification = "{size=-12}Надя запомнит это{/size}"
+                        
+                    show screen notification_popup_big
+                    with dissolve
+
+                    pause 2.0
+
+                    hide screen notification_popup_big
+                    with dissolve
+
                     if day4_nadya_meal :
                         $ day5_almost_sex_with_nadya = True
                         $ rel_nadya += 3
@@ -5822,6 +5989,17 @@ label _day5 :
                         with dissolve
 
                 "Пойти к себе в комнату" :
+
+                    $ str_for_notification = "{size=-12}Надя запомнит это{/size}"
+                        
+                    show screen notification_popup_big
+                    with dissolve
+
+                    pause 2.0
+
+                    hide screen notification_popup_big
+                    with dissolve
+
                     $ rel_nadya -= 3
                     sanya "Спокойно ночи. "
                     extend "Завтра еще встретимся?"
@@ -5923,9 +6101,31 @@ label _day5 :
 
             menu :
                 "Да." :
+
+                    $ str_for_notification = "{size=-12}Юля запомнит это{/size}"
+                        
+                    show screen notification_popup_big
+                    with dissolve
+
+                    pause 2.0
+
+                    hide screen notification_popup_big
+                    with dissolve
+
                     $ day5_sanya_love_yuli = True
 
                 "Прости, но нет..." :
+
+                    $ str_for_notification = "{size=-12}Юля запомнит это{/size}"
+                        
+                    show screen notification_popup_big
+                    with dissolve
+
+                    pause 2.0
+
+                    hide screen notification_popup_big
+                    with dissolve
+
                     $ day5_sanya_love_yuli = False
 
             if day5_sanya_love_yuli :
@@ -6319,9 +6519,31 @@ label _day5 :
 
         menu:
             "Пойти искать Эмилию":
+
+                $ str_for_notification = "{size=-12}У этого действия будут последствия{/size}"
+                    
+                show screen notification_popup_big
+                with dissolve
+
+                pause 2.0
+
+                hide screen notification_popup_big
+                with dissolve
+
                 $ day5_go_look_for_emilia = True
 
             "Пойти в комнату":
+
+                $ str_for_notification = "{size=-12}У этого действия будут последствия{/size}"
+                    
+                show screen notification_popup_big
+                with dissolve
+
+                pause 2.0
+
+                hide screen notification_popup_big
+                with dissolve
+
                 $ day5_go_look_for_emilia = False
                 "Продолжения нет."
 
@@ -6373,13 +6595,34 @@ label _day5 :
             menu :
 
                 "Поцеловать Эмилию." :
+                    $ str_for_notification = "{size=-12}Эмилия запомнит это{/size}"
+                        
+                    show screen notification_popup_big
+                    with dissolve
+
+                    pause 2.0
+
+                    hide screen notification_popup_big
+                    with dissolve
+
                     $ day5_kiss_emilia = True
                 "Дать понять, что ещё рано для этого." :
+                    $ str_for_notification = "{size=-12}Эмилия запомнит это{/size}"
+                        
+                    show screen notification_popup_big
+                    with dissolve
+
+                    pause 2.0
+
+                    hide screen notification_popup_big
+                    with dissolve
+
                     $ day5_kiss_emilia = False
 
             if day5_kiss_emilia :
                 "Ее комната была одноместной и на вид выглядела обставленной, видимо, по платной путевке предоставляют такие апартаменты."
                 "Все было чисто и аккуратно, только кровать была расправлена, что выбивалась из общей опрятности."
+
             else :
                 sanya "Я не думаю, что это хорошая идея, учитывая то, что мы знакомы два дня"
                 "Серьезно, кто вообще предлагает такую близость через два дня общения?"
@@ -6523,6 +6766,16 @@ label _day5 :
         
         menu:
             "Согласиться.":
+                $ str_for_notification = "{size=-12}Юля запомнит это{/size}"
+                    
+                show screen notification_popup_big
+                with dissolve
+
+                pause 2.0
+
+                hide screen notification_popup_big
+                with dissolve
+
                 "Ладно, уж. "
                 extend "В конце концов, почему бы не дать такой милой девушке второй шанс?"
                 sanya "Давай. Жду тебя после процедур там же, где вчера. "
@@ -6534,6 +6787,16 @@ label _day5 :
                 "И чего со мной не поела?"
                 # TODO: продолжение
             "Отказаться.":
+
+                $ str_for_notification = "{size=-12}Юля запомнит это{/size}"
+                    
+                show screen notification_popup_big
+                with dissolve
+
+                pause 2.0
+
+                hide screen notification_popup_big
+                with dissolve
 
                 "Идти с ней вновь, да и в принципе с кем-то гулять не было никакого желания. "
                 extend "После хорошего дня хотелось побыть одному."
