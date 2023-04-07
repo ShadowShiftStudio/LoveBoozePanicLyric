@@ -161,15 +161,15 @@ define player_name = "Саня"
 define str_for_notification = ""
 
 screen notification_popup():
-    add "notification.png" xalign 1.0 yalign 0.055 xzoom 0.6
+    add "firstDays/notification.png" xalign 1.0 yalign 0.055 xzoom 0.6
     text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
 screen notification_popup_big():
-    add "notification.png" xalign 1.0 yalign 0.055 
+    add "firstDays/notification.png" xalign 1.0 yalign 0.055 
     text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
 screen toska():
-    add "night color.png":
+    add "firstDays/night color.png":
         at transform:
             xalign 0.5 yalign 0.5
             alpha 0.0
@@ -217,8 +217,8 @@ label start:
     jump first_day
 
 label first_day:
-    image night = "night color.png"
-    scene black scen
+    image night = "firstDays/night color.png"
+    scene firstDays black scen
     
     play music "audio/alarm-sound.mp3"
     "*Звук будильника*"
@@ -256,12 +256,12 @@ label first_day:
     "*Звук смыва унитаза*"
     stop sound
 
-    scene black scen 
+    scene firstDays black scen 
     with fade
 
     play sound "audio/street-music.mp3" volume 0.4
     pause (2.0)
-    scene bus station 
+    scene firstDays bus station 
     with fade
 
     "А я вот иду и думаю: \"а не слишком ли я много пить стал в последнее время?\""
@@ -279,7 +279,7 @@ label first_day:
 
     play sound "audio/sound-in-bus.mp3" volume 0.03
 
-    scene bus 
+    scene firstDays bus 
     with fade
     "Даже матушку свою довёл."
     "Вчера с мужиками пришли пиво попить, последний день лета проводить, скажем так, а она меня поджидает у туалета и говорит:"
@@ -301,7 +301,7 @@ label first_day:
     $ hi_score = max(hi_score, int(_return))
     
 
-    scene black scen 
+    scene firstDays black scen 
     with fade
     "Какой странный сон мне приснился..."
     "Бесконечно едешь прямо... Как далеко можно так уехать?"
@@ -309,7 +309,7 @@ label first_day:
     $ renpy.pause (7.5)
     stop sound fadeout 1.5
     play music "audio/street-sound.mp3" volume 0.1
-    scene bus station near nstu 
+    scene firstDays bus station near nstu 
     with fade
 
     show pasha neutral:
@@ -383,7 +383,7 @@ label first_day:
     stop music
     $ renpy.pause(1.0)
 
-    scene lecture scen 
+    scene firstDays lecture scen 
     with fade
     play sound "audio/table_punch.mp3"
     $ renpy.pause(2)
@@ -572,7 +572,7 @@ label first_day:
     if day1_pasha_kfc :
         play sound "audio/forest-sound.mp3" volume 0.2 fadein 2.0
         hide yuli happy
-        scene nstu enter 
+        scene firstDays nstu enter 
         with fade
         
         "Наконец-то лекция закончилась..."
@@ -586,7 +586,7 @@ label first_day:
 
         hide pasha neutral 
         with dissolve
-        scene black scen 
+        scene firstDays black scen 
         with fade
 
         $ renpy.pause(1.0)
@@ -595,7 +595,7 @@ label first_day:
         stop sound fadeout 2.0
         play music "audio/kfc-sound.mp3" fadein 3.0 volume 0.4
 
-        scene kfc inside 
+        scene firstDays kfc inside 
         with fade
 
         "Зайдя внутрь, мне в нос сразу же ударил сладкий запах курочки, мы с Пашей переглянулись и быстро пошли заказывать."
@@ -637,7 +637,7 @@ label first_day:
             
         
         play sound "audio/street-sound.mp3" volume 0.5 fadein 2.0   
-        scene kfc outside 
+        scene firstDays kfc outside 
         with Fade(0.0, 0.0, 2.0, color="#fff")
         
         show pasha neutral:
@@ -713,8 +713,8 @@ label first_day:
         "Последняя трезвая частичка меня просто кричит, что это всё не к добру..."
         "Я достал телефон, нашёл её контакт и написал ей следующее, считай, любовное послание:"
         
-        image message_yuli_background = "message yuli background.png"
-        image message_yuli_messages = "message yuli messages.png"
+        image message_yuli_background = "firstDays/message yuli background.png"
+        image message_yuli_messages = "firstDays/message yuli messages.png"
         stop sound fadeout 0.5
 
         window hide
@@ -797,10 +797,10 @@ label first_day:
 
         if day1_yuli_agreed_after_kfc :
 
-            scene black scen
+            scene firstDays black scen
             with fade
             play music "audio/love_music.mp3" fadein 4.5 volume 0.4 fadeout 5.5
-            scene bridge
+            scene firstDays bridge
             with fade
 
             
@@ -837,13 +837,13 @@ label first_day:
             yuli "Ну что, Саша, не хочешь перекусить где-нибудь?"
 
             sanya "Да, звучит здорово. Тут неподалеку есть очень милое кафе."
-            scene black scen
+            scene firstDays black scen
             with Fade(2.0, 0.0, 1.0)
             
             "Я не могу поверить, как хорошо все идет. Она потрясающая. Кажется, она мне действительно нравится."
-            image foreground_cafe = "foreground cafe.png"
+            image foreground_cafe = "firstDays/foreground cafe.png"
             play sound "audio/kfc-sound.mp3" volume 0.1 fadein 3.0
-            scene background cafe
+            scene firstDays background cafe
             show yuli happy:
                 xalign 0.7
                 yalign 0.5
@@ -874,19 +874,19 @@ label first_day:
             "Не могу дождаться, когда увижу её вновь. Это начало чего-то особенного."
             hide yuli happy with dissolve
             hide foreground_cafe
-            scene black scen
+            scene firstDays black scen
             with fade
             stop sound
 
         else :
             play music "audio/slow_sad_classical_music.mp3"  fadein 4.5 volume 0.4 fadeout 5.5
-            scene black scen
+            scene firstDays black scen
             with fade
             "Я действительно не хотел встречи с Юлей, поэтому решил пробираться через закрытый мост."
             "Юля ждала меня совсем в другом месте. Скажу ей, что просто передумал встречаться, или побоялся, что слишком пьян..."
             "Прогуливаясь по ночным улочкам, я дошёл до моста. Передо мной воцарилась та самая, уже классическая надпись:"
 
-            scene bridge
+            scene firstDays bridge
             with fade
 
             "Мост временно закрыт для пеших прогулок, приносим свои извинения."
@@ -946,7 +946,7 @@ label first_day:
 
             "Мы поговорили ещё немного, о школе, о наших интересах, о наших семьях. Это было приятно, но было заметно, что Юля не интересуется мной в романтическом плане."
 
-            scene black scen
+            scene firstDays black scen
             with fade
 
             "В конце концов, мы попрощались, и я пошёл домой один. Это была грустная прогулка, но, по крайней мере, у меня появился новый друг."
@@ -959,18 +959,18 @@ label first_day:
 
         hide yuli happy
 
-        scene nstu enter 
+        scene firstDays nstu enter 
         with fade
 
         "На улице в этот самый момент как раз показался красивый закат, поэтому мы решили прогуляться в сторону набережной."
 
-        scene black scen
+        scene firstDays black scen
         with fade
 
         storyteller "Саня прогуливался вдоль набережной вместе с Юлей."
         storyteller "Конечно, они ещё не держались за ручку и не шли в обнимку, но уже явно были ближе друг к другу."
 
-        scene promenade yuli
+        scene firstDays promenade yuli
         with Dissolve(1.5)
         sanya "Да, дух захватывает. " 
         extend "Я рад, что тебе тоже здесь нравится."
@@ -992,7 +992,7 @@ label first_day:
         "Довольно резво тучи закрыли всё небо."
         "Начал собираться дождь."
         stop music fadeout 6.0
-        scene rain yuli
+        scene firstDays rain yuli
         with Fade(2.0, 0.0, 2.0)
         play sound "audio/rain.mp3" fadein 15.0 volume 0.06 loop
         show yuli neutral
@@ -1017,7 +1017,7 @@ label first_day:
         
         hide yuli horny
         
-        scene bridge
+        scene firstDays bridge
         with fade
 
         storyteller "Пока они шли по мосту, Саня не мог отделаться от ощущения кома в горле. Он понимал, что неправильно обошёлся с товарищем."
@@ -1061,13 +1061,13 @@ label first_day:
         show pasha angry at center with Dissolve(0.5):
             blur 0.0
 
-        scene black scen
+        scene firstDays black scen
         with fade
 
         storyteller "Когда они шли обратно к университету, Саня не мог отделаться от чувства вины за то, что только что произошло."
         storyteller "Он понимал, что подвел друга и совершил ошибку, решив пойти на свидание с Юлей вместо того, чтобы встретиться с Пашей."
 
-        scene nstu night 
+        scene firstDays nstu night 
         with fade
         stop sound fadeout 3.0
         show pasha sad at center
@@ -1087,14 +1087,14 @@ label first_day:
         storyteller "Он поклялся как-нибудь загладить свою вину перед Пашей и больше никогда не предавать его доверие."
         "После всех мыслей, я не нашел ничего лучше, чем поехать домой."
 
-        scene black scen 
+        scene firstDays black scen 
         with fade
 
         pause 2.0
     if not day1_pasha_kfc:
         play sound "audio/sound-in-bus.mp3" volume 0.03
 
-        scene bus night
+        scene firstDays bus night
 
         "Как обычно, по пути домой я глубоко погрузился в себя. Мои мысли перескакивали со скучных лекций и лаб на Пашку, на новую подругу Юлю и обратно."
         
@@ -1260,7 +1260,7 @@ label second_day :
     "Придется сходить в кб за сигами. " 
     extend "Ведь говорил же себе вчера купить пару пачек, но всё равно забыл."
 
-    scene black scen
+    scene firstDays black scen
     with fade
     
     play sound "audio/footsteps_asphalt.mp3" fadein 0.2 fadeout 0.2
@@ -1268,7 +1268,7 @@ label second_day :
 
     pause 4.0
 
-    scene red white
+    scene firstDays red white
     with fade
 
     "Наконец-то купил сиги. Жизнь продолжается."
@@ -1282,14 +1282,14 @@ label second_day :
     extend "Иначе я могу просто не выдержать..."
     "Придется ехать в универ."
 
-    scene bus station
+    scene firstDays bus station
     with fade
 
     "Снова эта убитая и дряхлая остановка. "
     extend "Быть может, ещё в СССР она выглядела нормально, но сейчас... "
     extend "Это просто пиздец."
 
-    scene black scen 
+    scene firstDays black scen 
     with fade
  
     play sound "audio/bus.mp3" fadein 0.5 fadeout 1.5 volume 0.1
@@ -1298,7 +1298,7 @@ label second_day :
 
     stop sound fadeout 1.0
 
-    scene bus 
+    scene firstDays bus 
     with fade
 
     play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.5 volume 0.1
@@ -1326,7 +1326,7 @@ label second_day :
 
     stop music fadeout 2.0
     
-    scene black scen
+    scene firstDays black scen
     with fade
 
     "Ох, блядь! Чуть не проспал свою же остановку."
@@ -1337,7 +1337,7 @@ label second_day :
 
     stop sound
 
-    scene bus station near nstu
+    scene firstDays bus station near nstu
     with fade
     show pasha neutral
     with dissolve
@@ -1422,7 +1422,7 @@ label second_day :
     if not day1_yuli_agreed_after_kfc and day1_pasha_kfc :
 
         pasha "Кстати, а как там с девочкой твоей дела обстоят?"
-        image night = "night color.png"
+        image night = "firstDays/night color.png"
         sanya "Ну ты же знаешь, что я тебе сейчас ничего хорошего не расскажу..."
 
         play sound "audio/heart.mp3" fadein 4.0 fadeout 0.5 volume 0.3
@@ -1512,7 +1512,7 @@ label second_day :
     
         "Всё-таки хорошо, что я смог увидеть Пашу. Теперь как-то даже веселее. Пора идти в универ..."
 
-    scene black scen 
+    scene firstDays black scen 
     with fade
 
     "Распрощавшись с Пашкой, я направился прямиком в деканат. "
@@ -1521,7 +1521,7 @@ label second_day :
     stop music fadeout 2.0
     stop sound fadeout 2.0
 
-    scene nstu que
+    scene firstDays nstu que
     with fade
 
     play sound "audio/people-noise.mp3" fadein 2.0 loop volume 0.05
@@ -1594,7 +1594,7 @@ label second_day :
     "Может, мне тоже сходить?"
     "Хотя, с другой стороны, сегодня хорошая погода, можно пойти домой через парк..."
     
-    scene nstu enter
+    scene firstDays nstu enter
     with Fade(0.0, 0.0, 0.3)
 
     menu :
@@ -1619,14 +1619,14 @@ label second_day :
     with dissolve
 
     if day2_sanya_went_to_smoke :
-        scene black scen 
+        scene firstDays black scen 
         with fade
 
         "Поприветствовав одногруппников, я с ними направился в сторону курилки."
 
         play music "audio/street-sound.mp3" fadein 1.5 fadeout 2.5 volume 0.1
 
-        scene kyrilka
+        scene firstDays kyrilka
         with fade
 
         "Одногруппник" "Как же бесит препод по схемотехнике, мы с ним только первый день, а он уже показал себя полным мудаком."
@@ -1679,13 +1679,13 @@ label second_day :
             extend "Хотел плакать. "
             extend "Хотел заорать на всю улицу, но сдержался."
 
-            scene black scen
+            scene firstDays black scen
             with fade
             play sound "audio/footsteps_asphalt.mp3" noloop fadein 0.2 fadeout 0.2
             "У выхода из корпуса я заметил Юлю, смотрящую в мою сторону. "
             extend "Она подбежала ко мне, явно заметив моё паршивое настроение."
 
-            scene nstu enter
+            scene firstDays nstu enter
             with fade
             show yuli afraid
             with dissolve
@@ -1701,7 +1701,7 @@ label second_day :
             sanya "Пойдем, конечно."
 
             hide yuli happy
-            scene black scen
+            scene firstDays black scen
             with fade
 
             "Как же приятно идти по улице в компании такой красивой и весёлой девушки..."
@@ -1709,7 +1709,7 @@ label second_day :
             sanya "Нет, всё в порядке, Юля. Ты лучше расскажи, как у тебя дела."
             "Поболтав немного, я решил предложить зайти за сигаретами. Свои новенькие я уже успешно проебал."
 
-            scene red white
+            scene firstDays red white
             with fade
 
             show yuli empathy
@@ -1719,7 +1719,7 @@ label second_day :
             sanya "Хорошо! Скоро буду."
 
             hide yuli empathy
-            scene magazine inside
+            scene firstDays magazine inside
             with fade
             
             sanya "Можно, пожалуйста, пачку чапы ванильной."
@@ -1727,7 +1727,7 @@ label second_day :
             sanya "И два советских пломбира в вафельном стаканчике!"
             "Кассир" "Да, с вас..."
 
-            scene red white
+            scene firstDays red white
             with Fade(2.0, 0.0, 1.0)
             show yuli empathy
             with dissolve
@@ -1738,7 +1738,7 @@ label second_day :
             yuli "Советское! Обожаю!"
 
             
-            scene black scen
+            scene firstDays black scen
             with Fade(2.0, 0.0, 2.0)
 
             "Через пять минут мы уже были около моего дома."
@@ -1777,7 +1777,7 @@ label second_day :
             stop music fadeout 3.0
 
             hide yuli horny2
-            show black scen
+            show firstDays black scen
             with Fade(2.0, 0.0, 1.0)
 
         else:
@@ -1792,12 +1792,12 @@ label second_day :
             "Может и зря я так отозвался о СССР... "
             "Говорят, там советское мороженное и квас в бочках были вкусными!"
 
-            scene black scen
+            scene firstDays black scen
             with fade
 
             "У выхода из корпуса я заметил Юлю, смотрящую в мою сторону. Она подбежала ко мне явно заметив моё паршивое настроение."
 
-            scene nstu enter
+            scene firstDays nstu enter
             with fade
             show yuli greeting
             with dissolve
@@ -1815,7 +1815,7 @@ label second_day :
             sanya "Да, конечно, пойдём!"
 
             hide yuli horny
-            scene black scen
+            scene firstDays black scen
             with fade
 
             pause 3.0
@@ -1848,14 +1848,14 @@ label second_day :
             stop music
 
             hide yuli horny2
-            show black scen
+            show firstDays black scen
             with fade
 
         $ day2_sanya_vote_for_ussr = True
 
     else :
         
-        scene nstu enter
+        scene firstDays nstu enter
         with fade
 
         "Выйдя из корпуса я потянулся за пачкой сигарет, но тут же обнаружил, что её там нет."
@@ -1863,12 +1863,12 @@ label second_day :
         "А ведь только утром покупал. Может спиздил кто?"
         "Ладно, в этот раз пойду пешком до дома. Сэкономлю хотя бы на проезде."
 
-        scene black scen
+        scene firstDays black scen
         with fade
 
         "Пройдя пару кварталов, я заметил вход в парк, который находится недалеко от моего дома. Чем не отличное место, чтобы привести мысли в порядок?"
         play sound "audio/forest-sound.mp3" fadein 1.0
-        scene park
+        scene firstDays park
         with fade
 
         "Красивый парк. Но сначала стоит сбегать за сигами всё-таки."
@@ -1878,7 +1878,7 @@ label second_day :
         stop sound fadeout 3.0
         pause 2.0
 
-        scene magazine inside
+        scene firstDays magazine inside
         with fade
 
         show nadya angry
@@ -1901,7 +1901,7 @@ label second_day :
         "Девушка" "Ухх, ну я тебе ещё покажу, злюка!"
 
         "Развернувшись, девушка увидела меня и попросила выйти с ней ненадолго."
-        scene red white
+        scene firstDays red white
         with fade
         show nadya flirting
         with dissolve
@@ -1936,7 +1936,7 @@ label second_day :
 
             sanya "Ладно. Сейчас куплю тебе чапу."
 
-            scene magazine inside
+            scene firstDays magazine inside
             with fade
 
             sanya "Добрый вечер, пару пачек ванильного чапман."
@@ -1961,12 +1961,12 @@ label second_day :
             nadya "Я хотела по парку прогуляться, составишь мне компанию?"
             sanya "Пойдем, мне всё равно нечем заняться."
 
-            scene black scen
+            scene firstDays black scen
             with fade
             play sound "audio/forest-sound.mp3" fadein 4.0
             pause 3.0
 
-            scene park
+            scene firstDays park
             with fade
 
         else :
@@ -1976,7 +1976,7 @@ label second_day :
 
             "Поразмыслив над просьбой девушки, я решил не покупать ей сигареты, выглядит она совсем молодо, может быть ей и 18-ти лет то нет."
 
-            scene magazine inside
+            scene firstDays magazine inside
             with fade
 
             sanya "Добрый вечер, ванильный чапмен, пожалуйста."
@@ -1987,7 +1987,7 @@ label second_day :
             sanya "Интересно куда она так неожиданно ушла."
             "Оставив размышления, я направился в сторону парка, где присел на ближайшую лавочку."
             play sound "audio/forest-sound.mp3" fadein 1.0
-            scene park
+            scene firstDays park
             with fade
 
             "Достав сигаретку, я уже было потянулся в карман за зажигалкой, как какой-то незнакомец дал мне прикурить."
@@ -2147,7 +2147,7 @@ label second_day :
             hide screen notification_popup_big
             with dissolve
     
-    scene black scen
+    scene firstDays black scen
     with fade
 
     if not day2_nadya_get_one_sigarett and not day2_nadya_bought_sigaretts and not day2_sanya_went_to_smoke:
@@ -2435,7 +2435,7 @@ label second_day :
             linear 35 zoom 1.0
             repeat
     stop music fadeout 7.0
-    scene black scen 
+    scene firstDays black scen 
     with Fade(3.0, 0.0, 3.0)
 
     jump third_day
@@ -2506,7 +2506,7 @@ label third_day :
     hide screen notification_popup_big
     with dissolve
 
-    scene bus station
+    scene firstDays bus station
     with fade
 
     "Заебала эта остановка. Когда её уже снесут к хуям собачьим?"
@@ -2514,7 +2514,7 @@ label third_day :
 
     play sound "audio/bus.mp3" fadein 1.5 fadeout 1.5 volume 0.1
 
-    scene black scen 
+    scene firstDays black scen 
     with fade
 
     pause 6.0
@@ -2522,7 +2522,7 @@ label third_day :
 
     play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1
 
-    scene bus
+    scene firstDays bus
     with fade
 
     "Посплю пока. Главное не проспать остановку..."
@@ -2545,7 +2545,7 @@ label third_day :
     "Снова тот же сон..."
 
     
-    scene black scen 
+    scene firstDays black scen 
     with fade
 
     stop music
@@ -2554,18 +2554,18 @@ label third_day :
     pause 6.0
     stop sound
 
-    scene bus station near nstu
+    scene firstDays bus station near nstu
     with fade
 
     "Кажется, по времени всё нормально. Можно уже не торопиться."
 
-    scene black scen
+    scene firstDays black scen
     with fade
 
     "На часах было без пяти восемь, а в конце улицы уже виднелся ждавший меня автобус."
     "Подойдя ближе, я был приятно удивлен, передо мной открылся вид не на старенький и потрепанный ЛИАЗ, а на красивый Икарус, он выглядел так будто только сошёл с конвейера."
 
-    scene neew bus
+    scene firstDays neew bus
     with fade
 
     if day3_choice_lonely :
@@ -2821,7 +2821,7 @@ label _alone :
 
 label _sanatorium :
 
-    scene black scen
+    scene firstDays black scen
     with dissolve
 
     pause 2.0   
@@ -2937,14 +2937,14 @@ label _sanatorium :
             $ rel_valeria -= 10
             
             play sound "audio/punch.mp3" noloop fadein 0.5 fadeout 0.5
-            pause 3.0
-
-            "Въебав ей, я с удовольствием втянул ароматный дым любимого чапмана."
-            "Никотин приятно ударил в голову, лёгкие разжались и я, с удовольствием, продолжил смаковать сигаретку."
-
+            with hpunch
+            pause 2.0
+            
             show valeria angry
             with dissolve
-
+            "Въебав ей, я с удовольствием втянул ароматный дым любимого чапмана."
+            "Никотин приятно ударил в голову, лёгкие разжались и я, с удовольствием, продолжил смаковать сигаретку."
+            
             $ str_for_notification = "{size=-12}У этого действия будут ебать какие последствия{/size}"
                 
             show screen notification_popup_big
@@ -2956,7 +2956,7 @@ label _sanatorium :
             with dissolve
 
             "Валерия Владимировна неодобрительно глянула на меня."
-            sanya "Да похуй чё"   
+            sanya "Да похуй чё." 
 
             "От этого взгляда мурашки пошли по спине. Надеюсь она не заставит таскать мешки с сахаром по всему санаторию."
             valeria "Хуй с тобой, давайте я вам проведу небольшую экскурсию, пока мы идем до ваших комнат."
@@ -2986,8 +2986,11 @@ label _sanatorium :
     "Вот ты здоров, силен, молод и можешь выдуть чекушку всухую, а на утро выпить крепкого чаю и быть в строю."
     "А потом раз - и вот ты уже хрустишь коленками и боишься лишний раз наклониться, потому что темнеет в глазах." 
     "Вот и я, как и эти старые пердуны, незаметно для себя постарел. В их естественной среде обитания комфортно себя чувствую, буду те же процедуры что и они проходить."
-    "Ну, рядом хотя бы есть парочка жгучих красоток, которые вполне могут скрасить мои оздоровительные процедуры. А может и а может и не просто скрасить... Хе-хе.  "
+    "Ну, рядом хотя бы есть парочка жгучих красоток, которые вполне могут скрасить мои оздоровительные процедуры. "
+    extend "А может и а может и не просто скрасить... Хе-хе."
+
     play music "audio/life_blossom.mp3" fadein 2.5 fadeout 3.0 volume 0.3
+    
     if day3_choice_yuli :
         "Я незаметно оглянулся в поисках Юли, в мыслях уже готовый пригласить её на совместное принятие грязевой ванны."
         "Как бы я не крутил головой, никак не мог найти её. Юли нигде видно не было. Может, она пошла к себе в комнату, минуя экскурсию? А может ей стало плохо?"
@@ -3079,9 +3082,6 @@ label _sanatorium :
     extend "Этот амбал будет моим соседом?!"
     play sound "audio/pavel_cough.mp3"
     
-    
-    
-    
     show pavel pavel neutral:
         ypos 0.1
         linear 0.9 xalign 0.9
@@ -3090,7 +3090,6 @@ label _sanatorium :
     show valeria happy:
         linear 0.1 xalign 0.1
     with Dissolve(0.5)
-
     
     "Вслед за мной в комнату зашел мужик. Конкретный такой мужик, будто бы только что вышедший из жесткого запоя. Пахло от него соответствующе."
     
@@ -3114,7 +3113,7 @@ label _sanatorium :
             $ rel_pavel -= 1
             play music "audio/prepare-to-fight.mp3" fadein 2.5 fadeout 3.0 volume 0.15
                     
-        "Ну и я не идеален.":
+        "Да мы с ним два сапога пара.":
             $ str_for_notification = "{size=-12}Павел запомнит это{/size}"
                 
             show screen notification_popup_big
@@ -3189,7 +3188,7 @@ label _sanatorium :
             "На ногах устоять я смог, хоть ноги и подкосились, однако челюсть дала отбой."
             
             play sound "audio/Fall.mp3" fadein 0.1 fadeout 0.2
-            scene black scen
+            scene firstDays black scen
             with Fade(0.5, 0.5, 0.5, color="#000")
             
             "Вот тут у нас проблемы, Ватсон! Бухнувшись на колени, я судорожно пытался вздохнуть, царапая пальцами плитку." 
@@ -3197,7 +3196,7 @@ label _sanatorium :
             "Но мучился я не долго - висок взорвался болью и я потерял сознание."
             "Очнулся я от резкого запаха, чуть ли не вскочив с  кушетки.  Но чьи-то стальные руки крепко прижали меня к жесткой поверхности, не давай двинуться лишний сантиметр. "
 
-            scene medicina
+            scene firstDays medicina
             with fade
             
             play music "audio/medicine_sound.mp3" noloop fadein 1.0 fadeout 1.0
@@ -3450,7 +3449,7 @@ label _sanatorium :
                     "Перед глазами все вертелось и кружилось, а во рту будто бы насрали кошки. Причем несколько раз."
                     "Легкие болели так, будто бы их прострелили. Нахуй я согласился?.. Щас бы сидел в столовой, пил чаек с девчонками и в ус не дул."
 
-                    scene medicina
+                    scene firstDays medicina
                     with Fade(0.4, 0.5, 0.4, color="#000")
                     
                     play music "audio/medicine_sound.mp3" fadein 1.0 fadeout 1.0
@@ -3790,7 +3789,7 @@ label _sanatorium :
             hide pavel smile
             with dissolve
 
-            scene black scen
+            scene firstDays black scen
             with fade
 
             "Голова адски кружилась, меня штормило даже лежа."
@@ -3802,7 +3801,7 @@ label _sanatorium :
             "Живот болел так, будто бы его прострелили, а пищевод саднил, будто я хлестал кислоту, а не коньяк."
             "Нахуй я согласился?.. Щас бы сидел в столовой, пил чаек с девчонками и в ус не дул."
             
-            scene medicina
+            scene firstDays medicina
             with fade
 
             show grusha happy
@@ -5397,7 +5396,7 @@ label _day5 :
         
         "Пора бы и на процедуры."
         
-        scene black scen
+        scene firstDays black scen
         with fade
 
         stop music fadeout 1.0
@@ -5567,7 +5566,7 @@ label _day5 :
             
             play sound "audio/door_open.mp3" noloop fadein 0.1 fadeout 0.1
             
-            scene black scen
+            scene firstDays black scen
             with Fade(0.3, 0.4, 0.3, color="#000")
             
             play sound "audio/door_close.mp3" noloop fadein 0.1 fadeout 0.1
@@ -5637,7 +5636,7 @@ label _day5 :
             
             hide nadya
             with dissolve
-            scene black scen
+            scene firstDays black scen
             with dissolve
 
             pause 2.0
@@ -5738,12 +5737,12 @@ label _day5 :
             hide grusha grusha neutral
             with dissolve
 
-            scene black scen 
+            scene firstDays black scen 
             with dissolve
 
             pause 2.0
 
-            scene medicina
+            scene firstDays medicina
             with dissolve
             
             play sound "audio/chair_crack.mp3" noloop fadein 0.3 fadeout 0.3
@@ -5994,7 +5993,7 @@ label _day5 :
                             "Павла Геннадьевича не было, так что умывшись, я лег в кровать. "
                             extend "Спокойной мне ночи!"
                         
-                        scene black scen
+                        scene firstDays black scen
                         with dissolve
 
                 "Пойти к себе в комнату" :
@@ -6065,7 +6064,7 @@ label _day5 :
                         "Павла Геннадьевича не было, так что умывшись, я лег в кровать. "
                         extend "Спокойной мне ночи!"
 
-                    scene black scen
+                    scene firstDays black scen
                     with dissolve
 
                     pause 2.0
@@ -6561,41 +6560,77 @@ label _day5 :
             "Эмилия не похожа на человека, который просто забывает или кидает, по крайней мере, мне хочется в это верить."
             "Собрав всю свою волю в кулак я направился на ее поиски. И, к счастью, долго в детектива играть не пришлось."
             "Первый же работник подсказал мне номер ее комнаты, и доверительно сообщил, что как она зашла, так и не выходила."
+            play sound "audio/footsteps_asphalt.mp3" fadein 0.2 fadeout 0.2
+            pause 1.5
 
             scene sanatorium walkway
             with dissolve
 
             "Стараясь не забивать голову мыслями по типу: зачем вообще работникам знать кто куда ходил или не выходил, я направился по заданным координатам."
             "Эмилия жила этажом выше, прямо над моей комнатой. Уж не судьба ли это?"
-            "Постучавшись, я прислушался. В комнате послышалась какая-то возня, но никто не открыл. Постучав настойчивее, я прибавил голос."
-            sanya "Эмилия, открой! Я знаю, что ты там!"
+
+            play sound "audio/door_knock.mp3" noloop fadein 0.5 fadeout 0.5
+
+            "Постучавшись, я прислушался. "
+            extend "В комнате послышалась какая-то возня, но никто не открыл. "
+            play sound "audio/door_knock_hard.mp3" noloop fadein 0.5 fadeout 0.5
+            extend "Постучав настойчивее, я прибавил голос."
+            sanya "Эмилия, открой! "
+            extend "Я знаю, что ты там!"
+
+            play music "audio/emily_sad.mp3" fadein 1.0 fadeout 1.0 volume 0.3
+            play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
+            
             "Какое-то время было тихо. И когда я уже было планировал уходить, дверь, легко скрипнув, открылась."
+
+            show emily green sad at right 
+            with dissolve
+
             "Передо мной предстала растрепанная Эмилия, с красными заплаканными глазами."
             emily "Привет..."
             sanya "Оу, привет..."
             "Несколько неожиданно было видеть Эмилию... такой."
-            emily "Извини, что я в таком виде.... Просто..."
+            emily "Извини, что я в таком виде.... "
+            extend "Просто..."
             "Кажется, она едва сдерживала себя, чтобы не заплакать."
             sanya "Извини, если помешал, я могу пойти..."
-            emily "Нет-нет! Не уходи!"
+            emily "Нет-нет! "
+            extend "Не уходи!"
             "Она сделал шаг вперед, схватив меня за руку."
-            emily "Может... Посидишь со мной? Мне так будет спокойнее"
-            "Утешать девушек мне еще не приходилось. Ну, все бывает в первый раз."
-            sanya "Конечно! Мне зайти?"
+            emily "Может... Посидишь со мной? "
+            extend "Мне так будет спокойнее."
+            "Утешать девушек мне еще не приходилось. "
+            extend "Ну, все бывает в первый раз."
+            sanya "Конечно! "
+            extend "Мне зайти?"
             "Девушка кивнула, потянув меня за собой."
+
+            play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
+            
+            # TODO: комнату поменять
+            scene sanatorium nadya room
+            with dissolve
+            
             "Ее комната была одноместной и на вид выглядела обставленной, видимо, по платной путевке предоставляют такие апартаменты."
             "Все было чисто и аккуратно, только кровать была расправлена, что выбивалась из общей опрятности."
-            "Эмилия потянула меня как раз к этому островку беспорядка, заставив сесть. Сама примостилась рядом, все так же не отпуская рукав моей кофты. "
-            "Помолчали. Поняв, что Эмилия не планирует начинать разговор первой, я осторожно спросил:"
+            "Эмилия потянула меня как раз к этому островку беспорядка, заставив сесть. "
+            
+            show emily green neutral at left
+            with dissolve
+
+            extend "Сама примостилась рядом, все так же не отпуская рукав моей кофты."
+            "Поняв, что Эмилия не планирует начинать разговор первой, я осторожно спросил:"
             sanya "Что-то случилось?"
             "Она кивнула, крепче сжав мою руку."
             sanya "Ты не хочешь об этом говорит?"
             "Эмилия неуверенно кивнула, чуть расслабившись."
             "Я не стал продолжать допрос, захочет - расскажет, но и просто сидеть не хотелось."
-            sanya "Может я могу что-то сделать для тебя? Может, как-то помочь?"
+            sanya "Может я могу что-то сделать для тебя? "
+            extend "Может, как-то помочь?"
             "Ну, а вдруг прокатит?"
             "Она неуверенно посмотрела мне в глаза."
-            emily "Ну... Ты можешь меня поцеловать?"
+            emily "Ну... "
+            extend "Ты можешь меня поцеловать?"
             sanya "Что, прости?"
             "Сказать, что я опешил, ничего не сказать."
             emily "Я хочу, чтобы ты меня поцеловал!"
@@ -6633,25 +6668,54 @@ label _day5 :
                 "Все было чисто и аккуратно, только кровать была расправлена, что выбивалась из общей опрятности."
 
             else :
-                sanya "Я не думаю, что это хорошая идея, учитывая то, что мы знакомы два дня"
+                sanya "Я не думаю, что это хорошая идея, учитывая то, что мы знакомы два дня."
                 "Серьезно, кто вообще предлагает такую близость через два дня общения?"
-                "Хотя, я думаю, для кого-то это покажется нормальным, разные же люди есть. Но точно не в данной ситуации."
-                "Губы Эмилии затряслись, а глаза заблестели. Кажется, она была готова вновь разрыдаться."
+                "Хотя, я думаю, для кого-то это покажется нормальным, разные же люди есть. "
+                extend "Но точно не в данной ситуации."
+                "Губы Эмилии затряслись, а глаза заблестели. "
+                extend "Кажется, она была готова вновь разрыдаться."
+                
+                show emily green sad at center:
+                    ypos 1.1
+                    linear 0.5 zoom 1.3
+                with dissolve
+                
                 "Не дав ей это сделать, повинуясь порыву, я ее обнял."
                 sanya "Но дружеские объятия я могу тебе устроить."
+
+                show emily green crying
+                with dissolve
+
                 "Пара мгновений и плотину прорвало."
-                "Она разрыдалась так, что мне стало не по себе. Она ничего не говорила, просто рыдала навзрыд несколько минут подряд."
+                "Она разрыдалась так, что мне стало не по себе. "
+                extend "Она ничего не говорила, просто рыдала навзрыд несколько минут подряд."
                 "Это же сколько в себе надо копить, чтобы вот так в один момент все вылить."
-                "Через какое-то время она чуть успокоилась. Уткнувшись мне в грудь она тихонько всхлипывала и вздрагивала."
+                "Через какое-то время она чуть успокоилась. "
+                extend "Уткнувшись мне в грудь она тихонько всхлипывала и вздрагивала."
+                
+                show emily green sad at center:
+                    ypos 1.0
+                    zoom 1.0
+                with dissolve
+
                 "Погладив ее по неожиданно мягким волосами, я осторожно отнял ее от своей груди и положил на кровать."
                 "Она лениво сопротивлялась, но, видимо, эта вспышка забрала у нее много сил."
                 "Прикрыв ее одеялом, я сел рядышком, вытерев своей кофтой остатки слез с ее лица."
+                
                 emily "Спасибо."
                 sanya "За что?"
-                emily "За то, что посидел со мной. Извини, за это. Просто... Не было сил сдерживаться"
-                sanya "Не переживай. Мне это ничего не стоило."
+                emily "За то, что посидел со мной. "
+                extend "Извини, за это. Просто... "
+                extend "Не было сил сдерживаться."
+                sanya "Не переживай. "
+                extend "Мне это ничего не стоило."
+                
+                show emily green neutral at center
+                with dissolve
+
                 "Она слабо улыбнулась."
-                emily "У меня довольно строгие родители. И не особо чуткие. Для них я - идеальная дочь. Отличница, спортсменка, всегда и везде первая."
+                emily "У меня довольно строгие родители. И не особо чуткие. "
+                extend "Для них я - идеальная дочь. Отличница, спортсменка, всегда и везде первая."
                 emily "В общем, все как у всех подобных людей. "
                 extend "Мне, в целом, и самой нравится заниматься спортом, активничать, побеждать. "
                 extend "Это приятно, когда ты чувствуешь, что становишься лучше."
@@ -6662,12 +6726,19 @@ label _day5 :
                 extend "Победил на региональной олимпиаде? " 
                 extend "Почему не на международной?"
                 emily "И так во всем. Даже в отдыхе. " 
-                extend "Ты устала решать тест? Иди в зал! " 
-                extend "Ты устала в зале? Иди за уроки. "
-                extend "Когда вечно крутишься, есть риск, что закружиться голова."
-                emily "В последнее время это моя вечная проблема"
-                sanya "А почему ты не переедешь? Ты тогда сможешь жить как хочешь?"
-                "Эмиля горько улыбнулась."
+                extend "Ты устала решать тест? "
+                extend "Иди в зал! " 
+                extend "Ты устала в зале? "
+                extend "Садись за уроки. "
+                emily "Когда вечно крутишься, есть риск, что закружиться голова."
+                emily "В последнее время это моя вечная проблема."
+                sanya "А почему ты не переедешь? "
+                extend "Ты тогда сможешь жить как хочешь?"
+
+                show emily green sad
+                with dissolve
+
+                "Эмилия горько улыбнулась."
                 emily "Если бы это было так просто."
                 emily "Думаю, как у всех родителей подобного типа есть такое, что они не хотят отпускать свое дитя, опасаясь, что оно перестанет быть таким, каким его хотят видеть родители."
                 emily "Мне не дают денег на карманные расходы и заставляют вести отчет о каждой трате. "
@@ -6684,49 +6755,110 @@ label _day5 :
                 emily "Но не получилось - папу вызвали в командировку, а маму я смогла убедить. "
                 extend "Ее главным условием было, чтобы я каждый день, утром днем и вечером звонила по видеосвязи."
                 sanya "Бывают же родители..."
-                emily "Я думаю, мои не самые худшие в мире. Да и делают они это их лучших побуждений."
+                emily "Я думаю, мои не самые худшие в мире. "
+                extend "Да и делают они это их лучших побуждений."
                 sanya "Мне показалось или ты сейчас переобулась?"
-                "Эмилия хихикнула... Красиво, ярко и так искренне, что сердце будто бы свело."
+
+                show emily green happy
+                with dissolve
+                
+                play sound "audio/girl_laugh2.mp3" noloop fadein 0.2 fadeout 0.2
+
+                "Эмилия хихикнула... "
+                extend "Красиво, ярко и так искренне, что сердце будто бы свело."
+
                 emily "Да нет, просто говорю про мотивы. "
-                extend "Конечно, мне хочется сбежать из под их душной опеки, пожить так, как мне хочется. С тем, кем мне хочется."
-                "Тут она стрельнула глазками в меня. Я сделал вид, что не заметил этого."
+                extend "Конечно, мне хочется сбежать из под их душной опеки, пожить так, как мне хочется. "
+                extend "С тем, кем мне хочется."
+                "Тут она стрельнула глазками в меня. "
+                extend "Я сделал вид, что не заметил этого."
                 sanya "Ну, если то, что я услышал правда от и до, то это будет весьма трудной задачей. "
                 extend "Но если у тебя есть цель - стремись к ней, и все в таком роде."
                 "Кажется, она немного обиделась..."
+
+                show emily green kind
+                with dissolve
+
                 emily "Извини за мою вспышку. "
                 extend "Просто... я немного устала держать все в себе и делать вид, что я робот."
                 sanya "Все нормально, не бери в голову."
                 sanya "Пускай мы знакомы пару дней, я уже могу назвать тебя подругой. "
-                extend "Думаю, я мог это сделать еще в парке, когда ты подошла ко мне, чтобы спросить, как у меня дела"
+                extend "Думаю, я мог это сделать еще в парке, когда ты подошла ко мне, чтобы спросить, как у меня дела."
+                
+                show emily green love
+                with dissolve
+
                 emily "Просто ты выглядел таким хмурым, будто бы у тебя случилось что-то серьезное."
-                sanya "Можно и так сказать. Так что вот, ты мне, я - тебе. "
+                sanya "Можно и так сказать. "
+                extend "Так что вот, ты мне, я - тебе. "
                 extend "В благородство играть не буду!"
+                
+                show emily green neutral
+                with dissolve
+
                 emily "Что?"
                 "Кажется в ее голосе мелькнула паника."
-                sanya "Ничего, не волнуйся. Просто шутка."
-                emily "Ну, ладно. Слушай, может посидишь со мной еще немного? "
-                extend "Просто... с тобой как-то спокойнее."
-                sanya "Без проблем, время еще детское"
+                sanya "Ничего, не волнуйся. "
+                extend "Просто шутка."
+                
+                show emily green cute
+                with dissolve
+
+                emily "Ну, ладно. "
+                extend "Слушай, может посидишь со мной еще немного? "
+                extend "C тобой как-то спокойнее."
+                sanya "Без проблем, время еще детское."
                 emily "Извини, что так получилось..."
                 sanya "Да все нормально! "
                 extend "Мы же все-равно хотели погулять, а тут считай в гости зашел, на улице же холодно. "
                 extend "Да и в комнате нечего делать."
                 emily "Если хочешь, то ты можешь остаться."
                 emily "Я могу подвинуться..."
-                sanya "Не стоит. Не хочу доставлять тебе неудобства."
+                sanya "Не стоит. "
+                extend "Не хочу доставлять тебе неудобства."
                 "Её можно понять, но пока что не стоит так торопиться. "
                 extend "Видимо, опыта у неё совсем нет..."
                 "Эмилия больше не пыталась затащить меня в постель и вскоре уснула. "
                 extend "Оставив мерно сопящую девушку, я тихо вышел из комнаты."
+
+                play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
+                
+                scene sanatorium walkway
+                with Fade(0.4, 0.5, 0.4, color="#000")
+                pause 1.0
+
+                play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2 
+                
                 "Да-а-а, существуют же люди!"
                 "Как она вообще с ума не сошла с такими родителями. "
                 extend "Ладно, надеюсь, ей хоть немного полегчало. "
                 extend "Лично мне, когда я посидел с ней в обнимку, точно стало лучше."
+
+                play sound "audio/footsteps.mp3" noloop fadein 0.5 fadeout 0.5
+                pause 1.5
+                play sound "audio/pain.mp3" noloop fadein 0.2 fadeout 0.2
+
                 "Так что спокойный и удовлетворенный я шел в комнату, как вдруг в голове словно что-то стрельнуло."
                 "Вспышка боли в висках, резкая, сильная, но быстро прошедшая. "
                 extend "Словно меня что-то покинуло, решив напоследок немного пошалить. "
                 extend "Ну, ладно, главное не болит."
-                "Придя в комнату я сразу улегся спать. Устал я знатно, так сон пришел быстро. День, определенно удался."
+
+                stop music fadeout 1.5
+
+                play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
+
+                if day4_tried_move and not day4_fight:
+                    scene sanatorium skin dormitory room
+                    with Fade(0.4, 0.5, 0.4, color="#000")
+                else:
+                    scene sanatorium dormitory room
+                    with Fade(0.4, 0.5, 0.4, color="#000")
+                
+                play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
+
+                "Придя в комнату я сразу улегся спать. "
+                extend "Устал я знатно, так сон пришел быстро. "
+                extend "День, определенно удался."
 
                 jump _day6
 
@@ -6737,23 +6869,41 @@ label _day5 :
         "Хорошо, что девочки сидели ко мне спиной и не могли меня видеть. "
         extend "Объяснятся с ними не хотелось."
         "Быстренько выхлебав идеальной консистенции суп, я принялся терзать сочные сырники, щедро политые ароматной сгущенкой."
+
+        play sound "audio/chair_crack.mp3" noloop fadein 0.2 fadeout 0.2
+
         noname "Привет..."
         "Я вздрогнул от неожиданности, чуть не подавившись кофе."
         "На стул передо мной мягко приземлилась Юля, на ее милом личике блуждала приветливая улыбка."
+
+        show yuli horny
+        with dissolve
+
         sanya "Привет..."
         "Последнее, что мне сейчас хотелось, это общаться с Юлей. " 
         extend "Но раз она пришла, то ничего не поделать."
         
+        
+        yuli "Извини, что вчера не пришла! "
+        extend "Ты долго ждал?"
+        
         show yuli shy
         with dissolve
 
-        yuli "Извини, что вчера не пришла! Ты долго ждал?"
         "Она состроила такую извиняющуюся рожицу, что у меня пробежали мурашки по спине."
         sanya "Ну, так... "
         extend "Я нашел, чем себя занять..."
+        
+        show yuli sad
+        with dissolve
+
         yuli "Вот как..."
         "Кажется, этот ответ ее расстроил."
         extend "Повисла неловкая тишина."
+
+        show yuli horny2
+        with dissolve
+
         yuli "А давай встретимся сегодня!"
         "Неожиданно выкрикнула она, чуть ли не на всю столовую."
         yuli "Я сегодня точно приду! "
@@ -6762,12 +6912,16 @@ label _day5 :
         extend "трудности, вот!"
         sanya "Какие трудности?"
         "Странно она ведет себя как-то."
+
+        show yuli shy
+        with dissolve
+
         "Она смутилась и щечки мило порозовели."
         yuli "Я отравилась... "
         extend "Весь день из номера не вылезала..."
         sanya "Почему не позвонила? "
-        extend "У тебя же есть мой номер"
-        yuli "Забыла"
+        extend "У тебя же есть мой номер."
+        yuli "Забыла."
         "Она смутилась еще больше."
         "Хм, странно все это. "
         extend "Но выглядит она, по крайней мере, раскаявшейся."
@@ -6787,10 +6941,23 @@ label _day5 :
 
                 "Ладно, уж. "
                 extend "В конце концов, почему бы не дать такой милой девушке второй шанс?"
-                sanya "Давай. Жду тебя после процедур там же, где вчера. "
+                sanya "Давай. "
+                extend "Жду тебя после процедур там же, где вчера. "
                 extend "Без опозданий!"
+
+                show yuli happy
+                with dissolve
+
                 yuli "Конечно!"
                 "Юля словно расцвела, услышав эти слова."
+
+                play sound "audio/chair_crack.mp3" noloop fadein 0.2 fadeout 0.2
+                pause 0.6
+                play sound "audio/footsteps.mp3" noloop fadein 0.2 fadeout 0.2
+                
+                hide yuli happy
+                with dissolve
+
                 "Подскочив как ужаленная, она не прощаясь куда-то ускакала. "
                 extend "Я же, хмыкнув ей в ответ, продолжил завтрак."
                 "И чего со мной не поела?"
@@ -6810,12 +6977,22 @@ label _day5 :
                 "Идти с ней вновь, да и в принципе с кем-то гулять не было никакого желания. "
                 extend "После хорошего дня хотелось побыть одному."
                 sanya "Юль, извини, но у меня на вечер сегодня другие планы."
+
+                show yuli horny
+                with dissolve
+
                 "На Юлином лице застыла улыбка. "
                 extend "Смотрелось это жутко. "
                 extend "Словно живой человек резко превратился в куклу."
-                yuli "Хорошо. Я тебя поняла."
+                yuli "Хорошо. "
+                extend "Я тебя поняла."
                 "С этими словами она встала."
                 yuli "Рада была пообщаться."
+
+                play sound "footsteps.mp3" noloop fadein 0.2 fadeout 0.2    
+                hide yuli
+                with dissolve
+            
                 "Произнеся эти слова странным тоном, в котором отсутствовали любые эмоции, она деревянной походкой удалилась."
                 "Да уж... "
                 extend "Впервые отказал девушке, если честно. Странное чувство."
@@ -6831,7 +7008,7 @@ label _end :
 
     play music "audio/lobby_music.mp3" fadein 2.0 fadeout 2.5 volume 0.3
 
-    scene black scen
+    scene firstDays black scen
     with fade
     
     pause 4.0

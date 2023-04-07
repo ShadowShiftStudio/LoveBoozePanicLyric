@@ -48,7 +48,7 @@ init python:
 
     class Background():
         def __init__(self, speed, textures_index):
-            self.image = Image(f"mg1 road background{textures_index}.png")
+            self.image = Image(f"firstDays/mg1 road background{textures_index}.png")
             self.shift_step_factor = 3
             self.shift = Shift(self.shift_step_factor * speed)
 
@@ -70,7 +70,7 @@ init python:
 
     class Road():
         def __init__(self, speed):
-            self.image = Image("mg1 road ground.png")
+            self.image = Image("firstDays/mg1 road ground.png")
             self.shift_step_factor = 3.5
             self.shift = Shift(self.shift_step_factor * speed)
             self.rendered = None
@@ -117,7 +117,7 @@ init python:
             for _ in range(0, self.count_of_tracks - 1):
                 pos = random.randrange(0, self.count_of_tracks)
                 if self.cars[pos] == None:
-                    self.cars[pos] = Image(f"car{random.randrange(1, 7)}.png")
+                    self.cars[pos] = Image(f"firstDays/car{random.randrange(1, 7)}.png")
 
             self.cars_rects = [None] * self.count_of_tracks
         
@@ -220,7 +220,7 @@ init python:
         def __init__(self, speed, road, cars):
             self.road = road
             self.cars = cars
-            self.image = Image("bus top view.png")
+            self.image = Image("firstDays/bus top view.png")
             self.prev_track_i = 1
             self.curr_track_i = 1
             self.counter_step_factor = 1.5
@@ -265,7 +265,7 @@ init python:
     class SurrenderBtn(renpy.Displayable):
         def __init__(self, on_click):
             renpy.Displayable.__init__(self)
-            self.image = Image("surrender btn.png")
+            self.image = Image("firstDays/surrender btn.png")
 
             self.on_click = on_click
             self.rect = None
