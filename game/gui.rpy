@@ -25,7 +25,7 @@ init python:
 ## Цвета текста в интерфейсе.
 
 ## Акцентный цвет используется в заголовках и подчёркнутых текстах.
-define gui.accent_color = '#61FFD7'
+define gui.accent_color = '#fc80fc'
 
 ## Цвет, используемый в текстовой кнопке, когда она не выбрана и не наведена.
 define gui.idle_color = '#f0f0f0'
@@ -35,7 +35,7 @@ define gui.idle_color = '#f0f0f0'
 define gui.idle_small_color = '#eee3e3'
 
 ## Цвет, используемых в кнопках и панелях, когда они наведены.
-define gui.hover_color = '#f3a64f'
+define gui.hover_color = '#cc66cc'
 
 
 ## Цвет, используемый текстовой кнопкой, когда она выбрана, но не наведена.
@@ -90,7 +90,7 @@ define gui.title_text_size = 1
 ## Главное и игровое меню. #####################################################
 
 ## Изображения, используемые в главном и игровом меню.
-define gui.main_menu_background = Movie(play="gui/classic_sanya.webm") # "gui/sanya.png"
+define gui.main_menu_background = Movie(play="gui/classic_sanya.webm", start_image="gui/sanya.jpg") # "gui/sanya.png"
 define gui.game_menu_background = "gui/game_menu.png"
 
 

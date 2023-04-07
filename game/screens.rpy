@@ -471,8 +471,8 @@ screen main_menu():
     ## содержание главного меню находится на экране навигации.
     use navigation
     image "gui/logotype.png":
-                xalign 0.02
-                yalign 0.1
+        xalign 0.02 yalign 0.1
+        
     if gui.show_name:
         
 
@@ -534,7 +534,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
         add gui.main_menu_background
     else:
         add gui.game_menu_background
-    
+
     frame:
         style "game_menu_outer_frame"
 
@@ -546,6 +546,14 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
             frame:
                 style "game_menu_content_frame"
+
+                text _(title):
+                    size 100
+                    text_align 0.5
+                    xalign 0.5 ypos -175
+                    drop_shadow_color (202, 77, 202, 200)
+                    drop_shadow (1, 5)
+                    #font gui.interface_text_font
 
                 if scroll == "viewport":
 
@@ -587,6 +595,8 @@ screen game_menu(title, scroll=None, yinitial=0.0):
         text_align 0.5
         xalign 0.047
         action Return()
+    
+    
 
     label title
 
@@ -666,8 +676,12 @@ screen about():
         vbox:
 
             #label "[config.name!t]"
-            text _("Любовь, выпивка, паника, лирика\n")
-            text _("Авторы:\nAsind\nDarlingInSteam\nDanilka108\nTheNorth\nXpomin\nArtsBer")
+            text _("Любовь выпивка паника лирика\n"):
+                text_align 0.5
+                xalign 0.5
+            text _("Авторы:\nAsind\nDarlingInSteam\nDanilka108\nTheNorth\nXpomin\nArtsBer\nrero"):
+                text_align 0.5
+                xalign 0.5
             text _("Ссылка на репозиторий {a=https://github.com/nstu-games/TechTales-Love-Booze-and-Code}GitHub{/a}")
 
             ## gui.about обычно установлено в options.rpy.

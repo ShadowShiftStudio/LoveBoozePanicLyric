@@ -186,13 +186,15 @@ screen busday1():
 
 label splashscreen:
     play sound "audio/intro_sound.mp3" 
+    image temp_m = Movie(play="gui/splashscreen_sanya.webm", loop=False, start_image="gui/sanya.jpg")
     image back = "#272727"
-    image sanya_first_frame = "gui/sanya.png" #
+    image log_o = "gui/logotype.png"
+    image sanya_first_frame = "gui/sanya.jpg" 
     scene back
     with dissolve
 
     show logo studio logo at center with Dissolve(1.6)
-
+ 
     pause 2.0
 
     scene back 
@@ -202,6 +204,13 @@ label splashscreen:
     
     pause 100.0
     stop sound
+    scene temp_m with Fade(0.0, 0.1, 0.06, color="#272727")
+    show log_o:
+        xalign 0.02 yalign 0.1 alpha 0.0
+        linear 0.16 alpha 1.0
+
+    pause 0.16
+
     return
 
 label start:
