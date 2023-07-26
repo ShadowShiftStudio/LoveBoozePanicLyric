@@ -754,7 +754,7 @@ label first_day:
 
         window hide
 
-        $ sms_show(_("Юлолия"), True)
+        $ sms_show(_("Юлолия"), False)
         with dissolve
 
         sms_c "Сегодня"
