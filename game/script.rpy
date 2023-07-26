@@ -7496,7 +7496,9 @@ label _day5 :
                 "Подскочив как ужаленная, она не прощаясь куда-то ускакала. "
                 extend "Я же, хмыкнув ей в ответ, продолжил завтрак."
                 "И чего со мной не поела?"
-                # TODO: продолжение
+                
+                "Конец первой главы."
+
             "Отказаться.":
 
                 $ str_for_notification = "{size=-12}Юля запомнит это{/size}"
@@ -7532,12 +7534,13 @@ label _day5 :
                 "Да уж... "
                 extend "Впервые отказал девушке, если честно. Странное чувство."
                 "Без аппетита доев свой завтрак, я пошёл на утренние процедуры."
-                # TODO: продолжение
+                
+                "Конец первой главы."
 
 
 label _day6 :
 
-    "день шестой сука блять"
+    "Конец первой главы."
 
 label _end :
 
@@ -7559,7 +7562,7 @@ label _end :
     centered "Andrey Usikov - Rostov Font\nChristian Robertson - Roboto Font\nSan Francisco Pro Font - © 2015-2017 Apple Inc. All rights reserved.\nCMU Sans Serif Font - under SIL Open Font License\n Perun. Copyright © Stefan Peev, Context Ltd, 2016"
     centered "Strauss Festival Orchestra Vienna\nLudovico Einaudi - Nefeli\nSymphony No. 4 in A Major, Op. 90, MWV N16, \"Italian\": IV. Saltarello. Presto. Симфонический орекстр Бирмингема.\nSchumann: Kinderszenen, Op. 15 - 7. Traumerei. Владимир Самойлович Горовиц\n9 духовно-музыкальных сочинений: III. Херувимская песнь; Исполнитель: Государственный камерный хор Министерства культуры СССР; Композитор: Пётр Ильич Чайковский"
     centered "Awakening Dew - Keys of Moon\Downpour - Keys of Moon\nForest Walk - Alexander Nakarada\nHall of the Mountain King - Kevin MacLeod • Edvard Grieg\nCherry Metal - Arthur Vyncke\nSpace Floating - FSM Team feat. < e s c p >\nOtixx - Nostalgia\nharris cole & aso - safe now (slowed & reverb)"
-    #centered "" 
 
     centered "{size=+24}В разделе \"Об игре\" можно найти ссылку на репозиторий GitHub.{/size}"
     centered "{size=+24}Спасибо за прохождение данной новеллы. Мы благодарны за Ваше внимание.{/size}"
+    centered "{size=+24}Новости по выходу новой главы можно увидеть в нашей группе ВК. Ссылка в разделе \"Об игре\"{/size}"

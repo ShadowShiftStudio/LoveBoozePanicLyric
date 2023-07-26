@@ -683,6 +683,7 @@ screen about():
                 text_align 0.5
                 xalign 0.5
             text _("Ссылка на репозиторий {a=https://github.com/nstu-games/TechTales-Love-Booze-and-Code}GitHub{/a}")
+            text _("Ссылка на нашу группу {a=https://vk.com/shadowshiftstudio}Shadow Shift Studio VK{/a}")
 
             ## gui.about обычно установлено в options.rpy.
             if gui.about:
