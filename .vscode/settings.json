@@ -279,6 +279,54 @@
                 "settings": {
                     "foreground": "наст"
                 }
+            },
+            {
+                "scope": "renpy.meta.color.#222",
+                "settings": {
+                    "foreground": "#222"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.#224",
+                "settings": {
+                    "foreground": "#224"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.#253",
+                "settings": {
+                    "foreground": "#253"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.#243",
+                "settings": {
+                    "foreground": "#243"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.#463",
+                "settings": {
+                    "foreground": "#463"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.#465",
+                "settings": {
+                    "foreground": "#465"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.#377",
+                "settings": {
+                    "foreground": "#377"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.#374",
+                "settings": {
+                    "foreground": "#374"
+                }
             }
         ]
     }

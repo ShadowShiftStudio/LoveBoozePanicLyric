@@ -249,11 +249,11 @@ screen quick_menu():
             style_prefix "quick"
 
             xalign 0.5
-            yalign 1.0
+            yalign 0.99
             imagebutton auto "gui/button/back_button_%s.png" xpos 0 ypos 0 action Rollback()
-            imagebutton auto "gui/button/history_button_%s.png" xpos 0 ypos 0 action ShowMenu('history')
+            # imagebutton auto "gui/button/history_button_%s.png" xpos 0 ypos 0 action ShowMenu('history')
             imagebutton auto "gui/button/skip_button_%s.png" xpos 0 ypos 0 action Skip() alternate Skip(fast=True, confirm=True)
-            imagebutton auto "gui/button/auto_button_%s.png" xpos 0 ypos 0 action Preference("auto-forward", "toggle")
+            # imagebutton auto "gui/button/auto_button_%s.png" xpos 0 ypos 0 action Preference("auto-forward", "toggle")
             imagebutton auto "gui/button/save_button_%s.png" xpos 0 ypos 0 action ShowMenu('save')
             imagebutton auto "gui/button/load_button_%s.png" xpos 0 ypos 0 action ShowMenu('load')
             imagebutton auto "gui/button/settings_button_%s.png" xpos 0 ypos 0 action ShowMenu('preferences')
@@ -863,6 +863,16 @@ screen preferences():
                     textbutton _("После выборов") action Preference("after choices", "toggle")
                     textbutton _("Переходов") action InvertSelected(Preference("transitions", "toggle"))
 
+                vbox:
+                    null height gui.pref_spacing
+                    label _("Дополнительно")
+                    null height gui.pref_spacing
+                    textbutton _("Меню отображения"):
+                            action Preference("renderer menu")
+                    
+                    textbutton _("Специальные возможности"):
+                            action Preference("accessibility menu")
+
                 ## Дополнительные vbox'ы типа "radio_pref" или "check_pref"
                 ## могут быть добавлены сюда для добавления новых настроек.
 
@@ -881,6 +891,12 @@ screen preferences():
                     label _("Скорость авточтения")
 
                     bar value Preference("auto-forward time")
+
+                    null height gui.pref_spacing
+
+                    textbutton _("Авточтение"):
+                        action Preference("auto-forward", "toggle")
+                        style "mute_all_button"
 
                 vbox:
 
@@ -1539,8 +1555,8 @@ style nvl_button_text:
 ################################################################################
 
 style pref_vbox:
-    variant "medium"
-    xsize 675
+    variant "small"
+    xsize 65
 
 ## Раз мышь может не использоваться, мы заменили быстрое меню версией,
 ## использующей меньше кнопок, но больших по размеру, чтобы их было легче
@@ -1554,26 +1570,26 @@ screen quick_menu():
         vbox:
             
             style_prefix "quick"
-            xalign 0.99
-            yalign 0.99
+            yalign 0.95
+            xalign 0.02
 
             # imagebutton auto "gui/button/back_button_%s.png" xpos 0 ypos 0 action Rollback()
-            imagebutton auto "gui/button/history_button_%s.png" xpos 0 ypos 0 action ShowMenu('history')
+            # imagebutton auto "gui/button/history_button_%s.png" xpos 0 ypos 0 action ShowMenu('history')
             # imagebutton auto "gui/button/skip_button_%s.png" xpos 0 ypos 0 action Skip() alternate Skip(fast=True, confirm=True)
             # Гоimagebutton auto "gui/button/auto_button_%s.png" xpos 0 ypos 0 action Preference("auto-forward", "toggle")
-            imagebutton auto "gui/button/save_button_%s.png" xpos 0 ypos 0 action ShowMenu('save')
-            imagebutton auto "gui/button/load_button_%s.png" xpos 0 ypos 0 action ShowMenu('load')
-            imagebutton auto "gui/button/settings_button_%s.png" xpos 0 ypos 0 action ShowMenu('preferences')
+            imagebutton auto "gui/phone/button/save_button_%s.png" xpos 0 ypos 0 action ShowMenu('save')
+            imagebutton auto "gui/phone/button/load_button_%s.png" xpos 0 ypos 0 action ShowMenu('load')
 
         vbox:
             
             style_prefix "quick"
-            xalign 0.01
-            yalign 0.99
+            xalign 0.98
+            yalign 0.95
 
-            imagebutton auto "gui/button/back_button_%s.png" xpos 0 ypos 0 action Rollback()
-            imagebutton auto "gui/button/auto_button_%s.png" xpos 0 ypos 0 action Preference("auto-forward", "toggle")
-            imagebutton auto "gui/button/skip_button_%s.png" xpos 0 ypos 0 action Skip() alternate Skip(fast=True, confirm=True)
+            #imagebutton auto "gui/phone/button/back_button_%s.png" xpos 0 ypos 0 action Rollback()
+            #imagebutton auto "gui/phone/button/auto_button_%s.png" xpos 0 ypos 0 action Preference("auto-forward", "toggle")
+            imagebutton auto "gui/phone/button/settings_button_%s.png" xpos 0 ypos 0 action ShowMenu('preferences')
+            imagebutton auto "gui/phone/button/skip_button_%s.png" xpos 0 ypos 0 action Skip() alternate Skip(fast=True, confirm=True)
 
 
 

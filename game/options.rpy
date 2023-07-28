@@ -12,18 +12,18 @@
 ##
 ## Символы "_()", окружающие название, отмечают его как пригодное для перевода.
 
-define config.name = _("Любовь, выпивка, паника, лирика")
+define config.name = _("Любовь Выпивка Паника Лирика")
 
 
 ## Определяет, показывать ли заголовок, данный выше, на экране главного меню.
 ## Установите на False, чтобы спрятать заголовок.
 
-define gui.show_name = True
+define gui.show_name = False
 
 
 ## Версия игры.
 
-define config.version = "1.0"
+define config.version = "2.0"
 
 
 ## Текст, помещённый в экран "Об игре". Поместите текст между тройными скобками.
@@ -37,7 +37,7 @@ define gui.about = _p("""
 ## постройке дистрибутивов. Оно должно содержать текст формата ASCII и не должно
 ## содержать пробелы, двоеточия и точки с запятой.
 
-define build.name = "TechTales"
+define build.name = "LoveBoozePanicLyric"
 
 
 ## Звуки и музыка ##############################################################
@@ -53,7 +53,7 @@ define config.has_voice = True
 
 ## Чтобы разрешить игроку тестировать громкость на звуковом или голосовом
 ## каналах, раскомментируйте строчку и настройте пример звука для прослушивания.
-define config.sample_sound = "audio/gamewin.ogg"
+define config.sample_sound = "audio/nea.mp3"
 # define config.sample_voice = "sample-voice.ogg"
 
 
@@ -83,12 +83,12 @@ define config.intra_transition = dissolve
 
 ## Переход, используемый после загрузки слота сохранения.
 
-define config.after_load_transition = None
+define config.after_load_transition = Fade(1.0, 0.2, 1.5)
 
 
 ## Используется при входе в главное меню после того, как игра закончится.
 
-define config.end_game_transition = None
+define config.end_game_transition = Fade(5.0, 1.0, 5.0)
 
 
 ## Переменная, устанавливающая переход, когда старт игры не существует. Вместо
@@ -120,14 +120,14 @@ define config.window_hide_transition = Dissolve(.2)
 ## в то время как любая другая цифра — это количество символов, печатаемых в
 ## секунду.
 
-default preferences.text_cps = 0
+default preferences.text_cps = 60
 
 
 ## Стандартная задержка авточтения. Большие значения означают долгие ожидания, а
 ## от 0 до 30 — вполне допустимый диапазон.
 
 default preferences.afm_time = 15
-
+default preferences.mobile_rollback_side = "left"
 
 ## Директория сохранений #######################################################
 ##
@@ -143,7 +143,7 @@ default preferences.afm_time = 15
 ## Этот параметр обычно не должен изменяться, а если и изменился, должен быть
 ## текстовой строчкой, а не выражением.
 
-define config.save_directory = "TechTales-1678447813"
+define config.save_directory = "LoveBoozePanicLyric"
 
 
 ## Иконка ######################################################################

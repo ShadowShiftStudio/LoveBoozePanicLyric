@@ -427,13 +427,13 @@ init python:
     @gui.variant
     def touch():
 
-        gui.quick_button_borders = Borders(60, 21, 60, 0)
+        gui.quick_button_borders = Borders(0, 0, 0, 0)
 
     ## Это изменяет размеры и интервалы различных элементов GUI, чтобы
     ## убедиться, что они будут лучше видны на телефонах.
     @gui.variant
     def small():
-
+        gui.quick_button_borders = Borders(0, 0, 0, 0)
         ## Размеры шрифтов.
         gui.text_size = 45
         gui.name_text_size = 54
@@ -453,19 +453,21 @@ init python:
         gui.slider_size = 64
 
         gui.choice_button_width = None
+        gui.choice_button_height = None
         gui.choice_button_text_size = 60
+        gui.choice_button_borders = Borders(100, 33, 70, 33, pad_top=0, pad_bottom=0)
 
         gui.navigation_spacing = 30
-        gui.pref_button_spacing = 15
+        gui.pref_button_spacing = 30
 
         gui.history_height = 285
         gui.history_text_width = 835
         gui.history_text_xpos = 0.3
 
-        gui.quick_button_text_size = 30
+        gui.quick_button_text_size = 60
 
         ## Местоположение кнопок слотов.
-        gui.file_slot_cols = 2
+        gui.file_slot_cols = 3
         gui.file_slot_rows = 2
 
         ## Режим NVL.
