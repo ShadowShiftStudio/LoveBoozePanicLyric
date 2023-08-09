@@ -123,6 +123,8 @@ define config.window_hide_transition = Dissolve(.2)
 default preferences.text_cps = 60
 
 
+
+
 ## Стандартная задержка авточтения. Большие значения означают долгие ожидания, а
 ## от 0 до 30 — вполне допустимый диапазон.
 

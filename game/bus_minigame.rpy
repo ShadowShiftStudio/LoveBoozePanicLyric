@@ -1,5 +1,5 @@
 init python:
-    SECONDS_PER_UPDATE = 1 / 120
+    SECONDS_PER_UPDATE = 1 / 60
     from renpy.audio.sound import play
     from renpy.audio.music import play as play_music
     from renpy.audio.music import stop as stop_music
