@@ -666,7 +666,7 @@ label first_day:
 
         "Вспомнив про намеченные планы, я согласился, и в скором времени мы уже были на месте."
         stop sound fadeout 2.0
-        play music "audio/kfc-sound.mp3" fadein 3.0 volume 0.4
+        play music "audio/kfc-sound.mp3" fadein 3.0 volume 0.4 fadeout 2.0
 
         scene firstDays kfc inside 
         with fade
@@ -690,16 +690,14 @@ label first_day:
         pasha "Ну что, Санёк, сейчас нам будет весело."
 
         "Сказав это, Пашка непонятно откуда достал бутылку коньячка."
-        sanya "Ах-ха-ха, бля-я-ядь, сука, ну, Пашка, а ты умеешь поднять настроение!"
+        sanya "Ах-ха-ха, сука, ну, Пашка, а ты умеешь поднять настроение!"
         pasha "А я умею!"
         pasha "Ну что, выпьем?"
 
-        stop music
+        play music "audio/deadline_music.mp3" volume 0.13 fadein 6.0
+        scene black with fade
+        centered "{size=+20}{color=#BFA}Игра \"Перепей соперника\"\n{/color}{/size}Закусывая после стопки, Вы меньше пьянеете, но и получаете меньше очков{w=1.0}\nНе закусывая, Вы зарабатываете больше очков уважения, но и пьянеете сильнее{w=1.0}\n\nЧем вы пьянее, тем больше очков вы получаете,\nно если вы перепьёте, то проиграете!"
 
-        hide pasha smiles
-        with dissolve
-
-        play music "audio/deadline_music.mp3" volume 0.13
 
         call play_kfc_minigame from _call_play_kfc_minigame
         stop music fadeout 2.0
