@@ -162,6 +162,7 @@ define hi_score = 0
 
 define player_name = "Саня"
 define str_for_notification = ""
+image cigarette_smoke = Movie(play="images/video/loopen.webm", side_mask=True)
 
 screen notification_popup():
     add "firstDays/notification.png" xalign 1.0 yalign 0.055 xzoom 0.6
@@ -1195,13 +1196,12 @@ label first_day:
         "Достав последнюю сигаретку из пачки ванильного чапмана, я пару раз затянулся."
         play sound "audio/cigarette.mp3"
         pause 8.3
-        image movad = Movie(play="images/video/loopen.webm", side_mask=True)
-        show movad with dissolve
+        show cigarette_smoke with dissolve
         sanya "Фух, сразу полегчало. На днях надо будет купить ещё пару пачек в кб."
         
         "Странный день вышел сегодня. "
         extend "Кажется, какое решение я бы не принял, всё пошло бы через жопу..."
-        hide movad with dissolve
+        hide cigarette_smoke with dissolve
 
         "Почему я не могу не вести себя как идиот хотя бы на первом свидании?"
         
@@ -1750,8 +1750,7 @@ label second_day :
 
         scene firstDays kyrilka
         with fade
-        image movad = Movie(play="images/video/loopen.webm", side_mask=True)
-        show movad with dissolve
+        show cigarette_smoke with dissolve
 
         "Одногруппник" "Как же бесит препод по схемотехнике, мы с ним только первый день, а он уже показал себя полным мудаком."
         "Одногруппник" "Да уж, он точно будет валить на сессии. Кстати, Саня, тебя вроде не было на лекции."
@@ -3809,7 +3808,6 @@ label _sanatorium :
         "По крайней мере, с кровати он встал очень резво."
 
         "Выйдя на балкон, он через нос вздохнул местный воздух. И со словами: \"Пиздато!\" достал сигареты."
-        image movad = Movie(play="images/video/loopen.webm", side_mask=True)
 
         show pavel smile:
             ypos 0.1
@@ -3819,12 +3817,11 @@ label _sanatorium :
         play sound "audio/chair_crack.mp3" noloop fadein 0.2 fadeout 0.2
         
         "Плюхнувшись на свободное кресло, которое жалобно скрипнуло под ним, но все же стоически выдержало, он закурил."
-
         
         play sound "audio/cigarette_one_shot.mp3" noloop fadein 0.2 fadeout 0.2
         hide pavel smile
         with None
-        show movad
+        show cigarette_smoke
         show pavel smokes
         with dissolve
         
@@ -4030,7 +4027,7 @@ label _sanatorium :
             sanya "Вы кто? Где я?"
             grusha "Я Агриппина Филипповна, твой ангел хранитель на случай, если опять перепьешь. А находишься ты в раю, где ставят на ноги таких как ты."
             sanya "А-а-а-а."
-            grusha "Б, дурында, ещё раз тут появишься – рассолом буду отпаивать. Такой молодой, а уже... эх!"
+            grusha "\"Б\", дурында, ещё раз тут появишься – рассолом буду отпаивать. Такой молодой, а уже... эх!"
             "Бурчание продолжалось, но уже так невнятно, что разобрать было сложно."
             "С каждой минутой мне становилось все лучше и лучше."
             "По крайней мере, вертолетики кончились, да и живот не так сильно болел."
@@ -5188,7 +5185,6 @@ label _sanatorium :
         "Неудачно поставив ногу, я оступился, подворачивая лодыжку."
         sanya "Блядство!"
         
-        # TODO (возможно поменять)
         play music "audio/heart.mp3" fadein 3.0 fadeout 2.0 volume 0.7
         with vpunch
         "Упав на землю, я пару раз перекатился, набивая синяки везде, где только можно."
@@ -5836,8 +5832,6 @@ label _day5 :
             hide screen toska
             with dissolve
 
-            #TODO: Надя беспокоица
-
             play music "audio/nadya_theme.mp3" fadein 0.6 fadeout 2.0 volume 0.25
 
             "Меня подхватила Надина тонкая, но удивительно сильная рука."
@@ -6179,6 +6173,7 @@ label _day5 :
                         "Я замер, не веря своим ушам. "
                         extend "Посмотрел на Надю, ожидая увидеть улыбку, но та была серьезной."
                         sanya "Почту за честь, моя леди..."
+                        jump _day6
                         
                     else :
                         sanya "Может, зайдем к тебе? Ты вроде говорила у тебя никого нет..."
@@ -6229,6 +6224,7 @@ label _day5 :
                         
                         scene firstDays black scen
                         with dissolve
+                        jump _day6
 
                 "Пойти к себе в комнату" :
 
@@ -7463,6 +7459,7 @@ label _day5 :
             yuli "А теперь – спи. Ты отлично постарался"
             "Волна эйфории ушла так же, как и появилась – резко."
             "Оставив после себя лишь приятную истому, благодаря которой я очень быстро уснул, даже не задумываясь над тем, что сейчас произошло."
+            jump _day6
 
     elif day5_loneliness_in_cafe :
 
@@ -7562,7 +7559,7 @@ label _day5 :
                 "Подскочив как ужаленная, она, не прощаясь, куда-то ускакала. "
                 extend "Я же, хмыкнув ей в ответ, продолжил завтрак."
                 "И чего со мной не поела?"
-                
+                #TODO: не закончено!
                 jump _day6
 
             "Отказаться.":
@@ -7600,6 +7597,7 @@ label _day5 :
                 "Да уж... "
                 extend "Впервые отказал девушке, если честно. Странное чувство."
                 "Без аппетита доев свой завтрак, я пошёл на утренние процедуры."
+                #TODO: не закончено!
                 
                 jump _day6
 
@@ -7614,7 +7612,7 @@ label _day6 :
     play sound "audio/typewriter-sound.mp3" volume 0.5 loop
     centered "{size=+30}{font=fonts/sfpro_semibold.ttf}{cps=4.8}Конец первой главы.  {nw}{/cps}{/font}{/size}"
     stop sound
-
+    #TODO: Егор, ctrl+f и поищи по "TODO" и закончи полностью пятый день сперва
 
     with Fade(4.0, 2.0, 5.0)
     jump _end
