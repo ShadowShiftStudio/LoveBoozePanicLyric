@@ -23,7 +23,7 @@ define gui.show_name = False
 
 ## Версия игры.
 
-define config.version = "2.0"
+define config.version = "2.230816"
 
 
 ## Текст, помещённый в экран "Об игре". Поместите текст между тройными скобками.
@@ -49,12 +49,13 @@ define build.name = "LoveBoozePanicLyric"
 define config.has_sound = True
 define config.has_music = True
 define config.has_voice = True
+define config.default_voice_volume = 0.0
 
 
 ## Чтобы разрешить игроку тестировать громкость на звуковом или голосовом
 ## каналах, раскомментируйте строчку и настройте пример звука для прослушивания.
 define config.sample_sound = "audio/nea.mp3"
-# define config.sample_voice = "sample-voice.ogg"
+define config.sample_voice = "audio/girl_laugh2.mp3"
 
 
 ## Раскомментируйте следующую строчку, чтобы настроить аудиофайл, который будет

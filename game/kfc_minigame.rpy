@@ -336,7 +336,7 @@ init python:
             self.pasha_image = Image(enemy_image_path)
             self.bowl_image = Image("firstDays/kfc_bowl.png")
             self.ground_image = Image("firstDays/kfc_ground.png")
-            self.background_image = Image("firstDays/kfc inside.png")
+            self.background_image = Image("firstDays/kfc inside.jpg")
 
             self.gg_image = Image("sanya/neutral.png")
 
@@ -372,9 +372,9 @@ init python:
             import random
 
             is_pasha_bite = bool(random.getrandbits(1))
-
             if is_pasha_bite:
                 self.pasha_bar.decrease(self.bite_decrease)
+                
             else:
                 self.pasha_bar.decrease(self.not_bite_decrease)
 
@@ -487,7 +487,8 @@ label play_kfc_minigame:
     $ quick_menu = True
     window show
 
-if _return == "pasha":
-    "Саня конкретно перебрал с выпивкой в этот раз... Ноги еле идут..."
-else:
-    "Вы выиграли! Паша конкретно перебрал с выпивкой в этот раз..."
+    #if _return == "pasha":
+    #    "Саня конкретно перебрал с выпивкой в этот раз... Ноги еле идут..."
+    #else:
+    #    "Вы выиграли! Паша конкретно перебрал с выпивкой в этот раз..."
+    #return _return

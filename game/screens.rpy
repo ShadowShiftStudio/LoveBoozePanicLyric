@@ -674,22 +674,31 @@ screen about():
         style_prefix "about"
 
         vbox:
-
+            xalign 0.5
+            yalign 0.5
+            xpos 0.65
+            ypos 0.5
             #label "[config.name!t]"
-            text _("Любовь выпивка паника лирика\n"):
+            text _("{color=#FAD}{size=+30}Любовь выпивка паника лирика\n\n\n{/size}{/color}"):
                 text_align 0.5
                 xalign 0.5
-            text _("Авторы:\nAsind\nDarlingInSteam\nDanilka108\nTheNorth\nXpomin\nArtsBer\nrero"):
+            text _("{size=+10}{u}Авторы:{/u}\nAsind\nDarlingInSteam\nDanilka108\nTheNorth\nXpomin\nArtsBer\nrero{/size}"):
                 text_align 0.5
                 xalign 0.5
-            text _("Ссылка на репозиторий {a=https://github.com/nstu-games/TechTales-Love-Booze-and-Code}GitHub{/a}")
-            text _("Ссылка на нашу группу {a=https://vk.com/shadowshiftstudio}Shadow Shift Studio VK{/a}")
+            #text _("Ссылка на репозиторий {a=https://github.com/nstu-games/TechTales-Love-Booze-and-Code}GitHub{/a}")
+            text _("{size=+20}\n\nСсылка на {a=https://t.ly/OKYrU}Телеграм-канал по игре{/a}{/size}"):
+                text_align 0.5
+                xalign 0.5
+            
+            text _("{size=+20}Ссылка на нашу группу VK {a=https://vk.com/shadowshiftstudio}Shadow Shift Studio{/a}{/size}"):
+                text_align 0.5
+                xalign 0.5
 
             ## gui.about обычно установлено в options.rpy.
             if gui.about:
                 text "[gui.about!t]\n"
 
-            text _("Сделано с помощью {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+            #text _("Сделано с помощью {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
 style about_label is gui_label

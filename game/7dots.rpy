@@ -1,7 +1,7 @@
 # чтобы str() не вылетала на линуксе
 define mystr = eval("lambda i: '%s' % i")
 
-init -2000 python:
+init -999 python:
     # деление с переводом в целочисленное для нового ренпая
     def d2(x, d=2):
         return int(x / d)
@@ -835,7 +835,7 @@ init -99 python:
 # вместо этого объединяются через нижний минус "_"
 # префиксы, по которым определяются такие имена берутся из layered_prefixes
 # выполняется после всего остального
-init 1900 python hide:
+init 999 python hide:
     def create_automatic_images():
 
         seps = config.automatic_images
