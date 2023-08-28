@@ -162,19 +162,19 @@ define hi_score = 0
 
 define player_name = "Саня"
 define str_for_notification = ""
-image cigarette_smoke = Movie(play="images/video/loopen.webm", side_mask=True)
+image cigarette_smoke = Movie(play="images/video/.webp", side_mask=True)
 image light_pink = Solid("#857")
 
 screen notification_popup():
-    add "firstDays/notification.png" xalign 1.0 yalign 0.055 xzoom 0.6
+    add "firstDays/notification.webp" xalign 1.0 yalign 0.055 xzoom 0.6
     text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
 screen notification_popup_big():
-    add "firstDays/notification.png" xalign 1.0 yalign 0.055 
+    add "firstDays/notification.webp" xalign 1.0 yalign 0.055 
     text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
 screen toska():
-    add "firstDays/night color.png":
+    add "firstDays/night color.webp":
         at transform:
             xalign 0.5 yalign 0.5
             alpha 0.0
@@ -185,9 +185,9 @@ screen toska():
                 repeat
 
 screen yuli_welcome():
-        add "images/yuli/welcome.jpg"
-        add Movie(play="images/video/petals.webm", side_mask=True)
-        add "images/yuli/welcome_focus.png":
+        add "images/yuli/welcome.webp"
+        add Movie(play="images/video/.webp", side_mask=True)
+        add "images/yuli/welcome_focus.webp":
             at transform:
                 truecenter
                 block:
@@ -196,9 +196,9 @@ screen yuli_welcome():
                     repeat
 
 screen nadya_welcome():
-        add "images/nadya/welcome.jpg"
-        add Movie(play="images/video/petals.webm", side_mask=True)
-        add "images/nadya/welcome_focus.png":
+        add "images/nadya/welcome.webp"
+        add Movie(play="images/video/.webp", side_mask=True)
+        add "images/nadya/welcome_focus.webp":
             at transform:
                 truecenter
                 block:
@@ -207,9 +207,9 @@ screen nadya_welcome():
                     repeat
 
 screen emily_welcome():
-        add "images/emily/welcome.jpg"
-        add Movie(play="images/video/petals.webm", side_mask=True)
-        add "images/emily/welcome_focus.png"
+        add "images/emily/welcome.webp"
+        add Movie(play="images/video/.webp", side_mask=True)
+        add "images/emily/welcome_focus.webp"
 
 screen busday1():
         default bus_minigame = BusMinigameDisplayable(hi_score, 0)
@@ -218,7 +218,7 @@ screen busday1():
 
 label splashscreen:
     play sound "audio/intro_sound.mp3" 
-    image temp_m = Movie(play="gui/splashscreen_sanya.webm", loop=False, start_image="gui/sanya.jpg")
+    image temp_m = Movie(play="gui/splashscreen_sanya.webp", loop=False, start_image="gui/sanya.jpg")
     image back = "#272727"
     image log_o = "gui/logotype.png"
     image sanya_first_frame = "gui/sanya.jpg" 
@@ -249,7 +249,7 @@ label start:
     jump first_day
 
 label first_day:
-    image night = "firstDays/night color.png"
+    image night = "firstDays/night color.webp"
     scene firstDays black scen
     stop music
     play sound "audio/alarm-sound.mp3" volume 0.05 loop
@@ -301,7 +301,7 @@ label first_day:
     "Cпрашиваю я себя, и в голове зарождается нотка беспокойства."
     stop sound fadeout 10.0
     play music "audio/bad_dream.mp3" volume 0.5 fadein 10.0
-    image nc = "firstDays/night color.png"
+    image nc = "firstDays/night color.webp"
     show nc:
         xalign 0.5 yalign 0.5
         alpha 0.0
@@ -785,8 +785,6 @@ label first_day:
         "Последняя трезвая частичка меня просто кричит, что это всё не к добру..."
         "Я достал телефон, нашёл её контакт и написал ей следующее, считай, любовное послание:"
         
-        image message_yuli_background = "firstDays/message yuli background.png"
-        image message_yuli_messages = "firstDays/message yuli messages.png"
         stop sound fadeout 0.5
 
         window hide
@@ -913,7 +911,7 @@ label first_day:
             with Fade(2.0, 0.0, 1.0)
             
             "Я не могу поверить, как хорошо всё идет. Она потрясающая. Кажется, она мне действительно нравится."
-            image foreground_cafe = "firstDays/foreground cafe.png"
+            image foreground_cafe = "firstDays/foreground cafe.webp"
             play sound "audio/kfc-sound.mp3" volume 0.1 fadein 3.0
             scene firstDays background cafe
             show yuli happy:
@@ -1415,7 +1413,7 @@ label second_day :
 
         play music "audio/bad_dream.mp3" fadein 1.0 fadeout 1.0 volume 0.6
         play sound "audio/heart.mp3" fadein 0.9 fadeout 0.2
-        image nc = "firstDays/night color.png"
+        image nc = "firstDays/night color.webp"
         show nc:
             xalign 0.5 yalign 0.5
             alpha 0.0
@@ -1534,7 +1532,7 @@ label second_day :
     if not day1_yuli_agreed_after_kfc and day1_pasha_kfc :
 
         pasha "Кстати, а как там с девочкой твоей дела обстоят?"
-        image night = "firstDays/night color.png"
+        image night = "firstDays/night color.webp"
         sanya "Ну ты же знаешь, что я тебе сейчас ничего хорошего не расскажу..."
 
         play sound "audio/heart.mp3" fadein 4.0 fadeout 0.5 volume 0.3
@@ -6482,9 +6480,9 @@ label _day5 :
 
                 image yuliinsult:
                     block:
-                        "images/yuli/empty glitch.png"
+                        "images/yuli/empty glitch.webp"
                         pause 0.2
-                        "images/yuli/insult.png"
+                        "images/yuli/insult.webp"
                         pause 2.0
                         repeat
 
