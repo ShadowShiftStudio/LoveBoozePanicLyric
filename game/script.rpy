@@ -2047,7 +2047,7 @@ label second_day :
         "Развернувшись, девушка увидела меня и попросила выйти с ней ненадолго."
         scene firstDays red white
         with fade
-        play sound "audio/forest-sound.mp3" fadein 2.0 loop
+        play sound "audio/forest-sound.mp3" fadein 2.0 loop volume 0.4
         show nadya flirting
         with dissolve
 
@@ -2118,7 +2118,7 @@ label second_day :
 
             scene firstDays black scen
             with fade
-            play sound "audio/forest-sound.mp3" fadein 4.0 loop 
+            play sound "audio/forest-sound.mp3" fadein 4.0 loop volume 0.4
             pause 3.0
 
             scene firstDays park night
@@ -2141,7 +2141,7 @@ label second_day :
             "Оплатив покупку, я вышел на улицу. Девушки я там так и не увидел."
             sanya "Интересно, куда она так неожиданно ушла."
             "Оставив размышления, я направился в сторону парка, где присел на ближайшую лавочку."
-            play sound "audio/forest-sound.mp3" loop fadein 1.0
+            play sound "audio/forest-sound.mp3" loop fadein 1.0 volume 0.4
             scene firstDays park night
             with fade
 
@@ -2321,6 +2321,7 @@ label second_day :
             
             hide screen notification_popup_big
             with dissolve
+            stop sound fadeout 1.0
     
     scene firstDays black scen
     with fade
@@ -4245,7 +4246,7 @@ label _sanatorium :
             with dissolve
             
             nadya "Чтобы жиром не заплыть – надо срочно покурить!"
-            "Закончила за меня Юля и звонко рассмеялась. Я невольно залюбовался её искренней улыбкой, что так мягко сияла на нежно девичьем личике."
+            "Закончила за меня Надя и звонко рассмеялась. Я невольно залюбовался её искренней улыбкой, что так мягко сияла на нежно девичьем личике."
             sanya "Точняк! Ты не против составить мне компанию?"
             
             show nadya smiles
@@ -7608,7 +7609,7 @@ label _day6 :
     stop sound
     
     scene light_pink with Fade(0.0, 0.0, 1.0)
-    centered "{size=+20}Будьте в курсе выхода новой главы, а также станьте участником нашего крохотного сообщества!\n{/size}{size=+30}Переходи:{a=https://t.ly/OKYrU} Ссылка на телеграм-канал по игре{/a}{/size}"
+    centered "{size=+20}Будьте в курсе выхода новой главы, а также станьте участником нашего крохотного сообщества!\n{/size}{size=+30}ищи в тг \"{color=#3B7}Любовь Выпивка Паника Лирика{/color}\"!{/size}"
     
     
     

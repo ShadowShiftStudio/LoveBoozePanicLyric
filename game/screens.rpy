@@ -686,11 +686,11 @@ screen about():
                 text_align 0.5
                 xalign 0.5
             #text _("Ссылка на репозиторий {a=https://github.com/nstu-games/TechTales-Love-Booze-and-Code}GitHub{/a}")
-            text _("{size=+20}\n\nСсылка на {a=https://t.ly/OKYrU}Телеграм-канал по игре{/a}{/size}"):
+            text _("{size=+20}\n\nИщи нас в тг: {color=#3B7}Любовь Выпивка Паника Лирика{/color}{/size}"):
                 text_align 0.5
                 xalign 0.5
             
-            text _("{size=+20}Ссылка на нашу группу VK {a=https://vk.com/shadowshiftstudio}Shadow Shift Studio{/a}{/size}"):
+            text _("{size=+20}Ищи нашу группу в ВК: {color=#3B7}Shadow Shift Studio{/color}{/size}"):
                 text_align 0.5
                 xalign 0.5
 
@@ -1184,7 +1184,7 @@ screen keyboard_help():
 
     hbox:
         label "V"
-        text _("Включает поддерживаемый {a=https://www.renpy.org/l/voicing}синтезатор речи{/a}.")
+        text _("Включает поддерживаемый синтезатор речи.")
 
     hbox:
         label "Shift+A"
