@@ -162,7 +162,7 @@ define hi_score = 0
 
 define player_name = "Саня"
 define str_for_notification = ""
-image cigarette_smoke = Movie(play="images/video/.webp", side_mask=True)
+image cigarette_smoke = Movie(play="images/video/loopen.webm", side_mask=True)
 image light_pink = Solid("#857")
 
 screen notification_popup():
@@ -186,7 +186,7 @@ screen toska():
 
 screen yuli_welcome():
         add "images/yuli/welcome.webp"
-        add Movie(play="images/video/.webp", side_mask=True)
+        add Movie(play="images/video/petals.webm", side_mask=True)
         add "images/yuli/welcome_focus.webp":
             at transform:
                 truecenter
@@ -197,7 +197,7 @@ screen yuli_welcome():
 
 screen nadya_welcome():
         add "images/nadya/welcome.webp"
-        add Movie(play="images/video/.webp", side_mask=True)
+        add Movie(play="images/video/petals.webm", side_mask=True)
         add "images/nadya/welcome_focus.webp":
             at transform:
                 truecenter
@@ -208,7 +208,7 @@ screen nadya_welcome():
 
 screen emily_welcome():
         add "images/emily/welcome.webp"
-        add Movie(play="images/video/.webp", side_mask=True)
+        add Movie(play="images/video/petals.webm", side_mask=True)
         add "images/emily/welcome_focus.webp"
 
 screen busday1():
