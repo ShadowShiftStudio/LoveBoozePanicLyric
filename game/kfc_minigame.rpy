@@ -181,7 +181,7 @@ init python:
         def __init__(self, buttons, pos):
             renpy.Displayable.__init__(self)
             self.counter = Counter(100)
-            self.glass_image = Image("firstDays/kfc_glass.png")
+            self.glass_image = Image("firstDays/kfc_glass.webp")
             self.pos = pos
 
             self.reverse_animation = False
@@ -314,18 +314,18 @@ init python:
             return r
 
     class KfcMinigameDisplayable(renpy.Displayable):
-        def __init__(self, enemy_image_path = "pasha/neutral.png", enemy_name = "pasha", player_name = "sanya"):
+        def __init__(self, enemy_image_path = "pasha/neutral.webp", enemy_name = "pasha", player_name = "sanya"):
             renpy.Displayable.__init__(self)
 
-            self.surrender_image = Image("firstDays/surrender drink.png")
+            self.surrender_image = Image("firstDays/surrender drink.webp")
             self.surrender_btn_coords = None
             self.surrender_btn = None
 
             self.player_name = player_name
             self.enemy_name = enemy_name
 
-            self.bite_button = ButtonDisplayble(self.on_gg_bite, Image("firstDays/kfc_bite.png"), Image("firstDays/kfc_button_fade.png"), -1)
-            self.not_bite_button = ButtonDisplayble(self.on_gg_not_bite, Image("firstDays/kfc_not_bite.png"), Image("firstDays/kfc_button_fade.png"), 1)
+            self.bite_button = ButtonDisplayble(self.on_gg_bite, Image("firstDays/kfc_bite.webp"), Image("firstDays/kfc_button_fade.webp"), -1)
+            self.not_bite_button = ButtonDisplayble(self.on_gg_not_bite, Image("firstDays/kfc_not_bite.webp"), Image("firstDays/kfc_button_fade.webp"), 1)
 
             self.pasha_bar = BarDisplayable(100, -1)
             self.pasha_glass = GlassDisplayable([self.bite_button, self.not_bite_button], -1)
@@ -334,11 +334,11 @@ init python:
             self.gg_glass = GlassDisplayable([], 1)
 
             self.pasha_image = Image(enemy_image_path)
-            self.bowl_image = Image("firstDays/kfc_bowl.png")
-            self.ground_image = Image("firstDays/kfc_ground.png")
-            self.background_image = Image("firstDays/kfc inside.jpg")
+            self.bowl_image = Image("firstDays/kfc_bowl.webp")
+            self.ground_image = Image("firstDays/kfc_ground.webp")
+            self.background_image = Image("firstDays/kfc inside.webp")
 
-            self.gg_image = Image("sanya/neutral.png")
+            self.gg_image = Image("sanya/neutral.webp")
 
             self.round_starting_counter = Counter(100)
 

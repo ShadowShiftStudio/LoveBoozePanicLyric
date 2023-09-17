@@ -166,15 +166,15 @@ image cigarette_smoke = Movie(play="images/video/loopen.webm", side_mask=True)
 image light_pink = Solid("#857")
 
 screen notification_popup():
-    add "firstDays/notification.png" xalign 1.0 yalign 0.055 xzoom 0.6
+    add "firstDays/notification.webp" xalign 1.0 yalign 0.055 xzoom 0.6
     text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
 screen notification_popup_big():
-    add "firstDays/notification.png" xalign 1.0 yalign 0.055 
+    add "firstDays/notification.webp" xalign 1.0 yalign 0.055 
     text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
 screen toska():
-    add "firstDays/night color.png":
+    add "firstDays/night color.webp":
         at transform:
             xalign 0.5 yalign 0.5
             alpha 0.0
@@ -185,9 +185,10 @@ screen toska():
                 repeat
 
 screen yuli_welcome():
-        add "images/yuli/welcome.jpg"
-        add Movie(play="images/video/petals.webm", side_mask=True)
-        add "images/yuli/welcome_focus.png":
+        add "images/yuli/welcome.webp"
+        add Movie(play="images/video/petals.webm", side_mask=True):
+                zoom 2.0
+        add "images/yuli/welcome_focus.webp":
             at transform:
                 truecenter
                 block:
@@ -196,20 +197,24 @@ screen yuli_welcome():
                     repeat
 
 screen nadya_welcome():
-        add "images/nadya/welcome.jpg"
-        add Movie(play="images/video/petals.webm", side_mask=True)
-        add "images/nadya/welcome_focus.png":
+        add "images/nadya/welcome.webp"
+        add Movie(play="images/video/petals.webm", side_mask=True):
+                zoom 2.0
+        add "images/nadya/welcome_focus.webp":
             at transform:
                 truecenter
+                zoom 2.0
                 block:
                     easein 1.0 zoom 1.02 
                     easeout 0.6 zoom 1.0 
                     repeat
 
 screen emily_welcome():
-        add "images/emily/welcome.jpg"
-        add Movie(play="images/video/petals.webm", side_mask=True)
-        add "images/emily/welcome_focus.png"
+        add "images/emily/welcome.webp"
+        add Movie(play="images/video/petals.webm", side_mask=True):
+                zoom 2.0
+        add "images/emily/welcome_focus.webp"
+        
 
 screen busday1():
         default bus_minigame = BusMinigameDisplayable(hi_score, 0)
@@ -249,7 +254,7 @@ label start:
     jump first_day
 
 label first_day:
-    image night = "firstDays/night color.png"
+    image night = "firstDays/night color.webp"
     scene firstDays black scen
     stop music
     play sound "audio/alarm-sound.mp3" volume 0.05 loop
@@ -301,7 +306,7 @@ label first_day:
     "Cпрашиваю я себя, и в голове зарождается нотка беспокойства."
     stop sound fadeout 10.0
     play music "audio/bad_dream.mp3" volume 0.5 fadein 10.0
-    image nc = "firstDays/night color.png"
+    image nc = "firstDays/night color.webp"
     show nc:
         xalign 0.5 yalign 0.5
         alpha 0.0
@@ -357,11 +362,11 @@ label first_day:
     "Какой странный сон мне приснился..."
     "Бесконечно едешь прямо... Как далеко можно так уехать?"
     play sound "audio/bus.mp3" volume 0.03
-    $ renpy.pause (7.5)
+    scene firstDays bus station near nstu 
+    with Fade(0.0, 0.0, 7.5)
     stop sound fadeout 1.5
     play music "audio/street-sound.mp3" volume 0.1
-    scene firstDays bus station near nstu 
-    with fade
+    
 
     show pasha neutral:
         alpha 0.0 xalign 0.5 yalign 1.0
@@ -785,8 +790,6 @@ label first_day:
         "Последняя трезвая частичка меня просто кричит, что это всё не к добру..."
         "Я достал телефон, нашёл её контакт и написал ей следующее, считай, любовное послание:"
         
-        image message_yuli_background = "firstDays/message yuli background.png"
-        image message_yuli_messages = "firstDays/message yuli messages.png"
         stop sound fadeout 0.5
 
         window hide
@@ -913,7 +916,7 @@ label first_day:
             with Fade(2.0, 0.0, 1.0)
             
             "Я не могу поверить, как хорошо всё идет. Она потрясающая. Кажется, она мне действительно нравится."
-            image foreground_cafe = "firstDays/foreground cafe.png"
+            image foreground_cafe = "firstDays/foreground cafe.webp"
             play sound "audio/kfc-sound.mp3" volume 0.1 fadein 3.0
             scene firstDays background cafe
             show yuli happy:
@@ -1188,7 +1191,9 @@ label first_day:
         "Достав последнюю сигаретку из пачки ванильного чапмана, я пару раз затянулся."
         play sound "audio/cigarette.mp3"
         pause 8.3
-        show cigarette_smoke with dissolve
+        show cigarette_smoke:
+            zoom 2.0 
+        with dissolve
         sanya "Фух, сразу полегчало. На днях надо будет купить ещё пару пачек в КБ."
         
         "Странный день вышел сегодня. "
@@ -1415,7 +1420,7 @@ label second_day :
 
         play music "audio/bad_dream.mp3" fadein 1.0 fadeout 1.0 volume 0.6
         play sound "audio/heart.mp3" fadein 0.9 fadeout 0.2
-        image nc = "firstDays/night color.png"
+        image nc = "firstDays/night color.webp"
         show nc:
             xalign 0.5 yalign 0.5
             alpha 0.0
@@ -1534,7 +1539,7 @@ label second_day :
     if not day1_yuli_agreed_after_kfc and day1_pasha_kfc :
 
         pasha "Кстати, а как там с девочкой твоей дела обстоят?"
-        image night = "firstDays/night color.png"
+        image night = "firstDays/night color.webp"
         sanya "Ну ты же знаешь, что я тебе сейчас ничего хорошего не расскажу..."
 
         play sound "audio/heart.mp3" fadein 4.0 fadeout 0.5 volume 0.3
@@ -1740,7 +1745,9 @@ label second_day :
 
         scene firstDays kyrilka
         with fade
-        show cigarette_smoke with dissolve
+        show cigarette_smoke:
+            zoom 2.0 
+        with dissolve
 
         "Одногруппник" "Как же бесит препод по схемотехнике, мы с ним только первый день, а он уже показал себя полным мудаком."
         "Одногруппник" "Да уж, он точно будет валить на сессии. Кстати, Саня, тебя вроде не было на лекции."
@@ -1910,7 +1917,7 @@ label second_day :
             with Fade(2.0, 0.0, 1.0)
 
         else:
-            sanya "Согласен, сейчас жизнь куда лучше, ни то что в совке, посмотреть только на то, куда он нас привел, в кошмарную перестройку."
+            sanya "Согласен, сейчас жизнь куда лучше, не то что в совке!.."
 
             "Одногруппник" "Да, ты прав, в то время был полный пиздец."
             "Одногруппник" "Слышали, недавно версию разработчиков атомик харт выпустили. Кто-нибудь уже играл?"
@@ -2047,7 +2054,7 @@ label second_day :
         "Развернувшись, девушка увидела меня и попросила выйти с ней ненадолго."
         scene firstDays red white
         with fade
-        play sound "audio/forest-sound.mp3" fadein 2.0 loop
+        play sound "audio/forest-sound.mp3" fadein 2.0 loop volume 0.4
         show nadya flirting
         with dissolve
 
@@ -2118,7 +2125,7 @@ label second_day :
 
             scene firstDays black scen
             with fade
-            play sound "audio/forest-sound.mp3" fadein 4.0 loop 
+            play sound "audio/forest-sound.mp3" fadein 4.0 loop volume 0.4
             pause 3.0
 
             scene firstDays park night
@@ -2141,7 +2148,7 @@ label second_day :
             "Оплатив покупку, я вышел на улицу. Девушки я там так и не увидел."
             sanya "Интересно, куда она так неожиданно ушла."
             "Оставив размышления, я направился в сторону парка, где присел на ближайшую лавочку."
-            play sound "audio/forest-sound.mp3" loop fadein 1.0
+            play sound "audio/forest-sound.mp3" loop fadein 1.0 volume 0.4
             scene firstDays park night
             with fade
 
@@ -2321,6 +2328,7 @@ label second_day :
             
             hide screen notification_popup_big
             with dissolve
+            stop sound fadeout 1.0
     
     scene firstDays black scen
     with fade
@@ -3811,7 +3819,8 @@ label _sanatorium :
         play sound "audio/cigarette_one_shot.mp3" noloop fadein 0.2 fadeout 0.2
         hide pavel smile
         with None
-        show cigarette_smoke
+        show cigarette_smoke:
+            zoom 2.0 
         show pavel smokes
         with dissolve
         
@@ -4245,7 +4254,7 @@ label _sanatorium :
             with dissolve
             
             nadya "Чтобы жиром не заплыть – надо срочно покурить!"
-            "Закончила за меня Юля и звонко рассмеялась. Я невольно залюбовался её искренней улыбкой, что так мягко сияла на нежно девичьем личике."
+            "Закончила за меня Надя и звонко рассмеялась. Я невольно залюбовался её искренней улыбкой, что так мягко сияла на нежно девичьем личике."
             sanya "Точняк! Ты не против составить мне компанию?"
             
             show nadya smiles
@@ -6483,9 +6492,9 @@ label _day5 :
 
                 image yuliinsult:
                     block:
-                        "images/yuli/empty glitch.png"
+                        "images/yuli/empty glitch.webp"
                         pause 0.2
-                        "images/yuli/insult.png"
+                        "images/yuli/insult.webp"
                         pause 2.0
                         repeat
 
@@ -7610,7 +7619,7 @@ label _day6 :
     stop sound
     
     scene light_pink with Fade(0.0, 0.0, 1.0)
-    centered "{size=+20}Будьте в курсе выхода новой главы, а также станьте участником нашего крохотного сообщества!\n{/size}{size=+30}Переходи:{a=https://t.ly/OKYrU} Ссылка на телеграм-канал по игре{/a}{/size}"
+    centered "{size=+20}Будьте в курсе выхода новой главы, а также станьте участником нашего крохотного сообщества!\n{/size}{size=+30}Переходи:{a=https://t.me/LoveBoozePanicLyric} Ссылка на телеграм-канал по игре{/a}{/size}"
     
     
     

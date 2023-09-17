@@ -13,3 +13,4 @@ game/saves/persistent
 game/saves/navigation.json
 game/saves/persistent
 game/saves/persistent
+*.keystore

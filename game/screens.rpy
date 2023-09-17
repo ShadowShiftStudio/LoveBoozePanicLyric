@@ -686,7 +686,7 @@ screen about():
                 text_align 0.5
                 xalign 0.5
             #text _("Ссылка на репозиторий {a=https://github.com/nstu-games/TechTales-Love-Booze-and-Code}GitHub{/a}")
-            text _("{size=+20}\n\nСсылка на {a=https://t.ly/OKYrU}Телеграм-канал по игре{/a}{/size}"):
+            text _("{size=+20}\n\nСсылка на {a=https://t.me/LoveBoozePanicLyric}Телеграм-канал по игре{/a}{/size}"):
                 text_align 0.5
                 xalign 0.5
             
@@ -897,7 +897,7 @@ screen preferences():
 
                     bar value Preference("text speed")
 
-                    label _("Скорость авточтения")
+                    label _("Задержка при авточтении")
 
                     bar value Preference("auto-forward time")
 
