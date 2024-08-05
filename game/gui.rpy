@@ -90,7 +90,8 @@ define gui.title_text_size = 1
 ## Главное и игровое меню. #####################################################
 
 ## Изображения, используемые в главном и игровом меню.
-define gui.main_menu_background = Movie(play="gui/classic_sanya.webm", start_image="gui/sanya.jpg") # "gui/sanya.png"
+
+define gui.main_menu_background = "images/sanya/cry.webp"
 define gui.game_menu_background = "gui/game_menu.png"
 
 

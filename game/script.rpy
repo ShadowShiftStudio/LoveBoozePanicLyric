@@ -10,26 +10,6 @@ define skin = Character('Мыкало ', color="#e1ffaa")
 define noname = Character('Незнакомец ', color="#999999")
 define emily = Character('Эмилия ', color="#e28cd7")
 
-#для рекламы в будущем
-
-# init python:
-#   if renpy.android:
-#     banner = yandex_ads.create_banner()
-
-#     # первым делом необходимо установить размер баннера
-#     # помните - сделать это можно только один раз
-#     banner.set_sticky_size(-1)
-
-#     # по умолчанию баннер будет находиться "под игрой"
-#     # с помощью set_position можно изменить положение баннера в любое время
-#     banner.set_position('above_game') # при значении above_game, баннер будет находиться "над игрой"
-
-#     # ad_unit_id можно взять в партнёрском кабинете
-#     banner.set_ad_unit_id("R-M-XXXXXX-Y")
-
-#     # не забудьте загрузить объявление
-#     banner.load_ad()
-
 init:
 
     python:
@@ -86,8 +66,6 @@ init:
                     **properties)
 
         Shake = renpy.curry(_Shake)
-    
-
 
 init python :
 
@@ -162,6 +140,7 @@ define hi_score = 0
 
 define player_name = "Саня"
 define str_for_notification = ""
+image nadya_smile = Movie(play="images/nadya/web-presplash.webm")
 image cigarette_smoke = Movie(play="images/video/loopen.webm", side_mask=True)
 image light_pink = Solid("#857")
 
@@ -220,33 +199,29 @@ screen busday1():
         default bus_minigame = BusMinigameDisplayable(hi_score, 0)
         add bus_minigame
 
+init python:
+    images_auto()
 
 label splashscreen:
-    play sound "audio/intro_sound.mp3" 
-    image temp_m = Movie(play="gui/splashscreen_sanya.webm", loop=False, start_image="gui/sanya.jpg")
-    image back = "#272727"
+    show nadya_smile 
+    play sound "audio/intro_sound.mp3" volume 0.0
+    pause 2.8
+    play sound "audio/intro_sound.mp3" volume 0.5
+    image back = "#fefefe"
     image log_o = "gui/logotype.png"
-    image sanya_first_frame = "gui/sanya.jpg" 
     scene back
-    with dissolve
-
+    
     show logo studio logo at center with Dissolve(1.6)
- 
-    pause 2.0
+    pause 1.7
+    
 
     scene back 
     with Dissolve(1.5)
 
     show logo disclaimer with dissolve
     
-    pause 100.0
+    pause
     stop sound
-    scene temp_m with Fade(0.0, 0.1, 0.06, color="#272727")
-    show log_o:
-        xalign 0.02 yalign 0.1 alpha 0.0
-        linear 0.16 alpha 1.0
-
-    pause 0.16
 
     return
 
@@ -365,7 +340,7 @@ label first_day:
     scene firstDays bus station near nstu 
     with Fade(0.0, 0.0, 7.5)
     stop sound fadeout 1.5
-    play music "audio/street-sound.mp3" volume 0.1
+    play music "audio/street-sound.mp3" volume 0.3
     
 
     show pasha neutral:
@@ -2543,7 +2518,7 @@ label second_day :
         "Какое-же я ничтожество."
         "Подвел Юлю, она ещё меня и до дома провела."
 
-        scene sanya toilet night withh water
+        scene sanya toilet day without water
         with fade
 
         "Затушив сигарету, я направился в ванну."
