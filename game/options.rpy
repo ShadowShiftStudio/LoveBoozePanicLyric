@@ -24,7 +24,7 @@ define gui.show_name = False
 
 ## Версия игры.
 
-define config.version = "2.240802"
+define config.version = "2.060425"
 
 
 ## Текст, помещённый в экран "Об игре". Поместите текст между тройными скобками.
@@ -51,7 +51,6 @@ define config.has_sound = True
 define config.has_music = True
 define config.has_voice = True
 define config.default_voice_volume = 0.0
-
 
 ## Чтобы разрешить игроку тестировать громкость на звуковом или голосовом
 ## каналах, раскомментируйте строчку и настройте пример звука для прослушивания.

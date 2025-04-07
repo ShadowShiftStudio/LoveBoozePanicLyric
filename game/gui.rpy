@@ -56,17 +56,17 @@ define gui.text_color = '#fffdf6'
 define gui.interface_text_color = '#fffbf8'
 
 
-## Шрифты и их размеры ######################################################### "DejaVuSans.ttf"
+## Шрифты и их размеры #########################################################
 
 ## Шрифт, используемый внутриигровым текстом.
-define gui.text_font = "fonts/cmunssdc.ttf"
+define gui.text_font = "fonts/Finder.ttf"
 
 
 ## Шрифт, используемый именами персонажей.
-define gui.name_text_font = "fonts/Rostov.ttf"
+define gui.name_text_font = "fonts/CloudWorld.ttf"
 
 ## Шрифт, используемый текстом вне игры.
-define gui.interface_text_font = "fonts/PlainScriptCTT.ttf"
+define gui.interface_text_font = "fonts/CloudWorld.ttf"
 
 ## Размер нормального текста диалога.
 define gui.text_size = 43
@@ -91,7 +91,8 @@ define gui.title_text_size = 1
 
 ## Изображения, используемые в главном и игровом меню.
 
-define gui.main_menu_background = "images/sanya/cry.webp"
+define gui.main_menu_background = "images/sanya/main menu.png"
+define gui.main_menu_foreground = "images/sanya/main menu foreground.png"
 define gui.game_menu_background = "gui/game_menu.png"
 
 

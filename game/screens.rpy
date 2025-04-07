@@ -4,67 +4,149 @@
 
 init offset = -1
 
-init python:
+init:
+    
+    transform bg_fullscreen:
+        # Scale to cover the screen while maintaining aspect ratio
+        xysize (config.screen_width, config.screen_height)
+        fit "cover"
+        # Start centered horizontally and at top vertically
+        align (0.5, 0.0)
+        # Animation sequence
+        block:
+            # Slowly scroll down
+            ease 20.0 yalign 0.9
+            # Pause briefly at bottom
+            pause 2.0
+            # Ease back to top
+            ease 20.0 yalign 0.0
+
+init -3 python:
     import pygame
+    import random
     import math
 
-    class TrackCursor(renpy.Displayable):
+    def adjust_window_size(width, height):
+        # Получаем размеры экрана устройства
+        screen_width, screen_height = pygame.display.Info().current_w, pygame.display.Info().current_h
 
-        def __init__(self, child, paramod, **kwargs):
+        # Устанавливаем размер окна равным размеру экрана устройства
+        return (screen_width, screen_height)
 
-            super(TrackCursor, self).__init__()
+    # Назначаем функцию переменной config.adjust_view_size
+    config.adjust_view_size = adjust_window_size
 
-            self.child = renpy.displayable(child)
-            self.x = 0
-            self.y = 0
-            self.actual_x = 0
-            self.actual_y = 0
-
-            self.paramod = paramod
+    class RainAnimation(renpy.Displayable):
+        def __init__(self, drops=1000, **kwargs):
+            super(RainAnimation, self).__init__(**kwargs)
+            
+            # Number of raindrops
+            self.drops = drops
+            
+            # Initialize the raindrops
+            self.reset_drops()
+            
+            # Store the last update time for smooth animation
             self.last_st = 0
-
-
-
+            
+        def reset_drops(self):
+            # Each raindrop has position, speed, length, and angle
+            self.raindrops = []
+            
+            for i in range(self.drops):
+                # Random initial positions
+                x = random.uniform(0, 2000)  # Assuming 1920x1080 resolution
+                y = random.uniform(-50, 1000)
+                
+                # Random speeds (vertical fall speed)
+                speed = random.uniform(900, 2000)
+                
+                # Random lengths for the lines
+                length = random.uniform(15, 40)
+                
+                # Slight angle variations (falling at an angle)
+                angle = random.uniform(-70, -60)
+                
+                # Random opacity
+                opacity = random.uniform(100, 180)
+                
+                self.raindrops.append([x, y, speed, length, angle, opacity])
+    
         def render(self, width, height, st, at):
-
-            rv = renpy.Render(width, height)
-            minimum_speed = 0.1
-            maximum_speed = 0.5
-            speed = 1 + minimum_speed
-            mouse_distance_x = min(maximum_speed, max(minimum_speed, (self.x - self.actual_x)))
-            mouse_distance_y = (self.y - self.actual_y)
-            if self.x is not None:
-                st_change = st - self.last_st
-
-                self.last_st = st
-                self.actual_x = math.floor(self.actual_x + ((self.x - self.actual_x) * speed * (st_change )) * self.paramod)
-                self.actual_y = math.floor(self.actual_y + ((self.y - self.actual_y) * speed * (st_change)) * self.paramod)
-
-
-                if mouse_distance_y <= minimum_speed:
-                    mouse_distance_y = minimum_speed
-                elif mouse_distance_y >= maximum_speed:
-                    mouse_distance_y = maximum_speed
-
-                cr = renpy.render(self.child, width, height, st, at)
-                cw, ch = cr.get_size()
-                rv.blit(cr, (self.actual_x, self.actual_y))
-
-
-
+            # Calculate delta time for smooth animation
+            dt = st - self.last_st
+            self.last_st = st
+            
+            # If this is the first frame or a large time gap, use a small safe value
+            if dt <= 0 or dt > 0.1:
+                dt = 0.016  # Approximately 60 FPS
+                
+            # Create a render for the animation
+            render = renpy.Render(width, height)
+            
+            # Get the canvas
+            canvas = render.canvas()
+            
+            # Create a new list to store raindrops that are still on screen
+            new_raindrops = []
+            
+            # Count how many raindrops are off screen
+            off_screen_drops = 0
+            
+            # Update and draw each raindrop
+            for drop in self.raindrops:
+                x, y, speed, length, angle, opacity = drop
+                
+                # Update position based on delta time
+                new_y = y + speed * dt
+                new_x = x - speed * dt * 0.3  # Use negative multiplier for right-to-left movement
+                
+                # Draw the raindrop (white line)
+                end_x = new_x + length * math.cos(math.radians(angle))
+                end_y = new_y + length * math.sin(math.radians(angle))
+                
+                # Draw with correct color and opacity
+                color = (255, 255, 255, int(opacity))
+                canvas.line(color, (int(new_x), int(new_y)), (int(end_x), int(end_y)))
+                
+                # Keep track of drops that are still on screen
+                if new_y <= height:
+                    new_raindrops.append([new_x, new_y, speed, length, angle, opacity])
+                else:
+                    off_screen_drops += 1
+            
+            # Replace the old raindrop list with the filtered list
+            self.raindrops = new_raindrops
+            
+            # Generate new raindrops to replace those that went off screen
+            for _ in range(off_screen_drops):
+                # Create new raindrops at the top of the screen
+                x = random.uniform(0, width+300)
+                y = random.uniform(-50, 0)  # Start slightly above screen
+                speed = random.uniform(700, 1100)
+                length = random.uniform(30, 60)
+                angle = random.uniform(-70, -60)
+                opacity = random.uniform(80, 170)
+                self.raindrops.append([x, y, speed, length, angle, opacity])
+            
+            # Force a redraw on the next frame
             renpy.redraw(self, 0)
-            return rv
-
+            
+            return render
+            
         def event(self, ev, x, y, st):
-            hover = ev.type == pygame.MOUSEMOTION
-            click = ev.type == pygame.MOUSEBUTTONDOWN
-            mousefocus = pygame.mouse.get_focused()
-            if hover:
+            # No event handling needed
+            return None
 
-                if (x != self.x) or (y != self.y) or click:
-                    self.x = -x /self.paramod
-                    self.y = -y /self.paramod
+    def adjust_window_size(width, height):
+        # Получаем размеры экрана устройства
+        screen_width, screen_height = pygame.display.Info().current_w, pygame.display.Info().current_h
 
+        # Устанавливаем размер окна равным размеру экрана устройства
+        return (screen_width, screen_height)
+
+    # Назначаем функцию переменной config.adjust_view_size
+    config.adjust_view_size = adjust_window_size
 
 ################################################################################
 ## Стили
@@ -378,51 +460,52 @@ screen navigation():
 
     vbox:
         #style_prefix "navigation"
-        xpos gui.navigation_xpos
-        yalign 0.8
-        xalign 0.5
+        if not main_menu:
+            xpos gui.navigation_xpos
+        yalign 0.5
+        xalign 0.8
+        
         box_wrap True
         
         spacing gui.navigation_spacing
 
         if main_menu:
 
-            textbutton _("{size=60}Новая Игра{/size}") action Start():
+            textbutton _("{size=60}{font=[gui.text_font]}Новая Игра{/font}{/size}") action Start():
                 xalign 0.5
                 text_align 0.5
 
         else:
 
-            textbutton _("{size=60}История{/size}") action ShowMenu("history"):
+            textbutton _("{size=60}{font=[gui.text_font]}История{/font}{/size}") action ShowMenu("history"):
                 xalign 0.5
                 text_align 0.5
 
-            textbutton _("{size=60}Сохранить{/size}") action ShowMenu("save"):
+            textbutton _("{size=60}{font=[gui.text_font]}Сохранить{/font}{/size}") action ShowMenu("save"):
                 xalign 0.5
                 text_align 0.5
 
-        textbutton _("{size=60}Загрузить{/size}") action ShowMenu("load"):
+        textbutton _("{size=60}{font=[gui.text_font]}Загрузить{/font}{/size}") action ShowMenu("load"):
             xalign 0.5
             text_align 0.5
 
-        textbutton _("{size=60}Настройки{/size}") action ShowMenu("preferences"):
+        textbutton _("{size=60}{font=[gui.text_font]}Настройки{/font}{/size}") action ShowMenu("preferences"):
             xalign 0.5
             text_align 0.5
                 
-
         if _in_replay:
 
-            textbutton _("{size=60}Завершить повтор{/size}") action EndReplay(confirm=True):
+            textbutton _("{size=60}{font=[gui.text_font]}Завершить повтор{/font}{/size}") action EndReplay(confirm=True):
                 xalign 0.5
                 text_align 0.5
 
         elif not main_menu:
 
-            textbutton _("{size=60}Главное меню{/size}") action MainMenu():
+            textbutton _("{size=60}{font=[gui.text_font]}Главное меню{/font}{/size}") action MainMenu():
                 xalign 0.5
                 text_align 0.5
 
-        textbutton _("{size=60}Об игре{/size}") action ShowMenu("about"):
+        textbutton _("{size=60}{font=[gui.text_font]}Об игре{/font}{/size}") action ShowMenu("about"):
             xalign 0.5
             text_align 0.5
 
@@ -430,7 +513,7 @@ screen navigation():
 
             ## Кнопка выхода блокирована в iOS и не нужна на Android и в веб-
             ## версии.
-            textbutton _("{size=60}Выход{/size}") action Quit(confirm=not main_menu):
+            textbutton _("{size=60}{font=[gui.text_font]}Выход{/font}{/size}") action Quit(confirm=not main_menu):
                 xalign 0.5
                 text_align 0.5
 
@@ -522,18 +605,18 @@ screen main_menu():
     ## заменять этот.
     tag menu
 
-    add TrackCursor("images/sanya/mainmenubackground.webp", 20)
-    add TrackCursor("images/sanya/mainmenuforeground.webp", 16)
-
     ## Эта пустая рамка затеняет главное меню.
     # frame:
     #     style "main_menu_frame"
-
+    add gui.main_menu_background at bg_fullscreen
+    add RainAnimation()
+    add gui.main_menu_foreground at bg_fullscreen
+    
     ## Оператор use включает отображение другого экрана в данном. Актуальное
     ## содержание главного меню находится на экране навигации.
     use navigation
-    image "gui/logotype.png":
-        xalign 0.02 yalign 0.1
+    # image "gui/logotype.png":
+    #     xalign 0.02 yalign 0.1
         
     if gui.show_name:
         
@@ -557,17 +640,15 @@ style main_menu_title is main_menu_text
 style main_menu_version is main_menu_text
 
 style main_menu_frame:
-    xsize 420
+    xfill True
     yfill True
 
-    background "gui/overlay/main_menu.png"
 
 style main_menu_vbox:
-    xalign 1.0
-    xoffset 3330
-    xmaximum 1200
-    yalign 1.0
-    yoffset -30
+    xalign 0.0
+    xoffset 0
+    yalign 0.0
+    yoffset 0
 
 style main_menu_text:
     properties gui.text_properties("main_menu", accent=True)
@@ -593,7 +674,8 @@ screen game_menu(title, scroll=None, yinitial=0.0):
     style_prefix "game_menu"
 
     if main_menu:
-        add gui.main_menu_background
+        #add gui.main_menu_background
+        pass
     else:
         add gui.game_menu_background
 
@@ -615,7 +697,6 @@ screen game_menu(title, scroll=None, yinitial=0.0):
                     xalign 0.5 ypos -175
                     drop_shadow_color (202, 77, 202, 200)
                     drop_shadow (1, 5)
-                    #font gui.interface_text_font
 
                 if scroll == "viewport":
 

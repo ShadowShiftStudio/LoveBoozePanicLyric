@@ -6,6 +6,26 @@
         "**/cache/": true
     },
     "editor.tokenColorCustomizations": {
+        "[*Light*]": {
+            "textMateRules": [
+                {
+                    "scope": "ref.matchtext",
+                    "settings": {
+                        "foreground": "#000"
+                    }
+                }
+            ]
+        },
+        "[*Dark*]": {
+            "textMateRules": [
+                {
+                    "scope": "ref.matchtext",
+                    "settings": {
+                        "foreground": "#fff"
+                    }
+                }
+            ]
+        },
         "textMateRules": [
             {
                 "scope": "renpy.meta.plain",
@@ -374,6 +394,12 @@
                 "scope": "renpy.meta.color.#bfa",
                 "settings": {
                     "foreground": "#bfa"
+                }
+            },
+            {
+                "scope": "renpy.meta.color.#fad",
+                "settings": {
+                    "foreground": "#fad"
                 }
             }
         ]

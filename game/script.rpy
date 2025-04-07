@@ -11,7 +11,7 @@ define noname = Character('Незнакомец ', color="#999999")
 define emily = Character('Эмилия ', color="#e28cd7")
 
 init:
-
+    
     python:
     
         import math
@@ -85,6 +85,23 @@ init python :
 
 init:
     $ sshake = Shake((0, 0, 0, 0), 1.0, dist=15)
+
+init:
+    
+    transform bg_fullscreen:
+        # Scale to cover the screen while maintaining aspect ratio
+        xysize (config.screen_width, config.screen_height)
+        fit "cover"
+        # Start centered horizontally and at top vertically
+        align (0.5, 0.0)
+        # Animation sequence
+        block:
+            # Slowly scroll down
+            ease 30.0 yalign 1.0
+            # Pause briefly at bottom
+            pause 2.0
+            # Ease back to top
+            ease 20.0 yalign 0.5
 
 define day1_pasha_kfc = False
 define day1_sanya_wants_camp = False
@@ -164,16 +181,11 @@ screen toska():
                 repeat
 
 screen yuli_welcome():
-        add "images/yuli/welcome.webp"
-        add Movie(play="images/video/petals.webm", side_mask=True):
-                zoom 2.0
-        add "images/yuli/welcome_focus.webp":
-            at transform:
-                truecenter
-                block:
-                    easein 1.0 zoom 1.02 
-                    easeout 0.6 zoom 1.0 
-                    repeat
+    add "images/yuli/welcome.png":
+        zoom 1.3
+    add Movie(play="images/video/petals.webm", side_mask=True):
+        zoom 2.0
+        alpha 0.2
 
 screen nadya_welcome():
         add "images/nadya/welcome.webp"
@@ -209,13 +221,13 @@ label splashscreen:
     play sound "audio/intro_sound.mp3" volume 0.5
     image back = "#fefefe"
     image log_o = "gui/logotype.png"
-    scene back
+    scene back at bg_fullscreen
     
     show logo studio logo at center with Dissolve(1.6)
     pause 1.7
     
 
-    scene back 
+    scene back  at bg_fullscreen
     with Dissolve(1.5)
 
     show logo disclaimer with dissolve
@@ -230,7 +242,7 @@ label start:
 
 label first_day:
     image night = "firstDays/night color.webp"
-    scene firstDays black scen
+    scene black
     stop music
     play sound "audio/alarm-sound.mp3" volume 0.05 loop
     "*Звук будильника*"
@@ -239,7 +251,7 @@ label first_day:
     $ renpy.pause(2, hard=True)
     stop sound
 
-    scene sanya room 
+    scene sanya room at bg_fullscreen
     with fade
 
     play sound "audio/deep-moan.mp3"
@@ -261,19 +273,19 @@ label first_day:
     stop music fadeout 2.0
     pause (0.5)
 
-    scene sanya toilet day without water
+    scene sanya toilet at bg_fullscreen
     with fade
     
     play sound "audio/toilet-sound.mp3" volume 0.1
     "*Звук смыва унитаза*"
     stop sound
 
-    scene firstDays black scen 
+    scene black  at bg_fullscreen
     with fade
 
     play sound "audio/street-music.mp3" volume 0.4 
     pause (2.0)
-    scene firstDays bus station 
+    scene firstDays bus station  at bg_fullscreen
     with fade
 
     "Когда я иду ранним тихим утром по улице, мне кажется, что в голове у меня нескончаемый каскад мыслей." 
@@ -307,7 +319,7 @@ label first_day:
 
     play sound "audio/sound-in-bus.mp3" volume 0.05
 
-    scene firstDays bus 
+    scene firstDays bus  at bg_fullscreen
     with fade
     "Даже матушку свою довёл."
     "Вчера с мужиками пришли пиво пить, последний день лета проводить, скажем так, а она меня поджидает у туалета и говорит:"
@@ -332,12 +344,12 @@ label first_day:
     $ hi_score = max(hi_score, int(_return))
     
 
-    scene firstDays black scen 
+    scene black 
     with fade
     "Какой странный сон мне приснился..."
     "Бесконечно едешь прямо... Как далеко можно так уехать?"
     play sound "audio/bus.mp3" volume 0.03
-    scene firstDays bus station near nstu 
+    scene firstDays bus station near nstu  at bg_fullscreen
     with Fade(0.0, 0.0, 7.5)
     stop sound fadeout 1.5
     play music "audio/street-sound.mp3" volume 0.3
@@ -414,7 +426,7 @@ label first_day:
     stop music
     $ renpy.pause(1.0)
 
-    scene firstDays lecture scen 
+    scene firstDays lecture scen  at bg_fullscreen
     with fade
     play sound "audio/table_punch.mp3"
     $ renpy.pause(2)
@@ -438,7 +450,7 @@ label first_day:
 
     with None
     hide screen yuli_welcome
-    scene firstDays lecture scen 
+    scene firstDays lecture scen  at bg_fullscreen
     show yuli happy at right 
     with Fade(3.0, 1.0, 2.0)
     
@@ -625,7 +637,7 @@ label first_day:
     if day1_pasha_kfc :
         play sound "audio/forest-sound.mp3" loop volume 0.2 fadein 2.0
         hide yuli happy
-        scene firstDays nstu enter 
+        scene firstDays nstu enter  at bg_fullscreen
         with fade
         
         "Наконец-то лекция закончилась..."
@@ -640,7 +652,7 @@ label first_day:
 
         hide pasha neutral 
         with dissolve
-        scene firstDays black scen 
+        scene black 
         with fade
 
         $ renpy.pause(1.0)
@@ -649,7 +661,7 @@ label first_day:
         stop sound fadeout 2.0
         play music "audio/kfc-sound.mp3" fadein 3.0 volume 0.4 fadeout 2.0
 
-        scene firstDays kfc inside 
+        scene firstDays kfc inside  at bg_fullscreen
         with fade
 
         "Когда я вошёл внутрь, меня сразу же окутал сладкий аромат курочки, я переглянулся с Пашей и поспешил сделать заказ."
@@ -689,7 +701,7 @@ label first_day:
             
         
         play sound "audio/street-sound.mp3" volume 0.5 fadein 2.0  loop
-        scene firstDays kfc outside 
+        scene firstDays kfc outside  at bg_fullscreen
         with Fade(0.0, 0.0, 2.0, color="#fff")
         
         show pasha neutral:
@@ -838,27 +850,26 @@ label first_day:
 
         if day1_yuli_agreed_after_kfc :
 
-            scene firstDays black scen
+            scene black
             with fade
             play music "audio/love_music.mp3" fadein 4.5 volume 0.4 fadeout 5.5
-            scene firstDays bridge
+            scene firstDays rain yuli at bg_fullscreen
             with fade
 
             
-            show yuli greeting
+            show yuli wet neutral 
             with dissolve
 
             storyteller "Саня нервно пробирался к набережной, надеясь, что не споткнется о собственные ноги. Он был ещё немного пьян от выпитого с Пашей. Однако он был рад встрече с Юлей."
 
             storyteller "Когда он увидел её, она стояла у перил и смотрела на воду. Саня подошёл к ней, и она повернулась, чтобы поприветствовать его улыбкой."
 
-            yuli "Привет, Саша! Очень рада наконец-то с тобой познакомиться!"
+            yuli "Привет, Саша! Очень рада наконец-то с тобой увидеться!"
 
             sanya "Привет, Юля. Я тоже рад тебя видеть."
 
             "Вау, она выглядит ещё красивее, чем я помнил."
-            show yuli wet disappointed 
-            with dissolve
+
             yuli "На улице идет сильный дождь, но я подумала, что мы всё равно можем прогуляться по мосту."
 
             sanya "Конечно, звучит неплохо."
@@ -870,8 +881,6 @@ label first_day:
             storyteller "Слова Сани только укрепили у Юли уверенность в приятности его компании." 
             "Её сердце забилось немного быстрее, ведь она тоже чувствовала, что с ним так легко и приятно общаться."
 
-            show yuli wet neutral 
-            with dissolve
             yuli "Ха-ха, ну надеюсь, я не сильно тебя отвлекала."
 
             yuli "Мне тоже было очень интересно общаться с тобой," 
@@ -887,13 +896,13 @@ label first_day:
             yuli "Саша, а не хочешь перекусить где-нибудь?"
 
             sanya "Конечно, звучит здорово! Тут неподалеку есть очень милое кафе."
-            scene firstDays black scen
+            scene black
             with Fade(2.0, 0.0, 1.0)
             
             "Я не могу поверить, как хорошо всё идет. Она потрясающая. Кажется, она мне действительно нравится."
             image foreground_cafe = "firstDays/foreground cafe.webp"
             play sound "audio/kfc-sound.mp3" volume 0.1 fadein 3.0
-            scene firstDays background cafe
+            scene firstDays background cafe at bg_fullscreen
             show yuli happy:
                 xalign 0.7
                 yalign 0.5
@@ -916,30 +925,30 @@ label first_day:
                 yalign 0.5
                 zoom 0.77
             yuli "С удовольствием."
-
+            stop music
             "Не могу дождаться, когда увижу её вновь. Это начало чего-то особенного."
             hide yuli happy with dissolve
             hide foreground_cafe
-            scene firstDays black scen
+            scene black
             with fade
             stop sound
 
         else :
             play music "audio/slow_sad_classical_music.mp3"  fadein 4.5 volume 0.4 fadeout 5.5
-            scene firstDays black scen
+            scene black
             with fade
             "Я действительно не хотел встречи с Юлей, поэтому решил пробираться через закрытый мост."
             "Юля ждала меня совсем в другом месте. Скажу ей, что просто передумал встречаться, или побоялся, что слишком пьян..."
             "Прогуливаясь по ночным улочкам, я дошёл до моста. Передо мной воцарилась та самая, уже классическая надпись:"
 
-            scene firstDays bridge
+            scene firstDays bridge at bg_fullscreen
             with fade
 
             "Мост временно закрыт для пеших прогулок, приносим свои извинения."
             "Это временное закрытие длиться уже буквально год! Дыра справа от надписи как бы намекает, что мост закрыт только на словах."
             "Пробравшись через дырку на карачках, по ту сторону я увидел Юлю. Она меня сразу заметила и приветливо улыбнулась мне."
 
-            show yuli greeting
+            show yuli wet neutral
             with dissolve
 
             yuli "О, ты пришёл! Так быстро!"
@@ -949,7 +958,7 @@ label first_day:
 
             sanya "Набережная большая, Юля, а ты... такая маленькая на её фоне."
 
-            show yuli wet disappointed 
+            show yuli wet neutral 
             with dissolve
             
             yuli "Саш, ты порой такую чепуху несёшь..."
@@ -958,7 +967,7 @@ label first_day:
             
             sanya "Не переживай, Юля! *ик* Я тебя в обиду никому не дам!"
 
-            show yuli wet sad with dissolve
+            show yuli wet crying with dissolve
             yuli "Защити меня сперва от себя, пожалуйста..."
 
             yuli "Я же вижу, что ты меня не рад видеть уже. Мы с тобой не друзья даже..."
@@ -972,13 +981,14 @@ label first_day:
             sanya "И ведь это даже не самое главное..."
 
             yuli "Не говори этого, Саша. Я знаю, что ты хотел сказать, но это неправда. Мы едва знаем друг друга. "
+
             yuli "Давай просто наслаждаться видом."
-
-            show yuli wet neutral
-
+            
             "Мы стояли молча, смотрели на темную воду и отражающиеся на её поверхности огни."
 
             sanya "Юля, извини, если я что-то не так сказал. Я не хотел тебя напугать или ещё что-то."
+
+            show yuli wet neutral with dissolve
 
             yuli "Все нормально, Саша. Я просто немного нервничаю. Я не привыкла к таким вещам."
 
@@ -992,7 +1002,7 @@ label first_day:
 
             "Мы поговорили ещё немного, о школе, о наших интересах, о наших семьях. Это было приятно, но было заметно, что Юля не интересуется мной в романтическом плане."
 
-            scene firstDays black scen
+            scene black
             with fade
 
             "В конце концов, мы попрощались, и я пошёл домой один. Это была грустная прогулка, но, по крайней мере, у меня появился новый друг."
@@ -1005,20 +1015,20 @@ label first_day:
 
         hide yuli happy
 
-        scene firstDays nstu enter 
+        scene firstDays nstu enter  at bg_fullscreen
         with fade
 
         sanya "На улице сейчас такой прекрасный закат, давай прогуляемся в сторону набережной?"
         yuli "Конечно, давай!"
         storyteller "Юля согласилась, и они направились в сторону набережной, шагая рядом друг с другом."
 
-        scene firstDays black scen
+        scene black
         with fade
 
         storyteller "На набережной они оказались перед захватывающим видом. Солнце медленно клонилось за реку, раскрашивая небо оттенками розового и золотистого"
         storyteller "Конечно, они ещё не держались за ручку и не шли в обнимку, но уже явно были ближе друг к другу."
 
-        scene firstDays promenade yuli
+        scene firstDays promenade yuli at bg_fullscreen
         with Dissolve(1.5)
         sanya "Да, дух захватывает..."
         yuli "Какое удивительное зрелище! "
@@ -1040,7 +1050,7 @@ label first_day:
         "Довольно резво тучи закрыли всё небо."
         "Начал собираться дождь."
         stop music fadeout 6.0
-        scene firstDays rain yuli
+        scene firstDays rain yuli at bg_fullscreen
         with Fade(2.0, 0.0, 2.0)
         play sound "audio/rain.mp3" fadein 15.0 volume 0.06 loop
         show yuli neutral
@@ -1065,7 +1075,7 @@ label first_day:
         
         hide yuli horny
         
-        scene firstDays bridge
+        scene firstDays bridge at bg_fullscreen
         with fade
 
         storyteller "Пока они шли по мосту, Саня не мог отделаться от ощущения кома в горле. Он понимал, что неправильно обошёлся с товарищем"
@@ -1112,13 +1122,13 @@ label first_day:
         show pasha angry at center with Dissolve(0.5):
             blur 0.0
 
-        scene firstDays black scen
+        scene black
         with fade
 
         storyteller "Когда они шли обратно к университету, Саня не мог отделаться от чувства вины за то, что только что произошло."
         storyteller "Он понимал, что подвел друга и совершил ошибку, решив пойти на свидание с Юлей вместо того, чтобы встретиться с Пашей."
 
-        scene firstDays nstu night 
+        scene firstDays nstu night  at bg_fullscreen
         with fade
         stop sound fadeout 3.0
         show pasha sad at center
@@ -1138,13 +1148,13 @@ label first_day:
         storyteller "Он поклялся как-нибудь загладить свою вину перед Пашей и больше никогда не предавать его доверие."
         "После всех мыслей, я не нашел ничего лучше, чем поехать домой."
 
-        scene firstDays black scen 
+        scene black 
         with Fade(2.0, 0.0, 0.0)
 
     if not day1_pasha_kfc:
         play sound "audio/sound-in-bus.mp3" volume 0.03
 
-        scene firstDays bus night with Fade(0.0, 0.0, 3.0)
+        scene firstDays bus night at bg_fullscreen with Fade(0.0, 0.0, 3.0) 
 
         "Как обычно, по пути домой я глубоко погрузился в себя. Мои мысли перескакивали со скучных лекций и лаб на Пашку, на новую подругу Юлю и обратно."
         
@@ -1160,10 +1170,10 @@ label first_day:
         scene black with Fade(1.0, 0.0, 1.0)
         play sound "audio/footsteps.mp3"
         "Открыв дверь домой, я первым делом пошёл к окну."
-        scene sanya cry
-        with Fade(2.0, 0.0, 2.0)
         sanya "За столько лет я так и не смог бросить."
         "Достав последнюю сигаретку из пачки ванильного чапмана, я пару раз затянулся."
+        scene sanya cry at bg_fullscreen
+        with Fade(2.0, 0.0, 2.0)
         play sound "audio/cigarette.mp3"
         pause 8.3
         show cigarette_smoke:
@@ -1179,7 +1189,7 @@ label first_day:
         
     else:
         play music "audio/einaudi_nefeli.mp3" volume 0.2
-    scene sanya notification 
+    scene sanya notification  at bg_fullscreen
     with fade
 
     "Затушив сигарету, я было направился на кухню, но меня прервало уведомление на телефоне."
@@ -1212,7 +1222,7 @@ label first_day:
     "Родители" "Саша, мы можем оплатить санаторий, тебе будет полезно развеяться."
     "Ладно, это и правда неплохая возможность отдохнуть. Говорить о том, что он бесплатный я, конечно, не буду."
 
-    scene sanya bed with dissolve: 
+    scene sanya bed at bg_fullscreen with dissolve: 
         linear 35 zoom 1.1
         linear 35 zoom 1.0
         repeat
@@ -1313,7 +1323,7 @@ label second_day :
     extend " Только сигарета поможет мне забыться."
     
     
-    scene sanya cry blue
+    scene sanya on morning at bg_fullscreen
     with fade
 
     "Подойдя к окну, я достал уже изрядно потрепанную пачку сигарет, но единственное, что я в ней нашел, – это затхлый запах табака."
@@ -1322,7 +1332,7 @@ label second_day :
     "Придется сходить в КБ за сигами. " 
     extend "Ведь говорил же себе вчера купить пару пачек, но всё равно забыл."
 
-    scene firstDays black scen
+    scene black
     with fade
     
     play sound "audio/footsteps_asphalt.mp3" fadein 0.2 fadeout 0.2
@@ -1330,7 +1340,7 @@ label second_day :
 
     pause 4.0
 
-    scene firstDays red white
+    scene firstDays red white at bg_fullscreen
     with fade
 
     "Наконец-то купил сиги. Жизнь продолжается."
@@ -1344,14 +1354,14 @@ label second_day :
     extend "Иначе я могу просто не выдержать..."
     "Придётся ехать в универ."
 
-    scene firstDays bus station
+    scene firstDays bus station at bg_fullscreen
     with fade
 
     "Снова эта убитая и дряхлая остановка. "
     extend "Быть может, ещё в СССР она выглядела нормально, но сейчас... "
     extend "Это просто пиздец."
 
-    scene firstDays black scen 
+    scene black 
     with fade
  
     play sound "audio/bus.mp3" fadein 0.5 fadeout 1.5 volume 0.1
@@ -1360,7 +1370,7 @@ label second_day :
 
     stop sound fadeout 1.0
 
-    scene firstDays bus 
+    scene firstDays bus  at bg_fullscreen
     with fade
 
     play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.5 volume 0.1
@@ -1391,7 +1401,7 @@ label second_day :
         "В эти моменты серость уступает место теплым оттенкам, а в моей душе возникает надежда, что в этом городе ещё есть место для перемен," 
         "что он может возродиться, обрести новую жизнь и расцвести, словно редкая красочная картина, привлекающая взгляды и вызывающая восхищение"
     else:
-        scene firstDays bus with Fade(0.0, 0.5, 2.5)
+        scene firstDays bus at bg_fullscreen with Fade(0.0, 0.5, 2.5) 
 
         play music "audio/bad_dream.mp3" fadein 1.0 fadeout 1.0 volume 0.6
         play sound "audio/heart.mp3" fadein 0.9 fadeout 0.2
@@ -1418,7 +1428,7 @@ label second_day :
 
     stop music fadeout 2.0
     
-    scene firstDays black scen
+    scene black
     with fade
 
     "Ох, блядь! Чуть не проспал свою же остановку."
@@ -1429,7 +1439,7 @@ label second_day :
 
     stop sound
 
-    scene firstDays bus station near nstu
+    scene firstDays bus station near nstu at bg_fullscreen
     with fade
     show pasha neutral
     with dissolve
@@ -1604,7 +1614,7 @@ label second_day :
     
         "Всё-таки хорошо, что я смог увидеть Пашу. Теперь как-то даже веселее. Пора идти в универ..."
 
-    scene firstDays black scen 
+    scene black 
     with fade
 
     "Распрощавшись с Пашкой, я направился прямиком в деканат. "
@@ -1613,7 +1623,7 @@ label second_day :
     stop music fadeout 2.0
     stop sound fadeout 2.0
 
-    scene firstDays nstu que
+    scene firstDays nstu que at bg_fullscreen
     with fade
 
     play sound "audio/people-noise.mp3" fadein 2.0 loop volume 0.05
@@ -1686,7 +1696,7 @@ label second_day :
     "Может, мне тоже сходить? Пообщаться с одногруппниками. Встретить знакомые лица."
     "Хотя, с другой стороны, сегодня хорошая погода, можно пойти домой через парк..."
     
-    scene firstDays nstu enter
+    scene firstDays nstu enter at bg_fullscreen
     with Fade(0.0, 0.0, 0.3)
 
     menu :
@@ -1711,14 +1721,14 @@ label second_day :
     with dissolve
 
     if day2_sanya_went_to_smoke :
-        scene firstDays black scen 
+        scene black 
         with fade
 
         "Поприветствовав одногруппников, я с ними направился в сторону курилки."
 
         play music "audio/street-sound.mp3" fadein 1.5 fadeout 2.5 volume 0.3
 
-        scene firstDays kyrilka
+        scene firstDays kyrilka at bg_fullscreen
         with fade
         show cigarette_smoke:
             zoom 2.0 
@@ -1790,13 +1800,13 @@ label second_day :
             extend "Хотел плакать. "
             extend "Хотел заорать на всю улицу, но сдержался."
 
-            scene firstDays black scen
+            scene black
             with fade
             play sound "audio/footsteps_asphalt.mp3" volume 0.5 noloop fadein 0.2 fadeout 0.2
             "У выхода из корпуса я заметил Юлю, смотрящую в мою сторону. "
             extend "Она подбежала ко мне, явно заметив моё паршивое настроение."
 
-            scene firstDays nstu enter
+            scene firstDays nstu enter at bg_fullscreen
             with fade
             show yuli afraid
             with dissolve
@@ -1812,7 +1822,7 @@ label second_day :
             sanya "пойдём, конечно."
 
             hide yuli happy
-            scene firstDays black scen
+            scene black
             with fade
 
             "Как же приятно идти по улице в компании такой красивой и весёлой девушки..."
@@ -1820,7 +1830,7 @@ label second_day :
             sanya "Нет, всё в порядке, Юля. Ты лучше расскажи, как у тебя дела."
             "Поболтав немного, я решил предложить зайти за сигаретами. Свои новенькие я уже успешно проебал."
 
-            scene firstDays red white
+            scene firstDays red white at bg_fullscreen
             with fade
 
             show yuli empathy
@@ -1830,7 +1840,7 @@ label second_day :
             sanya "Хорошо! Скоро буду."
 
             hide yuli empathy
-            scene firstDays magazine inside
+            scene firstDays magazine inside at bg_fullscreen
             with fade
             
             sanya "Можно, пожалуйста, пачку чапы ванильной."
@@ -1838,7 +1848,7 @@ label second_day :
             sanya "И два советских пломбира в вафельном стаканчике!"
             "Кассир" "Да, с вас..."
 
-            scene firstDays red white
+            scene firstDays red white at bg_fullscreen
             with Fade(2.0, 0.0, 1.0)
             show yuli empathy
             with dissolve
@@ -1849,12 +1859,12 @@ label second_day :
             yuli "Советское! Обожаю!"
 
             
-            scene firstDays black scen
+            scene black
             with Fade(2.0, 0.0, 2.0)
 
             "Через пять минут мы уже были около моего дома."
 
-            scene sanya home
+            scene sanya home at bg_fullscreen
             with fade
             show yuli shy
             with dissolve
@@ -1888,7 +1898,7 @@ label second_day :
             stop music fadeout 3.0
 
             hide yuli horny2
-            show firstDays black scen
+            show black
             with Fade(2.0, 0.0, 1.0)
 
         else:
@@ -1903,12 +1913,12 @@ label second_day :
             "Может и зря я так отозвался о СССР... "
             "Говорят, там советское мороженное и квас в бочках были вкусными!"
 
-            scene firstDays black scen
+            scene black
             with fade
 
             "У выхода из корпуса я заметил Юлю, смотрящую в мою сторону. Она подбежала ко мне явно заметив моё паршивое настроение."
 
-            scene firstDays nstu enter
+            scene firstDays nstu enter at bg_fullscreen
             with fade
             show yuli greeting
             with dissolve
@@ -1926,12 +1936,12 @@ label second_day :
             sanya "Да, конечно, пойдём!"
 
             hide yuli horny
-            scene firstDays black scen
+            scene black
             with fade
 
             pause 3.0
             
-            scene sanya home
+            scene sanya home at bg_fullscreen
             with fade
             show yuli happy
             with dissolve
@@ -1959,14 +1969,14 @@ label second_day :
             stop music
 
             hide yuli horny2
-            show firstDays black scen
+            show black
             with fade
 
         $ day2_sanya_vote_for_ussr = True
 
     else :
         
-        scene firstDays nstu enter
+        scene firstDays nstu enter at bg_fullscreen
         with fade
 
         "Выйдя из корпуса, я потянулся за пачкой сигарет, но тут же обнаружил, что её там нет."
@@ -1974,12 +1984,12 @@ label second_day :
         "А ведь только утром покупал. Может, спиздил кто?"
         "Ладно, в этот раз пойду пешком до дома. Сэкономлю хотя бы на проезде."
 
-        scene firstDays black scen
+        scene black
         with fade
 
         "Пройдя пару кварталов, я заметил вход в парк, который находится недалеко от моего дома. Чем не отличное место, чтобы привести мысли в порядок?"
         play sound "audio/forest-sound.mp3" fadein 1.0 loop 
-        scene firstDays park
+        scene firstDays park at bg_fullscreen
         with fade
 
         "Великолепный парк, утопающий в природной красоте." 
@@ -2008,7 +2018,7 @@ label second_day :
         stop music fadeout 5.0
         with None
         hide screen nadya_welcome
-        scene firstDays magazine inside
+        scene firstDays magazine inside at bg_fullscreen
         show nadya angry
         with Fade(3.0, 0.5, 1.5)
         
@@ -2027,7 +2037,7 @@ label second_day :
         "Девушка" "Ухх, ну я тебе ещё покажу, злюка!"
 
         "Развернувшись, девушка увидела меня и попросила выйти с ней ненадолго."
-        scene firstDays red white
+        scene firstDays red white at bg_fullscreen
         with fade
         play sound "audio/forest-sound.mp3" fadein 2.0 loop volume 0.4
         show nadya flirting
@@ -2070,7 +2080,7 @@ label second_day :
 
             sanya "Ладно. Сейчас куплю тебе чапу."
 
-            scene firstDays magazine inside
+            scene firstDays magazine inside at bg_fullscreen
             with fade
             stop sound fadeout 2.0
 
@@ -2098,12 +2108,12 @@ label second_day :
             nadya "Я хотела по парку прогуляться, составишь мне компанию?"
             sanya "Ну давай пойдём, мне всё равно нечем заняться."
 
-            scene firstDays black scen
+            scene black
             with fade
             play sound "audio/forest-sound.mp3" fadein 4.0 loop volume 0.4
             pause 3.0
 
-            scene firstDays park night
+            scene firstDays park night at bg_fullscreen
             with fade
 
         else :
@@ -2113,7 +2123,7 @@ label second_day :
 
             "Поразмыслив над просьбой девушки, я решил не покупать ей сигареты, выглядит она совсем молодо, может быть ей и 18-ти лет-то нет."
             stop sound fadeout 2.0
-            scene firstDays magazine inside
+            scene firstDays magazine inside at bg_fullscreen
             with fade
             
             sanya "Добрый вечер, ванильный чапмен, пожалуйста."
@@ -2124,7 +2134,7 @@ label second_day :
             sanya "Интересно, куда она так неожиданно ушла."
             "Оставив размышления, я направился в сторону парка, где присел на ближайшую лавочку."
             play sound "audio/forest-sound.mp3" loop fadein 1.0 volume 0.4
-            scene firstDays park night
+            scene firstDays park night at bg_fullscreen
             with fade
 
             "Достав сигаретку, я уже было потянулся в карман за зажигалкой, как осознал, что и её я успешно посеял"
@@ -2305,7 +2315,7 @@ label second_day :
             with dissolve
             stop sound fadeout 1.0
     
-    scene firstDays black scen
+    scene black
     with fade
 
     if not day2_nadya_get_one_sigarett and not day2_nadya_bought_cigarettes and not day2_sanya_went_to_smoke:
@@ -2315,7 +2325,7 @@ label second_day :
 
         play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.5 volume 0.1
 
-        scene sanya cry blue
+        scene sanya cry at bg_fullscreen
         with fade
 
         "Настроение было, мягко говоря, отвратительным."
@@ -2330,7 +2340,7 @@ label second_day :
         stop music
         play music "audio/cell-phone-ring-simple.mp3" fadein 1.5 fadeout 2.0 volume 0.1
 
-        scene sanya notification
+        scene sanya notification at bg_fullscreen
         with fade
 
         "Как же я волнуюсь."
@@ -2368,7 +2378,7 @@ label second_day :
         sanya "Юль, спасибо ты очень помогла. Встретимся завтра возле универа. Спокойной ночи!"
         "Мне и правда сильно полегчало после разговора с Юлей, она как будто оживила меня."
 
-        scene sanya bed with dissolve :
+        scene sanya bed at bg_fullscreen with dissolve :
             linear 35 zoom 1.1
             linear 35 zoom 1.0
             repeat
@@ -2384,7 +2394,7 @@ label second_day :
 
         play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.5 volume 0.1
 
-        scene sanya cry blue
+        scene sanya cry at bg_fullscreen
         with fade
 
         "Настроения не было даже ужинать."
@@ -2407,7 +2417,7 @@ label second_day :
 
         "Отхлынув от балкона я сразу лёг в кровать в надежде прийти в себя."
 
-        scene sanya bed with dissolve :
+        scene sanya bed at bg_fullscreen with dissolve :
             linear 35 zoom 1.1
             linear 35 zoom 1.0
             repeat
@@ -2419,7 +2429,7 @@ label second_day :
 
         play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.5 volume 0.1
 
-        scene sanya cry blue
+        scene sanya cry at bg_fullscreen
         with fade
 
         "Наше знакомство в парке было очень неожиданным, но очень приятным."
@@ -2429,7 +2439,7 @@ label second_day :
             stop music
             play music "audio/cell-phone-ring-simple.mp3" fadein 1.5 fadeout 2.0 volume 0.1
 
-            scene sanya notification
+            scene sanya notification at bg_fullscreen
             with fade
 
             "Спустя пару протяжных гудков в трубке послышался знакомый голос."
@@ -2458,7 +2468,7 @@ label second_day :
             stop music
             play music "audio/cell-phone-ring-simple.mp3" fadein 1.5 fadeout 2.0 volume 0.1
 
-            scene sanya notification
+            scene sanya notification at bg_fullscreen
             with fade
 
             "Спустя пару протяжных гудков в трубке послышался знакомый голос."
@@ -2478,7 +2488,7 @@ label second_day :
 
         "С этими словами я положил трубку и достал ещё одну сигарету."
 
-        scene sanya cry blue
+        scene sanya cry at bg_fullscreen
         with dissolve
 
 
@@ -2487,7 +2497,7 @@ label second_day :
         "Ещё минут пятнадцать я сидел на балконе, курил и наслаждался музыкой."
         "В скором времени меня начало клонить в сон и я решил перебраться на кровать."
 
-        scene sanya bed with dissolve :
+        scene sanya bed at bg_fullscreen with dissolve:
             linear 35 zoom 1.1
             linear 35 zoom 1.0
             repeat
@@ -2501,7 +2511,7 @@ label second_day :
 
         play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.5 volume 0.1
 
-        scene sanya cry blue
+        scene sanya cry at bg_fullscreen
         with fade
 
         "Настроение было, мягко говоря, ужасным."
@@ -2518,7 +2528,7 @@ label second_day :
         "Какое-же я ничтожество."
         "Подвел Юлю, она ещё меня и до дома провела."
 
-        scene sanya toilet day without water
+        scene sanya toilet at bg_fullscreen
         with fade
 
         "Затушив сигарету, я направился в ванну."
@@ -2547,7 +2557,7 @@ label second_day :
 
         "Выбравшись из ванны я направился прямиком в кровать."
 
-        scene sanya bed with fade :
+        scene sanya bed at bg_fullscreen with fade:
             linear 35 zoom 1.1
             linear 35 zoom 1.0
             repeat
@@ -2566,7 +2576,7 @@ label second_day :
 
         play music "audio/home-sad.mp3" fadein 1.5 fadeout 2.5 volume 0.1
 
-        scene sanya cry blue
+        scene sanya cry at bg_fullscreen
         with fade
 
         "Настроение было, мягко говоря, в подвешенном состоянии."
@@ -2583,12 +2593,12 @@ label second_day :
 
         "Затушив сигарету, я сразу лёг в кровать, надеясь, что завтра наступит как можно скорее."
 
-        scene sanya bed with Dissolve(3.0):
+        scene sanya bed at bg_fullscreen with Dissolve(3.0):
             linear 35 zoom 1.1
             linear 35 zoom 1.0
             repeat
     stop music fadeout 7.0
-    scene firstDays black scen 
+    scene black 
     with Fade(3.0, 0.0, 3.0)
 
     jump third_day
@@ -2598,7 +2608,7 @@ label third_day :
     play sound "audio/typewriter-sound.mp3" volume 0.5 loop
     centered "{size=+30}{font=fonts/sfpro_semibold.ttf}{cps=3.8}День третий.  {nw}{/cps}{/font}{/size}"
     stop sound
-    scene sanya bed with Fade(0.0, 1.0, 4.0):
+    scene sanya bed at bg_fullscreen with Fade(0.0, 1.0, 4.0) :
         linear 35 zoom 1.1 center
         linear 35 zoom 1.0 center
         repeat
@@ -2611,7 +2621,7 @@ label third_day :
     "Я быстро собрался, захватил заранее заготовленные вещи и пачку новокупленных сигарет. "
     "Выйдя на улицу, я достал одну сигаретку и глубоко затянулся, головная боль ушла, а мысли переключились на вчерашний день."
 
-    scene sanya home
+    scene sanya home at bg_fullscreen
     with Fade(1.0, 1.0, 1.9)
 
     "С кем же мне поехать в итоге?"
@@ -2661,7 +2671,7 @@ label third_day :
     hide screen notification_popup_big
     with dissolve
 
-    scene firstDays bus station
+    scene firstDays bus station at bg_fullscreen
     with fade
 
     "Заебала эта остановка. Когда её уже снесут к хуям собачьим?"
@@ -2669,7 +2679,7 @@ label third_day :
 
     play sound "audio/bus.mp3" fadein 1.5 fadeout 1.5 volume 0.1
 
-    scene firstDays black scen 
+    scene black 
     with fade
 
     pause 6.0
@@ -2677,7 +2687,7 @@ label third_day :
 
     play music "audio/sound-in-bus.mp3" fadein 1.5 fadeout 2.0 volume 0.1
 
-    scene firstDays bus
+    scene firstDays bus at bg_fullscreen
     with fade
 
     "Посплю пока. Главное не проспать остановку..."
@@ -2700,7 +2710,7 @@ label third_day :
     "Снова тот же сон..."
 
     
-    scene firstDays black scen 
+    scene black 
     with fade
 
     stop music
@@ -2709,18 +2719,18 @@ label third_day :
     pause 6.0
     stop sound
 
-    scene firstDays bus station near nstu
+    scene firstDays bus station near nstu at bg_fullscreen
     with fade
 
     "Кажется, по времени всё нормально. Можно уже не торопиться."
 
-    scene firstDays black scen
+    scene black
     with fade
 
     "На часах было без пяти восемь, а в конце улицы уже виднелся ждавший меня автобус."
     "Подойдя ближе, я был приятно удивлен, передо мной открылся вид не на старенький и потрепанный ЛИАЗ, а на красивый Икарус, он выглядел так, будто только сошёл с конвейера."
 
-    scene firstDays neew bus
+    scene firstDays neew bus at bg_fullscreen
     with fade
 
     if day3_choice_lonely :
@@ -2909,7 +2919,7 @@ label third_day :
                     centered "{size=+24}\nArtsBer{fast}{w=1.3}{nw}{/size}"
                     centered "{size=+24}\nJuravl{fast}{w=1.3}{nw}{/size}"
                     centered "{size=+24}\nrero{fast}{w=1.3}{nw}{/size}"
-                    scene firstDays neew bus
+                    scene firstDays neew bus at bg_fullscreen
                     
         stop music fadeout 0.5 
         play music "audio/sound-in-bus.mp3" fadein 3.0 fadeout 5.0 volume 0.10
@@ -2998,7 +3008,7 @@ label _sanatorium :
     centered "{size=+30}{font=fonts/sfpro_semibold.ttf}{cps=4.5}День четвёртый.  {nw}{/cps}{/font}{/size}"
     stop sound
 
-    scene firstDays black scen
+    scene black
     with dissolve
 
     pause 2.0   
@@ -3009,7 +3019,7 @@ label _sanatorium :
 
     "Мы наконец-то подъезжаем к \"Новомысу\" – санаторию, в котором мне придётся провести целую неделю. Надеюсь, это будет стоить того."
 
-    scene sanatorium forest neer san with dissolve:
+    scene sanatorium forest neer san at bg_fullscreen with dissolve :
         block:
             linear 1.9 zoom 1.01 center
             linear 1.9 zoom 1.0 center
@@ -3030,7 +3040,7 @@ label _sanatorium :
     
     stop music fadeout 1.5
 
-    scene sanatorium sanatorium
+    scene sanatorium sanatorium at bg_fullscreen
     with dissolve
 
     play sound "audio/forest-sound.mp3" loop fadein 1.5 fadeout 3.0 volume 0.1
@@ -3146,7 +3156,7 @@ label _sanatorium :
     
     "Валерия Владимировна бодро шла вперед, громко информируя нас о том, как же хорош этот санаторий и как же качественно мы тут отдохнем. "
 
-    scene sanatorium sanatorium park
+    scene sanatorium sanatorium park at bg_fullscreen
     with dissolve
 
     play sound "audio/forest-sound.mp3" loop fadein 1.0 fadein 2.0 volume 0.1
@@ -3188,7 +3198,7 @@ label _sanatorium :
 
     valeria "Вот тут у нас медпункт, если кому-то станет плохо."
 
-    scene sanatorium medical post
+    scene sanatorium medical post at bg_fullscreen
     with dissolve
 
     "Выхватил я из общего потока речи конкретику, и,  ради интереса, взглянул в указанном направлении."
@@ -3212,7 +3222,7 @@ label _sanatorium :
     with dissolve
     "Ха! А мне нравится эта бабка, надо будет с ней скорешиться."
 
-    scene sanatorium park
+    scene sanatorium park at bg_fullscreen
     with fade
 
     "Я стал больше прислушиваться к болтовне Валерии Владимировной, но усталость и голод брали своё."
@@ -3242,7 +3252,7 @@ label _sanatorium :
     play sound "audio/door_open.mp3" noloop fadein 0.1 fadeout 0.1 volume 1.0
     pause 2.0
 
-    scene sanatorium dormitory room
+    scene sanatorium dormitory room at bg_fullscreen
     with Fade(0.3, 0.4, 0.3, color="#000")
 
     "Все было достаточно светлым, но каким-то устаревшим, что ли..."
@@ -3360,7 +3370,7 @@ label _sanatorium :
             "На ногах устоять я смог, хоть ноги и подкосились, однако челюсть дала отбой."
             
             play sound "audio/Fall.mp3" fadein 0.1 fadeout 0.2
-            scene firstDays black scen
+            scene black
             with Fade(0.5, 0.5, 0.5, color="#000")
             
             "Вот тут у нас проблемы, Ватсон! Бухнувшись на колени, я судорожно пытался вздохнуть, царапая пальцами плитку." 
@@ -3368,7 +3378,7 @@ label _sanatorium :
             "Но мучился я не долго – висок взорвался болью и я потерял сознание."
             "Очнулся я от резкого запаха, чуть ли не вскочив с  кушетки.  Но чьи-то стальные руки крепко прижали меня к жесткой поверхности, не давай двинуться лишний сантиметр. "
 
-            scene firstDays medicina
+            scene firstDays medicina at bg_fullscreen
             with fade
             
             play music "audio/medicine_sound.mp3" noloop fadein 1.0 fadeout 1.0
@@ -3412,7 +3422,7 @@ label _sanatorium :
             play sound "audio/footsteps.mp3" noloop fadein 0.2 fadeout 0.3
             pause 2.0 
             
-            scene medical post
+            scene medical post at bg_fullscreen
             with fade
 
             "Вот же ж гад! Не ожидал я от пропитого алкаша такой силы и скорости. Ну, сам виноват... "
@@ -3426,7 +3436,7 @@ label _sanatorium :
             sanya "Ну, хотя бы на обед не опоздал... Может даже с девчонками встречусь."
             "Подбодрив себя подобным образом я поплелся в сторону столовой. "
 
-            scene sanatorium canteen
+            scene sanatorium canteen at bg_fullscreen
             with fade
 
         else:
@@ -3445,7 +3455,7 @@ label _sanatorium :
             play sound "audio/door_open.mp3" noloop fadein 0.1 fadeout 0.1
             pause 1.0
             
-            scene sanatorium walkway
+            scene sanatorium walkway at bg_fullscreen
             with fade
             
             play sound "audio/door_close.mp3" noloop fadein 0.1 fadeout 0.1
@@ -3465,7 +3475,7 @@ label _sanatorium :
             play sound "audio/door_open.mp3" noloop fadein 0.1 fadeout 0.1
             pause 1.0
             play music "audio/skin_music.mp3" fadein 5.0 fadeout 2.0 volume 0.1
-            scene sanatorium skin dormitory room
+            scene sanatorium skin dormitory room at bg_fullscreen
             with fade
             
             play sound "audio/door_close.mp3" noloop fadein 0.1 fadeout 0.1
@@ -3621,7 +3631,7 @@ label _sanatorium :
                     "Перед глазами все вертелось и кружилось, а во рту будто бы насрали кошки. Причем несколько раз."
                     "Легкие болели так, будто бы их прострелили. Нахуй я согласился?.. Щас бы сидел в столовой, пил чаек с девчонками и в ус не дул."
 
-                    scene firstDays medicina
+                    scene firstDays medicina at bg_fullscreen
                     with Fade(0.4, 0.5, 0.4, color="#000")
                     
                     play music "audio/medicine_sound.mp3" fadein 1.0 fadeout 1.0
@@ -3733,7 +3743,7 @@ label _sanatorium :
 
         play sound "audio/door_open.mp3" noloop fadein 0.3 fadeout 0.3 
 
-        scene sanatorium balcony
+        scene sanatorium balcony at bg_fullscreen
         with Fade(0.3, 0.2, 0.3, color="#000")
 
         play music "audio/forest_walk.mp3" fadein 2.0 fadeout 3.0 volume 0.13
@@ -3837,7 +3847,7 @@ label _sanatorium :
 
         pavel "Я люблю чистый запах табака, без всяких примесей. Только так раскрывается его уникальный вкус."
         pavel "А если всякие вишни, арбузы, ванили добавлять, то в чем смысл? Иди салата наверни, если фрукты так нравятся."
-        scene balcony
+        scene balcony at bg_fullscreen
         show pavel smokes
         sanya "Ну не всем нравится чистый запах табака, некоторые пытаются его смягчить."
         pavel "Да-а-а, и так во всем! Все что-то пытаются смягчить, замаскировать, замылить. Зачем?!"
@@ -3884,7 +3894,7 @@ label _sanatorium :
                 
                 pavel "Во-о-от! Вот это по-нашему!"
 
-                scene sanatorium dormitory room
+                scene sanatorium dormitory room at bg_fullscreen
                 with Fade(0.3, 0.4, 0.3, color="#000")
 
                 play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
@@ -3935,7 +3945,7 @@ label _sanatorium :
                 pause 1.0
                 play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2 
 
-                scene sanatorium walkway
+                scene sanatorium walkway at bg_fullscreen
                 with Fade(0.2, 0.3, 0.2, color="#000")
 
                 play sound "audio/footsteps.mp3" noloop fadein 0.2 fadeout 0.2
@@ -3964,7 +3974,7 @@ label _sanatorium :
             hide pavel smile
             with dissolve
 
-            scene firstDays black scen
+            scene black
             with fade
 
             "Голова адски кружилась, меня штормило даже лежа."
@@ -3976,7 +3986,7 @@ label _sanatorium :
             "Живот болел так, будто бы его прострелили, а пищевод саднил, будто я хлестал кислоту, а не коньяк."
             "Нахуй я согласился?.. Щас бы сидел в столовой, пил чаек с девчонками и в ус не дул."
             
-            scene firstDays medicina
+            scene firstDays medicina at bg_fullscreen
             with fade
 
             show grusha happy
@@ -4020,7 +4030,7 @@ label _sanatorium :
             grusha "Ну так иди на хуй отсюда!"
             "Бодро вскочив, я вылетел пробкой из процедурного кабинета."
 
-            scene sanatorium medical post
+            scene sanatorium medical post at bg_fullscreen
             with fade
 
             "Никогда так быстро в себя после попойки не приходил, да ещё и такой жесткой. Баба Груша реально волшебница!"
@@ -4028,7 +4038,7 @@ label _sanatorium :
             "В животе заурчало, но аппетита как такового не было, поскольку чувство насранности во рту не пропало."
             "Хотелось чем-то прополоскать рот, желательно пивком..."
 
-    scene sanatorium canteen
+    scene sanatorium canteen at bg_fullscreen
     with dissolve
 
     stop music fadeout 0.5
@@ -4132,7 +4142,7 @@ label _sanatorium :
             play sound "audio/footsteps_asphalt.mp3" noloop fadein 0.1 fadeout 0.1
             pause 1.5
 
-            scene sanatorium alcove
+            scene sanatorium alcove at bg_fullscreen
             with dissolve
 
             play music "audio/forest-sound.mp3" fadein 0.3 fadeout 0.3 volume 0.3
@@ -4254,7 +4264,7 @@ label _sanatorium :
             play sound "audio/footsteps_asphalt.mp3" noloop fadein 0.1 fadeout 0.1
             pause 1.5
            
-            scene sanatorium alcove
+            scene sanatorium alcove at bg_fullscreen
             with dissolve
             
             play music "audio/forest-sound.mp3" fadein 1.0 fadeout 2.0 volume 0.3 
@@ -4322,13 +4332,13 @@ label _sanatorium :
             "Горячая сауна, грязевая ванна, массажик, пускай делала его и не сексапильная девочка, а огромная женщина, руки которой были толщиной с мою голову."
             "А также прочие приколдесы, после которых ты чувствуешь себя человеком."
             
-            scene sanatorium evening park
+            scene sanatorium evening park at bg_fullscreen
             with Fade(0.2, 0.3, 0.2, color="#000")
 
             "Расслабленный, отдохнувший и довольный я шёл по парку в сторону курилки, намереваясь шлифануть всё ароматной сигареткой чапмана, и провести время в компании прекрасной девушки."
             "Эх, жить хорошо и жизнь хороша!"
 
-            scene sanatorium alcove
+            scene sanatorium alcove at bg_fullscreen
             with Fade(0.2, 0.3, 0.2, color="#000")
 
             "Зайдя в курилку, я присел на лавочку и, любуясь открывающимися видами, открыл стремительно пустующую пачку."
@@ -4337,7 +4347,7 @@ label _sanatorium :
             
             "Не вытерпев, я пошёл искать её."
             
-            scene sanatorium evening park
+            scene sanatorium evening park at bg_fullscreen
             with Fade(0.2, 0.3, 0.2, color="#000")
 
             "Прошелся по парку, заглядывая во всякие укромные места. "
@@ -4346,7 +4356,7 @@ label _sanatorium :
             "Отчаявшись, я даже спросил парочку встречных, не видели ли они девушку, похожую на неё. " 
             extend "Большинство просто пожимало плечами."
 
-            scene sanatorium night
+            scene sanatorium night at bg_fullscreen
             with Fade(0.2, 0.3, 0.2, color="#000")
 
             "Расстроившись, я вышел из корпуса на свежий воздух. " 
@@ -4392,7 +4402,7 @@ label _sanatorium :
                 extend "Там обычно никого не бывает, да и созерцание красивых видов успокаивает."
                 "Так что, кинув прощальный взгляд на злую тетку, не разрешающую курить где попало, я медленно побрёл в своё сакральное место."
                 
-                scene sanatorium evening park
+                scene sanatorium evening park at bg_fullscreen
                 with Fade(0.2, 0.3, 0.2, color="#000")
 
                 "Топая по красивому парку, я размышлял о тленности бытия и бессмысленности существования. "
@@ -4447,7 +4457,7 @@ label _sanatorium :
                             $ mood_counter += 1
                             with None
                             hide screen emily_welcome
-                            scene sanatorium alcove
+                            scene sanatorium alcove at bg_fullscreen
                             with Fade(0.2, 0.3, 0.2, color="#000")
                             play sound "audio/cigarette.mp3" fadein 2.0 fadeout 2.0 
 
@@ -4519,7 +4529,7 @@ label _sanatorium :
                             $ mood_counter += 1
                             with None
                             hide screen emily_welcome
-                            scene sanatorium alcove
+                            scene sanatorium alcove at bg_fullscreen
                             with Fade(0.2, 0.3, 0.2, color="#000")
                             
                             "Кажется, эта беседка становится мне роднее дома. Сев на скамейку, я закурил. Первая глубокая тяжка немного прочистила сознание, освободив места для разных мыслей. Далеко не самых приятных."
@@ -4587,7 +4597,7 @@ label _sanatorium :
                             $ mood_counter -= 1
 
 
-                            scene sanatorium balcony night
+                            scene sanatorium balcony night at bg_fullscreen
                             with Fade(0.2, 0.3, 0.2, color="#000")
                             
                             play music "audio/love_music.mp3" fadein 1.5 fadeout 2.5 volume 0.15
@@ -4638,7 +4648,7 @@ label _sanatorium :
                         "Я смутился и отвел взгляд от огромных голубых глазищ, которые, казалось, отражали само небо."
                         with None
                         hide screen emily_welcome
-                        scene sanatorium evening park
+                        scene sanatorium evening park at bg_fullscreen
                         show emily green neutral
                         with Fade(2.0, 0.5, 2.0)
 
@@ -4671,7 +4681,7 @@ label _sanatorium :
                         extend "Что, в общем-то, не было плохо."
                         "Она оказалось приятной и весёлой девушкой, так что настроение начало подниматься из глубин моего внутреннего мира."
                         
-                        scene sanatorium alcove
+                        scene sanatorium alcove at bg_fullscreen
                         with Fade(0.3, 0.4, 0.3, color="#000")
 
                         show emily green cute
@@ -4735,7 +4745,7 @@ label _sanatorium :
                         "Лишь когда Эмили начала зевать и клевать носом, мы поняли, что пора закругляться."
                         
                         
-                        scene sanatorium night
+                        scene sanatorium night at bg_fullscreen
                         with Fade(0.3, 0.4, 0.3, color="#000")
 
                         show emily green neutral
@@ -4762,7 +4772,7 @@ label _sanatorium :
                 
                 play sound "audio/footsteps.mp3" noloop fadein 0.3 fadeout 0.3
                 
-                scene sanatorium walkway
+                scene sanatorium walkway at bg_fullscreen
                 with Fade(0.4, 0.3, 0.7, color="#000")
 
                 pause 2
@@ -4773,7 +4783,7 @@ label _sanatorium :
 
                 play sound "audio/door_close.mp3" noloop fadein 0.3 fadeout 0.3
 
-                scene sanatorium dormitory room
+                scene sanatorium dormitory room at bg_fullscreen
                 with Fade(0.4, 0.3, 0.7, color="#000")
 
                 "Павла Геннадьевича не было, что немного меня порадовало. "
@@ -4786,7 +4796,7 @@ label _sanatorium :
 
                 play sound "audio/door_close.mp3" noloop fadein 0.3 fadeout 0.3
 
-                scene sanatorium balcony night
+                scene sanatorium balcony night at bg_fullscreen
                 with Fade(0.3, 0.4, 0.3, color="#000")
 
                 play music "audio/love_music.mp3" fadein 1.5 fadeout 2.5 volume 0.25
@@ -4894,7 +4904,7 @@ label _sanatorium :
 
                     play sound "audio/door_close.mp3" noloop fadein 0.3 fadeout 0.3
     
-                    scene sanatorium dormitory room
+                    scene sanatorium dormitory room at bg_fullscreen
                     with Fade(0.2, 0.3, 0.2, color="#000")
                     
                     sanya "Какой же я долбоеб."
@@ -4919,7 +4929,7 @@ label _sanatorium :
                     
                     stop music fadeout 0.5
 
-                    scene sanatorium dormitory room
+                    scene sanatorium dormitory room at bg_fullscreen
                     with Fade(0.2, 0.3, 0.2, color="#000")
 
                     "Я резко отпрянул. Кинул бычок в пепельницу и зашел в комнату. На кровати похрапывал Павел Геннадьич, и когда только успел войти?"
@@ -4938,7 +4948,7 @@ label _sanatorium :
 
             play music "audio/love_music.mp3" fadein 2.0 fadeout 2.0 volume 0.3
             
-            scene sanatorium evening park
+            scene sanatorium evening park at bg_fullscreen
             with Fade(0.4, 0.5, 0.4, color="#000")
 
             "Горячая сауна, грязевая ванна, массажик, пускай делала его и не сексапильная девочка, а огромная женщина, руки которой были толщиной с мою голову."
@@ -4950,7 +4960,7 @@ label _sanatorium :
                         
             "Эх, жить хорошо и жизнь хороша!"
 
-            scene sanatorium alcove
+            scene sanatorium alcove at bg_fullscreen
             with Fade(0.4, 0.5, 0.4, color="#000")
 
             "Надю я заметил издалека."
@@ -5046,7 +5056,7 @@ label _sanatorium :
             "Пока мы шли до корпуса, то не проронили ни единого слова. Атмосфера неловкости, царящая между нами, как-то не настраивала на беседу."
             "Однако эта неловкость была какой-то романтичной..."
 
-            scene sanatorium night 
+            scene sanatorium night  at bg_fullscreen
             with fade
 
             show nadya smiles
@@ -5080,7 +5090,7 @@ label _sanatorium :
         "Расслабленный, отдохнувший и довольный я шёл по парку в сторону курилки, намереваясь шлифануть всё ароматной сигареткой чапмана, и провести время в компании прекрасной девушки."
         "Эх, жить хорошо и жизнь хороша!"
 
-        scene sanatorium alcove
+        scene sanatorium alcove at bg_fullscreen
         with Fade(0.2, 0.3, 0.2, color="#000")
 
         "Зайдя в курилку, я присел на лавочку и, любуясь открывающимися видами, открыл стремительно пустующую пачку."
@@ -5142,7 +5152,7 @@ label _sanatorium :
 
         play sound "audio/footsteps_asphalt.mp3" fadein 0.2 fadeout 0.2
 
-        scene sanatorium path
+        scene sanatorium path at bg_fullscreen
         with Fade(0.4, 0.5, 0.4, color="#000")
         
         "Юля оказалась настоящим спринтером!"
@@ -5245,7 +5255,7 @@ label _day5 :
         
         if day4_with_skin :
 
-            scene sanatorium dormitory room
+            scene sanatorium dormitory room at bg_fullscreen
             with dissolve
 
             play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
@@ -5254,7 +5264,7 @@ label _day5 :
 
         else :
 
-            scene sanatorium skin dormitory room
+            scene sanatorium skin dormitory room at bg_fullscreen
             with dissolve
 
             play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
@@ -5267,7 +5277,7 @@ label _day5 :
 
         pause 1.0
 
-        scene sanatorium balcony
+        scene sanatorium balcony at bg_fullscreen
         with Fade(0.3, 0.4, 0.3)
         
         play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
@@ -5292,7 +5302,7 @@ label _day5 :
 
         if day4_tried_move:
 
-            scene sanatorium dormitory room
+            scene sanatorium dormitory room at bg_fullscreen
             with dissolve
 
             play music "audio/snore_big.mp3" fadeout 2.0 volume 0.4
@@ -5303,7 +5313,7 @@ label _day5 :
             
         else :
             
-            scene sanatorium skin dormitory room
+            scene sanatorium skin dormitory room at bg_fullscreen
             with dissolve
 
             play music "audio/snore_big.mp3" fadeout 2.0 volume 0.4
@@ -5318,7 +5328,7 @@ label _day5 :
 
         pause 1.0
 
-        scene sanatorium balcony
+        scene sanatorium balcony at bg_fullscreen
         with Fade(0.3, 0.4, 0.3)
         
         play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
@@ -5344,7 +5354,7 @@ label _day5 :
 
         if day4_tried_move and not day4_fight:
 
-            scene sanatorium skin dormitory room
+            scene sanatorium skin dormitory room at bg_fullscreen
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
@@ -5354,7 +5364,7 @@ label _day5 :
             extend "На соседней кровати похрапывал Мыкало."
         else :
 
-            scene sanatorium dormitory room
+            scene sanatorium dormitory room at bg_fullscreen
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
@@ -5369,7 +5379,7 @@ label _day5 :
 
         pause 1.0
 
-        scene sanatorium balcony
+        scene sanatorium balcony at bg_fullscreen
         with Fade(0.3, 0.4, 0.3)
         
         play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
@@ -5400,7 +5410,7 @@ label _day5 :
 
         if day4_tried_move and not day4_fight:
 
-            scene sanatorium skin dormitory room
+            scene sanatorium skin dormitory room at bg_fullscreen
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
@@ -5411,7 +5421,7 @@ label _day5 :
 
         else :
 
-            scene sanatorium dormitory room
+            scene sanatorium dormitory room at bg_fullscreen
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             play sound "audio/snore_big.mp3" noloop fadein 0.2 fadeout 0.3 volume 0.4
@@ -5426,7 +5436,7 @@ label _day5 :
 
         pause 1.0
 
-        scene sanatorium balcony
+        scene sanatorium balcony at bg_fullscreen
         with Fade(0.3, 0.4, 0.3)
         
         play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
@@ -5444,7 +5454,7 @@ label _day5 :
 
         stop music fadeout 2.0
         
-    scene sanatorium canteen
+    scene sanatorium canteen at bg_fullscreen
     with Fade(0.3, 0.4, 0.3, color="#000")
 
     play music "audio/kfc-sound.mp3" fadein 1.0 fadeout 1.0 volume 0.1 
@@ -5578,7 +5588,7 @@ label _day5 :
         
         "Пора бы и на процедуры."
         
-        scene firstDays black scen
+        scene black
         with fade
 
         stop music fadeout 1.0
@@ -5655,10 +5665,10 @@ label _day5 :
 
 
         if day4_tried_move and not day4_fight :
-            scene sanatorium skin dormitory room
+            scene sanatorium skin dormitory room at bg_fullscreen
             with fade
         else :
-            scene sanatorium dormitory room
+            scene sanatorium dormitory room at bg_fullscreen
             with fade
 
         "Прихорошившись, я подошёл к зеркалу, стоящему у входа."
@@ -5767,7 +5777,7 @@ label _day5 :
             
             play sound "audio/door_open.mp3" noloop fadein 0.1 fadeout 0.1
             
-            scene firstDays black scen
+            scene black
             with Fade(0.3, 0.4, 0.3, color="#000")
             
             play sound "audio/door_close.mp3" noloop fadein 0.1 fadeout 0.1
@@ -5785,7 +5795,7 @@ label _day5 :
             
             "Мрачное настроение сразу же исчезло, как только я встретил Надю."
             
-            scene nadya white meet art
+            scene nadya white meet art at bg_fullscreen
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             "Воздушное серое платье, босоножки и легкая походка."
@@ -5814,7 +5824,7 @@ label _day5 :
 
             play sound "audio/chair_crack.mp3" noloop fadein 0.3 fadeout 0.3
             
-            scene sanatorium alcove
+            scene sanatorium alcove at bg_fullscreen
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             show nadya white shy
@@ -5835,14 +5845,14 @@ label _day5 :
             
             hide nadya
             with dissolve
-            scene firstDays black scen
+            scene black
             with dissolve
 
             pause 2.0
 
             "Мы спокойно общались на разные отвлеченные темы, вскоре и вовсе переместившись в парк. "
 
-            scene sanatorium evening park
+            scene sanatorium evening park at bg_fullscreen
             with dissolve
             show nadya white happy
             with dissolve
@@ -5916,7 +5926,7 @@ label _day5 :
             
             "Каждый шаг отдавался болью в затылке, но с помощью Нади все-таки смог кое-как пойти."
             
-            scene sanatorium medical post
+            scene sanatorium medical post at bg_fullscreen
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             "Агриппина сидела около своей вотчины и, попыхивая трубку, смотрела с задумчивым видом вдаль. "
@@ -5938,12 +5948,12 @@ label _day5 :
             hide grusha grusha neutral
             with dissolve
 
-            scene firstDays black scen 
+            scene black 
             with dissolve
 
             pause 2.0
 
-            scene firstDays medicina
+            scene firstDays medicina at bg_fullscreen
             with dissolve
             
             play sound "audio/chair_crack.mp3" noloop fadein 0.3 fadeout 0.3
@@ -5984,7 +5994,7 @@ label _day5 :
             hide grusha angry
             with dissolve
 
-            scene sanatorium medical post
+            scene sanatorium medical post at bg_fullscreen
             with dissolve
 
             "На улице меня ждала обеспокоенная Надя. "
@@ -6014,7 +6024,7 @@ label _day5 :
             play voice "audio/girl_laugh4.mp3"
             "Надя звонко рассмеялась, а я галантно предложил свой локоть, на который она с готовностью оперлась."
             
-            scene nadya white river art
+            scene nadya white river art at bg_fullscreen
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             "Все-таки осень начинала входить в свои права, поэтому после заката температура опускалась достаточно низко."
@@ -6022,7 +6032,7 @@ label _day5 :
 
             extend "Именно из-за этого погуляли мы не очень долго, в конце-концов придя к корпусу."
 
-            scene sanatorium night
+            scene sanatorium night at bg_fullscreen
             with Fade(0.3, 0.4, 0.3, color="#000")
 
             show nadya white happy
@@ -6083,7 +6093,7 @@ label _day5 :
 
                         play sound "audio/door_open.mp3" noloop fadein 0.1 fadeout 0.1
                         
-                        scene sanatorium nadya room
+                        scene sanatorium nadya room at bg_fullscreen
                         with Fade(0.2, 0.3, 0.2, color="#000")
 
                         "Через пару минут дверь открылась, и чуть растрепанная девушка впустила меня."
@@ -6119,7 +6129,7 @@ label _day5 :
 
                         stop sound fadeout 1.0
                         
-                        scene nadya pijamas evening art
+                        scene nadya pijamas evening art at bg_fullscreen
                         with Fade(2.0, 1.0, 3.0)
 
                         "На кровати, в зеленой пижаме сидела Надя, сжимая в руках подушку."
@@ -6171,14 +6181,14 @@ label _day5 :
                         with dissolve
 
                         play sound "audio/footsteps.mp3" noloop fadein 0.2 fadeout 0.2
-                        scene sanatorium walkway
+                        scene sanatorium walkway at bg_fullscreen
                         with dissolve
                         pause 1.0
                         play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
                         pause 0.5
                         
                         if day4_tried_move and not day4_fight :
-                            scene sanatorium skin dormitory room
+                            scene sanatorium skin dormitory room at bg_fullscreen
                             with fade
 
                             play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
@@ -6188,7 +6198,7 @@ label _day5 :
                             "Мыкало не было, так что умывшись, я лег в кровать. "
                             extend "Спокойной мне ночи!"
                         else :
-                            scene sanatorium dormitory room
+                            scene sanatorium dormitory room at bg_fullscreen
                             with fade
 
                             play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
@@ -6198,7 +6208,7 @@ label _day5 :
                             "Павла Геннадьевича не было, так что умывшись, я лег в кровать. "
                             extend "Спокойной мне ночи!"
                         
-                        scene firstDays black scen
+                        scene black
                         with dissolve
                         jump _day6
 
@@ -6234,7 +6244,7 @@ label _day5 :
                         
                         play sound "audio/footsteps.mp3" noloop fadein 0.3 fadeout 0.3
                         
-                        scene sanatorium walkway
+                        scene sanatorium walkway at bg_fullscreen
                         with Fade(0.3, 0.4, 0.3, color="#000")
 
                         pause 1.5
@@ -6242,7 +6252,7 @@ label _day5 :
                         play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
                         pause 1.0
 
-                        scene sanatorium skin dormitory room
+                        scene sanatorium skin dormitory room at bg_fullscreen
                         with Fade(0.3, 0.4, 0.3, color="#000")
 
                         play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
@@ -6253,7 +6263,7 @@ label _day5 :
                     else :
                         play sound "audio/footsteps.mp3" noloop fadein 0.3 fadeout 0.3
                         
-                        scene sanatorium walkway
+                        scene sanatorium walkway at bg_fullscreen
                         with Fade(0.3, 0.4, 0.3, color="#000")
 
                         pause 1.5
@@ -6261,7 +6271,7 @@ label _day5 :
                         play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
                         pause 1.0
 
-                        scene sanatorium dormitory room
+                        scene sanatorium dormitory room at bg_fullscreen
                         with Fade(0.3, 0.4, 0.3, color="#000")
                         
                         play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
@@ -6270,7 +6280,7 @@ label _day5 :
                         "Павла Геннадьевича не было, так что умывшись, я лег в кровать. "
                         extend "Спокойной мне ночи!"
 
-                    scene firstDays black scen
+                    scene black
                     with dissolve
 
                     pause 2.0
@@ -6283,10 +6293,10 @@ label _day5 :
         else :
             
             if day4_tried_move and not day4_fight :
-                scene sanatorium skin dormitory room
+                scene sanatorium skin dormitory room at bg_fullscreen
                 with fade
             else :
-                scene sanatorium dormitory room
+                scene sanatorium dormitory room at bg_fullscreen
                 with fade
 
             sanya "Юль, пожалуйста, успокойся..."
@@ -6467,9 +6477,9 @@ label _day5 :
 
                 image yuliinsult:
                     block:
-                        "images/yuli/empty glitch.webp"
+                        "images/yuli/empty glitch.png"
                         pause 0.2
-                        "images/yuli/insult.webp"
+                        "images/yuli/insult.png"
                         pause 2.0
                         repeat
 
@@ -6537,7 +6547,7 @@ label _day5 :
                 hide yuli
                 with dissolve
 
-                scene sanatorium balcony
+                scene sanatorium balcony at bg_fullscreen
                 with dissolve
                 "Открыв дверь на балкон, я навалился на перегородку. "
                 extend "Я уже не мог соображать. "
@@ -6551,7 +6561,7 @@ label _day5 :
                 pause 2.0
 
                 hide screen toska
-                show yuli wet sad
+                show yuli wet crying
                 with dissolve
 
                 yuli "Прощай, Сашенька."
@@ -6735,10 +6745,10 @@ label _day5 :
         
         if not day5_look_for_yuli :
             if day4_tried_move and not day4_fight:
-                scene sanatorium skin dormitory room
+                scene sanatorium skin dormitory room at bg_fullscreen
                 with dissolve
             else:
-                scene sanatorium dormitory room
+                scene sanatorium dormitory room at bg_fullscreen
                 with dissolve
 
             "Почилив в комнате, отдыхая от процедур, я поднялся, морально готовясь на встречу с Эмилией. "
@@ -6754,7 +6764,7 @@ label _day5 :
             play sound "audio/footsteps.mp3" noloop fadein 0.2 fadeout 0.2
             pause 2.0
             
-            scene sanatorium
+            scene sanatorium at bg_fullscreen
             with dissolve
 
             "На улице было довольно тепло, пускай и вечерело. "
@@ -6766,7 +6776,7 @@ label _day5 :
             
             pause 2.0
 
-            scene sanatorium alcove
+            scene sanatorium alcove at bg_fullscreen
             with dissolve
             
             "Курилка пустовала, как и всегда. "
@@ -6822,7 +6832,7 @@ label _day5 :
                 play sound "audio/footsteps_asphalt.mp3" fadein 0.2 fadeout 0.2
                 pause 1.5
 
-                scene sanatorium walkway
+                scene sanatorium walkway at bg_fullscreen
                 with dissolve
 
                 "Стараясь не забивать голову мыслями по типу: зачем вообще работникам знать кто куда ходил или не выходил, я направился по заданным координатам."
@@ -6877,7 +6887,7 @@ label _day5 :
 
                 play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
                 
-                scene sanatorium emily room
+                scene sanatorium emily room at bg_fullscreen
                 with dissolve
                 
                 "её комната была одноместной и на вид выглядела обставленной, видимо, по платной путевке предоставляют такие апартаменты."
@@ -7016,7 +7026,7 @@ label _day5 :
 
                         play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
 
-                        scene sanatorium walkway
+                        scene sanatorium walkway at bg_fullscreen
                         with Fade(0.3, 0.4, 0.3)
 
                         play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
@@ -7034,10 +7044,10 @@ label _day5 :
                         play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
 
                         if day4_tried_move and day4_fight:
-                            scene sanatorium dormitory room 
+                            scene sanatorium dormitory room  at bg_fullscreen
                             with Fade(0.3, 0.4, 0.3)
                         else:
-                            scene sanatorium skin dormitory room 
+                            scene sanatorium skin dormitory room  at bg_fullscreen
                             with Fade(0.3, 0.4, 0.3)
 
                         play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
@@ -7231,7 +7241,7 @@ label _day5 :
 
                     play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
                     
-                    scene sanatorium walkway
+                    scene sanatorium walkway at bg_fullscreen
                     with Fade(0.4, 0.5, 0.4, color="#000")
                     pause 1.0
 
@@ -7256,10 +7266,10 @@ label _day5 :
                     play sound "audio/door_open.mp3" noloop fadein 0.2 fadeout 0.2
 
                     if day4_tried_move and not day4_fight:
-                        scene sanatorium skin dormitory room
+                        scene sanatorium skin dormitory room at bg_fullscreen
                         with Fade(0.4, 0.5, 0.4, color="#000")
                     else:
-                        scene sanatorium dormitory room
+                        scene sanatorium dormitory room at bg_fullscreen
                         with Fade(0.4, 0.5, 0.4, color="#000")
                     
                     play sound "audio/door_close.mp3" noloop fadein 0.2 fadeout 0.2
@@ -7287,7 +7297,7 @@ label _day5 :
                 if day4_with_skin :
                     "В этот раз комната не пустовала."
 
-                    scene sanatorium skin dormitory room
+                    scene sanatorium skin dormitory room at bg_fullscreen
                     with Fade(0.4, 0.5, 0.4, color="#000")
 
                     "Мыкало, которого я не видел с момента заселения, отжимался на полу. Судя по промокшей футболке и блестящей лысине, занимался он уже давно и усердно."
@@ -7593,7 +7603,7 @@ label _day6 :
     centered "{size=+20}{font=fonts/sfpro_semibold.ttf}{cps=20.8}Расскажите друзьям об этой игре,\nмы хотим, чтобы о нашей новелле узнало как можно больше людей!  {/cps}{/font}{/size}"
     stop sound
     
-    scene light_pink with Fade(0.0, 0.0, 1.0)
+    scene light_pink at bg_fullscreen with Fade(0.0, 0.0, 1.0) 
     centered "{size=+20}Будьте в курсе выхода новой главы, а также станьте участником нашего крохотного сообщества!\n{/size}{size=+30}Переходи:{a=https://t.me/LoveBoozePanicLyric} Ссылка на телеграм-канал по игре{/a}{/size}"
     
     

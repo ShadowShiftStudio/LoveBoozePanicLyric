@@ -181,7 +181,7 @@ init python:
         def __init__(self, buttons, pos):
             renpy.Displayable.__init__(self)
             self.counter = Counter(100)
-            self.glass_image = Image("firstDays/kfc_glass.webp")
+            self.glass_image = Image("firstDays/glass.png")
             self.pos = pos
 
             self.reverse_animation = False
@@ -314,7 +314,7 @@ init python:
             return r
 
     class KfcMinigameDisplayable(renpy.Displayable):
-        def __init__(self, enemy_image_path = "pasha/neutral.webp", enemy_name = "pasha", player_name = "sanya"):
+        def __init__(self, enemy_image_path = "pasha/giggles.png", enemy_name = "pasha", player_name = "sanya"):
             renpy.Displayable.__init__(self)
 
             self.surrender_image = Image("firstDays/surrender drink.webp")
@@ -333,12 +333,12 @@ init python:
             self.gg_bar = BarDisplayable(100, 1)
             self.gg_glass = GlassDisplayable([], 1)
 
-            self.pasha_image = Image(enemy_image_path)
-            self.bowl_image = Image("firstDays/kfc_bowl.webp")
+            self.pasha_image = Transform(Image(enemy_image_path), zoom=0.73)
+            self.bowl_image = Image("firstDays/bowl.png")
             self.ground_image = Image("firstDays/kfc_ground.webp")
-            self.background_image = Image("firstDays/kfc inside.webp")
+            self.background_image = Image("firstDays/kfc inside.png")
 
-            self.gg_image = Image("sanya/neutral.webp")
+            self.gg_image = Transform(Image("sanya/neutral.png"), xzoom=-1)
 
             self.round_starting_counter = Counter(100)
 
@@ -410,8 +410,8 @@ init python:
             pasha_bar = renpy.render(self.pasha_bar, width, height, st, at)
             gg_bar = renpy.render(self.gg_bar, width, height, st, at)
 
-            pasha = renpy.render(self.pasha_image, width, height, st, at)
-            r.blit(pasha, (width / 4 - pasha.width / 2, height - pasha.height))
+            pasha = renpy.render(self.pasha_image, width, height, st, at) 
+            r.blit(pasha, (width / 4 - pasha.width / 2, height - pasha.height * 1.37))
 
             gg_sized_image = Transform(self.gg_image, zoom=0.6)
             gg = renpy.render(gg_sized_image, width, height, st, at)
