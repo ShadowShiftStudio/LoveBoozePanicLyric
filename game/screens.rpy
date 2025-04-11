@@ -251,8 +251,12 @@ screen say(who, what):
                 id "namebox"
                 style "namebox"
                 text who id "who"
-
-        text what id "what"
+            text what id "what":
+                ypos gui.dialogue_ypos
+        else:
+            text what id "what":
+                ypos gui.dialogue_ypos -0.2
+            
 
 
     ## Если есть боковое изображение ("голова"), показывает её поверх текста.
@@ -326,7 +330,7 @@ screen input(prompt):
             xanchor gui.dialogue_text_xalign
             xpos gui.dialogue_xpos
             xsize gui.dialogue_width
-            ypos gui.dialogue_ypos
+            ypos gui.dialogue_ypos - 0.2
 
             text prompt style "input_prompt"
             input id "input"
@@ -387,18 +391,20 @@ screen quick_menu():
     zorder 100
 
     if quick_menu:
-        hbox:
+        vbox:
             
             style_prefix "quick"
 
-            xalign 0.5
-            yalign 0.99
-            imagebutton auto "gui/button/back_button_%s.png" xpos 0 ypos 0 action Rollback()
-            # imagebutton auto "gui/button/history_button_%s.png" xpos 0 ypos 0 action ShowMenu('history')
-            imagebutton auto "gui/button/skip_button_%s.png" xpos 0 ypos 0 action Skip() alternate Skip(fast=True, confirm=True)
-            # imagebutton auto "gui/button/auto_button_%s.png" xpos 0 ypos 0 action Preference("auto-forward", "toggle")
-            imagebutton auto "gui/button/save_button_%s.png" xpos 0 ypos 0 action ShowMenu('load')
-            imagebutton auto "gui/button/load_button_%s.png" xpos 0 ypos 0 action ShowMenu('save')
+            xalign 1.0
+            yalign 0.0
+            xoffset -10
+            yoffset 10
+            #imagebutton auto "gui/button/back_button_%s.png" xpos 0 ypos 0 action Rollback()
+            #imagebutton auto "gui/button/history_button_%s.png" xpos 0 ypos 0 action ShowMenu('history')
+            #imagebutton auto "gui/button/skip_button_%s.png" xpos 0 ypos 0 action Skip() alternate Skip(fast=True, confirm=True)
+            #imagebutton auto "gui/button/auto_button_%s.png" xpos 0 ypos 0 action Preference("auto-forward", "toggle")
+            #imagebutton auto "gui/button/save_button_%s.png" xpos 0 ypos 0 action ShowMenu('load')
+            #imagebutton auto "gui/button/load_button_%s.png" xpos 0 ypos 0 action ShowMenu('save')
             imagebutton auto "gui/button/settings_button_%s.png" xpos 0 ypos 0 action ShowMenu('preferences')
 
         # hbox:
@@ -459,127 +465,135 @@ style quick_button_text:
 screen navigation():
 
     vbox:
-        #style_prefix "navigation"
         if not main_menu:
             xpos gui.navigation_xpos
         yalign 0.5
-        xalign 0.8
+        xalign 0.9
         
-        box_wrap True
+        box_wrap False
         
         spacing gui.navigation_spacing
 
         if main_menu:
+            # Используем изображения вместо текстовых кнопок
+            imagebutton:
+                idle "gui/main_buttons/new_game.png"
+                hover "gui/main_buttons/new_game_hover.png"
+                action Start()
+                yoffset 12
 
-            textbutton _("{size=60}{font=[gui.text_font]}Новая Игра{/font}{/size}") action Start():
-                xalign 0.5
-                text_align 0.5
-
+            
+            imagebutton:
+                idle "gui/main_buttons/continue.png"
+                hover "gui/main_buttons/continue_hover.png"
+                action ShowMenu("load")
         else:
-
-            textbutton _("{size=60}{font=[gui.text_font]}История{/font}{/size}") action ShowMenu("history"):
+            textbutton _("{size=60}{font=[gui.name_text_font]}История{/font}{/size}") action ShowMenu("history"):
                 xalign 0.5
                 text_align 0.5
 
-            textbutton _("{size=60}{font=[gui.text_font]}Сохранить{/font}{/size}") action ShowMenu("save"):
+            textbutton _("{size=60}{font=[gui.name_text_font]}Сохранить{/font}{/size}") action ShowMenu("save"):
                 xalign 0.5
                 text_align 0.5
 
-        textbutton _("{size=60}{font=[gui.text_font]}Загрузить{/font}{/size}") action ShowMenu("load"):
-            xalign 0.5
-            text_align 0.5
-
-        textbutton _("{size=60}{font=[gui.text_font]}Настройки{/font}{/size}") action ShowMenu("preferences"):
-            xalign 0.5
-            text_align 0.5
+        if not main_menu:
+            textbutton _("{size=60}{font=[gui.name_text_font]}Загрузить{/font}{/size}") action ShowMenu("load"):
+                xalign 0.5
+                text_align 0.5
+        
+        # Кнопка настроек всегда отображается
+        imagebutton:
+            idle "gui/main_buttons/settings.png"
+            hover "gui/main_buttons/settings_hover.png"
+            action ShowMenu("preferences")
                 
         if _in_replay:
-
-            textbutton _("{size=60}{font=[gui.text_font]}Завершить повтор{/font}{/size}") action EndReplay(confirm=True):
+            textbutton _("{size=60}{font=[gui.name_text_font]}Завершить повтор{/font}{/size}") action EndReplay(confirm=True):
                 xalign 0.5
                 text_align 0.5
 
         elif not main_menu:
-
-            textbutton _("{size=60}{font=[gui.text_font]}Главное меню{/font}{/size}") action MainMenu():
+            textbutton _("{size=60}{font=[gui.name_text_font]}Выйти{/font}{/size}") action MainMenu():
                 xalign 0.5
                 text_align 0.5
 
-        textbutton _("{size=60}{font=[gui.text_font]}Об игре{/font}{/size}") action ShowMenu("about"):
-            xalign 0.5
-            text_align 0.5
-
-        if renpy.variant("pc"):
-
-            ## Кнопка выхода блокирована в iOS и не нужна на Android и в веб-
-            ## версии.
-            textbutton _("{size=60}{font=[gui.text_font]}Выход{/font}{/size}") action Quit(confirm=not main_menu):
-                xalign 0.5
-                text_align 0.5
+        # Кнопка "Об игре" всегда отображается
+        imagebutton:
+            idle "gui/main_buttons/about.png"
+            hover "gui/main_buttons/about_hover.png"
+            action ShowMenu("about")
+            
+            
 
 screen navigation_for_game():
 
-    image "gui/logotype.png":
-                xalign 0.033
-                yalign 0.1
-                zoom 0.5
+    image "gui/logotype.png": 
+            xpos 0.016
+            ypos 0.06                                                             
+            zoom 0.7
     vbox:
         #style_prefix "navigation"
+        
         xpos 0.11
         yalign 0.7
         xalign 0.5
-        box_wrap True
+        box_wrap False
         
         spacing gui.navigation_spacing
+        if not renpy.variant("pc"):
+            # Return button at the top of navigation
+            textbutton _("{size=60}{font=[gui.name_text_font]}Вернуться{/font}{/size}") action Return():
+                xalign 0.5
+                text_align 0.5
 
         if main_menu:
 
-            textbutton _("{size=60}Новая Игра{/size}") action Start():
+            textbutton _("{size=60}{font=[gui.name_text_font]}Новая Игра{/font}{/size}") action Start():
                 xalign 0.5
                 text_align 0.5
 
         else:
 
-            textbutton _("{size=60}История{/size}") action ShowMenu("history"):
+            textbutton _("{size=60}{font=[gui.name_text_font]}История{/font}{/size}") action ShowMenu("history"):
                 xalign 0.5
                 text_align 0.5
 
-            textbutton _("{size=60}Сохранить{/size}") action ShowMenu("save"):
+            textbutton _("{size=60}{font=[gui.name_text_font]}Сохранить{/font}{/size}") action ShowMenu("save"):
                 xalign 0.5
                 text_align 0.5
 
-        textbutton _("{size=60}Загрузить{/size}") action ShowMenu("load"):
+        textbutton _("{size=60}{font=[gui.name_text_font]}Загрузить{/font}{/size}") action ShowMenu("load"):
             xalign 0.5
             text_align 0.5
 
-        textbutton _("{size=60}Настройки{/size}") action ShowMenu("preferences"):
+        textbutton _("{size=60}{font=[gui.name_text_font]}Настройки{/font}{/size}") action ShowMenu("preferences"):
             xalign 0.5
             text_align 0.5
-                
+            
 
         if _in_replay:
 
-            textbutton _("{size=60}Завершить повтор{/size}") action EndReplay(confirm=True):
+            textbutton _("{size=60}{font=[gui.name_text_font]}Завершить повтор{/font}{/size}") action EndReplay(confirm=True):
                 xalign 0.5
                 text_align 0.5
 
         elif not main_menu:
 
-            textbutton _("{size=60}Главное меню{/size}") action MainMenu():
+            textbutton _("{size=60}{font=[gui.name_text_font]}Выйти{/font}{/size}") action MainMenu():
                 xalign 0.5
                 text_align 0.5
 
-        textbutton _("{size=60}Об игре{/size}") action ShowMenu("about"):
+        textbutton _("{size=60}{font=[gui.name_text_font]}Об игре{/font}{/size}") action ShowMenu("about"):
             xalign 0.5
             text_align 0.5
 
-        if renpy.variant("pc"):
+        # if renpy.variant("pc"):
 
-            ## Кнопка выхода блокирована в iOS и не нужна на Android и в веб-
-            ## версии.
-            textbutton _("{size=60}Выход{/size}") action Quit(confirm=not main_menu):
-                xalign 0.5
-                text_align 0.5
+        #     ## Кнопка выхода блокирована в iOS и не нужна на Android и в веб-
+        #     ## версии.
+        #     textbutton _("{size=60}Выход{/font}{/size}") action Quit(confirm=not main_menu):
+        #         xalign 0.5
+        #         text_align 0.5
 
 
 style navigation_button is gui_button
@@ -608,6 +622,7 @@ screen main_menu():
     ## Эта пустая рамка затеняет главное меню.
     # frame:
     #     style "main_menu_frame"
+    
     add gui.main_menu_background at bg_fullscreen
     add RainAnimation()
     add gui.main_menu_foreground at bg_fullscreen
@@ -615,8 +630,6 @@ screen main_menu():
     ## Оператор use включает отображение другого экрана в данном. Актуальное
     ## содержание главного меню находится на экране навигации.
     use navigation
-    # image "gui/logotype.png":
-    #     xalign 0.02 yalign 0.1
         
     if gui.show_name:
         
@@ -673,12 +686,6 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
     style_prefix "game_menu"
 
-    if main_menu:
-        #add gui.main_menu_background
-        pass
-    else:
-        add gui.game_menu_background
-
     frame:
         style "game_menu_outer_frame"
 
@@ -693,9 +700,9 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
                 text _(title):
                     size 100
+                    font "fonts/Caveat.ttf"
                     text_align 0.5
-                    xalign 0.5 ypos -175
-                    drop_shadow_color (202, 77, 202, 200)
+                    xalign 0.5 yalign -0.275
                     drop_shadow (1, 5)
 
                 if scroll == "viewport":
@@ -732,15 +739,7 @@ screen game_menu(title, scroll=None, yinitial=0.0):
                     transclude
 
     use navigation_for_game
-
-    textbutton _("{size=60}Вернуться{/size}"):
-        style "return_button"
-        text_align 0.5
-        xalign 0.047
-        action Return()
     
-    
-
     label title
 
     if main_menu:
@@ -789,9 +788,10 @@ style game_menu_label:
     ysize 180
 
 style game_menu_label_text:
-    size gui.title_text_size
+    size 1
     color gui.accent_color
     yalign 0.5
+    xalign 0.5
 
 style return_button:
     xpos gui.navigation_xpos
@@ -822,14 +822,14 @@ screen about():
             xpos 0.65
             ypos 0.5
             #label "[config.name!t]"
-            text _("{color=#FAD}{size=+30}Любовь выпивка паника лирика\n\n\n{/size}{/color}"):
+            text _("{color=#FAD}{size=+30}Любовь выпивка паника лирика{/size}{/color}"):
                 text_align 0.5
                 xalign 0.5
             text _("{size=+10}{u}Авторы:{/u}\nAsind\nDarlingInSteam\nDanilka108\nTheNorth\nXpomin\nArtsBer\nrero{/size}"):
                 text_align 0.5
                 xalign 0.5
             #text _("Ссылка на репозиторий {a=https://github.com/nstu-games/TechTales-Love-Booze-and-Code}GitHub{/a}")
-            text _("{size=+20}\n\nСсылка на {a=https://t.me/LoveBoozePanicLyric}Телеграм-канал по игре{/a}{/size}"):
+            text _("{size=+20}\nСсылка на {a=https://t.me/LoveBoozePanicLyric}Телеграм-канал по игре{/a}{/size}"):
                 text_align 0.5
                 xalign 0.5
             
@@ -1004,7 +1004,7 @@ screen preferences():
 
                     vbox:
                         style_prefix "radio"
-                        label _("Режим экрана")
+                        label _("Экран")
                         textbutton _("Оконный") action Preference("display", "window")
                         textbutton _("Полный") action Preference("display", "fullscreen")
 
@@ -1802,8 +1802,8 @@ style scrollbar:
 style vscrollbar:
     variant "small"
     xsize gui.scrollbar_size
-    base_bar Frame("gui/phone/scrollbar/vertical_[prefix_]bar.png", gui.vscrollbar_borders, tile=gui.scrollbar_tile)
-    thumb Frame("gui/phone/scrollbar/vertical_[prefix_]thumb.png", gui.vscrollbar_borders, tile=gui.scrollbar_tile)
+    base_bar Frame("gui/phone/scrollbar/vertical_[prefix_]bar.png", gui.vscrollbar_borders, tile=gui.vscrollbar_tile)
+    thumb Frame("gui/phone/scrollbar/vertical_[prefix_]thumb.png", gui.vscrollbar_borders, tile=gui.vscrollbar_tile)
 
 style slider:
     variant "small"

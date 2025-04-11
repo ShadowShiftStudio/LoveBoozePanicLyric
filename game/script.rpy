@@ -226,13 +226,13 @@ label splashscreen:
     show logo studio logo at center with Dissolve(1.6)
     pause 1.7
     
-
-    scene back  at bg_fullscreen
-    with Dissolve(1.5)
-
     show logo disclaimer with dissolve
-    
     pause
+    scene black at bg_fullscreen
+    with Dissolve(1.5)
+    show text "{size=-4}{color=#dddddd}ВИЗУАЛЬНАЯ НОВЕЛЛА СОДЕРЖИТ СЦЕНЫ КУРЕНИЯ И УПОТРЕБЛЕНИЯ АЛКОГОЛЯ.\nПОМНИТЕ, ЭТО СМЕРТЕЛЬНО ОПАСНО ДЛЯ ВАШЕГО ЗДОРОВЬЯ!{/color}{/size}" at truecenter with dissolve
+    pause 5.0
+    hide text with dissolve
     stop sound
 
     return
@@ -1269,13 +1269,13 @@ label second_day :
     play music "audio/space-floating.mp3" fadein 2.5 loop fadeout 3.0 volume 0.1
     # определим фон игры, время игры в секундах
     # и зададим параметры игры – спрайты и положение для собираемых предметов
-    $ hf_init("sanya room", 30,
-        ("backpack", 1232, 436, _("Рюкзак ЖУК-РЕДАН")),
-        ("light", 610, 930, _("Зажигалка")),
-        ("marlboro1", 1147, 927, _("Пачка сигарет (пустая)")),
-        ("marlboro2", 1610, 690, _("Пачка сигарет (пуста)")),
-        ("t-shirt", 1038, 798, _("Футболка")),
-        ("pants", 568, 200, _("Трусы")),
+    $ hf_init("sanya room", 18,
+        ("backpack", 880, 480, _("Рюкзак ЖУК-РЕДАН")),
+        ("light", 140, 780, _("Зажигалка")),
+        ("marlboro1", 800, 1000, _("Пачка сигарет (пустая)")),
+        ("marlboro2", 1610, 620, _("Пачка сигарет (пуста)")),
+        ("t-shirt", 1038, 810, _("Футболка")),
+        ("pants", 668, 70, _("Трусы")),
         # НЕОБЯЗАТЕЛЬНЫЕ ПАРАМЕТРЫ:
         # включаем смену курсора при наведении
         mouse=True,

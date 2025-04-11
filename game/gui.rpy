@@ -25,7 +25,7 @@ init python:
 ## Цвета текста в интерфейсе.
 
 ## Акцентный цвет используется в заголовках и подчёркнутых текстах.
-define gui.accent_color = '#fc80fc'
+define gui.accent_color = '#f3bcf3'
 
 ## Цвет, используемый в текстовой кнопке, когда она не выбрана и не наведена.
 define gui.idle_color = '#f0f0f0'
@@ -35,7 +35,7 @@ define gui.idle_color = '#f0f0f0'
 define gui.idle_small_color = '#eee3e3'
 
 ## Цвет, используемых в кнопках и панелях, когда они наведены.
-define gui.hover_color = '#cc66cc'
+define gui.hover_color = '#bc96ce'
 
 
 ## Цвет, используемый текстовой кнопкой, когда она выбрана, но не наведена.
@@ -61,13 +61,11 @@ define gui.interface_text_color = '#fffbf8'
 ## Шрифт, используемый внутриигровым текстом.
 define gui.text_font = "fonts/Finder.ttf"
 
-
 ## Шрифт, используемый именами персонажей.
-define gui.name_text_font = "fonts/CloudWorld.ttf"
+define gui.name_text_font = "fonts/Caveat.ttf"
 
 ## Шрифт, используемый текстом вне игры.
-define gui.interface_text_font = "fonts/CloudWorld.ttf"
-
+define gui.interface_text_font = "fonts/AmaticSC-Bold.ttf"
 ## Размер нормального текста диалога.
 define gui.text_size = 43
 
@@ -93,7 +91,6 @@ define gui.title_text_size = 1
 
 define gui.main_menu_background = "images/sanya/main menu.png"
 define gui.main_menu_foreground = "images/sanya/main menu foreground.png"
-define gui.game_menu_background = "gui/game_menu.png"
 
 
 ## Диалог ######################################################################
@@ -101,18 +98,17 @@ define gui.game_menu_background = "gui/game_menu.png"
 ## Эти переменные контролируют, как диалог появляется на отдельной строчке.
 
 ## Высота текстового окна, содержащего диалог.
-define gui.textbox_height = 318
+define gui.textbox_height = 350
 
 ## Местоположение текстового окна по вертикали экрана. 0.0 — верх, 0.5 — центр и
 ## 1.0 — низ.
 define gui.textbox_yalign = 0.98
 
-
 ## Местоположение имени говорящего персонажа по отношению к текстовому окну.
 ## Это могут быть целые значения в пикселях слева и сверху от начала окна или
 ## процентное отношение, например, 0.5 для центрирования.
-define gui.name_xpos = 420
-define gui.name_ypos = -30
+define gui.name_xpos = 0.21
+define gui.name_ypos = 0.0
 
 ## Горизонтальное выравнивание имени персонажа. Это может быть 0.0 для
 ## левоориентированного, 0.5 для центрированного и 1.0 для правоориентированного
@@ -126,7 +122,7 @@ define gui.namebox_height = 81
 
 ## Границы окна, содержащего имя персонажа слева, сверху, справа и снизу по
 ## порядку.
-define gui.namebox_borders = Borders(80, 10, 0, 0)
+define gui.namebox_borders = Borders(0, 10, 0, 10)
 
 ## Если True, фон текстового окна будет моститься (расширяться по эффекту
 ## плитки). Если False, фон текстового окна будет фиксированным.
@@ -136,11 +132,11 @@ define gui.namebox_tile = False
 ## Размещение диалога по отношению к текстовому окну. Это могут быть целые
 ## значения в пикселях слева и сверху от текстового окна или процентное
 ## отношение, например, 0.5 для центрирования.
-define gui.dialogue_xpos = 415
-define gui.dialogue_ypos = 70
+define gui.dialogue_xpos = 0.21
+define gui.dialogue_ypos = 0.27
 
 ## Максимальная ширина текста диалога в пикселях.
-define gui.dialogue_width = 1100
+define gui.dialogue_width = 1150
 
 ## Горизонтальное выравнивание текста диалога. Это может быть 0.0 для
 ## левоориентированного, 0.5 для центрированного и 1.0 для правоориентированного
@@ -266,10 +262,10 @@ define gui.skip_ypos = 15
 define gui.notify_ypos = 18
 
 ## Интервал между выборами в меню.
-define gui.choice_spacing = 5
+define gui.choice_spacing = 1
 
 ## Кнопки в секции навигации главного и игрового меню.
-define gui.navigation_spacing = 6
+define gui.navigation_spacing = -22
 
 ## Контролирует интервал между настройками.
 define gui.pref_spacing = 15
@@ -355,15 +351,15 @@ define gui.history_height = None
 
 ## Местоположение, ширина и выравнивание заголовка, показывающего имя говорящего
 ## персонажа.
-define gui.history_name_xpos = 330
+define gui.history_name_xpos = 0.0
 define gui.history_name_ypos = 0
-define gui.history_name_width = 335
-define gui.history_name_xalign = 1.0
+define gui.history_name_width = 0.2
+define gui.history_name_xalign = 0.0
 
 ## Местоположение, ширина и выравнивание диалогового текста.
-define gui.history_text_xpos = 350
-define gui.history_text_ypos = 3
-define gui.history_text_width = 930
+define gui.history_text_xpos = 0.2
+define gui.history_text_ypos = 0
+define gui.history_text_width = 0.8
 define gui.history_text_xalign = 0.0
 
 
