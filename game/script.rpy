@@ -83,6 +83,7 @@ init python :
     def mstop(chan = "music", fout=1.0):
         renpy.music.stop(channel = chan, fadeout = fout)
 
+
 init:
     $ sshake = Shake((0, 0, 0, 0), 1.0, dist=15)
 
@@ -188,17 +189,10 @@ screen yuli_welcome():
         alpha 0.2
 
 screen nadya_welcome():
-        add "images/nadya/welcome.webp"
-        add Movie(play="images/video/petals.webm", side_mask=True):
-                zoom 2.0
-        add "images/nadya/welcome_focus.webp":
-            at transform:
-                truecenter
-                zoom 2.0
-                block:
-                    easein 1.0 zoom 1.02 
-                    easeout 0.6 zoom 1.0 
-                    repeat
+    add "images/nadya/welcome.png" at bg_fullscreen
+    add Movie(play="images/video/petals.webm", side_mask=True):
+        zoom 2.0
+        alpha 0.2
 
 screen emily_welcome():
         add "images/emily/welcome.webp"
@@ -253,6 +247,8 @@ label first_day:
 
     scene sanya room at bg_fullscreen
     with fade
+
+    show noise medium
 
     play sound "audio/deep-moan.mp3"
     "*Вздох*"
@@ -1329,7 +1325,7 @@ label second_day :
     "Подойдя к окну, я достал уже изрядно потрепанную пачку сигарет, но единственное, что я в ней нашел, – это затхлый запах табака."
     "Пиздец... " 
     extend "День только начался, а я уже лишился самого важного."
-    "Придется сходить в КБ за сигами. " 
+    "придётся сходить в КБ за сигами. " 
     extend "Ведь говорил же себе вчера купить пару пачек, но всё равно забыл."
 
     scene black
@@ -1340,7 +1336,7 @@ label second_day :
 
     pause 4.0
 
-    scene firstDays red white at bg_fullscreen
+    scene firstDays bristoff at bg_fullscreen
     with fade
 
     "Наконец-то купил сиги. Жизнь продолжается."
@@ -1830,7 +1826,7 @@ label second_day :
             sanya "Нет, всё в порядке, Юля. Ты лучше расскажи, как у тебя дела."
             "Поболтав немного, я решил предложить зайти за сигаретами. Свои новенькие я уже успешно проебал."
 
-            scene firstDays red white at bg_fullscreen
+            scene firstDays bristoff at bg_fullscreen
             with fade
 
             show yuli empathy
@@ -1840,7 +1836,7 @@ label second_day :
             sanya "Хорошо! Скоро буду."
 
             hide yuli empathy
-            scene firstDays magazine inside at bg_fullscreen
+            scene firstDays shop inside at bg_fullscreen
             with fade
             
             sanya "Можно, пожалуйста, пачку чапы ванильной."
@@ -1848,7 +1844,7 @@ label second_day :
             sanya "И два советских пломбира в вафельном стаканчике!"
             "Кассир" "Да, с вас..."
 
-            scene firstDays red white at bg_fullscreen
+            scene firstDays bristoff at bg_fullscreen
             with Fade(2.0, 0.0, 1.0)
             show yuli empathy
             with dissolve
@@ -1980,7 +1976,7 @@ label second_day :
         with fade
 
         "Выйдя из корпуса, я потянулся за пачкой сигарет, но тут же обнаружил, что её там нет."
-        "Осмотрев все карманы рюкзака, сигарет я так и не нашёл. Видимо, где-то посеял. Придется заглянуть в КБ на обратном пути."
+        "Осмотрев все карманы рюкзака, сигарет я так и не нашёл. Видимо, где-то посеял. придётся заглянуть в КБ на обратном пути."
         "А ведь только утром покупал. Может, спиздил кто?"
         "Ладно, в этот раз пойду пешком до дома. Сэкономлю хотя бы на проезде."
 
@@ -2018,14 +2014,14 @@ label second_day :
         stop music fadeout 5.0
         with None
         hide screen nadya_welcome
-        scene firstDays magazine inside at bg_fullscreen
+        scene firstDays shop inside at bg_fullscreen
         show nadya angry
         with Fade(3.0, 0.5, 1.5)
         
         "Девушка" "Сейчас-сейчас, дайте минутку, я найду паспорт."
         "Кассир" "Да ты уже пять минут пытаешься его найти, не продам я тебе сигареты. По закону нельзя."
 
-        show nadya light sad
+        show nadya sad
         with dissolve
 
         "Девушка" "Может тогда по студенческому продадите?"
@@ -2037,7 +2033,7 @@ label second_day :
         "Девушка" "Ухх, ну я тебе ещё покажу, злюка!"
 
         "Развернувшись, девушка увидела меня и попросила выйти с ней ненадолго."
-        scene firstDays red white at bg_fullscreen
+        scene firstDays bristoff at bg_fullscreen
         with fade
         play sound "audio/forest-sound.mp3" fadein 2.0 loop volume 0.4
         show nadya flirting
@@ -2046,9 +2042,9 @@ label second_day :
         "Девушка" "Слушай, не мог бы ты купить мне чапу ванильную? Я забыла паспорт, а кассир ни в какую не продаёт. Меня, если что, Надя зовут."
         nadya "А, погоди, я тебя же видела сегодня уже в деканате со спины?.."
         sanya "Ага, вспомнил. Это же ты мне в спину тогда влетела, что все бумаги по полу разлетелись."
-        show nadya light sad with dissolve
+        show nadya sad with dissolve
         nadya "Прости пожалуйста! Это могло случиться с каждым! Я не растеряха!"
-        show nadya smiles with dissolve
+        show nadya flirting with dissolve
         nadya "Ну вот, значит ты знаешь, что я учусь с тобой в одном университете, а значит мне точно есть 18!"
         nadya "Так ку-упишь сижки-сигаретки, а?"
 
@@ -2075,12 +2071,12 @@ label second_day :
         with dissolve
 
         if day2_nadya_bought_cigarettes :
-            hide nadya flirting 
-            with dissolve
+            
 
             sanya "Ладно. Сейчас куплю тебе чапу."
-
-            scene firstDays magazine inside at bg_fullscreen
+            hide nadya flirting 
+            with dissolve
+            scene firstDays shop inside at bg_fullscreen
             with fade
             stop sound fadeout 2.0
 
@@ -2096,7 +2092,7 @@ label second_day :
             nadya "Большое спасибо, ты меня правда спас. Кстати говоря, мне кажется мы ещё где-то виделись."
             "Я попытался вспомнить где же я её ещё мог видеть, но ничего в голову так и не пришло."
 
-            show nadya smiles
+            show nadya flirting
             with dissolve
 
             nadya "А-а, вспомнила, ты был вчера на лекции по лингвистике, тебя ещё препод выгнал."
@@ -2118,17 +2114,18 @@ label second_day :
 
         else :
 
-            hide nadya flirting 
+            show nadya angry with dissolve
+            "Поразмыслив над просьбой девушки, я решил не покупать ей сигареты, выглядит она совсем молодо, может быть ей и 18-ти лет-то нет."
+            hide nadya angry 
             with dissolve
 
-            "Поразмыслив над просьбой девушки, я решил не покупать ей сигареты, выглядит она совсем молодо, может быть ей и 18-ти лет-то нет."
             stop sound fadeout 2.0
-            scene firstDays magazine inside at bg_fullscreen
+            scene firstDays shop inside at bg_fullscreen
             with fade
             
             sanya "Добрый вечер, ванильный чапмен, пожалуйста."
             "Кассир оценивающим взглядом оглядел меня с ног до головы."
-            "Кассир" "Паспорт гони."
+            "Кассир" "Паспорт."
             "Недолго думая, я показал его, на что он утвердительно кивнул и начал рыться за прилавком."
             "Оплатив покупку, я вышел на улицу. Девушки я там так и не увидел."
             sanya "Интересно, куда она так неожиданно ушла."
@@ -2171,7 +2168,7 @@ label second_day :
 
                 "Недолго думая, я достал ещё одну сигаретку и протянул милой даме."
                 
-                show nadya smiles
+                show nadya flirting
                 with dissolve
 
                 nadya "Спасибо большое!"
@@ -2192,15 +2189,15 @@ label second_day :
                 hide nadya angry
                 with dissolve
 
-                "Надя ушла, оставив меня в одиночестве. В я поступил как мудак, может быть мы бы стали с ней хорошими друзьями или ещё чего больше."
+                "Надя ушла, оставив меня в одиночестве. Возможно, я поступил как мудак. Может, мы бы стали с ней хорошими друзьями или даже больше."
                 "Опять я расстроил человека, неужели я ни разу не могу поступить правильно?"
-                "Надеюсь хоть что-то хорошее придет в мою жизнь, завтра всё таки поеду в санаторий."
+                "Надеюсь хоть что-то хорошее придёт в мою жизнь, завтра всё таки поеду в санаторий."
                 "Заниматься самобичеванием, раскуривая сигарету, мне не хотелось. Затушив её, я незамедлительно отправился домой."
 
         if day2_nadya_bought_cigarettes or day2_nadya_get_one_sigarett :
             
             $ day2_nadya_have_a_dialog = True
-            show nadya handson 
+            show nadya delight 
             with dissolve
 
             nadya "Ну вот и отлично, как ты? Выглядишь уставшим."
@@ -2241,7 +2238,6 @@ label second_day :
             if rel_yuli >= 3:
                 extend " Но как тогда быть с Юлей?"
 
-
             menu :
 
                 "Согласиться" :
@@ -2255,7 +2251,7 @@ label second_day :
 
                     sanya "Да, я тоже еду! Можем вместе поехать на одном автобусе!"
 
-                    show nadya smiles
+                    show nadya flirting
                     with dissolve
 
                     nadya "Отлично, а я-то боялась, что без друзей совсем там окажусь!"
@@ -2295,10 +2291,8 @@ label second_day :
                     else:
                         nadya "Ой, ну, может ещё в санатории пересечёмся!"
 
-                    show nadya light sad
+                    show nadya sad
                     with dissolve
-
-                    
 
                     "Мы продолжили разговаривать на различные темы, пока у Нади не зазвонил телефон."
                     nadya "Прости, мне уже пора, добавишь меня в телеграме?"
@@ -2306,7 +2300,7 @@ label second_day :
                     nadya "Класс, мой номер: ..."
                     nadya "Ладно, мне пора идти. Ещё увидимся."
 
-                    hide nadya light sad
+                    hide nadya sad
                     with dissolve
 
                     "Уже было достаточно поздно, поэтому, недолго думая, я направился прямиком к своему дому."
@@ -2730,7 +2724,7 @@ label third_day :
     "На часах было без пяти восемь, а в конце улицы уже виднелся ждавший меня автобус."
     "Подойдя ближе, я был приятно удивлен, передо мной открылся вид не на старенький и потрепанный ЛИАЗ, а на красивый Икарус, он выглядел так, будто только сошёл с конвейера."
 
-    scene firstDays neew bus at bg_fullscreen
+    scene firstDays ikarus at bg_fullscreen
     with fade
 
     if day3_choice_lonely :
@@ -2828,7 +2822,7 @@ label third_day :
         play music "audio/sound-in-bus.mp3" fadein 4.0 fadeout 5.0 volume 0.10
         sanya "Привет, в этот раз запаслась чапой? А то мне кажется, я взял маловато!"
 
-        show nadya smiles
+        show nadya flirting
         with dissolve
 
         nadya "Ха-ха-ха, конечно взяла, если будем жить рядом, можем вместе ходить курить."
@@ -2919,7 +2913,7 @@ label third_day :
                     centered "{size=+24}\nArtsBer{fast}{w=1.3}{nw}{/size}"
                     centered "{size=+24}\nJuravl{fast}{w=1.3}{nw}{/size}"
                     centered "{size=+24}\nrero{fast}{w=1.3}{nw}{/size}"
-                    scene firstDays neew bus at bg_fullscreen
+                    scene firstDays ikarus at bg_fullscreen
                     
         stop music fadeout 0.5 
         play music "audio/sound-in-bus.mp3" fadein 3.0 fadeout 5.0 volume 0.10
@@ -4205,13 +4199,13 @@ label _sanatorium :
             play sound "audio/chair_crack.mp3" noloop fadein 0.1 fadeout 0.1 
             sanya "А где ты была? Я тебя искал во время экскурсии."
 
-            show nadya light sad 
+            show nadya sad 
             with dissolve
 
             nadya "Прости, я немного отвлеклась и потеряла группу. Пришлось самой все осматривать."
             sanya "А-а-а, ну, ничего, я тогда давай позже тебе все покажу? После процедур можем погулять."
 
-            show nadya smiles
+            show nadya flirting
             with dissolve
 
             nadya "Да, конечно, я только рада буду."
@@ -4242,7 +4236,7 @@ label _sanatorium :
             "Закончила за меня Надя и звонко рассмеялась. Я невольно залюбовался её искренней улыбкой, что так мягко сияла на нежно девичьем личике."
             sanya "Точняк! Ты не против составить мне компанию?"
             
-            show nadya smiles
+            show nadya flirting
             with dissolve
 
             nadya "Не против, пойдём проветримся."
@@ -4298,7 +4292,7 @@ label _sanatorium :
             sanya "Конечно, я только за."
             nadya "Тогда, до вечера?"
 
-            show nadya handson
+            show nadya delight
             with dissolve
 
             sanya "До вечера..."
@@ -4835,7 +4829,7 @@ label _sanatorium :
                 play sound "audio/cigarette_one_shot.mp3" noloop fadein 0.2 fadeout 0.2
 
                 "Какое же дерьмо... Двадцать лет жизни... Кажется, так мало, только начал жить, но по факту... Кажется, я уже заруинил свои характеристики персонажа и мне придётся жить на костылях всю мою жизнь. "
-                "Или не придется?"
+                "Или не придётся?"
                 "Сигарета почти догорела, бычок жег пальцы, но я не обратил на это внимание."
                 "Облокотился на бортик балкона."
                 "Я ничего не хочу. Ни искать смысл жизни, ни что-то ещё."
@@ -4979,7 +4973,7 @@ label _sanatorium :
             sanya "Кто бы говорил."
             "Я кивнул на сигареты в её руках, на что она лишь неловко пожала плечами."
 
-            show nadya handson
+            show nadya delight
             with dissolve
 
             nadya "Ну, рассказывай, как твой день прошёл."
@@ -5004,7 +4998,7 @@ label _sanatorium :
             sanya "Типа: \"вот я отучусь, потом туда, через год сюда, замуж дети или там карьера, путешествия, слава и прочее\"."
             "Она пожала плечами."
             
-            show nadya smiles
+            show nadya flirting
             with dissolve
 
             nadya "Я просто пока не знаю, чего хочу от жизни." 
@@ -5059,7 +5053,7 @@ label _sanatorium :
             scene sanatorium night  at bg_fullscreen
             with fade
 
-            show nadya smiles
+            show nadya flirting
             with dissolve
             
             nadya "Спасибо, что погулял со мной."
@@ -5500,7 +5494,7 @@ label _day5 :
             hide emily green neutral
             with dissolve
 
-            hide nadya light sad
+            hide nadya sad
             with dissolve
 
         "Подсяду к Наде." if day4_nadya_meal or day2_nadya_have_a_dialog and rel_nadya >= 3:
@@ -5540,7 +5534,7 @@ label _day5 :
             $ day5_emily_in_cafe = True
             $ rel_emily += 2
 
-            hide nadya light sad
+            hide nadya sad
             with dissolve
 
             
@@ -5677,7 +5671,7 @@ label _day5 :
         play sound "audio/heart.mp3" fadein 0.2 fadeout 0.2
         noname "И куда это ты такой красивый вырядился?"
 
-
+        # TODO: добавить страшни звук!
         show yuli empty glitch at left:
             alpha 0.0
             linear 0.15 alpha 0.5
@@ -5695,9 +5689,11 @@ label _day5 :
 
         show yuli empty glitch:
             alpha 0.0 zoom 3.0 ypos -500 xpos -500
-            linear 0.5 alpha 0.99
-            linear 0.2
-            linear 0.3 alpha 0.0
+            linear 0.07 alpha 0.99
+            linear 0.1
+            linear 0.05 alpha 0.0
+            linear 0.07 alpha 0.99
+            linear 0.05 alpha 0.0
 
         pause 1.5
 
@@ -5708,27 +5704,31 @@ label _day5 :
         stop sound fadeout 0.3 
         "На моей кровати беззаботно болтая ножками сидела улыбающаяся Юля."
 
-        show yuli empathy
+        show yuli disappointed
         with dissolve
 
         sanya "Ты как сюда попала?"
+        show yuli angry with dissolve
         yuli "Я первая свой вопрос задала!"
         "Она легко вспорхнула с кровати и прошлась мягким шагом по комнате."
         "Почему-то, глядя на её расслабленное лицо, я напрягся. "
         extend "Какой-то иррациональный страх пробирался под кожу."
         sanya "Гулять я пошёл..."
-        yuli "О! Супер, куда пойдём?"
+        show yuli empathy with dissolve
+        yuli "О! ладно, куда пойдём?"
+        show yuli empathy with dissolve:
+            zoom 1.3
+            ypos 1.2 xpos 0.5
         "Она подошла ближе, ожидающе уставившись на меня своими огромными глазищами."
         sanya "В парк мы идём, я уже договорился со знакомой, но думаю, она не будет против, если мы..."
         yuli "C кем договорился?"
         "Юля резко переменилась в лице. "
 
         show yuli angry
-        with dissolve
 
         extend "От прежней расслабленности не осталось и грамма, сейчас её моську украшало достаточно злое выражение лица."
         sanya "С Надей..."
-        with sshake
+        with sshake # TODO: добавить грохот
         yuli "С этой сукой... "
         extend "Понятно. "
         extend "Вот значит как."
@@ -6024,8 +6024,10 @@ label _day5 :
             play voice "audio/girl_laugh4.mp3"
             "Надя звонко рассмеялась, а я галантно предложил свой локоть, на который она с готовностью оперлась."
             
-            scene nadya white river art at bg_fullscreen
-            with Fade(0.3, 0.4, 0.3, color="#000")
+            scene nadya white welcome at bg_fullscreen with Fade(0.3, 0.4, 0.3, color="#000")
+            show nadya white welcome transparent:
+                xalign 0.5
+                yalign 1.0
 
             "Все-таки осень начинала входить в свои права, поэтому после заката температура опускалась достаточно низко."
             "Гулять в легкой одежде было можно, но и риск заболеть присутствовал. "
@@ -6312,11 +6314,12 @@ label _day5 :
             extend "Разве это не очевидно?"
             sanya "Нет!"
             "Глаза Юли опасно сузились, она лёгким движением переместилась ко мне, заглядывая прямо в глаза."
-
+            play sound "audio/footsteps.mp3" noloop fadeout 1.7
+            show noisy_overlay_light onlayer effects
             show yuli sad with Dissolve(0.2):
                 xpos 0.5 ypos 1.0 zoom 1.0
-                linear 0.4 ypos 1.4 zoom 1.4
-                linear 0.6 ypos 1.5 zoom 2.0
+                linear 0.7 ypos 1.4 zoom 1.4
+                linear 0.9 ypos 1.7 zoom 2.0
 
             yuli "Скажи, ты меня любишь?"
             sanya "Что?"
@@ -6380,7 +6383,7 @@ label _day5 :
                 with dissolve
 
                 "Зажмурившись, я увидел перед собой плачущую Юлю."
-                yuli "Однако за то, что ты меня расстроил, пообщавшись с той девкой, придется тебя немного наказать."
+                yuli "Однако за то, что ты меня расстроил, пообщавшись с той девкой, придётся тебя немного наказать."
                 play audio "audio/pain.mp3" noloop fadein 0.2 fadeout 0.2 volume 3.0
                 "Я почувствовал острую боль на запястьях. "
                 extend "Посмотрев на них, обнаружил глубокие кровоточащие царапины, которые появлялись прямо на глазах."
