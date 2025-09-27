@@ -5,6 +5,8 @@
 transform full_screen_bg:
     size (config.screen_width, config.screen_height)
     fit "cover"  # сохраняет пропорции и заполняет весь экран
+    xalign 0.5
+    yalign 1.0 
 
 # пример использования:
 init 1:

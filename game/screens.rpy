@@ -405,7 +405,7 @@ screen quick_menu():
             #imagebutton auto "gui/button/auto_button_%s.png" xpos 0 ypos 0 action Preference("auto-forward", "toggle")
             #imagebutton auto "gui/button/save_button_%s.png" xpos 0 ypos 0 action ShowMenu('load')
             #imagebutton auto "gui/button/load_button_%s.png" xpos 0 ypos 0 action ShowMenu('save')
-            imagebutton auto "gui/button/settings_button_%s.png" xpos 0 ypos 0 action ShowMenu('preferences')
+            # imagebutton auto "gui/button/settings_button_%s.png" xpos 0 ypos 0 action ShowMenu('preferences')
 
         # hbox:
             

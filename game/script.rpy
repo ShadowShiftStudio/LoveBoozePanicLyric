@@ -87,22 +87,17 @@ init python :
 init:
     $ sshake = Shake((0, 0, 0, 0), 1.0, dist=15)
 
-init:
-    
-    transform bg_fullscreen:
-        # Scale to cover the screen while maintaining aspect ratio
-        xysize (config.screen_width, config.screen_height)
-        fit "cover"
-        # Start centered horizontally and at top vertically
-        align (0.5, 0.0)
-        # Animation sequence
-        block:
-            # Slowly scroll down
-            ease 30.0 yalign 1.0
-            # Pause briefly at bottom
-            pause 2.0
-            # Ease back to top
-            ease 20.0 yalign 0.5
+transform bg_fullscreen:
+    xysize (config.screen_width, config.screen_height)
+    fit "cover"
+    subpixel True
+    nearest False
+    align (0.5, 0.0)
+    block:
+        ease 40.0 yalign 1.0
+        pause 2.0
+        ease 20.0 yalign 0.5
+
 
 define day1_pasha_kfc = False
 define day1_sanya_wants_camp = False
@@ -170,7 +165,46 @@ screen notification_popup_big():
     add "firstDays/notification.webp" xalign 1.0 yalign 0.055 
     text "[str_for_notification]" xalign 0.99 yalign 0.06 color "#ffffff" 
 
+transform migraine_fade_pulse:
+    additive 1.0
+    alpha 0.8
+    block:
+        easeout 0.8 alpha 0.4
+        pause 0.2
+        ease 0.8 alpha 0.8
+        pause 0.1
+
+        repeat
+
+transform migraine_jitter:
+    xalign 0.5 yalign 0.5
+    zoom 1.0 rotate 0
+    block:
+        easeout 1.0 zoom 1.02 rotate 2 
+        easein 1.0 zoom 0.98 rotate -2
+
+        repeat
+
+transform fullscreen_cover:
+    xysize (config.screen_width, config.screen_height)
+    fit "cover"
+
 screen toska():
+    on "show" action Play("sound", "audio/heart_beat_loop.mp3", loop=True, relative_volume=0.3)
+    on "hide" action Stop("sound", fadeout=1.0)
+
+    add "sanya/migraine.png": 
+        at transform:
+            xalign 0.5 yalign 0.5
+            zoom 1.0 rotate 0
+            additive 1.0
+            alpha 0.1
+            block:
+                easeout 0.2 alpha 0.8 zoom 1.02 rotate 2 
+                ease_quad 0.2 alpha 0.5 zoom 1.0 rotate 0
+                easein 0.4 zoom 0.98 rotate -2 alpha 1.0
+                repeat
+
     add "firstDays/night color.webp":
         at transform:
             xalign 0.5 yalign 0.5
@@ -180,6 +214,7 @@ screen toska():
                 linear 1.0 zoom 1.2 alpha 0.9
                 linear 0.6 zoom 1.0 alpha 1.0
                 repeat
+    
 
 screen yuli_welcome():
     add "images/yuli/welcome.png":
@@ -209,7 +244,6 @@ init python:
     images_auto()
 
 label splashscreen:
-    show nadya_smile 
     play sound "audio/intro_sound.mp3" volume 0.0
     pause 2.8
     play sound "audio/intro_sound.mp3" volume 0.5
@@ -232,12 +266,61 @@ label splashscreen:
     return
 
 label start:
+    stop music
+    jump dream_1
+
+transform cover_full:
+    size (config.screen_width, config.screen_height)
+    fit "cover"
+    xalign 0.5
+    yalign 0.5
+
+init python:
+    def preload_dream():
+        renpy.start_predict("images/dream/deep_forest")
+        renpy.start_predict("images/dream/deep_forest_burn")
+        renpy.start_predict("images/video/dream_1.webm")
+
+label dream_1:
+    $ preload_dream()
+    play music "music/Surreal-Game-Menu_Looping.mp3" volume 0.15 fadein 5.0
+    "Лес смыкается надо мной так плотно, что небо сужается до тонкой щели."
+    scene deep_forest at cover_full, heat_haze(strength=0.015, scale=4.2, speed=0.075, wobble=0.6, temporal=0.08) with fade
+    play sound "audio/forest_footsteps_loop.mp3" volume 0.05 loop fadein 5.0
+    "Я иду осторожно: иглы пружинят под ботинком, пахнет смолой и холодной землёй."
+    "Тишина тут не пустая — она дышит. Как будто лес считает мои шаги."
+    "{i}Я здесь уже был?{/i} Мысль выглядит чужой, но садится точно в центр груди."
+    "Влажный воздух тяжелее с каждым вдохом. Кора тёплая, будто ствол спрятал в себе уголь."
+
+    "Сначала приходит запах — горький, как обожжённый сахар. {w=0.9}Потом треск. {w=0.7}Ещё. {w=0.5}Ближе.{w=0.5}{nw}"
+    stop music
+    stop sound
+    play sound "audio/Eeroioe-Industrial-Drone.mp3" noloop volume 0.5
+    show expression Movie(play="images/video/dream_1.webm", loop=False) at cover_full, tv_noise(strength=0.0) as dream_video
+    $ renpy.pause(0.656, hard=True)
+
+    show deep_forest_burn at cover_full, heat_haze()
+    "Огонь не просит разрешения. Он просто есть."
+    "Воздух дрожит, как над пустынной дорогой, и каждый шаг становится короче, чем был."
+    "Лес вспыхивает сразу — будто кто-то перевернул страницу на последнюю."
+    stop sound fadeout 0.2
+    "Я закрываю глаза — но свет всё равно проходит сквозь веки."
+    "{i}Стой.{/i}{w=2}{nw}"
+    play sound "audio/Creepy-Roll-Over-1.mp3" 
+    centered "{i}Смотри.{/i}{fast}{w=1}"
+    "Воздух становится колючим, как стеклянная пыль. Вдох режет горло."
+    "Огонь складывает моё имя и произносит его чужим, сухим голосом."
+    "Жар подбирается ближе, мир шевелится, а я — {w}нет."
+    "Я пытаюсь сделать шаг, но не могу."
+    "{i}Поздно.{/i}"
+    play sound "audio/Creepy-Roll-Over-1.mp3" 
+    scene black
+    $ renpy.pause(0.2, hard=True)
     jump first_day
 
+
 label first_day:
-    image night = "firstDays/night color.webp"
     scene black
-    stop music
     play sound "audio/alarm-sound.mp3" volume 0.05 loop
     "*Звук будильника*"
     stop sound
@@ -247,8 +330,6 @@ label first_day:
 
     scene sanya room at bg_fullscreen
     with fade
-
-    show noise medium
 
     play sound "audio/deep-moan.mp3"
     "*Вздох*"
@@ -289,15 +370,7 @@ label first_day:
     "Cпрашиваю я себя, и в голове зарождается нотка беспокойства."
     stop sound fadeout 10.0
     play music "audio/bad_dream.mp3" volume 0.5 fadein 10.0
-    image nc = "firstDays/night color.webp"
-    show nc:
-        xalign 0.5 yalign 0.5
-        alpha 0.0
-        linear 10.0 alpha 0.6
-        block:
-            linear 1.0 zoom 1.2 alpha 0.5
-            linear 0.6 zoom 1.0 alpha 0.6
-            repeat
+    show screen toska
     "Я как будто уже и не помню себя трезвым...."
     "Что со мной происходит? Как я допустил, чтобы всё дошло до такого состояния?" 
     "Раньше я был гораздо ответственнее и отдавал себе отчёт в своих поступках." 
@@ -305,10 +378,10 @@ label first_day:
     extend " и я даже не помню, когда последний раз был настоящим собой — трезвым и ясно мыслящим."
     "Я делаю глубокий вдох, пытаясь очистить голову, но мысли продолжают метаться."
     "Может быть, мне стоит отказаться от алкоголя, – размышляю я, пытаясь найти подобие равновесия."
-    "Речь идет не только о здоровье, но и о восстановлении контроля над своей жизнью."
+    "Речь идёт не только о здоровье, но и о восстановлении контроля над своей жизнью."
     stop music fadeout 0.5
+    hide screen toska 
     play sound "audio/bus.mp3" volume 0.07 fadein 1.4
-    hide nc 
     "Из бесконечного потока мыслей меня смог вытащить только гудок подъезжающего ЛИАЗа."
     "А вот и мой автобус подъезжает."    
     sanya "Ладно, пора и честь знать."
@@ -585,8 +658,8 @@ label first_day:
     "Преподаватель" "Стукните его там кто-нибудь рядом!"
 
     show yuli horny:
-        linear 1.0 xalign 0.5 zoom 1.3 yalign 0.6
-        linear 1.0 xalign 0.1 zoom 1.0 yalign 1.0
+        linear 1.0 xalign 0.5 zoom 1.3 yoffset 20
+        linear 1.0 xalign 0.1 zoom 1.0 yalign 1.02 yoffset 0
 
     "*Юля легко проводит рукой по моему подбородку, поворачивая голову в сторону преподавателя*"
 
@@ -687,9 +760,9 @@ label first_day:
         scene black with fade
         centered "{size=+20}{color=#BFA}Игра \"Перепей соперника\"\n{/color}{/size}Закусывая после стопки, Вы пьянеете меньше, но и получаете меньше очков{w=1.0}\nНе закусывая, Вы зарабатываете больше очков уважения, но и пьянеете сильнее{w=1.0}\n\nЧем вы пьянее, тем больше очков вы получаете,\nно если вы перепьёте, то проиграете!"
 
-
         call play_kfc_minigame from _call_play_kfc_minigame
         stop music fadeout 2.0
+        "[_return]"
         if _return == "pasha":
             $ day1_pasha_lose_in_drinking = False
         elif _return == "sanya":
@@ -697,13 +770,23 @@ label first_day:
             
         
         play sound "audio/street-sound.mp3" volume 0.5 fadein 2.0  loop
-        scene firstDays kfc outside  at bg_fullscreen
         with Fade(0.0, 0.0, 2.0, color="#fff")
         
-        show pasha neutral:
-            alpha 0.0 center
+        if not day1_pasha_lose_in_drinking :
+            scene firstDays kfc outside at cover_full, heat_haze(strength=0.015, scale=4.2, speed=0.005, wobble=0.9, temporal=0.88) with fade
+        else:
+            scene firstDays kfc outside at cover_full, heat_haze(strength=0.45, scale=1.2, speed=0.15, wobble=0.9, temporal=2.88) with fade
+        
+        show pasha neutral  at heat_haze(strength=0.005, scale=4.2, speed=0.005, wobble=0.9, temporal=10.88):
+            alpha 0.0 xalign 0.5 yalign 0.0 yoffset -100
             linear 1.0 alpha 1.0
-
+            subpixel True
+            nearest False
+            block:
+                ease 4.0 rotate 1
+                ease 3.5 rotate -1
+                repeat
+        
         "Знатно накидавшись, мы вышли из кефаса и решили перекурить."
 
         show pasha giggles
@@ -866,7 +949,7 @@ label first_day:
 
             "Вау, она выглядит ещё красивее, чем я помнил."
 
-            yuli "На улице идет сильный дождь, но я подумала, что мы всё равно можем прогуляться по мосту."
+            yuli "На улице идёт сильный дождь, но я подумала, что мы всё равно можем прогуляться по мосту."
 
             sanya "Конечно, звучит неплохо."
 
@@ -895,21 +978,20 @@ label first_day:
             scene black
             with Fade(2.0, 0.0, 1.0)
             
-            "Я не могу поверить, как хорошо всё идет. Она потрясающая. Кажется, она мне действительно нравится."
-            image foreground_cafe = "firstDays/foreground cafe.webp"
+            "Я не могу поверить, как хорошо всё идёт. Она потрясающая. Кажется, она мне действительно нравится."
             play sound "audio/kfc-sound.mp3" volume 0.1 fadein 3.0
             scene firstDays background cafe at bg_fullscreen
             show yuli happy:
                 xalign 0.7
                 yalign 0.5
                 zoom 0.77
-            show foreground_cafe
+            show firstDays foreground cafe
             show black
             hide black  with Fade(2.0, 0.0, 2.0)
             
 
             storyteller "Пока они сидели в уютном кафе, наслаждаясь едой и компанией друг друга, Саня чувствовал себя на вершине мира. Он не мог поверить, как ему повезло, что он встретил такую девушку, как Юля."
-            show yuli horny2 with dissolve:
+            show yuli horny with dissolve:
                 xalign 0.7
                 yalign 0.5
                 zoom 0.77
@@ -924,7 +1006,7 @@ label first_day:
             stop music
             "Не могу дождаться, когда увижу её вновь. Это начало чего-то особенного."
             hide yuli happy with dissolve
-            hide foreground_cafe
+            hide firstDays foreground cafe
             scene black
             with fade
             stop sound
@@ -1029,19 +1111,19 @@ label first_day:
         sanya "Да, дух захватывает..."
         yuli "Какое удивительное зрелище! "
         extend "Это похоже на произведение искусства!"
-        storyteller "Восхитилась Юля"
-        storyteller "Саня кивнул, соглашаясь"
+        storyteller "Восхитилась Юля."
+        storyteller "Саня кивнул, соглашаясь."
         sanya "Не могу не согласиться. "
-        extend "Знаешь, редко встретишь человека, который так ценит мелочи жизни"
+        extend "Знаешь, редко встретишь человека, который так ценит мелочи жизни."
         yuli "Я понимаю, о чем ты. "
-        extend "Иногда кажется, что люди слишком сильно заняты своими проблемами, чтобы замечать красоту вокруг"
+        extend "Иногда кажется, что люди слишком сильно заняты своими проблемами, чтобы замечать красоту вокруг."
         sanya "Именно! Будто вдыхаешь глоток свежего воздуха, когда встречаешь кого-то, кто видит вещи так же, как и ты."
-        yuli "Да, кажется, что мы на одной волне"
-        sanya "И это так здорово, когда можешь разговаривать с кем-то новым и совсем не испытывать дискомфорта"
-        yuli "Мы с тобой точно на одной волне"
-        storyteller "подтвердила Юля, улыбаясь"
+        yuli "Да, кажется, что мы на одной волне."
+        sanya "И это так здорово, когда можешь разговаривать с кем-то новым и совсем не испытывать дискомфорта."
+        yuli "Мы с тобой точно на одной волне."
+        storyteller "подтвердила Юля, улыбаясь."
         sanya "А хочешь пойти со мной куда-нибудь? Может быть, выпьем кофе?"
-        yuli "С удовольствием. Звучит замечательно"
+        yuli "С удовольствием. Звучит замечательно."
 
         "Довольно резво тучи закрыли всё небо."
         "Начал собираться дождь."
@@ -1064,19 +1146,19 @@ label first_day:
         with dissolve
 
         yuli "Обнимемся?"
-        storyteller "Саня на мгновение замешкался, испытывая чувство вины за то, что он так плохо поступил по отношению к Паше"
-        storyteller "Но, в то же время, он не мог устоять перед соблазном провести больше времени с Юлей"
-        storyteller "Он наклонился и крепко обнял её"
-        sanya "Конечно, давай обнимемся"
+        storyteller "Саня на мгновение замешкался, испытывая чувство вины за то, что он так плохо поступил по отношению к Паше."
+        storyteller "Но, в то же время, он не мог устоять перед соблазном провести больше времени с Юлей."
+        storyteller "Он наклонился и крепко обнял её."
+        sanya "Конечно, давай обнимемся."
         
         hide yuli horny
         
         scene firstDays bridge at bg_fullscreen
         with fade
 
-        storyteller "Пока они шли по мосту, Саня не мог отделаться от ощущения кома в горле. Он понимал, что неправильно обошёлся с товарищем"
-        storyteller "Но компания Юли была так приятна, что он отогнал эту мысль на задворки сознания"
-        storyteller "Когда они дошли до середины моста, Саня увидел, что к ним приближается Паша. Он ощутил приступ вины и тревоги, когда понял, что его друг ждал его всё это время"
+        storyteller "Пока они шли по мосту, Саня не мог отделаться от ощущения кома в горле. Он понимал, что неправильно обошёлся с товарищем."
+        storyteller "Но компания Юли была так приятна, что он отогнал эту мысль на задворки сознания."
+        storyteller "Когда они дошли до середины моста, Саня увидел, что к ним приближается Паша. Он ощутил приступ вины и тревоги, когда понял, что его друг ждал его всё это время."
         
         show pasha angry at center with dissolve:
             blur 5.0
@@ -1193,7 +1275,7 @@ label first_day:
 
     menu :
         "Отличная идея!" :
-            $ str_for_notification = "У этого действия будут последствия"
+            $ str_for_notification = "У этого действия минорные последствия"
             
             show screen notification_popup_big 
             with dissolve
@@ -1203,7 +1285,7 @@ label first_day:
 
             $ mood_counter += 1; 
         "Какой-то отстой." : 
-            $ str_for_notification = "У этого действия будут последствия"
+            $ str_for_notification = "У этого действия минорные последствия"
             
             show screen notification_popup_big 
             with dissolve
@@ -1401,15 +1483,7 @@ label second_day :
 
         play music "audio/bad_dream.mp3" fadein 1.0 fadeout 1.0 volume 0.6
         play sound "audio/heart.mp3" fadein 0.9 fadeout 0.2
-        image nc = "firstDays/night color.webp"
-        show nc:
-            xalign 0.5 yalign 0.5
-            alpha 0.0
-            linear 1.5 alpha 0.6
-            block:
-                linear 1.0 zoom 1.2 alpha 0.5
-                linear 0.6 zoom 1.0 alpha 0.6
-                repeat
+        show screen toska
         "Тягостное ощущение того, что время в этом городе остановилось или потихоньку утекает, сковывает мои мысли"
         "В молчаливом хоре окружающих меня домов и улиц я словно теряю себя"
         "Тот город, который когда-то вдохновлял меня своей суетой, сейчас кажется утратившим свою яркость"
@@ -1417,7 +1491,7 @@ label second_day :
         "Но я их упускаю, забившись в собственную повседневность и рутину"
         stop sound fadeout 1.0
  
-        hide nc with dissolve
+        hide screen toska with dissolve
 
     $ hi_score = max(hi_score, int(_return))
     
@@ -1520,17 +1594,10 @@ label second_day :
     if not day1_yuli_agreed_after_kfc and day1_pasha_kfc :
 
         pasha "Кстати, а как там с девочкой твоей дела обстоят?"
-        image night = "firstDays/night color.webp"
         sanya "Ну ты же знаешь, что я тебе сейчас ничего хорошего не расскажу..."
 
         play sound "audio/heart.mp3" fadein 4.0 fadeout 0.5 volume 0.3
-        show night:
-            alpha 0.0
-            linear 4.0 alpha 1.0
-            block:
-                linear 1.0 zoom 1.2 alpha 0.9
-                linear 0.6 zoom 1.0 alpha 1.0
-                repeat
+        show screen toska
 
         "Ужасно неудобно вышло с Юлей, на самом деле. Бедный человек, у неё же и правда проблемы в жизни, мы с ней практически незнакомы, а она мне так открылась на эмоциях. А я то и дело избегаю её."
 
@@ -1543,7 +1610,7 @@ label second_day :
         show pasha sad
         with dissolve
 
-        hide night with dissolve
+        hide screen toska with dissolve
         stop sound
 
         pasha "Алё-ё, Саня, ты завис тут немного!"
@@ -1619,7 +1686,7 @@ label second_day :
     stop music fadeout 2.0
     stop sound fadeout 2.0
 
-    scene firstDays nstu que at bg_fullscreen
+    scene firstDays queue at bg_fullscreen
     with fade
 
     play sound "audio/people-noise.mp3" fadein 2.0 loop volume 0.05
@@ -1635,16 +1702,16 @@ label second_day :
     # определим фон игры, время игры в секундах
     # и зададим параметры игры – спрайты и положение для собираемых предметов
     $ sec_medical_certificates = (9 if not renpy.mobile else 18)
-    $ hf_init("nstu que", sec_medical_certificates,
-        ("a1", 413, 780, _("1-НДФЛ")),
+    $ hf_init("que_game", sec_medical_certificates,
+        ("a1", 730, 600, _("1-НДФЛ")),
         ("a2", 918, 980, _("2-НДФЛ")),
-        ("a3", 630, 710, _("3-НДФЛ")),
-        ("a4", 413, 900, _("Справка об усыновлении")),
-        ("a5", 555, 950, _("Справка о целостности ануса")),
-        ("a6", 990, 711, _("Скан паспорта")),
+        ("a3", 330, 410, _("3-НДФЛ")),
+        ("a4", 413, 1200, _("Справка об усыновлении")),
+        ("a5", 555, 750, _("Справка о целостности ануса")),
+        ("a6", 990, 911, _("Скан паспорта")),
         ("a7", 733, 894, _("Скан свидетельства о рождении")),
-        ("a8", 900, 780, _("Направление на анализы кала")),
-        ("a9", 885, 694, _("Справка об отсутствии судимостей")),
+        ("a8", 400, 880, _("Направление на анализы кала")),
+        ("a9", 885, 494, _("Справка об отсутствии судимостей")),
         # НЕОБЯЗАТЕЛЬНЫЕ ПАРАМЕТРЫ:
         # включаем смену курсора при наведении
         mouse=True,
@@ -1882,7 +1949,7 @@ label second_day :
             #"Учитывая, как она думает над своими действиями, мне может что-нибудь да перепасть."
             "Юля не успела ответить, как у неё зазвонил телефон."
 
-            show yuli horny2
+            show yuli horny
             with dissolve
 
             yuli "Прости, Саш. Мама уже зовёт домой, сегодня не получится, — поздновато."
@@ -1893,7 +1960,7 @@ label second_day :
 
             stop music fadeout 3.0
 
-            hide yuli horny2
+            hide yuli horny
             show black
             with Fade(2.0, 0.0, 1.0)
 
@@ -1952,7 +2019,7 @@ label second_day :
             sanya "Не хочешь ко мне зайти, можем посмотреть кино или заняться чем-то ещё заняться?"
             "После этих слов у Юли зазвонил телефон."
 
-            show yuli horny2
+            show yuli horny
             with dissolve
 
             yuli "Прости, Саш. Мама уже зовёт домой, сегодня никак получится."
@@ -1964,7 +2031,7 @@ label second_day :
 
             stop music
 
-            hide yuli horny2
+            hide yuli horny
             show black
             with fade
 
@@ -3330,7 +3397,7 @@ label _sanatorium :
             "Она беспомощно развела руками, с вежливой улыбкой глядя на меня. Однако, судя по злорадным огонькам в глазах, это было неправдой. "
             sanya "Вы что, хотите, чтобы я жил... вот с этим?!"
             "Я махнул рукой в сторону алкаша, уже раздевшегося до трусов."
-            "Тот, поняв, что речь идет о нём, поднял на меня своё пропитое лицо." 
+            "Тот, поняв, что речь идёт о нём, поднял на меня своё пропитое лицо." 
             "Пару секунд на его лице отражался мучительный умственный процесс. Потом морда мужика побагровела."
 
             hide valeria angry
@@ -3372,7 +3439,7 @@ label _sanatorium :
             "Но мучился я не долго – висок взорвался болью и я потерял сознание."
             "Очнулся я от резкого запаха, чуть ли не вскочив с  кушетки.  Но чьи-то стальные руки крепко прижали меня к жесткой поверхности, не давай двинуться лишний сантиметр. "
 
-            scene firstDays medicina at bg_fullscreen
+            scene firstDays medical at bg_fullscreen
             with fade
             
             play music "audio/medicine_sound.mp3" noloop fadein 1.0 fadeout 1.0
@@ -3625,7 +3692,7 @@ label _sanatorium :
                     "Перед глазами все вертелось и кружилось, а во рту будто бы насрали кошки. Причем несколько раз."
                     "Легкие болели так, будто бы их прострелили. Нахуй я согласился?.. Щас бы сидел в столовой, пил чаек с девчонками и в ус не дул."
 
-                    scene firstDays medicina at bg_fullscreen
+                    scene firstDays medical at bg_fullscreen
                     with Fade(0.4, 0.5, 0.4, color="#000")
                     
                     play music "audio/medicine_sound.mp3" fadein 1.0 fadeout 1.0
@@ -3980,7 +4047,7 @@ label _sanatorium :
             "Живот болел так, будто бы его прострелили, а пищевод саднил, будто я хлестал кислоту, а не коньяк."
             "Нахуй я согласился?.. Щас бы сидел в столовой, пил чаек с девчонками и в ус не дул."
             
-            scene firstDays medicina at bg_fullscreen
+            scene firstDays medical at bg_fullscreen
             with fade
 
             show grusha happy
@@ -5129,7 +5196,7 @@ label _sanatorium :
         "Девушка больше спрашивала и слушала, что в корне отличалось от того, к чему я привык."
         "Так что вскоре я расслабился и, кажется, впервые получал удовольствие от долгой беседы с девушкой."
 
-        show yuli horny2
+        show yuli horny
         with dissolve
 
         yuli "Может сходим на берег?"
@@ -5795,8 +5862,11 @@ label _day5 :
             
             "Мрачное настроение сразу же исчезло, как только я встретил Надю."
             
-            scene nadya white meet art at bg_fullscreen
+            scene nadya white welcome at bg_fullscreen with Fade(0.3, 0.4, 0.3, color="#000")
             with Fade(0.3, 0.4, 0.3, color="#000")
+            show nadya white welcome transparent:
+                xalign 0.5
+                yalign 1.0
 
             "Воздушное серое платье, босоножки и легкая походка."
             "Эх... "
@@ -5932,7 +6002,7 @@ label _day5 :
             "Агриппина сидела около своей вотчины и, попыхивая трубку, смотрела с задумчивым видом вдаль. "
             "Однако, увидев меня, идущего на прицепе у Нади, Агриппина сузила глаза и встала с кресла, потушив трубку."
 
-            show grusha grusha neutral at left
+            show grusha neutral at left
             with dissolve
             show nadya white open mouth at right:
                 zoom 1.2
@@ -5945,7 +6015,7 @@ label _day5 :
             with vpunch
             "Все поплыло, ноги начали подкашиваться, но меня тут же кто-то подхватил и куда-то повел. "
 
-            hide grusha grusha neutral
+            hide grusha neutral
             with dissolve
 
             scene black 
@@ -5953,7 +6023,7 @@ label _day5 :
 
             pause 2.0
 
-            scene firstDays medicina at bg_fullscreen
+            scene firstDays medical at bg_fullscreen
             with dissolve
             
             play sound "audio/chair_crack.mp3" noloop fadein 0.3 fadeout 0.3
@@ -6131,13 +6201,13 @@ label _day5 :
 
                         stop sound fadeout 1.0
                         
-                        scene nadya pijamas evening art at bg_fullscreen
+                        scene nadya pijamas art at bg_fullscreen
                         with Fade(2.0, 1.0, 3.0)
 
                         "На кровати, в зеленой пижаме сидела Надя, сжимая в руках подушку."
                         nadya "Садись на вторую."
                         "Она указала на соседнюю кровать, на которую я и приземлился."
-                        sanya "Тебе идет эта пижама, подходит к твоим волосам."
+                        sanya "Тебе идёт эта пижама, подходит к твоим волосам."
                         
                         "Надя немного зарделась."
                         nadya "Спасибо."
@@ -7491,7 +7561,7 @@ label _day5 :
         "Кажется, этот ответ её расстроил."
         extend "Повисла неловкая тишина."
 
-        show yuli horny2
+        show yuli horny
         with dissolve
 
         yuli "А давай встретимся сегодня!"
@@ -7631,6 +7701,6 @@ label _end :
     centered "Andrey Usikov - Rostov Font\nChristian Robertson - Roboto Font\nSan Francisco Pro Font - © 2015-2017 Apple Inc. All rights reserved.\nCMU Sans Serif Font - under SIL Open Font License\n Perun. Copyright © Stefan Peev, Context Ltd, 2016{fast}"
     centered "Strauss Festival Orchestra Vienna\nLudovico Einaudi - Nefeli\nSymphony No. 4 in A Major, Op. 90, MWV N16, \"Italian\": IV. Saltarello. Presto. Симфонический орекстр Бирмингема.\nSchumann: Kinderszenen, Op. 15 - 7. Traumerei. Владимир Самойлович Горовиц\n9 духовно-музыкальных сочинений: III. Херувимская песнь; Исполнитель: Государственный камерный хор Министерства культуры СССР; Композитор: Пётр Ильич Чайковский{fast}"
     centered "Awakening Dew - Keys of Moon\Downpour - Keys of Moon\nForest Walk - Alexander Nakarada\nHall of the Mountain King - Kevin MacLeod • Edvard Grieg\nCherry Metal - Arthur Vyncke\nSpace Floating - FSM Team feat. < e s c p >\nOtixx - Nostalgia\nharris cole & aso - safe now (slowed & reverb){fast}"
-
+    centered "Several music and SFX\nby Eric Matyas\nwww.soundimage.org"
     centered "{size=+24}Спасибо за прохождение первой главы новеллы. Мы благодарны за Ваше внимание!{/size}"
     centered "{size=+24}Новости по выходу новой главы можно отслеживать в нашей группе ВК. Ссылка в разделе \"Об игре\"{/size}"
