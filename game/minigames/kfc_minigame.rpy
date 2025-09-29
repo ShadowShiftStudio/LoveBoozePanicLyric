@@ -355,6 +355,12 @@ init python:
 
             self.winner = ""
 
+        def _complete_game(self, winner):
+            if self.winner != "":
+                return
+            self.winner = winner
+            renpy.end_interaction(self.winner)
+
         def on_gg_bite(self):
             play("audio/bite.mp3")
             self.update_stats(self.bite_decrease)
@@ -382,13 +388,11 @@ init python:
             self.gg_bar.add_score((100 - self.gg_bar.percent) * 10)
 
             if self.pasha_bar.percent <= 0:
-                self.winner = self.player_name
-                renpy.timeout(0.001)
+                self._complete_game(self.player_name)
                 return
 
             if self.gg_bar.percent <= 0:
-                self.winner = self.enemy_name
-                renpy.timeout(0.001)
+                self._complete_game(self.enemy_name)
                 return
 
             renpy.redraw(self.gg_bar, 0.001)
@@ -463,17 +467,17 @@ init python:
                 and x >= self.surrender_btn_coords[0] and x <= self.surrender_btn_coords[0] + self.surrender_btn.width\
                 and y >= self.surrender_btn_coords[1] and y <= self.surrender_btn_coords[1] + self.surrender_btn.height \
                 and ev.type == pg.MOUSEBUTTONDOWN and ev.button == 1:
-                self.winner = self.enemy_name
+                self._complete_game(self.enemy_name)
 
             if self.winner != "":
                 return self.winner
+            raise renpy.IgnoreEvent()
 
-
-screen kfc_minigame():
-    default kfc_minigame = KfcMinigameDisplayable()
+screen kfc_minigame(enemy_image_path="pasha/giggles.png", enemy_name="pasha", player_name="sanya"):
+    default kfc_minigame = KfcMinigameDisplayable(enemy_image_path=enemy_image_path, enemy_name=enemy_name, player_name=player_name)
     add kfc_minigame
 
-label play_kfc_minigame:
+label play_kfc_minigame(enemy_image_path="pasha/giggles.png", enemy_name="pasha", player_name="sanya"):
     window hide  # Hide the window and quick menu while in pong
     $ quick_menu = False
 
@@ -481,7 +485,7 @@ label play_kfc_minigame:
 
     scene white
     with dissolve
-    call screen kfc_minigame
+    call screen kfc_minigame(enemy_image_path=enemy_image_path, enemy_name=enemy_name, player_name=player_name)
     with fade
 
     $ quick_menu = True
@@ -491,4 +495,5 @@ label play_kfc_minigame:
     #    "Саня конкретно перебрал с выпивкой в этот раз... Ноги еле идут..."
     #else:
     #    "Вы выиграли! Паша конкретно перебрал с выпивкой в этот раз..."
-    #return _return
+    return _return
+
