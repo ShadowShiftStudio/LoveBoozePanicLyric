@@ -3354,7 +3354,7 @@ label _sanatorium :
     extend "Этот амбал будет моим соседом?!"
     play sound "audio/pavel_cough.mp3"
     
-    show pavel pavel neutral:
+    show pavel neutral:
         ypos 0.1
         linear 0.9 xalign 0.9
     with Dissolve(1.0)
