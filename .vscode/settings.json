@@ -415,5 +415,7 @@
                 }
             }
         ]
-    }
+    },
+    "renpyWarp.sdkPath": "x:\\Download\\RenPy\\renpy-8.4.1-sdk",
+    "renpyWarp.renpyExtensionsEnabled": "Enabled"
 }
